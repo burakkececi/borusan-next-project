@@ -4,8 +4,8 @@ namespace Domain.Entities;
 
 public class BodyType : Entity<Guid>
 {
-    public string BodyName { get; set; }
-    public int Door { get; set; }
+    public Guid BodyName { get; set; }
+    public string Door { get; set; }
 
-    public virtual CarModel CarModel { get; set; }
+    //public virtual Car Car { get; set; }
 }
