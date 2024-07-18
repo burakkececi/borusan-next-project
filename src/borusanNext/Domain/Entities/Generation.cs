@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public class Brand : Entity<Guid>
+public class Generation : Entity<Guid>
 {
     public string Name { get; set; }
-    public string Logo { get; set; }
-    public virtual ICollection<CarModel> CarModels { get; set; }
+    public virtual ICollection<ModalExtension> ModalExtensions { get; set; }
 }
