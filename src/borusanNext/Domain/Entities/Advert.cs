@@ -14,6 +14,6 @@ public class Advert : Entity<Guid>
     public Guid CarId { get; set; }
     public Guid SellerId { get; set; }
     public virtual ICollection<Seller> Sellers { get; set; }
-    //public virtual Car Car{get;set;}
+    public virtual Car Car{get;set;}
 
 }
