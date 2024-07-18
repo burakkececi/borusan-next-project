@@ -32,15 +32,12 @@ public class Car : Entity<Guid>
     public Guid TransmissionId { get; set; }
     public virtual Transmission Transmission { get;set; }
 
-    public Guid ExpertizeId { get; set; }
-
-    //Herkes kodunu bitirince bu alttaki satır açılacak !!!
-    //public virtual ExpertizeResults ExpertizeResults { get; set; } 
+    public Guid TramerId { get; set; }
+    
+    public virtual ExpertizeResults ExpertizeResults { get; set; } 
 
     public  Guid AdvertId { get; set; }
 
-    //Herkes kodunu bitirince bu alttaki satır açılacak !!!
-    //public virtual Advert Advert { get; set; }
-    public int Tramer { get; set; }
+    public virtual Advert Advert { get; set; }
     
 }
