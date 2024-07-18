@@ -9,5 +9,5 @@ namespace Domain.Entities;
 public class Generation : Entity<Guid>
 {
     public string Name { get; set; }
-    public ICollection<ModalExtension> ModalExtensions { get; set; }
+    public virtual ICollection<ModalExtension> ModalExtensions { get; set; }
 }
