@@ -18,6 +18,7 @@ public class Engine : Entity<Guid>
 
     public Guid FuelTypeId { get; set; }
     public virtual FuelType FuelType { get; set; }
+    public Guid FuelConsumptionId { get; set; }
 
     public virtual FuelConsumption FuelConsumption { get; set; }
 
