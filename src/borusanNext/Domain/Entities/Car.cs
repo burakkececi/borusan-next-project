@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,10 +17,6 @@ public class Car : Entity<Guid>
     public string WheelType { get; set; }
     public bool SpareWheel { get; set; }
     public decimal Price { get; set; }
-
-    public Guid CarDimensionId { get; set; }
-    public virtual CarDimension CarDimension { get; set; }
-
     public int CarModelId { get; set; }
     public virtual CarModel CarModel { get; set; }
 
@@ -28,4 +25,22 @@ public class Car : Entity<Guid>
 
     public Guid EngineId { get; set; }
     public virtual Engine Engine { get; set; }
+
+    public Guid BodyTypeId { get; set; }
+    public virtual BodyType BodyType { get; set; }
+
+    public Guid TransmissionId { get; set; }
+    public virtual Transmission Transmission { get;set; }
+
+    public Guid ExpertizeId { get; set; }
+
+    //Herkes kodunu bitirince bu alttaki satır açılacak !!!
+    //public virtual ExpertizeResults ExpertizeResults { get; set; } 
+
+    public  Guid AdvertId { get; set; }
+
+    //Herkes kodunu bitirince bu alttaki satır açılacak !!!
+    //public virtual Advert Advert { get; set; }
+    public int Tramer { get; set; }
+    
 }
