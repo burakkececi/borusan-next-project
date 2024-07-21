@@ -8,6 +8,8 @@ public class FuelConsumption : Entity<Guid>
     public double Urban { get; set; }
     public double Average { get; set; }
 
-    public virtual Engine Engine { get; set; }
+    public virtual ICollection<Engine> Engines { get; set; }
+
+
 
 }
