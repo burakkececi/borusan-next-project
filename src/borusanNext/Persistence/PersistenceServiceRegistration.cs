@@ -51,6 +51,13 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ITransmissionRepository, TransmissionRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<ISellerRepository, SellerRepository>();
+        services.AddScoped<IExpertizeResultRepository, ExpertizeResultRepository>();
+        services.AddScoped<ICarRepository, CarRepository>();
+        services.AddScoped<ICarRepository, CarRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<ISellerRepository, SellerRepository>();
+        services.AddScoped<ILocationRepository, LocationRepository>();
         return services;
     }
 }
