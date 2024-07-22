@@ -8,5 +8,6 @@ public class UpdateBrandCommandValidator : AbstractValidator<UpdateBrandCommand>
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.Logo).NotEmpty();
     }
 }

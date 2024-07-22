@@ -5,6 +5,7 @@ using Application.Features.Brands.Queries.GetById;
 using Application.Features.Brands.Queries.GetList;
 using AutoMapper;
 using NArchitecture.Core.Application.Responses;
+using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.Brands.Profiles;

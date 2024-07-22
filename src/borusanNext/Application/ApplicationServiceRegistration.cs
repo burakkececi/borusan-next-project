@@ -21,6 +21,30 @@ using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
 using NArchitecture.Core.Security.JWT;
 using Application.Services.Brands;
+using Application.Services.Adverts;
+using Application.Services.Appointments;
+using Application.Services.Blogs;
+using Application.Services.BlogItemTags;
+using Application.Services.BodyShellParts;
+using Application.Services.BodyTypes;
+using Application.Services.Campaigns;
+using Application.Services.Cars;
+using Application.Services.CarColors;
+using Application.Services.CarModels;
+using Application.Services.ChassisParts;
+using Application.Services.CustomerAdvertLogs;
+using Application.Services.Engines;
+using Application.Services.ExpertizeResults;
+using Application.Services.FuelConsumptions;
+using Application.Services.FuelTypes;
+using Application.Services.Generations;
+using Application.Services.Licences;
+using Application.Services.Locations;
+using Application.Services.ModalExtensions;
+using Application.Services.Tags;
+using Application.Services.Transmissions;
+using Application.Services.Customers;
+using Application.Services.Sellers;
 
 namespace Application;
 
@@ -64,6 +88,33 @@ public static class ApplicationServiceRegistration
 
         services.AddScoped<IBrandService, BrandManager>();
         services.AddScoped<IBrandService, BrandManager>();
+        services.AddScoped<IAdvertService, AdvertManager>();
+        services.AddScoped<IAppointmentService, AppointmentManager>();
+        services.AddScoped<IBlogService, BlogManager>();
+        services.AddScoped<IBlogItemTagService, BlogItemTagManager>();
+        services.AddScoped<IBodyShellPartService, BodyShellPartManager>();
+        services.AddScoped<IBodyTypeService, BodyTypeManager>();
+        services.AddScoped<IBrandService, BrandManager>();
+        services.AddScoped<ICampaignService, CampaignManager>();
+        services.AddScoped<ICarService, CarManager>();
+        services.AddScoped<ICarService, CarManager>();
+        services.AddScoped<ICarColorService, CarColorManager>();
+        services.AddScoped<ICarModelService, CarModelManager>();
+        services.AddScoped<IChassisPartService, ChassisPartManager>();
+        services.AddScoped<ICustomerAdvertLogService, CustomerAdvertLogManager>();
+        services.AddScoped<IEngineService, EngineManager>();
+        services.AddScoped<IExpertizeResultService, ExpertizeResultManager>();
+        services.AddScoped<IFuelConsumptionService, FuelConsumptionManager>();
+        services.AddScoped<IFuelTypeService, FuelTypeManager>();
+        services.AddScoped<IGenerationService, GenerationManager>();
+        services.AddScoped<ILicenceService, LicenceManager>();
+        services.AddScoped<ILocationService, LocationManager>();
+        services.AddScoped<IModalExtensionService, ModalExtensionManager>();
+        services.AddScoped<ITagService, TagManager>();
+        services.AddScoped<ITransmissionService, TransmissionManager>();
+        services.AddScoped<ITransmissionService, TransmissionManager>();
+        services.AddScoped<ICustomerService, CustomerManager>();
+        services.AddScoped<ISellerService, SellerManager>();
         return services;
     }
 

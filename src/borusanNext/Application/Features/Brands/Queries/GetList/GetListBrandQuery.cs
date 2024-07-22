@@ -1,6 +1,7 @@
 using Application.Features.Brands.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
+using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;

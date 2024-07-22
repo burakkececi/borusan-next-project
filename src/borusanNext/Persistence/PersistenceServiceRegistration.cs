@@ -24,6 +24,33 @@ public static class PersistenceServiceRegistration
 
         services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<IBrandRepository, BrandRepository>();
+        services.AddScoped<IAdvertRepository, AdvertRepository>();
+        services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        services.AddScoped<IBlogRepository, BlogRepository>();
+        services.AddScoped<IBlogItemTagRepository, BlogItemTagRepository>();
+        services.AddScoped<IBodyShellPartRepository, BodyShellPartRepository>();
+        services.AddScoped<IBodyTypeRepository, BodyTypeRepository>();
+        services.AddScoped<IBrandRepository, BrandRepository>();
+        services.AddScoped<ICampaignRepository, CampaignRepository>();
+        services.AddScoped<ICarRepository, CarRepository>();
+        services.AddScoped<ICarRepository, CarRepository>();
+        services.AddScoped<ICarColorRepository, CarColorRepository>();
+        services.AddScoped<ICarModelRepository, CarModelRepository>();
+        services.AddScoped<IChassisPartRepository, ChassisPartRepository>();
+        services.AddScoped<ICustomerAdvertLogRepository, CustomerAdvertLogRepository>();
+        services.AddScoped<IEngineRepository, EngineRepository>();
+        services.AddScoped<IExpertizeResultRepository, ExpertizeResultRepository>();
+        services.AddScoped<IFuelConsumptionRepository, FuelConsumptionRepository>();
+        services.AddScoped<IFuelTypeRepository, FuelTypeRepository>();
+        services.AddScoped<IGenerationRepository, GenerationRepository>();
+        services.AddScoped<ILicenceRepository, LicenceRepository>();
+        services.AddScoped<ILocationRepository, LocationRepository>();
+        services.AddScoped<IModalExtensionRepository, ModalExtensionRepository>();
+        services.AddScoped<ITagRepository, TagRepository>();
+        services.AddScoped<ITransmissionRepository, TransmissionRepository>();
+        services.AddScoped<ITransmissionRepository, TransmissionRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<ISellerRepository, SellerRepository>();
         return services;
     }
 }

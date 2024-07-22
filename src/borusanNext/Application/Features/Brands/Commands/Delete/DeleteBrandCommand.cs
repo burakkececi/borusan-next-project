@@ -3,6 +3,7 @@ using Application.Features.Brands.Constants;
 using Application.Features.Brands.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Brands.Constants.BrandsOperationClaims;
