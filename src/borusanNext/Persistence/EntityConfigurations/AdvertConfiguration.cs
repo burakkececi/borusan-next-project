@@ -19,5 +19,8 @@ public class AdvertConfiguration : IEntityTypeConfiguration<Advert>
         builder.Property(a => a.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.Car).WithOne(p => p.Advert).HasForeignKey<Advert>(p => p.CarId);
+
     }
 }

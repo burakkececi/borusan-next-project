@@ -13,10 +13,17 @@ public class ExpertizeResultConfiguration : IEntityTypeConfiguration<ExpertizeRe
         builder.Property(er => er.Id).HasColumnName("Id").IsRequired();
         builder.Property(er => er.CarDamageInformationRecord).HasColumnName("CarDamageInformationRecord").IsRequired();
         builder.Property(er => er.InquiryDate).HasColumnName("InquiryDate").IsRequired();
+        builder.Property(er => er.ChassisPartId).HasColumnName("ChassisPartId").IsRequired();
+        builder.Property(er => er.BodyShellPartId).HasColumnName("BodyShellPartId").IsRequired();
         builder.Property(er => er.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(er => er.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(er => er.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(er => !er.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.ChassisPart).WithOne(p => p.ExpertizeResult).HasForeignKey<ExpertizeResult>(p => p.ChassisPartId);
+        builder.HasOne(p => p.BodyShellPart).WithOne(p => p.ExpertizeResult).HasForeignKey<ExpertizeResult>(p => p.BodyShellPartId);
+
+
     }
 }

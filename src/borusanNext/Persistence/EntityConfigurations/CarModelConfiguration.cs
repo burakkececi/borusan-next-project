@@ -27,5 +27,8 @@ public class CarModelConfiguration : IEntityTypeConfiguration<CarModel>
         builder.Property(cm => cm.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(cm => !cm.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.Brand).WithMany(p => p.CarModels).HasForeignKey(p => p.BrandId);
+
     }
 }

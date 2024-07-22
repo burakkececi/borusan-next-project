@@ -19,5 +19,10 @@ public class ModalExtensionConfiguration : IEntityTypeConfiguration<ModalExtensi
         builder.Property(me => me.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(me => !me.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.CarModel).WithMany(p => p.ModalExtensions).HasForeignKey(p => p.CarModelId);
+        builder.HasOne(p => p.Generation).WithMany(p => p.ModalExtensions).HasForeignKey(p => p.GenerationId);
+
+
     }
 }

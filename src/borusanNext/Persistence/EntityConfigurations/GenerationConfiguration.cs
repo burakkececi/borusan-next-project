@@ -17,5 +17,6 @@ public class GenerationConfiguration : IEntityTypeConfiguration<Generation>
         builder.Property(g => g.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(g => !g.DeletedDate.HasValue);
+
     }
 }

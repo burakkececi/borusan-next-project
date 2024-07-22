@@ -14,7 +14,6 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.UserId).HasColumnName("UserId").IsRequired();
         builder.Property(c => c.FirstName).HasColumnName("FirstName").IsRequired();
         builder.Property(c => c.LastName).HasColumnName("LastName").IsRequired();
-        builder.Property(c => c.EmailAddress).HasColumnName("EmailAddress").IsRequired();
         builder.Property(c => c.Phone).HasColumnName("Phone").IsRequired();
         builder.Property(c => c.IsSmsConfirmed).HasColumnName("IsSmsConfirmed").IsRequired();
         builder.Property(c => c.CustomerType).HasColumnName("CustomerType").IsRequired();
@@ -23,5 +22,8 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.User).WithOne(p => p.Customer).HasForeignKey<Customer>(p => p.UserId);
+
     }
 }

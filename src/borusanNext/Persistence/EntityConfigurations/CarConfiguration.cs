@@ -18,7 +18,7 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
         builder.Property(c => c.Inquiry).HasColumnName("Inquiry").IsRequired();
         builder.Property(c => c.WheelType).HasColumnName("WheelType").IsRequired();
         builder.Property(c => c.SpareWheel).HasColumnName("SpareWheel").IsRequired();
-        builder.Property(c => c.Price).HasColumnName("Price").IsRequired();
+        builder.Property(c => c.Price).HasColumnName("Price").HasPrecision(18, 2).IsRequired();
         builder.Property(c => c.CarModelId).HasColumnName("CarModelId").IsRequired();
         builder.Property(c => c.ColorId).HasColumnName("ColorId").IsRequired();
         builder.Property(c => c.EngineId).HasColumnName("EngineId").IsRequired();
@@ -32,5 +32,14 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
         builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.Advert).WithOne(p => p.Car).HasForeignKey<Car>(p => p.AdvertId);
+        builder.HasOne(p => p.ExpertizeResult).WithOne(p => p.Car).HasForeignKey<Car>(p => p.TramerId);
+        builder.HasOne(p => p.CarModel).WithMany(p => p.Cars).HasForeignKey(p => p.CarModelId);
+        builder.HasOne(p => p.Engine).WithMany(p => p.Cars).HasForeignKey(p => p.EngineId);
+        builder.HasOne(p => p.BodyType).WithMany(p => p.Cars).HasForeignKey(p => p.BodyTypeId);
+        builder.HasOne(p => p.Transmission).WithMany(p => p.Cars).HasForeignKey(p => p.TransmissionId);
+        builder.HasOne(p => p.Color).WithMany(p => p.Cars).HasForeignKey(p => p.ColorId);
+        builder.HasOne(p => p.Seller).WithMany(p => p.Cars).HasForeignKey(p => p.SellerId);
     }
 }

@@ -20,5 +20,10 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.Property(a => a.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.Customer).WithMany(p => p.Appointments).HasForeignKey(p => p.CustomerId).OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(p => p.Car).WithMany(p => p.Appointments).HasForeignKey(p => p.CarId).OnDelete(DeleteBehavior.NoAction);
+
+
     }
 }

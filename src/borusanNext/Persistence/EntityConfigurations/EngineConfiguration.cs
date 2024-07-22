@@ -25,5 +25,10 @@ public class EngineConfiguration : IEntityTypeConfiguration<Engine>
         builder.Property(e => e.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(e => !e.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.FuelType).WithMany(p => p.Engines).HasForeignKey(p => p.FuelTypeId);
+        builder.HasOne(p => p.FuelConsumption).WithMany(p => p.Engines).HasForeignKey(p => p.FuelConsumptionId);
+
+
     }
 }

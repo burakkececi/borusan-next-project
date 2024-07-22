@@ -19,5 +19,10 @@ public class CustomerAdvertLogConfiguration : IEntityTypeConfiguration<CustomerA
         builder.Property(cal => cal.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(cal => !cal.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.Advert).WithMany(p => p.CustomerAdvertLogs).HasForeignKey(p => p.AdvertId);
+        builder.HasOne(p => p.Customer).WithMany(p => p.CustomerAdvertLogs).HasForeignKey(p => p.CustomerId);
+
+
     }
 }
