@@ -14,27 +14,27 @@ namespace WebAPI.Controllers;
 public class CarsController : BaseController
 {
     [HttpPost]
-    public async Task<ActionResult<CreatedCustomerResponse>> Add([FromBody] CreateCustomerCommand command)
+    public async Task<ActionResult<CreatedCarResponse>> Add([FromBody] CreateCarCommand command)
     {
-        CreatedCustomerResponse response = await Mediator.Send(command);
+        CreatedCarResponse response = await Mediator.Send(command);
 
         return CreatedAtAction(nameof(GetById), new { response.Id }, response);
     }
 
     [HttpPut]
-    public async Task<ActionResult<UpdatedCustomerResponse>> Update([FromBody] UpdateCustomerCommand command)
+    public async Task<ActionResult<UpdatedCarResponse>> Update([FromBody] UpdateCarCommand command)
     {
-        UpdatedCustomerResponse response = await Mediator.Send(command);
+        UpdatedCarResponse response = await Mediator.Send(command);
 
         return Ok(response);
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<DeletedCustomerResponse>> Delete([FromRoute] Guid id)
+    public async Task<ActionResult<DeletedCarResponse>> Delete([FromRoute] Guid id)
     {
-        DeleteCustomerCommand command = new() { Id = id };
+        DeleteCarCommand command = new() { Id = id };
 
-        DeletedCustomerResponse response = await Mediator.Send(command);
+        DeletedCarResponse response = await Mediator.Send(command);
 
         return Ok(response);
     }
@@ -42,7 +42,7 @@ public class CarsController : BaseController
     [HttpGet("{id}")]
     public async Task<ActionResult<GetByIdCarResponse>> GetById([FromRoute] Guid id)
     {
-        GetByIdCustomerQuery query = new() { Id = id };
+        GetByIdCarQuery query = new() { Id = id };
 
         GetByIdCarResponse response = await Mediator.Send(query);
 
@@ -50,11 +50,11 @@ public class CarsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListCustomerQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListCarQuery>> GetList([FromQuery] PageRequest pageRequest)
     {
-        GetListCustomerQuery query = new() { PageRequest = pageRequest };
+        GetListCarQuery query = new() { PageRequest = pageRequest };
 
-        GetListResponse<GetListCustomerListItemDto> response = await Mediator.Send(query);
+        GetListResponse<GetListCarListItemDto> response = await Mediator.Send(query);
 
         return Ok(response);
     }
