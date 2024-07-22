@@ -7,17 +7,17 @@ using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
-using static Application.Features.Cars.Constants.CustomersOperationClaims;
+using static Application.Features.Cars.Constants.CarsOperationClaims;
 
 namespace Application.Features.Cars.Queries.GetList;
 
-public class GetListCustomerQuery : IRequest<GetListResponse<GetListCustomerListItemDto>>, ISecuredRequest
+public class GetListCarQuery : IRequest<GetListResponse<GetListCarListItemDto>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public string[] Roles => [Admin, Read];
 
-    public class GetListCarQueryHandler : IRequestHandler<GetListCustomerQuery, GetListResponse<GetListCustomerListItemDto>>
+    public class GetListCarQueryHandler : IRequestHandler<GetListCarQuery, GetListResponse<GetListCarListItemDto>>
     {
         private readonly ICarRepository _carRepository;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ public class GetListCustomerQuery : IRequest<GetListResponse<GetListCustomerList
             _mapper = mapper;
         }
 
-        public async Task<GetListResponse<GetListCustomerListItemDto>> Handle(GetListCustomerQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetListCarListItemDto>> Handle(GetListCarQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Car> cars = await _carRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
@@ -36,7 +36,7 @@ public class GetListCustomerQuery : IRequest<GetListResponse<GetListCustomerList
                 cancellationToken: cancellationToken
             );
 
-            GetListResponse<GetListCustomerListItemDto> response = _mapper.Map<GetListResponse<GetListCustomerListItemDto>>(cars);
+            GetListResponse<GetListCarListItemDto> response = _mapper.Map<GetListResponse<GetListCarListItemDto>>(cars);
             return response;
         }
     }

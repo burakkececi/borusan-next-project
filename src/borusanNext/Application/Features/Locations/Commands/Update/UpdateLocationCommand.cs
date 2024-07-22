@@ -15,8 +15,8 @@ public class UpdateLocationCommand : IRequest<UpdatedLocationResponse>, ISecured
     public required string Name { get; set; }
     public required string City { get; set; }
     public required string Address { get; set; }
-    public required decimal Latitute { get; set; }
-    public required decimal Longitute { get; set; }
+    public required string Latitute { get; set; }
+    public required string Longitute { get; set; }
 
     public string[] Roles => [Admin, Write, LocationsOperationClaims.Update];
 

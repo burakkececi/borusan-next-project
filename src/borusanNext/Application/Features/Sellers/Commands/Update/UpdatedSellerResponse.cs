@@ -5,7 +5,7 @@ namespace Application.Features.Sellers.Commands.Update;
 public class UpdatedSellerResponse : IResponse
 {
     public Guid Id { get; set; }
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
     public string Name { get; set; }
     public string PhoneNumber { get; set; }
     public Guid LicenceId { get; set; }

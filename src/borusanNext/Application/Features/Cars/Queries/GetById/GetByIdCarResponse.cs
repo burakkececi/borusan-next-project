@@ -13,7 +13,7 @@ public class GetByIdCarResponse : IResponse
     public string WheelType { get; set; }
     public bool SpareWheel { get; set; }
     public decimal Price { get; set; }
-    public int CarModelId { get; set; }
+    public Guid CarModelId { get; set; }
     public Guid ColorId { get; set; }
     public Guid EngineId { get; set; }
     public Guid BodyTypeId { get; set; }

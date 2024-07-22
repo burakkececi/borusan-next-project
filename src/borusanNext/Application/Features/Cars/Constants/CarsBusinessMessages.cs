@@ -1,6 +1,6 @@
 namespace Application.Features.Cars.Constants;
 
-public static class CustomersBusinessMessages
+public static class CarsBusinessMessages
 {
     public const string SectionName = "Car";
 

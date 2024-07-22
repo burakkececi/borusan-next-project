@@ -12,10 +12,9 @@ namespace Application.Features.Customers.Commands.Create;
 
 public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>, ISecuredRequest
 {
-    public required int UserId { get; set; }
+    public required Guid UserId { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
-    public required string EmailAddress { get; set; }
     public required string Phone { get; set; }
     public required bool IsSmsConfirmed { get; set; }
     public required CustomerType CustomerType { get; set; }

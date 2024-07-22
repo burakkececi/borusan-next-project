@@ -5,11 +5,11 @@ using AutoMapper;
 using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
-using static Application.Features.Cars.Constants.CustomersOperationClaims;
+using static Application.Features.Cars.Constants.CarsOperationClaims;
 
 namespace Application.Features.Cars.Commands.Create;
 
-public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>, ISecuredRequest
+public class CreateCarCommand : IRequest<CreatedCarResponse>, ISecuredRequest
 {
     public required string ChassisNumber { get; set; }
     public required string Plate { get; set; }
@@ -19,7 +19,7 @@ public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>, ISecured
     public required string WheelType { get; set; }
     public required bool SpareWheel { get; set; }
     public required decimal Price { get; set; }
-    public required int CarModelId { get; set; }
+    public required Guid CarModelId { get; set; }
     public required Guid ColorId { get; set; }
     public required Guid EngineId { get; set; }
     public required Guid BodyTypeId { get; set; }
@@ -28,29 +28,29 @@ public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>, ISecured
     public required Guid AdvertId { get; set; }
     public required Guid SellerId { get; set; }
 
-    public string[] Roles => [Admin, Write, CustomersOperationClaims.Create];
+    public string[] Roles => [Admin, Write, CarsOperationClaims.Create];
 
-    public class CreateCarCommandHandler : IRequestHandler<CreateCustomerCommand, CreatedCustomerResponse>
+    public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, CreatedCarResponse>
     {
         private readonly IMapper _mapper;
         private readonly ICarRepository _carRepository;
-        private readonly CustomerBusinessRules _carBusinessRules;
+        private readonly CarBusinessRules _carBusinessRules;
 
         public CreateCarCommandHandler(IMapper mapper, ICarRepository carRepository,
-                                         CustomerBusinessRules carBusinessRules)
+                                         CarBusinessRules carBusinessRules)
         {
             _mapper = mapper;
             _carRepository = carRepository;
             _carBusinessRules = carBusinessRules;
         }
 
-        public async Task<CreatedCustomerResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<CreatedCarResponse> Handle(CreateCarCommand request, CancellationToken cancellationToken)
         {
             Car car = _mapper.Map<Car>(request);
 
             await _carRepository.AddAsync(car);
 
-            CreatedCustomerResponse response = _mapper.Map<CreatedCustomerResponse>(car);
+            CreatedCarResponse response = _mapper.Map<CreatedCarResponse>(car);
             return response;
         }
     }

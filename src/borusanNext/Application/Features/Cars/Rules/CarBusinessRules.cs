@@ -7,12 +7,12 @@ using Domain.Entities;
 
 namespace Application.Features.Cars.Rules;
 
-public class CustomerBusinessRules : BaseBusinessRules
+public class CarBusinessRules : BaseBusinessRules
 {
     private readonly ICarRepository _carRepository;
     private readonly ILocalizationService _localizationService;
 
-    public CustomerBusinessRules(ICarRepository carRepository, ILocalizationService localizationService)
+    public CarBusinessRules(ICarRepository carRepository, ILocalizationService localizationService)
     {
         _carRepository = carRepository;
         _localizationService = localizationService;
@@ -20,14 +20,14 @@ public class CustomerBusinessRules : BaseBusinessRules
 
     private async Task throwBusinessException(string messageKey)
     {
-        string message = await _localizationService.GetLocalizedAsync(messageKey, CustomersBusinessMessages.SectionName);
+        string message = await _localizationService.GetLocalizedAsync(messageKey, CarsBusinessMessages.SectionName);
         throw new BusinessException(message);
     }
 
     public async Task CarShouldExistWhenSelected(Car? car)
     {
         if (car == null)
-            await throwBusinessException(CustomersBusinessMessages.CarNotExists);
+            await throwBusinessException(CarsBusinessMessages.CarNotExists);
     }
 
     public async Task CarIdShouldExistWhenSelected(Guid id, CancellationToken cancellationToken)

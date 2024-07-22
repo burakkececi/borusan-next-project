@@ -14,6 +14,8 @@ public class UpdateExpertizeResultCommand : IRequest<UpdatedExpertizeResultRespo
     public Guid Id { get; set; }
     public required int CarDamageInformationRecord { get; set; }
     public required DateTime InquiryDate { get; set; }
+    public required Guid ChassisPartId { get; set; }
+    public required Guid BodyPartId { get; set; }
 
     public string[] Roles => [Admin, Write, ExpertizeResultsOperationClaims.Update];
 

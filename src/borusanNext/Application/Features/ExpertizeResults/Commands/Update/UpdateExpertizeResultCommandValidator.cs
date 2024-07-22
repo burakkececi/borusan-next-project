@@ -9,5 +9,7 @@ public class UpdateExpertizeResultCommandValidator : AbstractValidator<UpdateExp
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.CarDamageInformationRecord).NotEmpty();
         RuleFor(c => c.InquiryDate).NotEmpty();
+        RuleFor(c => c.ChassisPartId).NotEmpty();
+        RuleFor(c => c.BodyPartId).NotEmpty();
     }
 }

@@ -12,7 +12,7 @@ namespace Application.Features.Sellers.Commands.Update;
 public class UpdateSellerCommand : IRequest<UpdatedSellerResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
-    public required int UserId { get; set; }
+    public required Guid UserId { get; set; }
     public required string Name { get; set; }
     public required string PhoneNumber { get; set; }
     public required Guid LicenceId { get; set; }

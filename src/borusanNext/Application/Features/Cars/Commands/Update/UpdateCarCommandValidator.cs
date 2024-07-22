@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace Application.Features.Cars.Commands.Update;
 
-public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
+public class UpdateCarCommandValidator : AbstractValidator<UpdateCarCommand>
 {
-    public UpdateCustomerCommandValidator()
+    public UpdateCarCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.ChassisNumber).NotEmpty();

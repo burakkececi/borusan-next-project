@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace Application.Features.Cars.Commands.Create;
 
-public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
+public class CreateCarCommandValidator : AbstractValidator<CreateCarCommand>
 {
-    public CreateCustomerCommandValidator()
+    public CreateCarCommandValidator()
     {
         RuleFor(c => c.ChassisNumber).NotEmpty();
         RuleFor(c => c.Plate).NotEmpty();

@@ -10,9 +10,9 @@ namespace Application.Services.Cars;
 public class CarManager : ICarService
 {
     private readonly ICarRepository _carRepository;
-    private readonly CustomerBusinessRules _carBusinessRules;
+    private readonly CarBusinessRules _carBusinessRules;
 
-    public CarManager(ICarRepository carRepository, CustomerBusinessRules carBusinessRules)
+    public CarManager(ICarRepository carRepository, CarBusinessRules carBusinessRules)
     {
         _carRepository = carRepository;
         _carBusinessRules = carBusinessRules;

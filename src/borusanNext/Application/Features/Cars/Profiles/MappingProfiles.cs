@@ -14,18 +14,18 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<CreateCustomerCommand, Car>();
-        CreateMap<Car, CreatedCustomerResponse>();
+        CreateMap<CreateCarCommand, Car>();
+        CreateMap<Car, CreatedCarResponse>();
 
-        CreateMap<UpdateCustomerCommand, Car>();
-        CreateMap<Car, UpdatedCustomerResponse>();
+        CreateMap<UpdateCarCommand, Car>();
+        CreateMap<Car, UpdatedCarResponse>();
 
-        CreateMap<DeleteCustomerCommand, Car>();
-        CreateMap<Car, DeletedCustomerResponse>();
+        CreateMap<DeleteCarCommand, Car>();
+        CreateMap<Car, DeletedCarResponse>();
 
         CreateMap<Car, GetByIdCarResponse>();
 
-        CreateMap<Car, GetListCustomerListItemDto>();
-        CreateMap<IPaginate<Car>, GetListResponse<GetListCustomerListItemDto>>();
+        CreateMap<Car, GetListCarListItemDto>();
+        CreateMap<IPaginate<Car>, GetListResponse<GetListCarListItemDto>>();
     }
 }

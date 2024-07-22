@@ -5,11 +5,11 @@ using AutoMapper;
 using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
-using static Application.Features.Cars.Constants.CustomersOperationClaims;
+using static Application.Features.Cars.Constants.CarsOperationClaims;
 
 namespace Application.Features.Cars.Commands.Update;
 
-public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecuredRequest
+public class UpdateCarCommand : IRequest<UpdatedCarResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
     public required string ChassisNumber { get; set; }
@@ -20,7 +20,7 @@ public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecured
     public required string WheelType { get; set; }
     public required bool SpareWheel { get; set; }
     public required decimal Price { get; set; }
-    public required int CarModelId { get; set; }
+    public required Guid CarModelId { get; set; }
     public required Guid ColorId { get; set; }
     public required Guid EngineId { get; set; }
     public required Guid BodyTypeId { get; set; }
@@ -29,23 +29,23 @@ public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecured
     public required Guid AdvertId { get; set; }
     public required Guid SellerId { get; set; }
 
-    public string[] Roles => [Admin, Write, CustomersOperationClaims.Update];
+    public string[] Roles => [Admin, Write, CarsOperationClaims.Update];
 
-    public class UpdateCarCommandHandler : IRequestHandler<UpdateCustomerCommand, UpdatedCustomerResponse>
+    public class UpdateCarCommandHandler : IRequestHandler<UpdateCarCommand, UpdatedCarResponse>
     {
         private readonly IMapper _mapper;
         private readonly ICarRepository _carRepository;
-        private readonly CustomerBusinessRules _carBusinessRules;
+        private readonly CarBusinessRules _carBusinessRules;
 
         public UpdateCarCommandHandler(IMapper mapper, ICarRepository carRepository,
-                                         CustomerBusinessRules carBusinessRules)
+                                         CarBusinessRules carBusinessRules)
         {
             _mapper = mapper;
             _carRepository = carRepository;
             _carBusinessRules = carBusinessRules;
         }
 
-        public async Task<UpdatedCustomerResponse> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<UpdatedCarResponse> Handle(UpdateCarCommand request, CancellationToken cancellationToken)
         {
             Car? car = await _carRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _carBusinessRules.CarShouldExistWhenSelected(car);
@@ -53,7 +53,7 @@ public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecured
 
             await _carRepository.UpdateAsync(car!);
 
-            UpdatedCustomerResponse response = _mapper.Map<UpdatedCustomerResponse>(car);
+            UpdatedCarResponse response = _mapper.Map<UpdatedCarResponse>(car);
             return response;
         }
     }

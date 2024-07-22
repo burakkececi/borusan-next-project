@@ -8,6 +8,6 @@ public class GetByIdLocationResponse : IResponse
     public string Name { get; set; }
     public string City { get; set; }
     public string Address { get; set; }
-    public decimal Latitute { get; set; }
-    public decimal Longitute { get; set; }
+    public string Latitute { get; set; }
+    public string Longitute { get; set; }
 }

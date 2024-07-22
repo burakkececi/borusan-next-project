@@ -2,7 +2,7 @@ using NArchitecture.Core.Application.Responses;
 
 namespace Application.Features.Cars.Commands.Create;
 
-public class CreatedCustomerResponse : IResponse
+public class CreatedCarResponse : IResponse
 {
     public Guid Id { get; set; }
     public string ChassisNumber { get; set; }
@@ -13,7 +13,7 @@ public class CreatedCustomerResponse : IResponse
     public string WheelType { get; set; }
     public bool SpareWheel { get; set; }
     public decimal Price { get; set; }
-    public int CarModelId { get; set; }
+    public Guid CarModelId { get; set; }
     public Guid ColorId { get; set; }
     public Guid EngineId { get; set; }
     public Guid BodyTypeId { get; set; }

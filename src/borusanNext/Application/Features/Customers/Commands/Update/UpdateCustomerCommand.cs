@@ -13,10 +13,9 @@ namespace Application.Features.Customers.Commands.Update;
 public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
-    public required int UserId { get; set; }
+    public required Guid UserId { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
-    public required string EmailAddress { get; set; }
     public required string Phone { get; set; }
     public required bool IsSmsConfirmed { get; set; }
     public required CustomerType CustomerType { get; set; }

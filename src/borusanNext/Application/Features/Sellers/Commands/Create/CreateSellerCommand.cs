@@ -11,7 +11,7 @@ namespace Application.Features.Sellers.Commands.Create;
 
 public class CreateSellerCommand : IRequest<CreatedSellerResponse>, ISecuredRequest
 {
-    public required int UserId { get; set; }
+    public required Guid UserId { get; set; }
     public required string Name { get; set; }
     public required string PhoneNumber { get; set; }
     public required Guid LicenceId { get; set; }
