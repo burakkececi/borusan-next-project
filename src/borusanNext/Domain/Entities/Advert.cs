@@ -13,8 +13,7 @@ public class Advert : Entity<Guid>
     public DateTime PublishedDate { get; set; }
     
     public Guid CarId { get; set; }
-
+    
     public virtual Car Car{get;set;}
     public virtual ICollection<CustomerAdvertLog> CustomerAdvertLogs { get; set; }
-
 }
