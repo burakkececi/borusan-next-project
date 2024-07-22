@@ -33,9 +33,8 @@ public class Car : Entity<Guid>
     public virtual Transmission Transmission { get; set; }
 
     public Guid TramerId { get; set; }
-
-    public virtual ExpertizeResult ExpertizeResult { get; set; }
-
+    
+    public virtual ExpertizeResult ExpertizeResult { get; set; } 
     public Guid AdvertId { get; set; }
 
     public virtual Advert Advert { get; set; }
