@@ -7,5 +7,5 @@ public class BodyType : Entity<Guid>
     public Guid BodyName { get; set; }
     public string Door { get; set; }
 
-    public virtual Car Car { get; set; }
+    public virtual ICollection<Car> Cars { get; set; }
 }
