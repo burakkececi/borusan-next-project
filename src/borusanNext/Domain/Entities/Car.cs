@@ -17,7 +17,8 @@ public class Car : Entity<Guid>
     public string WheelType { get; set; }
     public bool SpareWheel { get; set; }
     public decimal Price { get; set; }
-    public int CarModelId { get; set; }
+
+    public Guid CarModelId { get; set; }
     public Guid ColorId { get; set; }
     public Guid EngineId { get; set; }
     public Guid BodyTypeId { get; set; }
@@ -33,7 +34,7 @@ public class Car : Entity<Guid>
     public virtual Transmission Transmission { get;set; }
     public virtual ExpertizeResult ExpertizeResult { get; set; } 
     public virtual Advert Advert { get; set; }
-    public virtual ICollection<Appointment> Appointments { get; set; }
     public virtual Seller Seller { get; set; }
+    public virtual ICollection<Appointment> Appointments { get; set; }
 
 }

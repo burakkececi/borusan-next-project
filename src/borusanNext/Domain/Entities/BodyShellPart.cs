@@ -19,4 +19,6 @@ public class BodyShellPart : Entity<Guid>
     public ExpertizeCondition Ceiling { get; set; }
     public ExpertizeCondition Luggage { get; set; }
 
+    public virtual ExpertizeResult ExpertizeResult { get; set; }
+
 }

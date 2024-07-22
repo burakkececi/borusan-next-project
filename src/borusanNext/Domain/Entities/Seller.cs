@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class Seller : Entity<Guid>
 {
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
     public string Name { get; set; }
     public string PhoneNumber { get; set; }
     public Guid LicenceId { get; set; }
     public Guid LocationId { get; set; }
+
     public virtual Licence Licence { get; set; }
     public virtual Location Location { get; set; }
 

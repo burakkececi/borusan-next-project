@@ -10,5 +10,5 @@ public class CarColor : Entity<Guid>
 {
     public string Name { get; set; }
 
-    public virtual ICollection<Car> Car { get; set; }
+    public virtual ICollection<Car> Cars { get; set; }
 }

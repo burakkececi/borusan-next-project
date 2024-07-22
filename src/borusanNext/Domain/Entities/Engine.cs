@@ -17,10 +17,10 @@ public class Engine : Entity<Guid>
     public int FuelTankVolume { get; set; }
 
     public Guid FuelTypeId { get; set; }
-    public virtual FuelType FuelType { get; set; }
     public Guid FuelConsumptionId { get; set; }
 
+    public virtual FuelType FuelType { get; set; }
     public virtual FuelConsumption FuelConsumption { get; set; }
 
-    public virtual ICollection<Car> Car { get; set; }
+    public virtual ICollection<Car> Cars { get; set; }
 }

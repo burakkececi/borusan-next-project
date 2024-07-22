@@ -10,12 +10,9 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class Customer : Entity<Guid>
 {
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string EmailAddress { get; set; }
-    public byte[] PasswordHash { get; set; }
-    public byte[] PasswordSalt { get; set; }
     public string Phone { get; set; }
     public bool IsSmsConfirmed { get; set; }
     public CustomerType CustomerType { get; set; }

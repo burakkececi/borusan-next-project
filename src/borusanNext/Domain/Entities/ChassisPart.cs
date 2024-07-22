@@ -9,4 +9,6 @@ public class ChassisPart : Entity<Guid>
     public bool IsFrontPanelChanged { get; set; }
     public bool IsBackPanelChanged { get; set; }
 
+    public virtual ExpertizeResult ExpertizeResult { get; set; }
+
 }

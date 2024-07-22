@@ -10,4 +10,7 @@ public class Licence : Entity<Guid>
 {
     public int LicenceNo { get; set; }
     public string LicenceOwner { get; set; }
+
+    public virtual Seller Seller { get; set; }
+
 }
