@@ -6,6 +6,6 @@ public class GetByIdAdvertResponse : IResponse
 {
     public Guid Id { get; set; }
     public int AdvertNo { get; set; }
-    public DateTime PublishedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
     public Guid CarId { get; set; }
 }
