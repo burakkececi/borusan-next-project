@@ -10,8 +10,6 @@ public class Advert : Entity<Guid>
 {
     public int AdvertNo { get; set; }
     public List<string> Photos { get; set; }
-    public DateTime PublishedDate { get; set; }
-    
     public Guid CarId { get; set; }
     
     public virtual Car Car {get;set;}
