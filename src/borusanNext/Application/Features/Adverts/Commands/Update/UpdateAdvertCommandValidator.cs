@@ -8,7 +8,6 @@ public class UpdateAdvertCommandValidator : AbstractValidator<UpdateAdvertComman
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.AdvertNo).NotEmpty();
-        RuleFor(c => c.PublishedDate).NotEmpty();
         RuleFor(c => c.CarId).NotEmpty();
     }
 }

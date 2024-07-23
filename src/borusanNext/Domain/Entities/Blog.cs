@@ -10,6 +10,5 @@ public class Blog : Entity<Guid>
 {
     public string Title { get; set; }
     public string Description { get; set; }
-    public DateTime CreatedDate { get; set; }
     public virtual ICollection<BlogItemTag> BlogItemTags { get; set; }
 }
