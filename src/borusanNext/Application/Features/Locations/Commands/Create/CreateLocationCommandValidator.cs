@@ -9,7 +9,6 @@ public class CreateLocationCommandValidator : AbstractValidator<CreateLocationCo
         RuleFor(c => c.Name).NotEmpty();
         RuleFor(c => c.City).NotEmpty();
         RuleFor(c => c.Address).NotEmpty();
-        RuleFor(c => c.Latitute).NotEmpty();
-        RuleFor(c => c.Longitute).NotEmpty();
+       
     }
 }

@@ -12,7 +12,6 @@ public class AdvertConfiguration : IEntityTypeConfiguration<Advert>
 
         builder.Property(a => a.Id).HasColumnName("Id").IsRequired();
         builder.Property(a => a.AdvertNo).HasColumnName("AdvertNo").IsRequired();
-        builder.Property(a => a.PublishedDate).HasColumnName("PublishedDate").IsRequired();
         builder.Property(a => a.CarId).HasColumnName("CarId").IsRequired();
         builder.Property(a => a.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(a => a.UpdatedDate).HasColumnName("UpdatedDate");
