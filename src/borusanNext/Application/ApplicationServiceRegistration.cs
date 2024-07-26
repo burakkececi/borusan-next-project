@@ -89,16 +89,13 @@ public static class ApplicationServiceRegistration
         services.AddSecurityServices<Guid, int, Guid>(tokenOptions);
 
         services.AddScoped<IBrandService, BrandManager>();
-        services.AddScoped<IBrandService, BrandManager>();
         services.AddScoped<IAdvertService, AdvertManager>();
         services.AddScoped<IAppointmentService, AppointmentManager>();
         services.AddScoped<IBlogService, BlogManager>();
         services.AddScoped<IBlogItemTagService, BlogItemTagManager>();
         services.AddScoped<IBodyShellPartService, BodyShellPartManager>();
         services.AddScoped<IBodyTypeService, BodyTypeManager>();
-        services.AddScoped<IBrandService, BrandManager>();
         services.AddScoped<ICampaignService, CampaignManager>();
-        services.AddScoped<ICarService, CarManager>();
         services.AddScoped<ICarService, CarManager>();
         services.AddScoped<ICarColorService, CarColorManager>();
         services.AddScoped<ICarModelService, CarModelManager>();
@@ -114,19 +111,9 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IModalExtensionService, ModalExtensionManager>();
         services.AddScoped<ITagService, TagManager>();
         services.AddScoped<ITransmissionService, TransmissionManager>();
-        services.AddScoped<ITransmissionService, TransmissionManager>();
         services.AddScoped<ICustomerService, CustomerManager>();
         services.AddScoped<ISellerService, SellerManager>();
-        services.AddScoped<IExpertizeResultService, ExpertizeResultManager>();
-        services.AddScoped<ICarService, CarManager>();
-        services.AddScoped<ICarService, CarManager>();
-        services.AddScoped<ICustomerService, CustomerManager>();
-        services.AddScoped<ICustomerService, CustomerManager>();
-        services.AddScoped<ISellerService, SellerManager>();
-        services.AddScoped<ILocationService, LocationManager>();
-        services.AddScoped<IAdvertService, AdvertManager>();
         services.AddScoped<IAdvertImageService, AdvertImageManager>();
-        services.AddScoped<IBlogService, BlogManager>();
         services.AddScoped<IGenerationImageService, GenerationImageManager>();
         return services;
     }

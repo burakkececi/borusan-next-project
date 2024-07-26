@@ -8,5 +8,5 @@ public class UpdatedExpertizeResultResponse : IResponse
     public int CarDamageInformationRecord { get; set; }
     public DateTime InquiryDate { get; set; }
     public Guid ChassisPartId { get; set; }
-    public Guid BodyPartId { get; set; }
+    public Guid BodyShellPartId { get; set; }
 }

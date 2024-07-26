@@ -13,6 +13,13 @@ public class UpdateModalExtensionCommand : IRequest<UpdatedModalExtensionRespons
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }
+    public required double Lenght { get; set; }
+    public required double Width { get; set; }
+    public required double Height { get; set; }
+    public required double FuelTank { get; set; }
+    public required double LuggageCapacity { get; set; }
+    public required double EmptyWeight { get; set; }
+    public required int ModelYear { get; set; }
     public required Guid CarModelId { get; set; }
     public required Guid GenerationId { get; set; }
 

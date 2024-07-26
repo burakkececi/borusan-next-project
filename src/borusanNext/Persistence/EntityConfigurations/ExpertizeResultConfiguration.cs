@@ -23,7 +23,5 @@ public class ExpertizeResultConfiguration : IEntityTypeConfiguration<ExpertizeRe
 
         builder.HasOne(p => p.ChassisPart).WithOne(p => p.ExpertizeResult).HasForeignKey<ExpertizeResult>(p => p.ChassisPartId);
         builder.HasOne(p => p.BodyShellPart).WithOne(p => p.ExpertizeResult).HasForeignKey<ExpertizeResult>(p => p.BodyShellPartId);
-
-
     }
 }

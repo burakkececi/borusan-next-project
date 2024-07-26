@@ -23,16 +23,13 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
 
         services.AddScoped<IBrandRepository, BrandRepository>();
-        services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<IAdvertRepository, AdvertRepository>();
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
         services.AddScoped<IBlogRepository, BlogRepository>();
         services.AddScoped<IBlogItemTagRepository, BlogItemTagRepository>();
         services.AddScoped<IBodyShellPartRepository, BodyShellPartRepository>();
         services.AddScoped<IBodyTypeRepository, BodyTypeRepository>();
-        services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<ICampaignRepository, CampaignRepository>();
-        services.AddScoped<ICarRepository, CarRepository>();
         services.AddScoped<ICarRepository, CarRepository>();
         services.AddScoped<ICarColorRepository, CarColorRepository>();
         services.AddScoped<ICarModelRepository, CarModelRepository>();
@@ -48,19 +45,9 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IModalExtensionRepository, ModalExtensionRepository>();
         services.AddScoped<ITagRepository, TagRepository>();
         services.AddScoped<ITransmissionRepository, TransmissionRepository>();
-        services.AddScoped<ITransmissionRepository, TransmissionRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<ISellerRepository, SellerRepository>();
-        services.AddScoped<IExpertizeResultRepository, ExpertizeResultRepository>();
-        services.AddScoped<ICarRepository, CarRepository>();
-        services.AddScoped<ICarRepository, CarRepository>();
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<ISellerRepository, SellerRepository>();
-        services.AddScoped<ILocationRepository, LocationRepository>();
-        services.AddScoped<IAdvertRepository, AdvertRepository>();
         services.AddScoped<IAdvertImageRepository, AdvertImageRepository>();
-        services.AddScoped<IBlogRepository, BlogRepository>();
         services.AddScoped<IGenerationImageRepository, GenerationImageRepository>();
         return services;
     }

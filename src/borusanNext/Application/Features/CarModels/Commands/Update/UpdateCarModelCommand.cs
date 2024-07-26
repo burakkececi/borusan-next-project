@@ -12,17 +12,8 @@ namespace Application.Features.CarModels.Commands.Update;
 public class UpdateCarModelCommand : IRequest<UpdatedCarModelResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
-    public required Guid BrandId { get; set; }
     public required string ModelName { get; set; }
-    public required double Lenght { get; set; }
-    public required double Width { get; set; }
-    public required double Height { get; set; }
-    public required double FuelTank { get; set; }
-    public required double LuggageCapacity { get; set; }
-    public required double EmptyWeight { get; set; }
-    public required int ModelYear { get; set; }
-    public required Guid CarId { get; set; }
-    public required Guid ModalExtensionId { get; set; }
+    public required Guid BrandId { get; set; }
 
     public string[] Roles => [Admin, Write, CarModelsOperationClaims.Update];
 
