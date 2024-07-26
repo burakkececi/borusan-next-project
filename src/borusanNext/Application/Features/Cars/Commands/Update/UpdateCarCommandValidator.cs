@@ -21,7 +21,6 @@ public class UpdateCarCommandValidator : AbstractValidator<UpdateCarCommand>
         RuleFor(c => c.BodyTypeId).NotEmpty();
         RuleFor(c => c.TransmissionId).NotEmpty();
         RuleFor(c => c.TramerId).NotEmpty();
-        RuleFor(c => c.AdvertId).NotEmpty();
         RuleFor(c => c.SellerId).NotEmpty();
     }
 }
