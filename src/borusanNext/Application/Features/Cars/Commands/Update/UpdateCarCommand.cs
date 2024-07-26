@@ -26,7 +26,6 @@ public class UpdateCarCommand : IRequest<UpdatedCarResponse>, ISecuredRequest
     public required Guid BodyTypeId { get; set; }
     public required Guid TransmissionId { get; set; }
     public required Guid TramerId { get; set; }
-    public required Guid AdvertId { get; set; }
     public required Guid SellerId { get; set; }
 
     public string[] Roles => [Admin, Write, CarsOperationClaims.Update];

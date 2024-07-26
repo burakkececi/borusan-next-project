@@ -115,6 +115,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISellerService, SellerManager>();
         services.AddScoped<IAdvertImageService, AdvertImageManager>();
         services.AddScoped<IGenerationImageService, GenerationImageManager>();
+        services.AddScoped<ICarService, CarManager>();
         return services;
     }
 

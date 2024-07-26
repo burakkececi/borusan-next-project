@@ -19,6 +19,5 @@ public class CreatedCarResponse : IResponse
     public Guid BodyTypeId { get; set; }
     public Guid TransmissionId { get; set; }
     public Guid TramerId { get; set; }
-    public Guid AdvertId { get; set; }
     public Guid SellerId { get; set; }
 }
