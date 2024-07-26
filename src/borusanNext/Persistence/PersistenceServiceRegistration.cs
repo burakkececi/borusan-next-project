@@ -60,6 +60,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ILocationRepository, LocationRepository>();
         services.AddScoped<IAdvertRepository, AdvertRepository>();
         services.AddScoped<IAdvertImageRepository, AdvertImageRepository>();
+        services.AddScoped<IBlogRepository, BlogRepository>();
         return services;
     }
 }

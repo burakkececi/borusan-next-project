@@ -125,6 +125,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ILocationService, LocationManager>();
         services.AddScoped<IAdvertService, AdvertManager>();
         services.AddScoped<IAdvertImageService, AdvertImageManager>();
+        services.AddScoped<IBlogService, BlogManager>();
         return services;
     }
 
