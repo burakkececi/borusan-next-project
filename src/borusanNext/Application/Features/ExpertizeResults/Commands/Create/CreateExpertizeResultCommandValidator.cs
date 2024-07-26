@@ -9,6 +9,6 @@ public class CreateExpertizeResultCommandValidator : AbstractValidator<CreateExp
         RuleFor(c => c.CarDamageInformationRecord).NotEmpty();
         RuleFor(c => c.InquiryDate).NotEmpty();
         RuleFor(c => c.ChassisPartId).NotEmpty();
-        RuleFor(c => c.BodyPartId).NotEmpty();
+        RuleFor(c => c.BodyShellPartId).NotEmpty();
     }
 }

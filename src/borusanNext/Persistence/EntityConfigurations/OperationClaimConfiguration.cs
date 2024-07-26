@@ -542,6 +542,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         );
         #endregion
         
+        
+        #region ExpertizeResults CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Read },
+                new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Write },
+                new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Create },
+                new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Update },
+                new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
         return featureOperationClaims;
     }
 #pragma warning restore S1854 // Unused assignments should be removed
