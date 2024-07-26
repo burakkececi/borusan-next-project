@@ -59,6 +59,8 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ISellerRepository, SellerRepository>();
         services.AddScoped<ILocationRepository, LocationRepository>();
         services.AddScoped<IExpertizeResultRepository, ExpertizeResultRepository>();
+        services.AddScoped<ICarModelRepository, CarModelRepository>();
+        services.AddScoped<IModalExtensionRepository, ModalExtensionRepository>();
         return services;
     }
 }

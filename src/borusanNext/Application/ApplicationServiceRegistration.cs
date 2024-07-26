@@ -122,6 +122,9 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICustomerService, CustomerManager>();
         services.AddScoped<ISellerService, SellerManager>();
         services.AddScoped<ILocationService, LocationManager>();
+        services.AddScoped<IExpertizeResultService, ExpertizeResultManager>();
+        services.AddScoped<ICarModelService, CarModelManager>();
+        services.AddScoped<IModalExtensionService, ModalExtensionManager>();
         return services;
     }
 

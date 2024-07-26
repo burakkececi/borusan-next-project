@@ -556,6 +556,34 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         );
         #endregion
         
+        
+        #region CarModels CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = CarModelsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = CarModelsOperationClaims.Read },
+                new() { Id = ++lastId, Name = CarModelsOperationClaims.Write },
+                new() { Id = ++lastId, Name = CarModelsOperationClaims.Create },
+                new() { Id = ++lastId, Name = CarModelsOperationClaims.Update },
+                new() { Id = ++lastId, Name = CarModelsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region ModalExtensions CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Read },
+                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Write },
+                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Create },
+                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Update },
+                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
         return featureOperationClaims;
     }
 #pragma warning restore S1854 // Unused assignments should be removed
