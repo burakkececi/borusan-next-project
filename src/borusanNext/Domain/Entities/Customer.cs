@@ -18,7 +18,8 @@ public class Customer : Entity<Guid>
     public CustomerType CustomerType { get; set; }
 
     public virtual User User { get; set; }
-    public ICollection<CustomerAdvertLog> CustomerAdvertLogs { get; set; }   
-    public ICollection<Appointment> Appointments { get; set; }
+    public virtual ICollection<CustomerAdvertLog> CustomerAdvertLogs { get; set; }   
+    public virtual ICollection<Appointment> Appointments { get; set; }
+    public virtual ICollection<CustomerFavorite> CustomerFavorites { get; set; }
 
 }

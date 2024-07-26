@@ -47,6 +47,7 @@ using Application.Services.Customers;
 using Application.Services.Sellers;
 using Application.Services.AdvertImages;
 using Application.Services.GenerationImages;
+using Application.Services.CustomerFavorites;
 
 namespace Application;
 
@@ -116,6 +117,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IAdvertImageService, AdvertImageManager>();
         services.AddScoped<IGenerationImageService, GenerationImageManager>();
         services.AddScoped<ICarService, CarManager>();
+        services.AddScoped<ICustomerFavoriteService, CustomerFavoriteManager>();
         return services;
     }
 
