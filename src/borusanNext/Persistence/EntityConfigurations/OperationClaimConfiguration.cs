@@ -31,6 +31,7 @@ using Application.Features.Tags.Constants;
 using Application.Features.Transmissions.Constants;
 using Application.Features.Customers.Constants;
 using Application.Features.Sellers.Constants;
+using Application.Features.AdvertImages.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -538,6 +539,34 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = LocationsOperationClaims.Create },
                 new() { Id = ++lastId, Name = LocationsOperationClaims.Update },
                 new() { Id = ++lastId, Name = LocationsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region Adverts CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Read },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Write },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Create },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Update },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Delete },
+            ]
+        );
+        #endregion
+        
+        
+        #region AdvertImages CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Read },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Write },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Create },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Update },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Delete },
             ]
         );
         #endregion
