@@ -9,9 +9,10 @@ namespace Domain.Entities;
 public class Advert : Entity<Guid>
 {
     public int AdvertNo { get; set; }
-    public List<string> Photos { get; set; }
+    public string FeaturedImageURL { get; set; }
     public Guid CarId { get; set; }
     
     public virtual Car Car {get;set;}
     public virtual ICollection<CustomerAdvertLog> CustomerAdvertLogs { get; set; }
+    public virtual ICollection<AdvertImage> AdvertImages { get; set; }
 }
