@@ -9,11 +9,17 @@ namespace Domain.Entities;
 public class ModalExtension : Entity<Guid>
 {
     public string Name { get; set; }
-
+    public double Lenght { get; set; }
+    public double Width { get; set; }
+    public double Height { get; set; }
+    public double FuelTank { get; set; }
+    public double LuggageCapacity { get; set; }
+    public double EmptyWeight { get; set; }
+    public int ModelYear { get; set; }
     public Guid CarModelId { get; set; }
-    public virtual CarModel CarModel { get; set; }
-
     public Guid GenerationId { get; set; }
+
+    public virtual CarModel CarModel { get; set; }
     public virtual Generation Generation { get; set; }
     
 
