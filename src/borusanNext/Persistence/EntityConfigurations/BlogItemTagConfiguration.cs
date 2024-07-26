@@ -18,5 +18,8 @@ public class BlogItemTagConfiguration : IEntityTypeConfiguration<BlogItemTag>
         builder.Property(bit => bit.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(bit => !bit.DeletedDate.HasValue);
+
+        builder.HasOne(p => p.Blog).WithMany(p => p.BlogItemTags).HasForeignKey(p => p.BlogId);
+        builder.HasOne(p => p.Tag).WithMany(p => p.BlogItemTags).HasForeignKey(p => p.TagId);
     }
 }

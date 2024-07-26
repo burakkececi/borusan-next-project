@@ -18,5 +18,6 @@ public class GenerationConfiguration : IEntityTypeConfiguration<Generation>
 
         builder.HasQueryFilter(g => !g.DeletedDate.HasValue);
 
+        builder.HasMany(p => p.GenerationImages).WithOne(p => p.Generation).HasForeignKey(g => g.GenerationId);
     }
 }

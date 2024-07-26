@@ -14,7 +14,7 @@ namespace WebAPI.Controllers;
 public class CampaignsController : BaseController
 {
     [HttpPost]
-    public async Task<ActionResult<CreatedCampaignResponse>> Add([FromBody] CreateCampaignCommand command)
+    public async Task<ActionResult<CreatedCampaignResponse>> Add([FromForm] CreateCampaignCommand command)
     {
         CreatedCampaignResponse response = await Mediator.Send(command);
 
@@ -22,7 +22,7 @@ public class CampaignsController : BaseController
     }
 
     [HttpPut]
-    public async Task<ActionResult<UpdatedCampaignResponse>> Update([FromBody] UpdateCampaignCommand command)
+    public async Task<ActionResult<UpdatedCampaignResponse>> Update([FromForm] UpdateCampaignCommand command)
     {
         UpdatedCampaignResponse response = await Mediator.Send(command);
 

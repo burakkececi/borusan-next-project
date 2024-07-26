@@ -31,6 +31,8 @@ using Application.Features.Tags.Constants;
 using Application.Features.Transmissions.Constants;
 using Application.Features.Customers.Constants;
 using Application.Features.Sellers.Constants;
+using Application.Features.AdvertImages.Constants;
+using Application.Features.GenerationImages.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -137,20 +139,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #endregion
         
         
-        #region Adverts CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = AdvertsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = AdvertsOperationClaims.Read },
-                new() { Id = ++lastId, Name = AdvertsOperationClaims.Write },
-                new() { Id = ++lastId, Name = AdvertsOperationClaims.Create },
-                new() { Id = ++lastId, Name = AdvertsOperationClaims.Update },
-                new() { Id = ++lastId, Name = AdvertsOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
         #region Appointments CRUD
         featureOperationClaims.AddRange(
             [
@@ -234,19 +222,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         );
         #endregion
         
-        
-        #region Cars CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = CarsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Read },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Write },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Create },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Update },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Delete },
-            ]
-        );
-        #endregion
         
         #region CarColors CRUD
         featureOperationClaims.AddRange(
@@ -402,20 +377,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #endregion
         
         
-        #region ModalExtensions CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Read },
-                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Write },
-                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Create },
-                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Update },
-                new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
         #region Tags CRUD
         featureOperationClaims.AddRange(
             [
@@ -439,20 +400,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = TransmissionsOperationClaims.Create },
                 new() { Id = ++lastId, Name = TransmissionsOperationClaims.Update },
                 new() { Id = ++lastId, Name = TransmissionsOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
-        #region Customers CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Admin },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Read },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Write },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Create },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Update },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Delete },
             ]
         );
         #endregion
@@ -485,21 +432,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
             ]
         );
         #endregion
-        
-        
-        #region Customers CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Admin },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Read },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Write },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Create },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Update },
-                new() { Id = ++lastId, Name = CustomersOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
+       
         
         #region Customers CRUD
         featureOperationClaims.AddRange(
@@ -553,6 +486,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Update },
                 new() { Id = ++lastId, Name = ExpertizeResultsOperationClaims.Delete },
             ]
+         );
+        #endregion
+        
+        
+        #region Adverts CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Read },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Write },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Create },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Update },
+                new() { Id = ++lastId, Name = AdvertsOperationClaims.Delete },
+            ]
         );
         #endregion
         
@@ -566,6 +513,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = CarModelsOperationClaims.Create },
                 new() { Id = ++lastId, Name = CarModelsOperationClaims.Update },
                 new() { Id = ++lastId, Name = CarModelsOperationClaims.Delete },
+          ]
+         );
+        #endregion
+        
+        
+        #region AdvertImages CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Read },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Write },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Create },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Update },
+                new() { Id = ++lastId, Name = AdvertImagesOperationClaims.Delete },
             ]
         );
         #endregion
@@ -580,6 +541,20 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Create },
                 new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Update },
                 new() { Id = ++lastId, Name = ModalExtensionsOperationClaims.Delete },
+]
+         );
+        #endregion
+        
+        
+        #region GenerationImages CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = GenerationImagesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = GenerationImagesOperationClaims.Read },
+                new() { Id = ++lastId, Name = GenerationImagesOperationClaims.Write },
+                new() { Id = ++lastId, Name = GenerationImagesOperationClaims.Create },
+                new() { Id = ++lastId, Name = GenerationImagesOperationClaims.Update },
+                new() { Id = ++lastId, Name = GenerationImagesOperationClaims.Delete },
             ]
         );
         #endregion

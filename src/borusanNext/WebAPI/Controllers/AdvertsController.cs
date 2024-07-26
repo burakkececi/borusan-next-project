@@ -14,7 +14,7 @@ namespace WebAPI.Controllers;
 public class AdvertsController : BaseController
 {
     [HttpPost]
-    public async Task<ActionResult<CreatedAdvertResponse>> Add([FromBody] CreateAdvertCommand command)
+    public async Task<ActionResult<CreatedAdvertResponse>> Add([FromForm] CreateAdvertCommand command)
     {
         CreatedAdvertResponse response = await Mediator.Send(command);
 
@@ -22,7 +22,7 @@ public class AdvertsController : BaseController
     }
 
     [HttpPut]
-    public async Task<ActionResult<UpdatedAdvertResponse>> Update([FromBody] UpdateAdvertCommand command)
+    public async Task<ActionResult<UpdatedAdvertResponse>> Update([FromForm] UpdateAdvertCommand command)
     {
         UpdatedAdvertResponse response = await Mediator.Send(command);
 
