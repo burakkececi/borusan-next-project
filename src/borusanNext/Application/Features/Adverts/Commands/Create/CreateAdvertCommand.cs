@@ -15,7 +15,7 @@ public class CreateAdvertCommand : IRequest<CreatedAdvertResponse>, ISecuredRequ
 {
     public required int AdvertNo { get; set; }
     public required IFormFile FeaturedImageURL { get; set; }
-    //public required Guid CarId { get; set; }
+    public required Guid CarId { get; set; }
 
     public string[] Roles => [Admin, Write, AdvertsOperationClaims.Create];
 
