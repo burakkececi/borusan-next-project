@@ -17,7 +17,7 @@ namespace Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -45,13 +45,10 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<string>("Photos")
+                    b.Property<string>("FeaturedImageURL")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("PublishedDate");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("FeaturedImageURL");
 
                     b.Property<Guid?>("SellerId")
                         .HasColumnType("uniqueidentifier");
@@ -65,6 +62,41 @@ namespace Persistence.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("Adverts", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.AdvertImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<Guid>("AdvertId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("AdvertId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("ImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ImageURL");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdvertId");
+
+                    b.ToTable("AdvertImages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Appointment", b =>
@@ -117,6 +149,11 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
+
+                    b.Property<string>("Banner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Banner");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -948,6 +985,41 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Generations", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.GenerationImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<Guid>("GenerationId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("GenerationId");
+
+                    b.Property<string>("ImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ImageURL");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenerationId");
+
+                    b.ToTable("GenerationImages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Licence", b =>
@@ -2321,6 +2393,150 @@ namespace Persistence.Migrations
                             Id = 203,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Locations.Delete"
+                        },
+                        new
+                        {
+                            Id = 204,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Adverts.Admin"
+                        },
+                        new
+                        {
+                            Id = 205,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Adverts.Read"
+                        },
+                        new
+                        {
+                            Id = 206,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Adverts.Write"
+                        },
+                        new
+                        {
+                            Id = 207,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Adverts.Create"
+                        },
+                        new
+                        {
+                            Id = 208,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Adverts.Update"
+                        },
+                        new
+                        {
+                            Id = 209,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Adverts.Delete"
+                        },
+                        new
+                        {
+                            Id = 210,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertImages.Admin"
+                        },
+                        new
+                        {
+                            Id = 211,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertImages.Read"
+                        },
+                        new
+                        {
+                            Id = 212,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertImages.Write"
+                        },
+                        new
+                        {
+                            Id = 213,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertImages.Create"
+                        },
+                        new
+                        {
+                            Id = 214,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertImages.Update"
+                        },
+                        new
+                        {
+                            Id = 215,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertImages.Delete"
+                        },
+                        new
+                        {
+                            Id = 216,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Blogs.Admin"
+                        },
+                        new
+                        {
+                            Id = 217,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Blogs.Read"
+                        },
+                        new
+                        {
+                            Id = 218,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Blogs.Write"
+                        },
+                        new
+                        {
+                            Id = 219,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Blogs.Create"
+                        },
+                        new
+                        {
+                            Id = 220,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Blogs.Update"
+                        },
+                        new
+                        {
+                            Id = 221,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Blogs.Delete"
+                        },
+                        new
+                        {
+                            Id = 222,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "GenerationImages.Admin"
+                        },
+                        new
+                        {
+                            Id = 223,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "GenerationImages.Read"
+                        },
+                        new
+                        {
+                            Id = 224,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "GenerationImages.Write"
+                        },
+                        new
+                        {
+                            Id = 225,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "GenerationImages.Create"
+                        },
+                        new
+                        {
+                            Id = 226,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "GenerationImages.Update"
+                        },
+                        new
+                        {
+                            Id = 227,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "GenerationImages.Delete"
                         });
                 });
 
@@ -2581,12 +2797,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5ed5d6a8-2ef6-4d35-952f-198796a9a6cc"),
+                            Id = new Guid("d6ba2834-2bc7-46b0-84bf-6c980dad3946"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 92, 66, 184, 228, 216, 32, 236, 112, 225, 134, 56, 177, 127, 11, 106, 224, 246, 96, 234, 50, 156, 53, 150, 77, 164, 223, 23, 150, 31, 145, 134, 175, 144, 63, 13, 215, 106, 17, 87, 233, 40, 145, 39, 204, 52, 176, 40, 34, 169, 247, 247, 4, 149, 24, 248, 26, 50, 56, 143, 79, 184, 230, 105, 157 },
-                            PasswordSalt = new byte[] { 113, 152, 124, 254, 143, 16, 80, 120, 21, 78, 243, 114, 174, 6, 19, 6, 229, 228, 44, 25, 10, 250, 71, 144, 70, 0, 189, 151, 32, 125, 105, 155, 217, 48, 235, 194, 215, 134, 3, 79, 56, 191, 62, 244, 203, 217, 131, 157, 72, 244, 186, 113, 182, 214, 192, 77, 30, 176, 68, 54, 160, 18, 102, 147, 199, 9, 108, 109, 15, 42, 187, 215, 81, 198, 112, 150, 182, 192, 232, 251, 43, 239, 128, 247, 98, 154, 176, 163, 197, 38, 221, 92, 111, 248, 104, 163, 71, 83, 190, 83, 120, 42, 154, 123, 231, 158, 140, 33, 81, 8, 45, 124, 77, 204, 104, 183, 190, 71, 54, 174, 116, 1, 157, 139, 210, 208, 8, 179 }
+                            PasswordHash = new byte[] { 167, 46, 108, 29, 197, 162, 75, 51, 147, 50, 83, 244, 62, 133, 7, 31, 175, 2, 177, 196, 199, 249, 158, 242, 4, 192, 177, 136, 169, 151, 118, 228, 205, 50, 239, 163, 22, 233, 222, 35, 211, 222, 196, 149, 63, 151, 128, 167, 227, 6, 196, 94, 180, 186, 197, 222, 8, 184, 159, 0, 143, 158, 219, 210 },
+                            PasswordSalt = new byte[] { 136, 175, 40, 222, 178, 0, 57, 16, 164, 219, 27, 180, 146, 12, 134, 178, 98, 190, 245, 126, 128, 99, 176, 182, 185, 213, 171, 223, 134, 180, 205, 214, 49, 25, 66, 16, 33, 235, 102, 187, 231, 57, 154, 17, 69, 74, 78, 182, 18, 184, 38, 122, 17, 98, 19, 88, 204, 147, 235, 48, 217, 243, 180, 119, 221, 226, 167, 147, 59, 226, 232, 207, 228, 140, 1, 143, 65, 130, 192, 235, 151, 192, 59, 206, 243, 16, 134, 133, 111, 66, 17, 55, 82, 76, 220, 66, 37, 13, 51, 135, 130, 138, 89, 57, 24, 255, 79, 252, 223, 35, 45, 107, 82, 147, 57, 41, 71, 20, 187, 64, 138, 26, 34, 94, 8, 83, 16, 185 }
                         });
                 });
 
@@ -2628,10 +2844,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c4ce34d8-4ad1-4ed1-8f4c-b20968aee1fd"),
+                            Id = new Guid("d504d39c-de10-4d88-bbc5-bc4217f03b41"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("5ed5d6a8-2ef6-4d35-952f-198796a9a6cc")
+                            UserId = new Guid("d6ba2834-2bc7-46b0-84bf-6c980dad3946")
                         });
                 });
 
@@ -2640,6 +2856,17 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.Seller", null)
                         .WithMany("Adverts")
                         .HasForeignKey("SellerId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.AdvertImage", b =>
+                {
+                    b.HasOne("Domain.Entities.Advert", "Advert")
+                        .WithMany("AdvertImages")
+                        .HasForeignKey("AdvertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advert");
                 });
 
             modelBuilder.Entity("Domain.Entities.Appointment", b =>
@@ -2837,6 +3064,17 @@ namespace Persistence.Migrations
                     b.Navigation("ChassisPart");
                 });
 
+            modelBuilder.Entity("Domain.Entities.GenerationImage", b =>
+                {
+                    b.HasOne("Domain.Entities.Generation", "Generation")
+                        .WithMany("GenerationImages")
+                        .HasForeignKey("GenerationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Generation");
+                });
+
             modelBuilder.Entity("Domain.Entities.ModalExtension", b =>
                 {
                     b.HasOne("Domain.Entities.CarModel", "CarModel")
@@ -2926,6 +3164,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Advert", b =>
                 {
+                    b.Navigation("AdvertImages");
+
                     b.Navigation("Car")
                         .IsRequired();
 
@@ -3006,6 +3246,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Generation", b =>
                 {
+                    b.Navigation("GenerationImages");
+
                     b.Navigation("ModalExtensions");
                 });
 

@@ -45,6 +45,8 @@ using Application.Services.Tags;
 using Application.Services.Transmissions;
 using Application.Services.Customers;
 using Application.Services.Sellers;
+using Application.Services.AdvertImages;
+using Application.Services.GenerationImages;
 
 namespace Application;
 
@@ -122,6 +124,10 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICustomerService, CustomerManager>();
         services.AddScoped<ISellerService, SellerManager>();
         services.AddScoped<ILocationService, LocationManager>();
+        services.AddScoped<IAdvertService, AdvertManager>();
+        services.AddScoped<IAdvertImageService, AdvertImageManager>();
+        services.AddScoped<IBlogService, BlogManager>();
+        services.AddScoped<IGenerationImageService, GenerationImageManager>();
         return services;
     }
 

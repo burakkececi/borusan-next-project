@@ -6,6 +6,6 @@ public class CreatedAdvertResponse : IResponse
 {
     public Guid Id { get; set; }
     public int AdvertNo { get; set; }
-    public DateTime PublishedDate { get; set; }
+    public string FeaturedImageURL { get; set; }
     public Guid CarId { get; set; }
 }

@@ -39,6 +39,8 @@ public class BaseDbContext : DbContext
     public DbSet<Transmission> Transmissions { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Seller> Sellers { get; set; }
+    public DbSet<AdvertImage> AdvertImages { get; set; }
+    public DbSet<GenerationImage> GenerationImages { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

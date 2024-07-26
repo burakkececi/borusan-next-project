@@ -14,7 +14,7 @@ namespace WebAPI.Controllers;
 public class BrandsController : BaseController
 {
     [HttpPost]
-    public async Task<ActionResult<CreatedBrandResponse>> Add([FromBody] CreateBrandCommand command)
+    public async Task<ActionResult<CreatedBrandResponse>> Add([FromForm] CreateBrandCommand command)
     {
         CreatedBrandResponse response = await Mediator.Send(command);
 
@@ -22,7 +22,7 @@ public class BrandsController : BaseController
     }
 
     [HttpPut]
-    public async Task<ActionResult<UpdatedBrandResponse>> Update([FromBody] UpdateBrandCommand command)
+    public async Task<ActionResult<UpdatedBrandResponse>> Update([FromForm] UpdateBrandCommand command)
     {
         UpdatedBrandResponse response = await Mediator.Send(command);
 

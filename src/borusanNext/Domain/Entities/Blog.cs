@@ -10,5 +10,7 @@ public class Blog : Entity<Guid>
 {
     public string Title { get; set; }
     public string Description { get; set; }
+    public string Banner { get; set; }
+
     public virtual ICollection<BlogItemTag> BlogItemTags { get; set; }
 }

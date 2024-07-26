@@ -6,6 +6,8 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Adverts.Constants.AdvertsOperationClaims;
+using Microsoft.AspNetCore.Http;
+using Application.Services.ImageService;
 
 namespace Application.Features.Adverts.Commands.Update;
 
@@ -13,7 +15,7 @@ public class UpdateAdvertCommand : IRequest<UpdatedAdvertResponse>, ISecuredRequ
 {
     public Guid Id { get; set; }
     public required int AdvertNo { get; set; }
-    public required DateTime UpdatedDate { get; set; }
+    public IFormFile FeaturedImageURL { get; set; }
     public required Guid CarId { get; set; }
 
     public string[] Roles => [Admin, Write, AdvertsOperationClaims.Update];
@@ -23,21 +25,30 @@ public class UpdateAdvertCommand : IRequest<UpdatedAdvertResponse>, ISecuredRequ
         private readonly IMapper _mapper;
         private readonly IAdvertRepository _advertRepository;
         private readonly AdvertBusinessRules _advertBusinessRules;
+        private readonly ImageServiceBase _imageServiceBase;
 
         public UpdateAdvertCommandHandler(IMapper mapper, IAdvertRepository advertRepository,
-                                         AdvertBusinessRules advertBusinessRules)
+                                         AdvertBusinessRules advertBusinessRules, ImageServiceBase imageServiceBase)
         {
             _mapper = mapper;
             _advertRepository = advertRepository;
             _advertBusinessRules = advertBusinessRules;
+            _imageServiceBase = imageServiceBase;
         }
 
         public async Task<UpdatedAdvertResponse> Handle(UpdateAdvertCommand request, CancellationToken cancellationToken)
         {
             Advert? advert = await _advertRepository.GetAsync(predicate: a => a.Id == request.Id, cancellationToken: cancellationToken);
-            //advert.UpdatedDate = DateTime.Now;
             await _advertBusinessRules.AdvertShouldExistWhenSelected(advert);
-            advert = _mapper.Map(request, advert);
+            
+            advert.AdvertNo = request.AdvertNo;
+            advert.CarId = request.CarId;
+            
+            if(request.FeaturedImageURL.Length > 0)
+            {
+                advert.FeaturedImageURL = await _imageServiceBase.UpdateAsync(request.FeaturedImageURL,
+                                                                              advert.FeaturedImageURL);
+            }
 
             await _advertRepository.UpdateAsync(advert!);
 

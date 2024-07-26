@@ -9,6 +9,6 @@ public class UpdateBlogCommandValidator : AbstractValidator<UpdateBlogCommand>
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.Title).NotEmpty();
         RuleFor(c => c.Description).NotEmpty();
-        RuleFor(c => c.CreatedDate).NotEmpty();
+        RuleFor(c => c.Banner).NotEmpty();
     }
 }

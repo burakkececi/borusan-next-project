@@ -6,6 +6,8 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Blogs.Constants.BlogsOperationClaims;
+using Application.Services.ImageService;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Blogs.Commands.Update;
 
@@ -14,8 +16,7 @@ public class UpdateBlogCommand : IRequest<UpdatedBlogResponse>, ISecuredRequest
     public Guid Id { get; set; }
     public required string Title { get; set; }
     public required string Description { get; set; }
-    public required DateTime CreatedDate { get; set; }
-
+    public IFormFile Banner { get; set; }
     public string[] Roles => [Admin, Write, BlogsOperationClaims.Update];
 
     public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, UpdatedBlogResponse>
@@ -23,13 +24,15 @@ public class UpdateBlogCommand : IRequest<UpdatedBlogResponse>, ISecuredRequest
         private readonly IMapper _mapper;
         private readonly IBlogRepository _blogRepository;
         private readonly BlogBusinessRules _blogBusinessRules;
+        private readonly ImageServiceBase _imageServiceBase;
 
         public UpdateBlogCommandHandler(IMapper mapper, IBlogRepository blogRepository,
-                                         BlogBusinessRules blogBusinessRules)
+                                         BlogBusinessRules blogBusinessRules, ImageServiceBase imageServiceBase)
         {
             _mapper = mapper;
             _blogRepository = blogRepository;
             _blogBusinessRules = blogBusinessRules;
+            _imageServiceBase = imageServiceBase;
         }
 
         public async Task<UpdatedBlogResponse> Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
@@ -37,6 +40,8 @@ public class UpdateBlogCommand : IRequest<UpdatedBlogResponse>, ISecuredRequest
             Blog? blog = await _blogRepository.GetAsync(predicate: b => b.Id == request.Id, cancellationToken: cancellationToken);
             await _blogBusinessRules.BlogShouldExistWhenSelected(blog);
             blog = _mapper.Map(request, blog);
+
+            blog.Banner = await _imageServiceBase.UpdateAsync(request.Banner, blog.Banner);
 
             await _blogRepository.UpdateAsync(blog!);
 
