@@ -21,5 +21,6 @@ public class AdvertConfiguration : IEntityTypeConfiguration<Advert>
         builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
 
         builder.HasOne(p => p.Car).WithOne(p => p.Advert).HasForeignKey<Advert>(p => p.CarId);
+        builder.HasMany(p => p.AdvertImages).WithOne(p => p.Advert).HasForeignKey(p => p.AdvertId);
     }
 }

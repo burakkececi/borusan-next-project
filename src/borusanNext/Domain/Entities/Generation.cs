@@ -10,4 +10,5 @@ public class Generation : Entity<Guid>
 {
     public string Name { get; set; }
     public virtual ICollection<ModalExtension> ModalExtensions { get; set; }
+    public virtual ICollection<GenerationImage> GenerationImages { get; set; }
 }
