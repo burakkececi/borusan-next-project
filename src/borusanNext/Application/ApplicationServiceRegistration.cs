@@ -118,6 +118,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IGenerationImageService, GenerationImageManager>();
         services.AddScoped<ICarService, CarManager>();
         services.AddScoped<ICustomerFavoriteService, CustomerFavoriteManager>();
+        services.AddScoped<ILocationService, LocationManager>();
         return services;
     }
 

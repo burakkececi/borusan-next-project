@@ -14,7 +14,8 @@ public class CreateLocationCommand : IRequest<CreatedLocationResponse>, ISecured
     public required string Name { get; set; }
     public required string City { get; set; }
     public required string Address { get; set; }
-    
+    public required string Latitute { get; set; }
+    public required string Longitute { get; set; }
 
     public string[] Roles => [Admin, Write, LocationsOperationClaims.Create];
 

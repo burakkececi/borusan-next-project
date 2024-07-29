@@ -588,6 +588,20 @@ featureOperationClaims.AddRange(
 );
 #endregion
 
+
+#region Locations CRUD
+featureOperationClaims.AddRange(
+    [
+        new() { Id = ++lastId, Name = LocationsOperationClaims.Admin },
+        new() { Id = ++lastId, Name = LocationsOperationClaims.Read },
+        new() { Id = ++lastId, Name = LocationsOperationClaims.Write },
+        new() { Id = ++lastId, Name = LocationsOperationClaims.Create },
+        new() { Id = ++lastId, Name = LocationsOperationClaims.Update },
+        new() { Id = ++lastId, Name = LocationsOperationClaims.Delete },
+    ]
+);
+#endregion
+
         return featureOperationClaims;
     }
 #pragma warning restore S1854 // Unused assignments should be removed
