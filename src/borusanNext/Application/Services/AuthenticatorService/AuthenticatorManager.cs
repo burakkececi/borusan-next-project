@@ -97,7 +97,7 @@ public class AuthenticatorManager : IAuthenticatorService
             {
                 ToList = toEmailList,
                 Subject = "Authenticator Code - NArchitecture",
-                TextBody = $"Enter your authenticator code: {authenticatorCode}"
+                HtmlBody = $"Enter your authenticator code: {authenticatorCode}"
             }
         );
     }
