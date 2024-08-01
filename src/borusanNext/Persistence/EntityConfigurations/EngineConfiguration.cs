@@ -20,9 +20,9 @@ public class EngineConfiguration : IEntityTypeConfiguration<Engine>
         builder.Property(e => e.FuelTankVolume).HasColumnName("FuelTankVolume").IsRequired();
         builder.Property(e => e.FuelTypeId).HasColumnName("FuelTypeId").IsRequired();
         builder.Property(e => e.FuelConsumptionId).HasColumnName("FuelConsumptionId").IsRequired();
-        builder.Property(e => e.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(e => e.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(e => e.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(e => e.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(e => e.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(e => e.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(e => !e.DeletedDate.HasValue);
 

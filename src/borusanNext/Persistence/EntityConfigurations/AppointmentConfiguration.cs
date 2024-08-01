@@ -15,9 +15,9 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.Property(a => a.Time).HasColumnName("Time").IsRequired();
         builder.Property(a => a.CarId).HasColumnName("CarId").IsRequired();
         builder.Property(a => a.CustomerId).HasColumnName("CustomerId").IsRequired();
-        builder.Property(a => a.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(a => a.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(a => a.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(a => a.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(a => a.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(a => a.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(a => !a.DeletedDate.HasValue);
 

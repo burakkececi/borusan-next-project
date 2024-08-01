@@ -14,9 +14,9 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
         builder.Property(b => b.Title).HasColumnName("Title").IsRequired();
         builder.Property(b => b.Description).HasColumnName("Description").IsRequired();
         builder.Property(b => b.Banner).HasColumnName("Banner").IsRequired();
-        builder.Property(b => b.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(b => b.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(b => b.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(b => b.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
     }

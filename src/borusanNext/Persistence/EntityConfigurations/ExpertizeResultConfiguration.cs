@@ -15,9 +15,9 @@ public class ExpertizeResultConfiguration : IEntityTypeConfiguration<ExpertizeRe
         builder.Property(er => er.InquiryDate).HasColumnName("InquiryDate").IsRequired();
         builder.Property(er => er.ChassisPartId).HasColumnName("ChassisPartId").IsRequired();
         builder.Property(er => er.BodyShellPartId).HasColumnName("BodyShellPartId").IsRequired();
-        builder.Property(er => er.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(er => er.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(er => er.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(er => er.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(er => er.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(er => er.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(er => !er.DeletedDate.HasValue);
 

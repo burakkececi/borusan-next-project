@@ -21,9 +21,9 @@ public class ModalExtensionConfiguration : IEntityTypeConfiguration<ModalExtensi
         builder.Property(me => me.ModelYear).HasColumnName("ModelYear").IsRequired();
         builder.Property(me => me.CarModelId).HasColumnName("CarModelId").IsRequired();
         builder.Property(me => me.GenerationId).HasColumnName("GenerationId").IsRequired();
-        builder.Property(me => me.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(me => me.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(me => me.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(me => me.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(me => me.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(me => me.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(me => !me.DeletedDate.HasValue);
         builder.HasOne(p => p.CarModel).WithMany(p => p.ModalExtensions).HasForeignKey(p => p.CarModelId);

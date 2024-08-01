@@ -17,9 +17,9 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.Phone).HasColumnName("Phone").IsRequired();
         builder.Property(c => c.IsSmsConfirmed).HasColumnName("IsSmsConfirmed").IsRequired();
         builder.Property(c => c.CustomerType).HasColumnName("CustomerType").IsRequired();
-        builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(c => c.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(c => c.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
 

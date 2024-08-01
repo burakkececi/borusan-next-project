@@ -44,9 +44,9 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
 
         builder.Property(oc => oc.Id).HasColumnName("Id").IsRequired();
         builder.Property(oc => oc.Name).HasColumnName("Name").IsRequired();
-        builder.Property(oc => oc.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(oc => oc.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(oc => oc.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(oc => oc.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(oc => oc.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(oc => oc.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(oc => !oc.DeletedDate.HasValue);
 

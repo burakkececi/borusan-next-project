@@ -16,9 +16,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.PasswordSalt).HasColumnName("PasswordSalt").IsRequired();
         builder.Property(u => u.PasswordHash).HasColumnName("PasswordHash").IsRequired();
         builder.Property(u => u.AuthenticatorType).HasColumnName("AuthenticatorType").IsRequired();
-        builder.Property(u => u.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(u => u.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(u => u.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(u => u.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(u => u.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(u => u.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
 

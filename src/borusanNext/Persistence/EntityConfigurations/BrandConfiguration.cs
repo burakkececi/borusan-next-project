@@ -13,9 +13,9 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
         builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
         builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
         builder.Property(b => b.Logo).HasColumnName("Logo").IsRequired();
-        builder.Property(b => b.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(b => b.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(b => b.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(b => b.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
     }
