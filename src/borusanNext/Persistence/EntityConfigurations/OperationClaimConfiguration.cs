@@ -33,6 +33,7 @@ using Application.Features.Customers.Constants;
 using Application.Features.Sellers.Constants;
 using Application.Features.AdvertImages.Constants;
 using Application.Features.GenerationImages.Constants;
+using Application.Features.CustomerFavorites.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -569,6 +570,20 @@ featureOperationClaims.AddRange(
         new() { Id = ++lastId, Name = CarsOperationClaims.Create },
         new() { Id = ++lastId, Name = CarsOperationClaims.Update },
         new() { Id = ++lastId, Name = CarsOperationClaims.Delete },
+    ]
+);
+#endregion
+
+
+#region CustomerFavorites CRUD
+featureOperationClaims.AddRange(
+    [
+        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Admin },
+        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Read },
+        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Write },
+        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Create },
+        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Update },
+        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Delete },
     ]
 );
 #endregion

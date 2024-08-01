@@ -1,11 +1,12 @@
-﻿namespace Domain.Entities;
+﻿using NArchitecture.Core.Persistence.Repositories;
 
-public class CustomerFavorite
+namespace Domain.Entities;
+
+public class CustomerFavorite : Entity<Guid>
 {
-    public string CollectionName { get; set; }
     public Guid CustomerId { get; set; }
-    public Guid FavoriteId { get; set; }
+    public Guid AdvertId { get; set; }
 
     public virtual Customer Customer { get; set; }
-    public virtual Favorite Favorite { get; set; }
+    public virtual Advert Advert { get; set; }
 }

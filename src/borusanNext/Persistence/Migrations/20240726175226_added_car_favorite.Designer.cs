@@ -2,8 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Contexts;
 
 #nullable disable
@@ -11,50 +12,52 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240726175226_added_car_favorite")]
+    partial class added_car_favorite
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.Entities.Advert", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<int>("AdvertNo")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("AdvertNo");
 
                     b.Property<Guid>("CarId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CarId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("FeaturedImageURL")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("FeaturedImageURL");
 
                     b.Property<Guid?>("SellerId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -71,28 +74,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("AdvertId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("AdvertId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImageURL");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -106,35 +109,35 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("CarId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CarId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CustomerId");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("Date");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("Time")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("Time");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -150,34 +153,34 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<string>("Banner")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Banner");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Description");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -189,27 +192,27 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BlogId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("BlogId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("TagId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TagId");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -225,71 +228,71 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<int>("Bonnet")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("Bonnet");
 
                     b.Property<int>("Ceiling")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("Ceiling");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("Frontbumper")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("Frontbumper");
 
                     b.Property<int>("LeftFrontDoor")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("LeftFrontDoor");
 
                     b.Property<int>("LeftFrontFender")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("LeftFrontFender");
 
                     b.Property<int>("LeftRearDoor")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("LeftRearDoor");
 
                     b.Property<int>("LeftRearFender")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("LeftRearFender");
 
                     b.Property<int>("Luggage")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("Luggage");
 
                     b.Property<int>("RearBumper")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("RearBumper");
 
                     b.Property<int>("RightFrontDoor")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("RightFrontDoor");
 
                     b.Property<int>("RightFrontFender")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("RightFrontFender");
 
                     b.Property<int>("RightRearDoor")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("RightRearDoor");
 
                     b.Property<int>("RightRearFender")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("RightRearFender");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -301,28 +304,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BodyName")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("BodyName");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Door")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Door");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -334,29 +337,29 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Logo")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Logo");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -368,34 +371,34 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<string>("Banner")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Banner");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Description");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -407,83 +410,83 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BodyTypeId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("BodyTypeId");
 
                     b.Property<Guid>("CarModelId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CarModelId");
 
                     b.Property<string>("ChassisNumber")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ChassisNumber");
 
                     b.Property<Guid>("ColorId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ColorId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("EngineId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("EngineId");
 
                     b.Property<DateTime>("Inquiry")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("Inquiry");
 
                     b.Property<int>("Kilometers")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("Kilometers");
 
                     b.Property<string>("Plate")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Plate");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
-                        .HasColumnType("numeric(18,2)")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("Price");
 
                     b.Property<Guid>("SellerId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("SellerId");
 
                     b.Property<bool>("SpareKey")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("SpareKey");
 
                     b.Property<bool>("SpareWheel")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("SpareWheel");
 
                     b.Property<Guid>("TramerId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TramerId");
 
                     b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("TransmissionId");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<string>("WheelType")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("WheelType");
 
                     b.HasKey("Id");
@@ -510,24 +513,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -539,28 +542,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("BrandId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("ModelName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ModelName");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -574,35 +577,35 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<bool>("IsBackPanelChanged")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("IsBackPanelChanged");
 
                     b.Property<bool>("IsFrontPanelChanged")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("IsFrontPanelChanged");
 
                     b.Property<bool>("IsLeftChassisChanged")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("IsLeftChassisChanged");
 
                     b.Property<bool>("IsRightChassisChanged")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("IsRightChassisChanged");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -614,46 +617,46 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<int>("CustomerType")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("CustomerType");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("FirstName");
 
                     b.Property<bool>("IsSmsConfirmed")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("IsSmsConfirmed");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("LastName");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Phone");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -668,31 +671,31 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("AdvertId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("AdvertId");
 
                     b.Property<int>("ContactStatus")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ContactStatus");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CustomerId");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -744,31 +747,31 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<string>("ActivationKey")
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ActivationKey");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("IsVerified");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -782,56 +785,56 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<double>("Acceleration")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("Acceleration");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("EngineCapacity")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("EngineCapacity");
 
                     b.Property<string>("EngineNo")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("EngineNo");
 
                     b.Property<Guid>("FuelConsumptionId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("FuelConsumptionId");
 
                     b.Property<int>("FuelTankVolume")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("FuelTankVolume");
 
                     b.Property<Guid>("FuelTypeId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("FuelTypeId");
 
                     b.Property<int>("MaximumSpeed")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("MaximumSpeed");
 
                     b.Property<int>("MaximumTorque")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("MaximumTorque");
 
                     b.Property<int>("MotorPower")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("MotorPower");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -847,35 +850,35 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BodyShellPartId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("BodyShellPartId");
 
                     b.Property<int>("CarDamageInformationRecord")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("CarDamageInformationRecord");
 
                     b.Property<Guid>("ChassisPartId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ChassisPartId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("InquiryDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("InquiryDate");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -893,31 +896,31 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<double>("Average")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("Average");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<double>("OutOfTown")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("OutOfTown");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<double>("Urban")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("Urban");
 
                     b.HasKey("Id");
@@ -929,24 +932,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -958,24 +961,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -987,28 +990,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("GenerationId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("GenerationId");
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImageURL");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -1022,28 +1025,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("LicenceNo")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("LicenceNo");
 
                     b.Property<string>("LicenceOwner")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("LicenceOwner");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -1055,44 +1058,44 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Address");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("City");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Latitute")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Latitute");
 
                     b.Property<string>("Longitute")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Longitute");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -1104,60 +1107,60 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("CarModelId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CarModelId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<double>("EmptyWeight")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("EmptyWeight");
 
                     b.Property<double>("FuelTank")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("FuelTank");
 
                     b.Property<Guid>("GenerationId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("GenerationId");
 
                     b.Property<double>("Height")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("Height");
 
                     b.Property<double>("Lenght")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("Lenght");
 
                     b.Property<double>("LuggageCapacity")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("LuggageCapacity");
 
                     b.Property<int>("ModelYear")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("ModelYear");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<double>("Width")
-                        .HasColumnType("double precision")
+                        .HasColumnType("float")
                         .HasColumnName("Width");
 
                     b.HasKey("Id");
@@ -1173,26 +1176,26 @@ namespace Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -2532,32 +2535,32 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("IsVerified");
 
                     b.Property<byte[]>("SecretKey")
                         .IsRequired()
-                        .HasColumnType("bytea")
+                        .HasColumnType("varbinary(max)")
                         .HasColumnName("SecretKey");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2571,53 +2574,53 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("CreatedByIp");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("ExpiresDate");
 
                     b.Property<string>("ReasonRevoked")
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ReasonRevoked");
 
                     b.Property<string>("ReplacedByToken")
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("ReplacedByToken");
 
                     b.Property<string>("RevokedByIp")
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("RevokedByIp");
 
                     b.Property<DateTime?>("RevokedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("RevokedDate");
 
                     b.Property<string>("Token")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Token");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2631,41 +2634,41 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("LicenceId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LicenceId");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("LocationId");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("PhoneNumber");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2686,24 +2689,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -2715,24 +2718,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -2744,38 +2747,38 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<int>("AuthenticatorType")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("AuthenticatorType");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Email");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("bytea")
+                        .HasColumnType("varbinary(max)")
                         .HasColumnName("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
-                        .HasColumnType("bytea")
+                        .HasColumnType("varbinary(max)")
                         .HasColumnName("PasswordSalt");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -2785,12 +2788,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f26dc11a-e11b-406f-9408-54d051829307"),
+                            Id = new Guid("ee03510b-a86d-42b8-9dfb-f24142ebd2c3"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 133, 55, 6, 168, 83, 66, 116, 8, 216, 65, 108, 40, 165, 0, 188, 88, 154, 18, 61, 210, 210, 42, 46, 135, 159, 74, 88, 139, 141, 174, 114, 121, 203, 202, 18, 173, 61, 77, 215, 67, 99, 246, 86, 177, 211, 247, 252, 49, 61, 244, 173, 47, 179, 131, 252, 123, 247, 255, 31, 8, 23, 87, 235, 198 },
-                            PasswordSalt = new byte[] { 184, 112, 89, 237, 85, 72, 234, 28, 154, 236, 165, 165, 138, 196, 100, 207, 115, 92, 114, 171, 109, 194, 3, 36, 160, 43, 219, 40, 71, 49, 235, 144, 135, 197, 208, 140, 92, 220, 221, 67, 29, 92, 96, 93, 200, 189, 143, 19, 84, 22, 108, 113, 108, 114, 96, 130, 36, 154, 144, 23, 100, 98, 3, 119, 175, 246, 107, 232, 38, 97, 212, 212, 83, 19, 243, 255, 4, 171, 55, 220, 26, 66, 166, 47, 50, 147, 163, 216, 150, 48, 248, 70, 204, 8, 226, 77, 63, 11, 118, 3, 7, 232, 220, 151, 250, 3, 152, 53, 181, 147, 135, 124, 209, 79, 77, 154, 73, 30, 141, 129, 218, 167, 73, 114, 147, 7, 232, 60 }
+                            PasswordHash = new byte[] { 47, 87, 141, 63, 133, 66, 37, 148, 53, 233, 7, 207, 205, 5, 55, 95, 239, 5, 195, 56, 89, 81, 47, 19, 125, 100, 89, 107, 180, 9, 162, 59, 128, 165, 114, 70, 249, 227, 245, 207, 185, 62, 136, 218, 34, 168, 212, 161, 141, 55, 140, 214, 35, 135, 183, 156, 101, 150, 246, 125, 224, 118, 157, 26 },
+                            PasswordSalt = new byte[] { 121, 26, 75, 246, 104, 126, 6, 152, 73, 197, 204, 13, 139, 33, 80, 57, 88, 231, 17, 142, 91, 216, 218, 223, 176, 251, 161, 242, 45, 199, 78, 21, 12, 162, 77, 242, 133, 193, 23, 249, 74, 252, 82, 191, 218, 162, 172, 160, 44, 205, 78, 71, 25, 96, 112, 225, 71, 243, 64, 172, 140, 107, 19, 51, 4, 166, 25, 79, 33, 132, 236, 149, 71, 11, 157, 211, 66, 3, 243, 155, 155, 198, 113, 252, 161, 59, 171, 132, 221, 226, 249, 242, 15, 87, 42, 235, 115, 16, 24, 98, 218, 110, 212, 217, 198, 167, 103, 119, 253, 232, 208, 245, 88, 161, 13, 68, 152, 33, 243, 197, 72, 117, 250, 163, 244, 56, 83, 138 }
                         });
                 });
 
@@ -2798,27 +2801,27 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("OperationClaimId")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("OperationClaimId");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
+                        .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2832,10 +2835,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("da479124-a385-4e92-b833-f254d89bfadc"),
+                            Id = new Guid("1bbce3da-fdfe-4ae6-a3a7-71d217344ff0"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("f26dc11a-e11b-406f-9408-54d051829307")
+                            UserId = new Guid("ee03510b-a86d-42b8-9dfb-f24142ebd2c3")
                         });
                 });
 
