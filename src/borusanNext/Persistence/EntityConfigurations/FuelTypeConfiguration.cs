@@ -12,9 +12,9 @@ public class FuelTypeConfiguration : IEntityTypeConfiguration<FuelType>
 
         builder.Property(ft => ft.Id).HasColumnName("Id").IsRequired();
         builder.Property(ft => ft.Name).HasColumnName("Name").IsRequired();
-        builder.Property(ft => ft.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(ft => ft.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(ft => ft.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(ft => ft.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(ft => ft.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(ft => ft.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(ft => !ft.DeletedDate.HasValue);
     }

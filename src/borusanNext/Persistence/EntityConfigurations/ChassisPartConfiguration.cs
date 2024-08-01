@@ -15,9 +15,9 @@ public class ChassisPartConfiguration : IEntityTypeConfiguration<ChassisPart>
         builder.Property(cp => cp.IsLeftChassisChanged).HasColumnName("IsLeftChassisChanged").IsRequired();
         builder.Property(cp => cp.IsFrontPanelChanged).HasColumnName("IsFrontPanelChanged").IsRequired();
         builder.Property(cp => cp.IsBackPanelChanged).HasColumnName("IsBackPanelChanged").IsRequired();
-        builder.Property(cp => cp.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(cp => cp.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(cp => cp.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(cp => cp.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(cp => cp.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(cp => cp.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(cp => !cp.DeletedDate.HasValue);
     }

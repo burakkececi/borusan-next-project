@@ -12,9 +12,9 @@ public class GenerationConfiguration : IEntityTypeConfiguration<Generation>
 
         builder.Property(g => g.Id).HasColumnName("Id").IsRequired();
         builder.Property(g => g.Name).HasColumnName("Name").IsRequired();
-        builder.Property(g => g.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(g => g.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(g => g.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(g => g.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(g => g.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(g => g.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(g => !g.DeletedDate.HasValue);
 

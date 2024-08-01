@@ -83,6 +83,8 @@ builder.Services.AddSwaggerGen(opt =>
     opt.OperationFilter<BearerSecurityRequirementOperationFilter>();
 });
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true); // Enable timestamp without time zone for postgresql
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.

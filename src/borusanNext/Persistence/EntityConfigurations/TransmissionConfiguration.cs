@@ -12,9 +12,9 @@ public class TransmissionConfiguration : IEntityTypeConfiguration<Transmission>
 
         builder.Property(t => t.Id).HasColumnName("Id").IsRequired();
         builder.Property(t => t.Name).HasColumnName("Name").IsRequired();
-        builder.Property(t => t.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(t => t.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(t => t.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(t => t.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(t => !t.DeletedDate.HasValue);
     }

@@ -2,9 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence.Contexts;
 
 #nullable disable
@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240726104407_added-generationImage")]
-    partial class addedgenerationImage
+    [Migration("20240801122822_set_datetime_to_timestamp")]
+    partial class set_datetime_to_timestamp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,46 +21,49 @@ namespace Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.Entities.Advert", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<int>("AdvertNo")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("AdvertNo");
 
                     b.Property<Guid>("CarId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("CarId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("FeaturedImageURL")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("FeaturedImageURL");
 
                     b.Property<Guid?>("SellerId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CarId")
+                        .IsUnique();
 
                     b.HasIndex("SellerId");
 
@@ -71,28 +74,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("AdvertId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("AdvertId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("ImageURL");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -106,35 +109,35 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("CarId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("CarId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("CustomerId");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("Date");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("Time");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -150,34 +153,34 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<string>("Banner")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Banner");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Description");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Title");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -189,27 +192,27 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BlogId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("BlogId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("TagId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("TagId");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -225,71 +228,71 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<int>("Bonnet")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Bonnet");
 
                     b.Property<int>("Ceiling")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Ceiling");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("Frontbumper")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Frontbumper");
 
                     b.Property<int>("LeftFrontDoor")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("LeftFrontDoor");
 
                     b.Property<int>("LeftFrontFender")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("LeftFrontFender");
 
                     b.Property<int>("LeftRearDoor")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("LeftRearDoor");
 
                     b.Property<int>("LeftRearFender")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("LeftRearFender");
 
                     b.Property<int>("Luggage")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Luggage");
 
                     b.Property<int>("RearBumper")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("RearBumper");
 
                     b.Property<int>("RightFrontDoor")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("RightFrontDoor");
 
                     b.Property<int>("RightFrontFender")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("RightFrontFender");
 
                     b.Property<int>("RightRearDoor")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("RightRearDoor");
 
                     b.Property<int>("RightRearFender")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("RightRearFender");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -301,28 +304,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BodyName")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("BodyName");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Door")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Door");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -334,29 +337,29 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Logo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Logo");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -368,34 +371,34 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<string>("Banner")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Banner");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Description");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Title");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -407,93 +410,86 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
-                    b.Property<Guid>("AdvertId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("AdvertId");
-
                     b.Property<Guid>("BodyTypeId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("BodyTypeId");
 
                     b.Property<Guid>("CarModelId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("CarModelId");
 
                     b.Property<string>("ChassisNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("ChassisNumber");
 
                     b.Property<Guid>("ColorId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("ColorId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("EngineId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("EngineId");
 
                     b.Property<DateTime>("Inquiry")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("Inquiry");
 
                     b.Property<int>("Kilometers")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Kilometers");
 
                     b.Property<string>("Plate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Plate");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
+                        .HasColumnType("numeric(18,2)")
                         .HasColumnName("Price");
 
                     b.Property<Guid>("SellerId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("SellerId");
 
                     b.Property<bool>("SpareKey")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("SpareKey");
 
                     b.Property<bool>("SpareWheel")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("SpareWheel");
 
                     b.Property<Guid>("TramerId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("TramerId");
 
                     b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("TransmissionId");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<string>("WheelType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("WheelType");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AdvertId")
-                        .IsUnique();
 
                     b.HasIndex("BodyTypeId");
 
@@ -517,24 +513,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -546,65 +542,29 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("BrandId");
 
-                    b.Property<Guid>("CarId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CarId");
-
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
-
-                    b.Property<double>("EmptyWeight")
-                        .HasColumnType("float")
-                        .HasColumnName("EmptyWeight");
-
-                    b.Property<double>("FuelTank")
-                        .HasColumnType("float")
-                        .HasColumnName("FuelTank");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("float")
-                        .HasColumnName("Height");
-
-                    b.Property<double>("Lenght")
-                        .HasColumnType("float")
-                        .HasColumnName("Lenght");
-
-                    b.Property<double>("LuggageCapacity")
-                        .HasColumnType("float")
-                        .HasColumnName("LuggageCapacity");
-
-                    b.Property<Guid>("ModalExtensionId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("ModalExtensionId");
 
                     b.Property<string>("ModelName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("ModelName");
 
-                    b.Property<int>("ModelYear")
-                        .HasColumnType("int")
-                        .HasColumnName("ModelYear");
-
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
-
-                    b.Property<double>("Width")
-                        .HasColumnType("float")
-                        .HasColumnName("Width");
 
                     b.HasKey("Id");
 
@@ -617,35 +577,35 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<bool>("IsBackPanelChanged")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("IsBackPanelChanged");
 
                     b.Property<bool>("IsFrontPanelChanged")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("IsFrontPanelChanged");
 
                     b.Property<bool>("IsLeftChassisChanged")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("IsLeftChassisChanged");
 
                     b.Property<bool>("IsRightChassisChanged")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("IsRightChassisChanged");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -657,46 +617,46 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<int>("CustomerType")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("CustomerType");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("FirstName");
 
                     b.Property<bool>("IsSmsConfirmed")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("IsSmsConfirmed");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("LastName");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Phone");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -711,31 +671,31 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("AdvertId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("AdvertId");
 
                     b.Property<int>("ContactStatus")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("ContactStatus");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("CustomerId");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -751,31 +711,31 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<string>("ActivationKey")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("ActivationKey");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("IsVerified");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -789,56 +749,56 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<double>("Acceleration")
-                        .HasColumnType("float")
+                        .HasColumnType("double precision")
                         .HasColumnName("Acceleration");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("EngineCapacity")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("EngineCapacity");
 
                     b.Property<string>("EngineNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("EngineNo");
 
                     b.Property<Guid>("FuelConsumptionId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("FuelConsumptionId");
 
                     b.Property<int>("FuelTankVolume")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("FuelTankVolume");
 
                     b.Property<Guid>("FuelTypeId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("FuelTypeId");
 
                     b.Property<int>("MaximumSpeed")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("MaximumSpeed");
 
                     b.Property<int>("MaximumTorque")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("MaximumTorque");
 
                     b.Property<int>("MotorPower")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("MotorPower");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -854,35 +814,35 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BodyShellPartId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("BodyShellPartId");
 
                     b.Property<int>("CarDamageInformationRecord")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("CarDamageInformationRecord");
 
                     b.Property<Guid>("ChassisPartId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("ChassisPartId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("InquiryDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("InquiryDate");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -900,31 +860,31 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<double>("Average")
-                        .HasColumnType("float")
+                        .HasColumnType("double precision")
                         .HasColumnName("Average");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<double>("OutOfTown")
-                        .HasColumnType("float")
+                        .HasColumnType("double precision")
                         .HasColumnName("OutOfTown");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<double>("Urban")
-                        .HasColumnType("float")
+                        .HasColumnType("double precision")
                         .HasColumnName("Urban");
 
                     b.HasKey("Id");
@@ -936,24 +896,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -965,24 +925,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -994,28 +954,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("GenerationId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("GenerationId");
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("ImageURL");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -1029,28 +989,28 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("LicenceNo")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("LicenceNo");
 
                     b.Property<string>("LicenceOwner")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("LicenceOwner");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -1062,44 +1022,44 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Address");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("City");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Latitute")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Latitute");
 
                     b.Property<string>("Longitute")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Longitute");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -1111,33 +1071,61 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<Guid>("CarModelId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("CarModelId");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
+                    b.Property<double>("EmptyWeight")
+                        .HasColumnType("double precision")
+                        .HasColumnName("EmptyWeight");
+
+                    b.Property<double>("FuelTank")
+                        .HasColumnType("double precision")
+                        .HasColumnName("FuelTank");
+
                     b.Property<Guid>("GenerationId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("GenerationId");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Height");
+
+                    b.Property<double>("Lenght")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Lenght");
+
+                    b.Property<double>("LuggageCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("LuggageCapacity");
+
+                    b.Property<int>("ModelYear")
+                        .HasColumnType("integer")
+                        .HasColumnName("ModelYear");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Width");
 
                     b.HasKey("Id");
 
@@ -1152,26 +1140,26 @@ namespace Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -1357,1189 +1345,1117 @@ namespace Persistence.Migrations
                         {
                             Id = 30,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Admin"
+                            Name = "Appointments.Admin"
                         },
                         new
                         {
                             Id = 31,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Read"
+                            Name = "Appointments.Read"
                         },
                         new
                         {
                             Id = 32,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Write"
+                            Name = "Appointments.Write"
                         },
                         new
                         {
                             Id = 33,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Create"
+                            Name = "Appointments.Create"
                         },
                         new
                         {
                             Id = 34,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Update"
+                            Name = "Appointments.Update"
                         },
                         new
                         {
                             Id = 35,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Delete"
+                            Name = "Appointments.Delete"
                         },
                         new
                         {
                             Id = 36,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Appointments.Admin"
+                            Name = "Blogs.Admin"
                         },
                         new
                         {
                             Id = 37,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Appointments.Read"
+                            Name = "Blogs.Read"
                         },
                         new
                         {
                             Id = 38,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Appointments.Write"
+                            Name = "Blogs.Write"
                         },
                         new
                         {
                             Id = 39,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Appointments.Create"
+                            Name = "Blogs.Create"
                         },
                         new
                         {
                             Id = 40,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Appointments.Update"
+                            Name = "Blogs.Update"
                         },
                         new
                         {
                             Id = 41,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Appointments.Delete"
+                            Name = "Blogs.Delete"
                         },
                         new
                         {
                             Id = 42,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Admin"
+                            Name = "BlogItemTags.Admin"
                         },
                         new
                         {
                             Id = 43,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Read"
+                            Name = "BlogItemTags.Read"
                         },
                         new
                         {
                             Id = 44,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Write"
+                            Name = "BlogItemTags.Write"
                         },
                         new
                         {
                             Id = 45,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Create"
+                            Name = "BlogItemTags.Create"
                         },
                         new
                         {
                             Id = 46,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Update"
+                            Name = "BlogItemTags.Update"
                         },
                         new
                         {
                             Id = 47,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Delete"
+                            Name = "BlogItemTags.Delete"
                         },
                         new
                         {
                             Id = 48,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BlogItemTags.Admin"
+                            Name = "BodyShellParts.Admin"
                         },
                         new
                         {
                             Id = 49,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BlogItemTags.Read"
+                            Name = "BodyShellParts.Read"
                         },
                         new
                         {
                             Id = 50,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BlogItemTags.Write"
+                            Name = "BodyShellParts.Write"
                         },
                         new
                         {
                             Id = 51,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BlogItemTags.Create"
+                            Name = "BodyShellParts.Create"
                         },
                         new
                         {
                             Id = 52,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BlogItemTags.Update"
+                            Name = "BodyShellParts.Update"
                         },
                         new
                         {
                             Id = 53,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BlogItemTags.Delete"
+                            Name = "BodyShellParts.Delete"
                         },
                         new
                         {
                             Id = 54,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyShellParts.Admin"
+                            Name = "BodyTypes.Admin"
                         },
                         new
                         {
                             Id = 55,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyShellParts.Read"
+                            Name = "BodyTypes.Read"
                         },
                         new
                         {
                             Id = 56,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyShellParts.Write"
+                            Name = "BodyTypes.Write"
                         },
                         new
                         {
                             Id = 57,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyShellParts.Create"
+                            Name = "BodyTypes.Create"
                         },
                         new
                         {
                             Id = 58,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyShellParts.Update"
+                            Name = "BodyTypes.Update"
                         },
                         new
                         {
                             Id = 59,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyShellParts.Delete"
+                            Name = "BodyTypes.Delete"
                         },
                         new
                         {
                             Id = 60,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyTypes.Admin"
+                            Name = "Campaigns.Admin"
                         },
                         new
                         {
                             Id = 61,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyTypes.Read"
+                            Name = "Campaigns.Read"
                         },
                         new
                         {
                             Id = 62,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyTypes.Write"
+                            Name = "Campaigns.Write"
                         },
                         new
                         {
                             Id = 63,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyTypes.Create"
+                            Name = "Campaigns.Create"
                         },
                         new
                         {
                             Id = 64,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyTypes.Update"
+                            Name = "Campaigns.Update"
                         },
                         new
                         {
                             Id = 65,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "BodyTypes.Delete"
+                            Name = "Campaigns.Delete"
                         },
                         new
                         {
                             Id = 66,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Campaigns.Admin"
+                            Name = "CarColors.Admin"
                         },
                         new
                         {
                             Id = 67,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Campaigns.Read"
+                            Name = "CarColors.Read"
                         },
                         new
                         {
                             Id = 68,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Campaigns.Write"
+                            Name = "CarColors.Write"
                         },
                         new
                         {
                             Id = 69,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Campaigns.Create"
+                            Name = "CarColors.Create"
                         },
                         new
                         {
                             Id = 70,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Campaigns.Update"
+                            Name = "CarColors.Update"
                         },
                         new
                         {
                             Id = 71,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Campaigns.Delete"
+                            Name = "CarColors.Delete"
                         },
                         new
                         {
                             Id = 72,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Admin"
+                            Name = "CarModels.Admin"
                         },
                         new
                         {
                             Id = 73,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Read"
+                            Name = "CarModels.Read"
                         },
                         new
                         {
                             Id = 74,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Write"
+                            Name = "CarModels.Write"
                         },
                         new
                         {
                             Id = 75,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Create"
+                            Name = "CarModels.Create"
                         },
                         new
                         {
                             Id = 76,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Update"
+                            Name = "CarModels.Update"
                         },
                         new
                         {
                             Id = 77,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Delete"
+                            Name = "CarModels.Delete"
                         },
                         new
                         {
                             Id = 78,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarColors.Admin"
+                            Name = "ChassisParts.Admin"
                         },
                         new
                         {
                             Id = 79,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarColors.Read"
+                            Name = "ChassisParts.Read"
                         },
                         new
                         {
                             Id = 80,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarColors.Write"
+                            Name = "ChassisParts.Write"
                         },
                         new
                         {
                             Id = 81,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarColors.Create"
+                            Name = "ChassisParts.Create"
                         },
                         new
                         {
                             Id = 82,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarColors.Update"
+                            Name = "ChassisParts.Update"
                         },
                         new
                         {
                             Id = 83,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarColors.Delete"
+                            Name = "ChassisParts.Delete"
                         },
                         new
                         {
                             Id = 84,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Admin"
+                            Name = "CustomerAdvertLogs.Admin"
                         },
                         new
                         {
                             Id = 85,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Read"
+                            Name = "CustomerAdvertLogs.Read"
                         },
                         new
                         {
                             Id = 86,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Write"
+                            Name = "CustomerAdvertLogs.Write"
                         },
                         new
                         {
                             Id = 87,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Create"
+                            Name = "CustomerAdvertLogs.Create"
                         },
                         new
                         {
                             Id = 88,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Update"
+                            Name = "CustomerAdvertLogs.Update"
                         },
                         new
                         {
                             Id = 89,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Delete"
+                            Name = "CustomerAdvertLogs.Delete"
                         },
                         new
                         {
                             Id = 90,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ChassisParts.Admin"
+                            Name = "Engines.Admin"
                         },
                         new
                         {
                             Id = 91,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ChassisParts.Read"
+                            Name = "Engines.Read"
                         },
                         new
                         {
                             Id = 92,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ChassisParts.Write"
+                            Name = "Engines.Write"
                         },
                         new
                         {
                             Id = 93,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ChassisParts.Create"
+                            Name = "Engines.Create"
                         },
                         new
                         {
                             Id = 94,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ChassisParts.Update"
+                            Name = "Engines.Update"
                         },
                         new
                         {
                             Id = 95,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ChassisParts.Delete"
+                            Name = "Engines.Delete"
                         },
                         new
                         {
                             Id = 96,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerAdvertLogs.Admin"
+                            Name = "ExpertizeResults.Admin"
                         },
                         new
                         {
                             Id = 97,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerAdvertLogs.Read"
+                            Name = "ExpertizeResults.Read"
                         },
                         new
                         {
                             Id = 98,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerAdvertLogs.Write"
+                            Name = "ExpertizeResults.Write"
                         },
                         new
                         {
                             Id = 99,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerAdvertLogs.Create"
+                            Name = "ExpertizeResults.Create"
                         },
                         new
                         {
                             Id = 100,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerAdvertLogs.Update"
+                            Name = "ExpertizeResults.Update"
                         },
                         new
                         {
                             Id = 101,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerAdvertLogs.Delete"
+                            Name = "ExpertizeResults.Delete"
                         },
                         new
                         {
                             Id = 102,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Engines.Admin"
+                            Name = "FuelConsumptions.Admin"
                         },
                         new
                         {
                             Id = 103,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Engines.Read"
+                            Name = "FuelConsumptions.Read"
                         },
                         new
                         {
                             Id = 104,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Engines.Write"
+                            Name = "FuelConsumptions.Write"
                         },
                         new
                         {
                             Id = 105,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Engines.Create"
+                            Name = "FuelConsumptions.Create"
                         },
                         new
                         {
                             Id = 106,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Engines.Update"
+                            Name = "FuelConsumptions.Update"
                         },
                         new
                         {
                             Id = 107,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Engines.Delete"
+                            Name = "FuelConsumptions.Delete"
                         },
                         new
                         {
                             Id = 108,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Admin"
+                            Name = "FuelTypes.Admin"
                         },
                         new
                         {
                             Id = 109,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Read"
+                            Name = "FuelTypes.Read"
                         },
                         new
                         {
                             Id = 110,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Write"
+                            Name = "FuelTypes.Write"
                         },
                         new
                         {
                             Id = 111,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Create"
+                            Name = "FuelTypes.Create"
                         },
                         new
                         {
                             Id = 112,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Update"
+                            Name = "FuelTypes.Update"
                         },
                         new
                         {
                             Id = 113,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Delete"
+                            Name = "FuelTypes.Delete"
                         },
                         new
                         {
                             Id = 114,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Admin"
+                            Name = "Generations.Admin"
                         },
                         new
                         {
                             Id = 115,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Read"
+                            Name = "Generations.Read"
                         },
                         new
                         {
                             Id = 116,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Write"
+                            Name = "Generations.Write"
                         },
                         new
                         {
                             Id = 117,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Create"
+                            Name = "Generations.Create"
                         },
                         new
                         {
                             Id = 118,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Update"
+                            Name = "Generations.Update"
                         },
                         new
                         {
                             Id = 119,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Delete"
+                            Name = "Generations.Delete"
                         },
                         new
                         {
                             Id = 120,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Admin"
+                            Name = "Licences.Admin"
                         },
                         new
                         {
                             Id = 121,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Read"
+                            Name = "Licences.Read"
                         },
                         new
                         {
                             Id = 122,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Write"
+                            Name = "Licences.Write"
                         },
                         new
                         {
                             Id = 123,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Create"
+                            Name = "Licences.Create"
                         },
                         new
                         {
                             Id = 124,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Update"
+                            Name = "Licences.Update"
                         },
                         new
                         {
                             Id = 125,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Delete"
+                            Name = "Licences.Delete"
                         },
                         new
                         {
                             Id = 126,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Admin"
+                            Name = "Locations.Admin"
                         },
                         new
                         {
                             Id = 127,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Read"
+                            Name = "Locations.Read"
                         },
                         new
                         {
                             Id = 128,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Write"
+                            Name = "Locations.Write"
                         },
                         new
                         {
                             Id = 129,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Create"
+                            Name = "Locations.Create"
                         },
                         new
                         {
                             Id = 130,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Update"
+                            Name = "Locations.Update"
                         },
                         new
                         {
                             Id = 131,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Delete"
+                            Name = "Locations.Delete"
                         },
                         new
                         {
                             Id = 132,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Admin"
+                            Name = "Tags.Admin"
                         },
                         new
                         {
                             Id = 133,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Read"
+                            Name = "Tags.Read"
                         },
                         new
                         {
                             Id = 134,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Write"
+                            Name = "Tags.Write"
                         },
                         new
                         {
                             Id = 135,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Create"
+                            Name = "Tags.Create"
                         },
                         new
                         {
                             Id = 136,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Update"
+                            Name = "Tags.Update"
                         },
                         new
                         {
                             Id = 137,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Delete"
+                            Name = "Tags.Delete"
                         },
                         new
                         {
                             Id = 138,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Admin"
+                            Name = "Transmissions.Admin"
                         },
                         new
                         {
                             Id = 139,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Read"
+                            Name = "Transmissions.Read"
                         },
                         new
                         {
                             Id = 140,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Write"
+                            Name = "Transmissions.Write"
                         },
                         new
                         {
                             Id = 141,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Create"
+                            Name = "Transmissions.Create"
                         },
                         new
                         {
                             Id = 142,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Update"
+                            Name = "Transmissions.Update"
                         },
                         new
                         {
                             Id = 143,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Delete"
+                            Name = "Transmissions.Delete"
                         },
                         new
                         {
                             Id = 144,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Admin"
+                            Name = "Sellers.Admin"
                         },
                         new
                         {
                             Id = 145,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Read"
+                            Name = "Sellers.Read"
                         },
                         new
                         {
                             Id = 146,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Write"
+                            Name = "Sellers.Write"
                         },
                         new
                         {
                             Id = 147,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Create"
+                            Name = "Sellers.Create"
                         },
                         new
                         {
                             Id = 148,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Update"
+                            Name = "Sellers.Update"
                         },
                         new
                         {
                             Id = 149,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Delete"
+                            Name = "Sellers.Delete"
                         },
                         new
                         {
                             Id = 150,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Admin"
+                            Name = "Cars.Admin"
                         },
                         new
                         {
                             Id = 151,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Read"
+                            Name = "Cars.Read"
                         },
                         new
                         {
                             Id = 152,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Write"
+                            Name = "Cars.Write"
                         },
                         new
                         {
                             Id = 153,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Create"
+                            Name = "Cars.Create"
                         },
                         new
                         {
                             Id = 154,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Update"
+                            Name = "Cars.Update"
                         },
                         new
                         {
                             Id = 155,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Delete"
+                            Name = "Cars.Delete"
                         },
                         new
                         {
                             Id = 156,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Admin"
+                            Name = "Customers.Admin"
                         },
                         new
                         {
                             Id = 157,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Read"
+                            Name = "Customers.Read"
                         },
                         new
                         {
                             Id = 158,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Write"
+                            Name = "Customers.Write"
                         },
                         new
                         {
                             Id = 159,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Create"
+                            Name = "Customers.Create"
                         },
                         new
                         {
                             Id = 160,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Update"
+                            Name = "Customers.Update"
                         },
                         new
                         {
                             Id = 161,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Delete"
+                            Name = "Customers.Delete"
                         },
                         new
                         {
                             Id = 162,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Admin"
+                            Name = "Sellers.Admin"
                         },
                         new
                         {
                             Id = 163,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Read"
+                            Name = "Sellers.Read"
                         },
                         new
                         {
                             Id = 164,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Write"
+                            Name = "Sellers.Write"
                         },
                         new
                         {
                             Id = 165,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Create"
+                            Name = "Sellers.Create"
                         },
                         new
                         {
                             Id = 166,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Update"
+                            Name = "Sellers.Update"
                         },
                         new
                         {
                             Id = 167,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Delete"
+                            Name = "Sellers.Delete"
                         },
                         new
                         {
                             Id = 168,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Admin"
+                            Name = "Locations.Admin"
                         },
                         new
                         {
                             Id = 169,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Read"
+                            Name = "Locations.Read"
                         },
                         new
                         {
                             Id = 170,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Write"
+                            Name = "Locations.Write"
                         },
                         new
                         {
                             Id = 171,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Create"
+                            Name = "Locations.Create"
                         },
                         new
                         {
                             Id = 172,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Update"
+                            Name = "Locations.Update"
                         },
                         new
                         {
                             Id = 173,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Delete"
+                            Name = "Locations.Delete"
                         },
                         new
                         {
                             Id = 174,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Admin"
+                            Name = "ExpertizeResults.Admin"
                         },
                         new
                         {
                             Id = 175,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Read"
+                            Name = "ExpertizeResults.Read"
                         },
                         new
                         {
                             Id = 176,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Write"
+                            Name = "ExpertizeResults.Write"
                         },
                         new
                         {
                             Id = 177,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Create"
+                            Name = "ExpertizeResults.Create"
                         },
                         new
                         {
                             Id = 178,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Update"
+                            Name = "ExpertizeResults.Update"
                         },
                         new
                         {
                             Id = 179,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Delete"
+                            Name = "ExpertizeResults.Delete"
                         },
                         new
                         {
                             Id = 180,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Admin"
+                            Name = "Adverts.Admin"
                         },
                         new
                         {
                             Id = 181,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Read"
+                            Name = "Adverts.Read"
                         },
                         new
                         {
                             Id = 182,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Write"
+                            Name = "Adverts.Write"
                         },
                         new
                         {
                             Id = 183,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Create"
+                            Name = "Adverts.Create"
                         },
                         new
                         {
                             Id = 184,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Update"
+                            Name = "Adverts.Update"
                         },
                         new
                         {
                             Id = 185,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Delete"
+                            Name = "Adverts.Delete"
                         },
                         new
                         {
                             Id = 186,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Admin"
+                            Name = "CarModels.Admin"
                         },
                         new
                         {
                             Id = 187,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Read"
+                            Name = "CarModels.Read"
                         },
                         new
                         {
                             Id = 188,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Write"
+                            Name = "CarModels.Write"
                         },
                         new
                         {
                             Id = 189,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Create"
+                            Name = "CarModels.Create"
                         },
                         new
                         {
                             Id = 190,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Update"
+                            Name = "CarModels.Update"
                         },
                         new
                         {
                             Id = 191,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Delete"
+                            Name = "CarModels.Delete"
                         },
                         new
                         {
                             Id = 192,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Admin"
+                            Name = "AdvertImages.Admin"
                         },
                         new
                         {
                             Id = 193,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Read"
+                            Name = "AdvertImages.Read"
                         },
                         new
                         {
                             Id = 194,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Write"
+                            Name = "AdvertImages.Write"
                         },
                         new
                         {
                             Id = 195,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Create"
+                            Name = "AdvertImages.Create"
                         },
                         new
                         {
                             Id = 196,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Update"
+                            Name = "AdvertImages.Update"
                         },
                         new
                         {
                             Id = 197,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Delete"
+                            Name = "AdvertImages.Delete"
                         },
                         new
                         {
                             Id = 198,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Admin"
+                            Name = "ModalExtensions.Admin"
                         },
                         new
                         {
                             Id = 199,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Read"
+                            Name = "ModalExtensions.Read"
                         },
                         new
                         {
                             Id = 200,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Write"
+                            Name = "ModalExtensions.Write"
                         },
                         new
                         {
                             Id = 201,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Create"
+                            Name = "ModalExtensions.Create"
                         },
                         new
                         {
                             Id = 202,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Update"
+                            Name = "ModalExtensions.Update"
                         },
                         new
                         {
                             Id = 203,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Delete"
+                            Name = "ModalExtensions.Delete"
                         },
                         new
                         {
                             Id = 204,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Admin"
+                            Name = "GenerationImages.Admin"
                         },
                         new
                         {
                             Id = 205,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Read"
+                            Name = "GenerationImages.Read"
                         },
                         new
                         {
                             Id = 206,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Write"
+                            Name = "GenerationImages.Write"
                         },
                         new
                         {
                             Id = 207,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Create"
+                            Name = "GenerationImages.Create"
                         },
                         new
                         {
                             Id = 208,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Update"
+                            Name = "GenerationImages.Update"
                         },
                         new
                         {
                             Id = 209,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Delete"
+                            Name = "GenerationImages.Delete"
                         },
                         new
                         {
                             Id = 210,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Admin"
+                            Name = "Cars.Admin"
                         },
                         new
                         {
                             Id = 211,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Read"
+                            Name = "Cars.Read"
                         },
                         new
                         {
                             Id = 212,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Write"
+                            Name = "Cars.Write"
                         },
                         new
                         {
                             Id = 213,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Create"
+                            Name = "Cars.Create"
                         },
                         new
                         {
                             Id = 214,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Update"
+                            Name = "Cars.Update"
                         },
                         new
                         {
                             Id = 215,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Delete"
-                        },
-                        new
-                        {
-                            Id = 216,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Admin"
-                        },
-                        new
-                        {
-                            Id = 217,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Read"
-                        },
-                        new
-                        {
-                            Id = 218,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Write"
-                        },
-                        new
-                        {
-                            Id = 219,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Create"
-                        },
-                        new
-                        {
-                            Id = 220,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Update"
-                        },
-                        new
-                        {
-                            Id = 221,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blogs.Delete"
-                        },
-                        new
-                        {
-                            Id = 222,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Admin"
-                        },
-                        new
-                        {
-                            Id = 223,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Read"
-                        },
-                        new
-                        {
-                            Id = 224,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Write"
-                        },
-                        new
-                        {
-                            Id = 225,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Create"
-                        },
-                        new
-                        {
-                            Id = 226,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Update"
-                        },
-                        new
-                        {
-                            Id = 227,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Delete"
+                            Name = "Cars.Delete"
                         });
                 });
 
@@ -2547,32 +2463,32 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("IsVerified");
 
                     b.Property<byte[]>("SecretKey")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)")
+                        .HasColumnType("bytea")
                         .HasColumnName("SecretKey");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2586,53 +2502,53 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("CreatedByIp");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ExpiresDate");
 
                     b.Property<string>("ReasonRevoked")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("ReasonRevoked");
 
                     b.Property<string>("ReplacedByToken")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("ReplacedByToken");
 
                     b.Property<string>("RevokedByIp")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("RevokedByIp");
 
                     b.Property<DateTime?>("RevokedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("RevokedDate");
 
                     b.Property<string>("Token")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Token");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2646,41 +2562,41 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("LicenceId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("LicenceId");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("LocationId");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("PhoneNumber");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2701,24 +2617,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -2730,24 +2646,24 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -2759,38 +2675,38 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<int>("AuthenticatorType")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("AuthenticatorType");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("Email");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)")
+                        .HasColumnType("bytea")
                         .HasColumnName("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)")
+                        .HasColumnType("bytea")
                         .HasColumnName("PasswordSalt");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
@@ -2800,12 +2716,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d6ba2834-2bc7-46b0-84bf-6c980dad3946"),
+                            Id = new Guid("f26dc11a-e11b-406f-9408-54d051829307"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 167, 46, 108, 29, 197, 162, 75, 51, 147, 50, 83, 244, 62, 133, 7, 31, 175, 2, 177, 196, 199, 249, 158, 242, 4, 192, 177, 136, 169, 151, 118, 228, 205, 50, 239, 163, 22, 233, 222, 35, 211, 222, 196, 149, 63, 151, 128, 167, 227, 6, 196, 94, 180, 186, 197, 222, 8, 184, 159, 0, 143, 158, 219, 210 },
-                            PasswordSalt = new byte[] { 136, 175, 40, 222, 178, 0, 57, 16, 164, 219, 27, 180, 146, 12, 134, 178, 98, 190, 245, 126, 128, 99, 176, 182, 185, 213, 171, 223, 134, 180, 205, 214, 49, 25, 66, 16, 33, 235, 102, 187, 231, 57, 154, 17, 69, 74, 78, 182, 18, 184, 38, 122, 17, 98, 19, 88, 204, 147, 235, 48, 217, 243, 180, 119, 221, 226, 167, 147, 59, 226, 232, 207, 228, 140, 1, 143, 65, 130, 192, 235, 151, 192, 59, 206, 243, 16, 134, 133, 111, 66, 17, 55, 82, 76, 220, 66, 37, 13, 51, 135, 130, 138, 89, 57, 24, 255, 79, 252, 223, 35, 45, 107, 82, 147, 57, 41, 71, 20, 187, 64, 138, 26, 34, 94, 8, 83, 16, 185 }
+                            PasswordHash = new byte[] { 133, 55, 6, 168, 83, 66, 116, 8, 216, 65, 108, 40, 165, 0, 188, 88, 154, 18, 61, 210, 210, 42, 46, 135, 159, 74, 88, 139, 141, 174, 114, 121, 203, 202, 18, 173, 61, 77, 215, 67, 99, 246, 86, 177, 211, 247, 252, 49, 61, 244, 173, 47, 179, 131, 252, 123, 247, 255, 31, 8, 23, 87, 235, 198 },
+                            PasswordSalt = new byte[] { 184, 112, 89, 237, 85, 72, 234, 28, 154, 236, 165, 165, 138, 196, 100, 207, 115, 92, 114, 171, 109, 194, 3, 36, 160, 43, 219, 40, 71, 49, 235, 144, 135, 197, 208, 140, 92, 220, 221, 67, 29, 92, 96, 93, 200, 189, 143, 19, 84, 22, 108, 113, 108, 114, 96, 130, 36, 154, 144, 23, 100, 98, 3, 119, 175, 246, 107, 232, 38, 97, 212, 212, 83, 19, 243, 255, 4, 171, 55, 220, 26, 66, 166, 47, 50, 147, 163, 216, 150, 48, 248, 70, 204, 8, 226, 77, 63, 11, 118, 3, 7, 232, 220, 151, 250, 3, 152, 53, 181, 147, 135, 124, 209, 79, 77, 154, 73, 30, 141, 129, 218, 167, 73, 114, 147, 7, 232, 60 }
                         });
                 });
 
@@ -2813,27 +2729,27 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
                     b.Property<int>("OperationClaimId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("OperationClaimId");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -2847,18 +2763,26 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d504d39c-de10-4d88-bbc5-bc4217f03b41"),
+                            Id = new Guid("da479124-a385-4e92-b833-f254d89bfadc"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("d6ba2834-2bc7-46b0-84bf-6c980dad3946")
+                            UserId = new Guid("f26dc11a-e11b-406f-9408-54d051829307")
                         });
                 });
 
             modelBuilder.Entity("Domain.Entities.Advert", b =>
                 {
+                    b.HasOne("Domain.Entities.Car", "Car")
+                        .WithOne("Advert")
+                        .HasForeignKey("Domain.Entities.Advert", "CarId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Seller", null)
                         .WithMany("Adverts")
                         .HasForeignKey("SellerId");
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("Domain.Entities.AdvertImage", b =>
@@ -2912,12 +2836,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
-                    b.HasOne("Domain.Entities.Advert", "Advert")
-                        .WithOne("Car")
-                        .HasForeignKey("Domain.Entities.Car", "AdvertId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.BodyType", "BodyType")
                         .WithMany("Cars")
                         .HasForeignKey("BodyTypeId")
@@ -2959,8 +2877,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("TransmissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Advert");
 
                     b.Navigation("BodyType");
 
@@ -3169,9 +3085,6 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("AdvertImages");
 
-                    b.Navigation("Car")
-                        .IsRequired();
-
                     b.Navigation("CustomerAdvertLogs");
                 });
 
@@ -3198,6 +3111,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
+                    b.Navigation("Advert")
+                        .IsRequired();
+
                     b.Navigation("Appointments");
                 });
 

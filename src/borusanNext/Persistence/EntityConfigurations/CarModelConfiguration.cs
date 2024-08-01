@@ -13,9 +13,9 @@ public class CarModelConfiguration : IEntityTypeConfiguration<CarModel>
         builder.Property(cm => cm.Id).HasColumnName("Id").IsRequired();
         builder.Property(cm => cm.ModelName).HasColumnName("ModelName").IsRequired();
         builder.Property(cm => cm.BrandId).HasColumnName("BrandId").IsRequired();
-        builder.Property(cm => cm.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(cm => cm.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(cm => cm.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(cm => cm.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(cm => cm.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(cm => cm.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(cm => !cm.DeletedDate.HasValue);
         builder.HasOne(p => p.Brand).WithMany(p => p.CarModels).HasForeignKey(p => p.BrandId);

@@ -13,9 +13,9 @@ public class BodyTypeConfiguration : IEntityTypeConfiguration<BodyType>
         builder.Property(bt => bt.Id).HasColumnName("Id").IsRequired();
         builder.Property(bt => bt.BodyName).HasColumnName("BodyName").IsRequired();
         builder.Property(bt => bt.Door).HasColumnName("Door").IsRequired();
-        builder.Property(bt => bt.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(bt => bt.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(bt => bt.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(bt => bt.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(bt => bt.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(bt => bt.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(bt => !bt.DeletedDate.HasValue);
     }

@@ -24,9 +24,9 @@ public class BodyShellPartConfiguration : IEntityTypeConfiguration<BodyShellPart
         builder.Property(bsp => bsp.Bonnet).HasColumnName("Bonnet").IsRequired();
         builder.Property(bsp => bsp.Ceiling).HasColumnName("Ceiling").IsRequired();
         builder.Property(bsp => bsp.Luggage).HasColumnName("Luggage").IsRequired();
-        builder.Property(bsp => bsp.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(bsp => bsp.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(bsp => bsp.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(bsp => bsp.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(bsp => bsp.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(bsp => bsp.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(bsp => !bsp.DeletedDate.HasValue);
     }

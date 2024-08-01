@@ -14,9 +14,9 @@ public class FuelConsumptionConfiguration : IEntityTypeConfiguration<FuelConsump
         builder.Property(fc => fc.OutOfTown).HasColumnName("OutOfTown").IsRequired();
         builder.Property(fc => fc.Urban).HasColumnName("Urban").IsRequired();
         builder.Property(fc => fc.Average).HasColumnName("Average").IsRequired();
-        builder.Property(fc => fc.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(fc => fc.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(fc => fc.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(fc => fc.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(fc => fc.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(fc => fc.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(fc => !fc.DeletedDate.HasValue);
     }

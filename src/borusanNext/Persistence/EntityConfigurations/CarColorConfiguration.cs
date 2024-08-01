@@ -12,9 +12,9 @@ public class CarColorConfiguration : IEntityTypeConfiguration<CarColor>
 
         builder.Property(cc => cc.Id).HasColumnName("Id").IsRequired();
         builder.Property(cc => cc.Name).HasColumnName("Name").IsRequired();
-        builder.Property(cc => cc.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(cc => cc.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(cc => cc.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(cc => cc.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(cc => cc.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(cc => cc.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(cc => !cc.DeletedDate.HasValue);
     }
