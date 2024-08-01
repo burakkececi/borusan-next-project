@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Brands.Constants.BrandsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Brands.Queries.GetList;
 
@@ -30,7 +31,8 @@ public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDt
 
         public async Task<GetListResponse<GetListBrandListItemDto>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Brand> brands = await _brandRepository.GetListAsync(
+            IPaginate<Brand> brands = await _brandRepository.GetListAsync(include:
+                b=>b.Include(c=>c.CarModels),
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken
