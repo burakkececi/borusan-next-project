@@ -14,9 +14,9 @@ public class OtpAuthenticatorConfiguration : IEntityTypeConfiguration<OtpAuthent
         builder.Property(oa => oa.UserId).HasColumnName("UserId").IsRequired();
         builder.Property(oa => oa.SecretKey).HasColumnName("SecretKey").IsRequired();
         builder.Property(oa => oa.IsVerified).HasColumnName("IsVerified").IsRequired();
-        builder.Property(oa => oa.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(oa => oa.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(oa => oa.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(oa => oa.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(oa => oa.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(oa => oa.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(oa => !oa.DeletedDate.HasValue);
 

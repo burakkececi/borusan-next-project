@@ -16,9 +16,9 @@ public class SellerConfiguration : IEntityTypeConfiguration<Seller>
         builder.Property(s => s.PhoneNumber).HasColumnName("PhoneNumber").IsRequired();
         builder.Property(s => s.LicenceId).HasColumnName("LicenceId").IsRequired();
         builder.Property(s => s.LocationId).HasColumnName("LocationId").IsRequired();
-        builder.Property(s => s.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(s => s.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(s => s.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(s => s.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
 

@@ -13,9 +13,9 @@ public class LicenceConfiguration : IEntityTypeConfiguration<Licence>
         builder.Property(l => l.Id).HasColumnName("Id").IsRequired();
         builder.Property(l => l.LicenceNo).HasColumnName("LicenceNo").IsRequired();
         builder.Property(l => l.LicenceOwner).HasColumnName("LicenceOwner").IsRequired();
-        builder.Property(l => l.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(l => l.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(l => l.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(l => l.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(l => l.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(l => l.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(l => !l.DeletedDate.HasValue);
     }

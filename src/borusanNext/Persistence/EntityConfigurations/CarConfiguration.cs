@@ -26,9 +26,9 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
         builder.Property(c => c.TransmissionId).HasColumnName("TransmissionId").IsRequired();
         builder.Property(c => c.TramerId).HasColumnName("TramerId").IsRequired();
         builder.Property(c => c.SellerId).HasColumnName("SellerId").IsRequired();
-        builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(c => c.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(c => c.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
 

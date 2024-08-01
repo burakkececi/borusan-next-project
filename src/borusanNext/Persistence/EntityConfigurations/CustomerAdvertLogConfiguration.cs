@@ -14,9 +14,9 @@ public class CustomerAdvertLogConfiguration : IEntityTypeConfiguration<CustomerA
         builder.Property(cal => cal.CustomerId).HasColumnName("CustomerId").IsRequired();
         builder.Property(cal => cal.AdvertId).HasColumnName("AdvertId").IsRequired();
         builder.Property(cal => cal.ContactStatus).HasColumnName("ContactStatus").IsRequired();
-        builder.Property(cal => cal.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(cal => cal.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(cal => cal.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(cal => cal.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(cal => cal.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(cal => cal.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(cal => !cal.DeletedDate.HasValue);
 

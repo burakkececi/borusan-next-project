@@ -16,9 +16,9 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         builder.Property(l => l.Address).HasColumnName("Address").IsRequired();
         builder.Property(l => l.Latitute).HasColumnName("Latitute").IsRequired();
         builder.Property(l => l.Longitute).HasColumnName("Longitute").IsRequired();
-        builder.Property(l => l.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(l => l.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(l => l.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(l => l.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(l => l.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(l => l.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(l => !l.DeletedDate.HasValue);
     }

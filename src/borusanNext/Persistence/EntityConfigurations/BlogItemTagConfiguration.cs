@@ -13,9 +13,9 @@ public class BlogItemTagConfiguration : IEntityTypeConfiguration<BlogItemTag>
         builder.Property(bit => bit.Id).HasColumnName("Id").IsRequired();
         builder.Property(bit => bit.TagId).HasColumnName("TagId").IsRequired();
         builder.Property(bit => bit.BlogId).HasColumnName("BlogId").IsRequired();
-        builder.Property(bit => bit.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(bit => bit.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(bit => bit.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(bit => bit.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
+        builder.Property(bit => bit.UpdatedDate).HasColumnName("UpdatedDate").HasColumnType("timestamp");
+        builder.Property(bit => bit.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(bit => !bit.DeletedDate.HasValue);
 
