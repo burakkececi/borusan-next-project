@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.CarModels.Queries.GetDynamic;
 
 namespace Application.Features.Cars.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Car, GetListCarListItemDto>();
         CreateMap<IPaginate<Car>, GetListResponse<GetListCarListItemDto>>();
+        CreateMap<Car, GetDynamicCarModelsResponse>();
+        CreateMap<IPaginate<Car>, GetListResponse<GetDynamicCarModelsResponse>>();
     }
 }

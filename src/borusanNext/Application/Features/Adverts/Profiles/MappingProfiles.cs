@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Adverts.Queries.GetDynamic;
 
 namespace Application.Features.Adverts.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Advert, GetListAdvertListItemDto>();
         CreateMap<IPaginate<Advert>, GetListResponse<GetListAdvertListItemDto>>();
+        CreateMap<Advert, GetDynamicAdvertResponse>();
+        CreateMap<IPaginate<Advert>, GetListResponse<GetDynamicAdvertResponse>>();
     }
 }
