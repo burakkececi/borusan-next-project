@@ -6,6 +6,8 @@ using Application.Features.Brands.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Brands.Queries.GetDynamic;
+using NArchitecture.Core.Persistence.Dynamic;
 
 namespace WebAPI.Controllers;
 
@@ -56,6 +58,17 @@ public class BrandsController : BaseController
 
         GetListResponse<GetListBrandListItemDto> response = await Mediator.Send(query);
 
+        return Ok(response);
+    }
+    [HttpPost("GetDynamic")]
+    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] int pageSize, [FromQuery] int pageIndex)
+    {
+        GetDynamicQuery getDynamicQuery = new()
+        {
+            DynamicQuery = dynamicQuery,
+            PageRequest = new() { PageIndex = pageIndex, PageSize = pageSize }
+        };
+        var response = await Mediator.Send(getDynamicQuery);
         return Ok(response);
     }
 }
