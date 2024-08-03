@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.ModalExtensions.Queries.GetDynamic;
 
 namespace Application.Features.ModalExtensions.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<ModalExtension, GetListModalExtensionListItemDto>();
         CreateMap<IPaginate<ModalExtension>, GetListResponse<GetListModalExtensionListItemDto>>();
+        CreateMap<ModalExtension, GetDynamicModalExtensionsResponse>();
+        CreateMap<IPaginate<ModalExtension>, GetListResponse<GetDynamicModalExtensionsResponse>>();
     }
 }
