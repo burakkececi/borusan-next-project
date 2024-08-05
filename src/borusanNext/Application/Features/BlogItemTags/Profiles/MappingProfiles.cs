@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.BlogItemTags.Queries.GetDynamic;
 
 namespace Application.Features.BlogItemTags.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<BlogItemTag, GetListBlogItemTagListItemDto>();
         CreateMap<IPaginate<BlogItemTag>, GetListResponse<GetListBlogItemTagListItemDto>>();
+        CreateMap<BlogItemTag, GetDynamicBlogItemResponse>();
+        CreateMap<IPaginate<BlogItemTag>, GetListResponse<GetDynamicBlogItemResponse>>();
     }
 }

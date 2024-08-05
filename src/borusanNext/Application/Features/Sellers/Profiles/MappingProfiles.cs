@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Sellers.Queries.GetDynamic;
 
 namespace Application.Features.Sellers.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Seller, GetListSellerListItemDto>();
         CreateMap<IPaginate<Seller>, GetListResponse<GetListSellerListItemDto>>();
+        CreateMap<Seller, GetDynamicSellerResponse>();
+        CreateMap<IPaginate<Seller>, GetListResponse<GetDynamicSellerResponse>>();
     }
 }

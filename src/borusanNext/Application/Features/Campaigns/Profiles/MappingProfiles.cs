@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Campaigns.Queries.GetDynamic;
 
 namespace Application.Features.Campaigns.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Campaign, GetListCampaignListItemDto>();
         CreateMap<IPaginate<Campaign>, GetListResponse<GetListCampaignListItemDto>>();
+        CreateMap<Campaign, GetDynamicCampaignsResponse>();
+        CreateMap<IPaginate<Campaign>, GetListResponse<GetDynamicCampaignsResponse>>();
     }
 }

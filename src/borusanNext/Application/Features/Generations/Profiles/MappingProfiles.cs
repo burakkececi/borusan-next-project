@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Generations.Queries.GetDynamic;
 
 namespace Application.Features.Generations.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Generation, GetListGenerationListItemDto>();
         CreateMap<IPaginate<Generation>, GetListResponse<GetListGenerationListItemDto>>();
+        CreateMap<Generation, GetDynamicGenerationResponse>();
+        CreateMap<IPaginate<Generation>, GetListResponse<GetDynamicGenerationResponse>>();
     }
 }

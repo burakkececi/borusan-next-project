@@ -7,6 +7,8 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.FuelTypes.Queries.GetDynamic;
+using Application.Features.ExpertizeResults.Queries.GetDynamic;
 
 namespace Application.Features.ExpertizeResults.Profiles;
 
@@ -27,5 +29,7 @@ public class MappingProfiles : Profile
 
         CreateMap<ExpertizeResult, GetListExpertizeResultListItemDto>();
         CreateMap<IPaginate<ExpertizeResult>, GetListResponse<GetListExpertizeResultListItemDto>>();
+        CreateMap<ExpertizeResult, GetDynamicExpertizeResponse>().ReverseMap();
+        CreateMap<IPaginate<ExpertizeResult>, GetListResponse<GetDynamicExpertizeResponse>>().ReverseMap();
     }
 }

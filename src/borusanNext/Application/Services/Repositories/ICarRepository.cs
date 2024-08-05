@@ -5,4 +5,5 @@ namespace Application.Services.Repositories;
 
 public interface ICarRepository : IAsyncRepository<Car, Guid>, IRepository<Car, Guid>
 {
+    Task<List<Car>> GetCarsByKilometersAsync(int maxKilometers);
 }
