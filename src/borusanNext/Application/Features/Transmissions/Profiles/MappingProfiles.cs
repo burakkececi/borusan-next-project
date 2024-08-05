@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Transmissions.Queries.GetDyanmic;
 
 namespace Application.Features.Transmissions.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Transmission, GetListTransmissionListItemDto>();
         CreateMap<IPaginate<Transmission>, GetListResponse<GetListTransmissionListItemDto>>();
+        CreateMap<Transmission, GetDynamicTransmissionResponse>();
+        CreateMap<IPaginate<Transmission>, GetListResponse<GetDynamicTransmissionResponse>>();
     }
 }

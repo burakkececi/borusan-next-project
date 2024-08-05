@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.CarColors.Queries.GetDynamic;
 
 namespace Application.Features.CarColors.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<CarColor, GetListCarColorListItemDto>();
         CreateMap<IPaginate<CarColor>, GetListResponse<GetListCarColorListItemDto>>();
+        CreateMap<CarColor, GetDynamicColorResponse>();
+        CreateMap<IPaginate<CarColor>, GetListResponse<GetDynamicColorResponse>>();
     }
 }

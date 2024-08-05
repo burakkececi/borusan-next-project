@@ -97,6 +97,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = OperationClaimsOperationClaims.Delete },
             ]
         );
+        
         #endregion
 
         #region UserOperationClaims

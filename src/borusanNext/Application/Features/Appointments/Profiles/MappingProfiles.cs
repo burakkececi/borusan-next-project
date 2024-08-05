@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Appointments.Queries.GetDynamic;
 
 namespace Application.Features.Appointments.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Appointment, GetListAppointmentListItemDto>();
         CreateMap<IPaginate<Appointment>, GetListResponse<GetListAppointmentListItemDto>>();
+        CreateMap<Appointment, GetDynamicAppoimentResponse>();
+        CreateMap<IPaginate<Appointment>, GetListResponse<GetDynamicAppoimentResponse>>();
     }
 }

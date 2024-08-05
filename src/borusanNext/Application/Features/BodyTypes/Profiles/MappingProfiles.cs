@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.BodyTypes.Queries.GetDynamic;
 
 namespace Application.Features.BodyTypes.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<BodyType, GetListBodyTypeListItemDto>();
         CreateMap<IPaginate<BodyType>, GetListResponse<GetListBodyTypeListItemDto>>();
+        CreateMap<BodyType, GetDynamicBodyTypesResponse>();
+        CreateMap<IPaginate<BodyType>, GetListResponse<GetDynamicBodyTypesResponse>>();
     }
 }

@@ -7,6 +7,8 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.Brands.Queries.GetDynamic;
+using Application.Features.FuelTypes.Queries.GetDynamic;
 
 namespace Application.Features.FuelTypes.Profiles;
 
@@ -27,5 +29,7 @@ public class MappingProfiles : Profile
 
         CreateMap<FuelType, GetListFuelTypeListItemDto>();
         CreateMap<IPaginate<FuelType>, GetListResponse<GetListFuelTypeListItemDto>>();
+        CreateMap<FuelType, GetDynamicFuelTypeResponse>().ReverseMap();
+        CreateMap<IPaginate<FuelType>, GetListResponse<GetDynamicFuelTypeResponse>>().ReverseMap();
     }
 }

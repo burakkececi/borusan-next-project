@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.BodyShellParts.Queries.GetDynamic;
 
 namespace Application.Features.BodyShellParts.Profiles;
 
@@ -27,5 +28,7 @@ public class MappingProfiles : Profile
 
         CreateMap<BodyShellPart, GetListBodyShellPartListItemDto>();
         CreateMap<IPaginate<BodyShellPart>, GetListResponse<GetListBodyShellPartListItemDto>>();
+        CreateMap<BodyShellPart, GetDynamicBodyShellPartsResponse>();
+        CreateMap<IPaginate<BodyShellPart>, GetListResponse<GetDynamicBodyShellPartsResponse>>();
     }
 }
