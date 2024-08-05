@@ -2,6 +2,7 @@ using Application.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NArchitecture.Core.Persistence.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Repositories;
@@ -12,7 +13,8 @@ public static class PersistenceServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("BorusanNextDb")));
+        services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("BorusanNextDb")).EnableSensitiveDataLogging()
+    .LogTo(Console.WriteLine, LogLevel.Information));
         services.AddDbMigrationApplier(buildServices => buildServices.GetRequiredService<BaseDbContext>());
 
         services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();

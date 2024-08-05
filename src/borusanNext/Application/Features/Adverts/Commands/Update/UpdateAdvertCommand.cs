@@ -15,7 +15,6 @@ public class UpdateAdvertCommand : IRequest<UpdatedAdvertResponse>, ISecuredRequ
 {
     public Guid Id { get; set; }
     public required int AdvertNo { get; set; }
-    public IFormFile FeaturedImageURL { get; set; }
     public required Guid CarId { get; set; }
 
     public string[] Roles => [Admin, Write, AdvertsOperationClaims.Update];
@@ -42,13 +41,7 @@ public class UpdateAdvertCommand : IRequest<UpdatedAdvertResponse>, ISecuredRequ
             await _advertBusinessRules.AdvertShouldExistWhenSelected(advert);
             
             advert.AdvertNo = request.AdvertNo;
-            advert.CarId = request.CarId;
-            
-            if(request.FeaturedImageURL.Length > 0)
-            {
-                advert.FeaturedImageURL = await _imageServiceBase.UpdateAsync(request.FeaturedImageURL,
-                                                                              advert.FeaturedImageURL);
-            }
+            advert.CarId = request.CarId; 
 
             await _advertRepository.UpdateAsync(advert!);
 

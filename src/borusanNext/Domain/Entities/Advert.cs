@@ -9,7 +9,6 @@ namespace Domain.Entities;
 public class Advert : Entity<Guid>
 {
     public int AdvertNo { get; set; }
-    public string FeaturedImageURL { get; set; }
     public Guid CarId { get; set; }
     
     public virtual Car Car {get;set;}

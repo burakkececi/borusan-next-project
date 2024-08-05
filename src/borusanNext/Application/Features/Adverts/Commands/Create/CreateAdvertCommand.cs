@@ -14,7 +14,6 @@ namespace Application.Features.Adverts.Commands.Create;
 public class CreateAdvertCommand : IRequest<CreatedAdvertResponse>, ISecuredRequest
 {
     public required int AdvertNo { get; set; }
-    public required IFormFile FeaturedImageURL { get; set; }
     public required Guid CarId { get; set; }
 
     public string[] Roles => [Admin, Write, AdvertsOperationClaims.Create];
@@ -38,8 +37,6 @@ public class CreateAdvertCommand : IRequest<CreatedAdvertResponse>, ISecuredRequ
         public async Task<CreatedAdvertResponse> Handle(CreateAdvertCommand request, CancellationToken cancellationToken)
         {
             Advert advert = _mapper.Map<Advert>(request);
-
-            advert.FeaturedImageURL = await _imageServiceBase.UploadAsync(request.FeaturedImageURL);
 
             await _advertRepository.AddAsync(advert);
 

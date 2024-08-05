@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -5,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Persistence.Contexts;
 
-public class BaseDbContext : DbContext
+public sealed class BaseDbContext : DbContext
 {
     protected IConfiguration Configuration { get; set; }
     public DbSet<EmailAuthenticator> EmailAuthenticators { get; set; }
@@ -52,5 +53,14 @@ public class BaseDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder
+            .LogTo(message => Debug.WriteLine(message))
+            .EnableSensitiveDataLogging();
+
+        base.OnConfiguring(optionsBuilder);
     }
 }

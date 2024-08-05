@@ -7,7 +7,6 @@ public class CreateAdvertCommandValidator : AbstractValidator<CreateAdvertComman
     public CreateAdvertCommandValidator()
     {
         RuleFor(c => c.AdvertNo).NotEmpty();
-        RuleFor(c => c.FeaturedImageURL).NotEmpty();
         RuleFor(c => c.CarId).NotEmpty();
     }
 }
