@@ -39,7 +39,6 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ICustomerAdvertLogRepository, CustomerAdvertLogRepository>();
         services.AddScoped<IEngineRepository, EngineRepository>();
         services.AddScoped<IExpertizeResultRepository, ExpertizeResultRepository>();
-        services.AddScoped<IFuelConsumptionRepository, FuelConsumptionRepository>();
         services.AddScoped<IFuelTypeRepository, FuelTypeRepository>();
         services.AddScoped<IGenerationRepository, GenerationRepository>();
         services.AddScoped<ILicenceRepository, LicenceRepository>();

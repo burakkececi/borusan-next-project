@@ -14,6 +14,5 @@ public class GetDynamicCustomerResponse:IResponse
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Phone { get; set; }
-    public bool IsSmsConfirmed { get; set; }
     public CustomerType CustomerType { get; set; }
 }

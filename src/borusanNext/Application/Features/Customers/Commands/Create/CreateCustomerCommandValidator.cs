@@ -10,7 +10,6 @@ public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCo
         RuleFor(c => c.FirstName).NotEmpty();
         RuleFor(c => c.LastName).NotEmpty();
         RuleFor(c => c.Phone).NotEmpty();
-        RuleFor(c => c.IsSmsConfirmed).NotEmpty();
         RuleFor(c => c.CustomerType).NotEmpty();
     }
 }

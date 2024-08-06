@@ -7,7 +7,6 @@ public class UpdateLocationCommandValidator : AbstractValidator<UpdateLocationCo
     public UpdateLocationCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
-        RuleFor(c => c.Name).NotEmpty();
         RuleFor(c => c.City).NotEmpty();
         RuleFor(c => c.Address).NotEmpty();
         RuleFor(c => c.Latitute).NotEmpty();

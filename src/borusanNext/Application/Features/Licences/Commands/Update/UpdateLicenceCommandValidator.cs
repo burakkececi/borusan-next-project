@@ -8,6 +8,6 @@ public class UpdateLicenceCommandValidator : AbstractValidator<UpdateLicenceComm
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.LicenceNo).NotEmpty();
-        RuleFor(c => c.LicenceOwner).NotEmpty();
+        RuleFor(c => c.ProvidedBy).NotEmpty();
     }
 }

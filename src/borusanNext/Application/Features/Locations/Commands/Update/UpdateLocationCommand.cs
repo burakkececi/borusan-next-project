@@ -12,7 +12,6 @@ namespace Application.Features.Locations.Commands.Update;
 public class UpdateLocationCommand : IRequest<UpdatedLocationResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
-    public required string Name { get; set; }
     public required string City { get; set; }
     public required string Address { get; set; }
     public required string Latitute { get; set; }

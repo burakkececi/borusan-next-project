@@ -10,5 +10,5 @@ public class GetDynamicLicenceResponse:IResponse
 {
     public Guid Id { get; set; }
     public int LicenceNo { get; set; }
-    public string LicenceOwner { get; set; }
+    public string ProvidedBy { get; set; }
 }

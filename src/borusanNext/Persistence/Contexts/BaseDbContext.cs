@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Persistence.Contexts;
 
-public sealed class BaseDbContext : DbContext
+public class BaseDbContext : DbContext
 {
     protected IConfiguration Configuration { get; set; }
     public DbSet<EmailAuthenticator> EmailAuthenticators { get; set; }
@@ -30,7 +30,6 @@ public sealed class BaseDbContext : DbContext
     public DbSet<CustomerAdvertLog> CustomerAdvertLogs { get; set; }
     public DbSet<Engine> Engines { get; set; }
     public DbSet<ExpertizeResult> ExpertizeResults { get; set; }
-    public DbSet<FuelConsumption> FuelConsumptions { get; set; }
     public DbSet<FuelType> FuelTypes { get; set; }
     public DbSet<Generation> Generations { get; set; }
     public DbSet<Licence> Licences { get; set; }

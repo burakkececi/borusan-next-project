@@ -15,12 +15,12 @@ public class Engine : Entity<Guid>
     public double Acceleration { get; set; }
     public int MaximumSpeed { get; set; }
     public int FuelTankVolume { get; set; }
+    public double OutOfTownConsumptionRate { get; set; }
+    public double UrbanConsumptionRate { get; set; }
+    public double AverageConsumptionRate { get; set; }
 
     public Guid FuelTypeId { get; set; }
-    public Guid FuelConsumptionId { get; set; }
 
     public virtual FuelType FuelType { get; set; }
-    public virtual FuelConsumption FuelConsumption { get; set; }
-
     public virtual ICollection<Car> Cars { get; set; }
 }

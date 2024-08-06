@@ -11,7 +11,7 @@ namespace Application.Features.BodyTypes.Commands.Create;
 
 public class CreateBodyTypeCommand : IRequest<CreatedBodyTypeResponse>, ISecuredRequest
 {
-    public required Guid BodyName { get; set; }
+    public required string BodyName { get; set; }
     public required string Door { get; set; }
 
     public string[] Roles => [Admin, Write, BodyTypesOperationClaims.Create];

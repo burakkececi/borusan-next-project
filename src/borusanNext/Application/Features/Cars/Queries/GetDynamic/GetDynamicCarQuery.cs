@@ -39,7 +39,7 @@ public class GetDynamicCarQuery : IRequest<GetListResponse<GetDynamicCarResponse
              include: i => i
                  .Include(i=>i.CarModel).Include(model=>model.CarModel.Brand)
                     .Include(i => i.CarModel.ModalExtensions).ThenInclude(modal=>modal.Generation)
-                    .Include(i=>i.Engine).Include(fuel=>fuel.Engine.FuelType).Include(fuel=>fuel.Engine.FuelConsumption)
+                    .Include(i=>i.Engine).Include(fuel=>fuel.Engine.FuelType)
                     .Include(i=>i.BodyType)
                     .Include(i=>i.Transmission)
                     .Include(i=>i.Color),

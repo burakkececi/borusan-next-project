@@ -35,7 +35,6 @@ using Application.Services.ChassisParts;
 using Application.Services.CustomerAdvertLogs;
 using Application.Services.Engines;
 using Application.Services.ExpertizeResults;
-using Application.Services.FuelConsumptions;
 using Application.Services.FuelTypes;
 using Application.Services.Generations;
 using Application.Services.Licences;
@@ -104,7 +103,6 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ICustomerAdvertLogService, CustomerAdvertLogManager>();
         services.AddScoped<IEngineService, EngineManager>();
         services.AddScoped<IExpertizeResultService, ExpertizeResultManager>();
-        services.AddScoped<IFuelConsumptionService, FuelConsumptionManager>();
         services.AddScoped<IFuelTypeService, FuelTypeManager>();
         services.AddScoped<IGenerationService, GenerationManager>();
         services.AddScoped<ILicenceService, LicenceManager>();

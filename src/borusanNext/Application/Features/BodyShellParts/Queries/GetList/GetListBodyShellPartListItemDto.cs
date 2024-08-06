@@ -1,17 +1,6 @@
 using NArchitecture.Core.Application.Dtos;
 using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
+
 
 namespace Application.Features.BodyShellParts.Queries.GetList;
 

@@ -6,18 +6,6 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
-using Domain.Enums;
 using static Application.Features.BodyShellParts.Constants.BodyShellPartsOperationClaims;
 
 namespace Application.Features.BodyShellParts.Commands.Create;

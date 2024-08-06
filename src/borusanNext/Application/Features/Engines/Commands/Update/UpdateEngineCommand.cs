@@ -20,7 +20,9 @@ public class UpdateEngineCommand : IRequest<UpdatedEngineResponse>, ISecuredRequ
     public required int MaximumSpeed { get; set; }
     public required int FuelTankVolume { get; set; }
     public required Guid FuelTypeId { get; set; }
-    public required Guid FuelConsumptionId { get; set; }
+    public double OutOfTownConsumptionRate { get; set; }
+    public double UrbanConsumptionRate { get; set; }
+    public double AverageConsumptionRate { get; set; }
 
     public string[] Roles => [Admin, Write, EnginesOperationClaims.Update];
 

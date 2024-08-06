@@ -37,7 +37,7 @@ public class GetDynamicEngineQuery:IRequest<GetListResponse<GetDynamicChassisPar
         {
             IPaginate<Engine> engine = await _engineRepository.GetListByDynamicAsync(
                 dynamic: request.DynamicQuery,
-                include: i => i.Include(e=>e.FuelType).Include(e=>e.FuelConsumption),
+                include: i => i.Include(e=>e.FuelType),
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken);

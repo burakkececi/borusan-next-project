@@ -9,8 +9,7 @@ namespace Domain.Entities;
 public class Licence : Entity<Guid>
 {
     public int LicenceNo { get; set; }
-    public string LicenceOwner { get; set; }
-
+    public string ProvidedBy { get; set; }
     public virtual Seller Seller { get; set; }
 
 }
