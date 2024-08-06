@@ -1,4 +1,4 @@
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,5 +19,15 @@ public class CampaignConfiguration : IEntityTypeConfiguration<Campaign>
         builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+
+        builder.HasData(
+            new Campaign()
+            {
+                Id = new Guid("4ddb2ea7-21a7-4d1d-9367-bdf25cc75ac8"),
+                Title = "Bu Bir Kampanya",
+                Description = "Bu Bir Kampanya Detayı",
+                Banner = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722923108/g09uyd5sinylzgo2xtjj.jpg"
+            }
+            );
     }
 }

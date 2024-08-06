@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -29,5 +30,59 @@ public class BodyShellPartConfiguration : IEntityTypeConfiguration<BodyShellPart
         builder.Property(bsp => bsp.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(bsp => !bsp.DeletedDate.HasValue);
+
+        builder.HasData(
+            new BodyShellPart()
+            {
+                Id = new Guid("3eeff5e8-58ab-4f64-82a9-05d77b83b4ef"),
+                LeftFrontFender = ExpertizeCondition.Changed,
+                LeftFrontDoor = ExpertizeCondition.Changed,
+                LeftRearDoor = ExpertizeCondition.Changed,
+                LeftRearFender = ExpertizeCondition.Changed,
+                RightFrontFender = 0,
+                RightFrontDoor = 0,
+                RightRearDoor = 0,
+                RightRearFender = 0,
+                Frontbumper = 0,
+                RearBumper = ExpertizeCondition.Painted,
+                Bonnet = 0,
+                Ceiling = 0,
+                Luggage = 0
+            },
+            new BodyShellPart()
+            {
+                Id = new Guid("8c9d2d89-affb-4202-9953-ab86cf490ca0"),
+                LeftFrontFender = 0,
+                LeftFrontDoor = 0,
+                LeftRearDoor = 0,
+                LeftRearFender = 0,
+                RightFrontFender = 0,
+                RightFrontDoor = 0,
+                RightRearDoor = 0,
+                RightRearFender = 0,
+                Frontbumper = 0,
+                RearBumper = 0,
+                Bonnet = 0,
+                Ceiling = 0,
+                Luggage = 0
+            },
+            new BodyShellPart()
+            {
+                Id = new Guid("db7257a0-5a57-4960-8a34-7f4f798470a2"),
+                LeftFrontFender = 0,
+                LeftFrontDoor = 0,
+                LeftRearDoor = ExpertizeCondition.Painted,
+                LeftRearFender = 0,
+                RightFrontFender = 0,
+                RightFrontDoor = 0,
+                RightRearDoor = 0,
+                RightRearFender = ExpertizeCondition.Painted,
+                Frontbumper = 0,
+                RearBumper = 0,
+                Bonnet = 0,
+                Ceiling = 0,
+                Luggage = 0
+            }
+            );
     }
 }
