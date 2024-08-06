@@ -18,7 +18,7 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
         builder.Property(c => c.Inquiry).HasColumnName("Inquiry").IsRequired();
         builder.Property(c => c.WheelType).HasColumnName("WheelType").IsRequired();
         builder.Property(c => c.SpareWheel).HasColumnName("SpareWheel").IsRequired();
-        builder.Property(c => c.Price).HasColumnName("Price").HasPrecision(18,2).IsRequired();
+        builder.Property(c => c.Price).HasColumnName("Price").HasPrecision(18, 2).IsRequired();
         builder.Property(c => c.CarModelId).HasColumnName("CarModelId").IsRequired();
         builder.Property(c => c.ColorId).HasColumnName("ColorId").IsRequired();
         builder.Property(c => c.EngineId).HasColumnName("EngineId").IsRequired();
@@ -39,5 +39,69 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
         builder.HasOne(p => p.Transmission).WithMany(p => p.Cars).HasForeignKey(p => p.TransmissionId);
         builder.HasOne(p => p.Color).WithMany(p => p.Cars).HasForeignKey(p => p.ColorId);
         builder.HasOne(p => p.Seller).WithMany(p => p.Cars).HasForeignKey(p => p.SellerId);
+
+        builder.HasData(
+                        new Car()
+                        {
+                            Id = new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"),
+                            ChassisNumber = "1HGCM82633A123456",
+                            Plate = "34GS407",
+                            Kilometers = 60000,
+                            SpareKey = true,
+                            Inquiry = new DateTime(2023, 08, 05),
+                            WheelType = "Alloy",
+                            SpareWheel = true,
+                            Price = 25000.00m,
+
+                            CarModelId = new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"),
+                            ColorId = new Guid("38211267-9cce-4040-adae-0c64bc26dab8"),
+                            EngineId = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
+                            BodyTypeId = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
+                            TramerId = new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"),
+                            SellerId = new Guid("056dd418-5114-4ea1-baf3-07d4b8fc26f6"),
+                        },
+                        new Car()
+                        {
+                            Id = new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"),
+                            ChassisNumber = "2HGCM82644A654321",
+                            Plate = "22AB123",
+                            Kilometers = 45000,
+                            SpareKey = true,
+                            Inquiry = new DateTime(2022, 05, 20),
+                            WheelType = "Steel",
+                            SpareWheel = false,
+                            Price = 20000.00m,
+
+                            CarModelId = new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"),
+                            ColorId = new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"),
+                            EngineId = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
+                            BodyTypeId = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
+                            TramerId = new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"),
+                            SellerId = new Guid("785d6af9-4404-4d7a-ad3e-82319812b037"),
+                        },
+                        new Car()
+                        {
+                            Id = new Guid("48f8a123-6b7d-4a2e-928b-c1e6beb2e7f2"),
+                            ChassisNumber = "3HGCM82655A789012",
+                            Plate = "78CD456",
+                            Kilometers = 75000,
+                            SpareKey = false,
+                            Inquiry = new DateTime(2021, 11, 15),
+                            WheelType = "Alloy",
+                            SpareWheel = true,
+                            Price = 18000.00m,
+
+                            CarModelId = new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"),
+                            ColorId = new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"),
+                            EngineId = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
+                            BodyTypeId = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
+                            TransmissionId = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
+                            TramerId = new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"),
+                            SellerId = new Guid("667742ae-ae24-4d8c-9029-57ab5ba305ba"),
+                        }
+
+            );
     }
 }

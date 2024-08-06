@@ -17,5 +17,23 @@ public class FuelTypeConfiguration : IEntityTypeConfiguration<FuelType>
         builder.Property(ft => ft.DeletedDate).HasColumnName("DeletedDate").HasColumnType("timestamp");
 
         builder.HasQueryFilter(ft => !ft.DeletedDate.HasValue);
+
+        builder.HasData(
+            new FuelType()
+            {
+                Id = new Guid("7c27ae08-d686-43b7-9fc2-5a9df75963de"),
+                Name = "Electric"
+            },
+            new FuelType()
+            {
+                Id = new Guid("5e44df51-9db5-46cc-b9ab-7c64a491e2fe"),
+                Name = "Diesel"
+            },
+            new FuelType()
+            {
+                Id = new Guid("55126902-8144-4e5a-9b4f-06cc32304d57"),
+                Name = "Petrol"
+            }
+            );
     }
 }

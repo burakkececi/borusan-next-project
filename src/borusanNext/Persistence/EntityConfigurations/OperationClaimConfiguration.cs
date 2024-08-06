@@ -21,7 +21,6 @@ using Application.Features.ChassisParts.Constants;
 using Application.Features.CustomerAdvertLogs.Constants;
 using Application.Features.Engines.Constants;
 using Application.Features.ExpertizeResults.Constants;
-using Application.Features.FuelConsumptions.Constants;
 using Application.Features.FuelTypes.Constants;
 using Application.Features.Generations.Constants;
 using Application.Features.Licences.Constants;
@@ -309,20 +308,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #endregion
         
         
-        #region FuelConsumptions CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = FuelConsumptionsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = FuelConsumptionsOperationClaims.Read },
-                new() { Id = ++lastId, Name = FuelConsumptionsOperationClaims.Write },
-                new() { Id = ++lastId, Name = FuelConsumptionsOperationClaims.Create },
-                new() { Id = ++lastId, Name = FuelConsumptionsOperationClaims.Update },
-                new() { Id = ++lastId, Name = FuelConsumptionsOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
         #region FuelTypes CRUD
         featureOperationClaims.AddRange(
             [
@@ -404,37 +389,8 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new() { Id = ++lastId, Name = TransmissionsOperationClaims.Delete },
             ]
         );
-        #endregion
+        #endregion 
         
-        
-        #region Sellers CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = SellersOperationClaims.Admin },
-                new() { Id = ++lastId, Name = SellersOperationClaims.Read },
-                new() { Id = ++lastId, Name = SellersOperationClaims.Write },
-                new() { Id = ++lastId, Name = SellersOperationClaims.Create },
-                new() { Id = ++lastId, Name = SellersOperationClaims.Update },
-                new() { Id = ++lastId, Name = SellersOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
-        
-        #region Cars CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = CarsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Read },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Write },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Create },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Update },
-                new() { Id = ++lastId, Name = CarsOperationClaims.Delete },
-            ]
-        );
-        #endregion
-       
         
         #region Customers CRUD
         featureOperationClaims.AddRange(
@@ -562,7 +518,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #endregion
         
 
-#region Cars CRUD
+        #region Cars CRUD
 featureOperationClaims.AddRange(
     [
         new() { Id = ++lastId, Name = CarsOperationClaims.Admin },
@@ -576,18 +532,18 @@ featureOperationClaims.AddRange(
 #endregion
 
 
-#region CustomerFavorites CRUD
-featureOperationClaims.AddRange(
-    [
-        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Admin },
-        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Read },
-        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Write },
-        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Create },
-        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Update },
-        new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Delete },
-    ]
-);
-#endregion
+        #region CustomerFavorites CRUD
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Admin },
+                new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Read },
+                new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Write },
+                new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Create },
+                new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Update },
+                new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Delete },
+            ]
+        );
+        #endregion
 
         return featureOperationClaims;
     }

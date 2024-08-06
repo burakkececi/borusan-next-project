@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240801122822_set_datetime_to_timestamp")]
-    partial class set_datetime_to_timestamp
+    [Migration("20240806160520_seed_data")]
+    partial class seed_data
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,11 +48,6 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<string>("FeaturedImageURL")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("FeaturedImageURL");
-
                     b.Property<Guid?>("SellerId")
                         .HasColumnType("uuid");
 
@@ -68,6 +63,22 @@ namespace Persistence.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("Adverts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            AdvertNo = 1,
+                            CarId = new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("87b836e5-0f84-4bc0-8825-0a3c50277385"),
+                            AdvertNo = 2,
+                            CarId = new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.AdvertImage", b =>
@@ -103,6 +114,78 @@ namespace Persistence.Migrations
                     b.HasIndex("AdvertId");
 
                     b.ToTable("AdvertImages", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("31895bc7-6acb-47ab-b17e-c25cdf4e206a"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927430/wkhtgdd9329qljrwrtct.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("abff24eb-4e70-4ed8-9628-6cbae7351290"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927430/dsjdl0uscjqi7dpwvjbb.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("9b099ef1-1465-457a-8f53-fe1322cbd1cc"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927433/rq2hr77xj9psnaau2qed.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("48360d95-19b9-4dc6-a5f9-ed7150ecd965"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927432/mkkciln87ynjbnje13ft.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("b755d05c-57f6-4929-ace4-5478f32dadb4"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927431/iwqgm7levti1a1peom4i.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("41d24792-ce26-41a7-ab03-86dd2b20da0e"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927430/e1trhsymprfpj4cv8qsj.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("e6bd50d8-861e-4696-8be6-74ed1a268090"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927429/x8tr1bwix1qafh6ekps2.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("4003779f-2f80-44aa-9569-737c0fa8fd5e"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927428/hdfqjaqsgg9ujzkmmg8k.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("9439d26c-d71c-4fb4-948f-bcf7969875b0"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927428/sjswo927ezke9ad4ehiq.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("7ad496e8-4960-42e5-947e-3af49eb2b54b"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageURL = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722927427/uebfhjzoiofr0epripub.jpg"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Appointment", b =>
@@ -124,17 +207,12 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("CustomerId");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("Date");
+                    b.Property<DateTime>("DateAndTime")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("Time");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
@@ -147,6 +225,16 @@ namespace Persistence.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Appointments", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("72f3de2b-6f55-400b-9b17-7e9c7dcb3167"),
+                            CarId = new Guid("48f8a123-6b7d-4a2e-928b-c1e6beb2e7f2"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = new Guid("b1e3b9cd-1c82-4f68-a70e-8349c28af525"),
+                            DateAndTime = new DateTime(2024, 7, 1, 14, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Blog", b =>
@@ -186,6 +274,32 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Blogs", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1c1fac0a-4c1f-4ade-bded-a9b7a28df01b"),
+                            Banner = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722923108/g09uyd5sinylzgo2xtjj.jpg",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Borusan Otomotiv Grubu'nun tek çatı altında çoklu marka ve çoklu kanal stratejisi vizyonu doğrultusunda oluşturulan ikinci el otomobil platformu Borusan Next, kendi lokasyonlarında, teknoloji, güven, hız ve premium müşteri deneyimi odaklı bir yaklaşım ile kullanılmış otomobil alım, satım, takas ve iş ortakları vasıtasıyla da finansman ve sigorta çözümleri sunuyor.",
+                            Title = "İkinci El Arabanın Yeni Adresi Borusan Next!"
+                        },
+                        new
+                        {
+                            Id = new Guid("6321910f-01ee-47be-b65e-8868ffecb023"),
+                            Banner = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722923108/roar5vpmq5y2btncajl2.jpg",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Borusan Otomotiv Grubu'nun tek çatı altında çoklu marka ve çoklu kanal stratejisi vizyonu doğrultusunda oluşturulan ikinci el otomobil platformu Borusan Next, kendi lokasyonlarında, teknoloji, güven, hız ve premium müşteri deneyimi odaklı bir yaklaşım ile kullanılmış otomobil alım, satım, takas ve iş ortakları vasıtasıyla da finansman ve sigorta çözümleri sunuyor.",
+                            Title = "Hız Tutkunları Motoru Nextten..."
+                        },
+                        new
+                        {
+                            Id = new Guid("d323a479-a0f5-4347-a764-698be769fb57"),
+                            Banner = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722923108/cnhqv7ttffz6297xulca.jpg",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Borusan Otomotiv Grubu'nun tek çatı altında çoklu marka ve çoklu kanal stratejisi vizyonu doğrultusunda oluşturulan ikinci el otomobil platformu Borusan Next, kendi lokasyonlarında, teknoloji, güven, hız ve premium müşteri deneyimi odaklı bir yaklaşım ile kullanılmış otomobil alım, satım, takas ve iş ortakları vasıtasıyla da finansman ve sigorta çözümleri sunuyor.",
+                            Title = "Burası Harika Bir Title!"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.BlogItemTag", b =>
@@ -222,6 +336,29 @@ namespace Persistence.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("BlogItemTags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("24786008-f2f5-456a-b3b2-9be51d2584af"),
+                            BlogId = new Guid("1c1fac0a-4c1f-4ade-bded-a9b7a28df01b"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TagId = new Guid("873dbb53-f3ca-4bda-a0d7-18ae10ca9f3e")
+                        },
+                        new
+                        {
+                            Id = new Guid("e3415515-de98-4ba4-ab4d-9527e6b9dbd4"),
+                            BlogId = new Guid("6321910f-01ee-47be-b65e-8868ffecb023"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TagId = new Guid("873dbb53-f3ca-4bda-a0d7-18ae10ca9f3e")
+                        },
+                        new
+                        {
+                            Id = new Guid("f433e050-e90c-4551-b65d-edb409244e3c"),
+                            BlogId = new Guid("d323a479-a0f5-4347-a764-698be769fb57"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TagId = new Guid("873dbb53-f3ca-4bda-a0d7-18ae10ca9f3e")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.BodyShellPart", b =>
@@ -298,6 +435,62 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BodyShellParts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3eeff5e8-58ab-4f64-82a9-05d77b83b4ef"),
+                            Bonnet = 0,
+                            Ceiling = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Frontbumper = 0,
+                            LeftFrontDoor = 3,
+                            LeftFrontFender = 3,
+                            LeftRearDoor = 3,
+                            LeftRearFender = 3,
+                            Luggage = 0,
+                            RearBumper = 2,
+                            RightFrontDoor = 0,
+                            RightFrontFender = 0,
+                            RightRearDoor = 0,
+                            RightRearFender = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("8c9d2d89-affb-4202-9953-ab86cf490ca0"),
+                            Bonnet = 0,
+                            Ceiling = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Frontbumper = 0,
+                            LeftFrontDoor = 0,
+                            LeftFrontFender = 0,
+                            LeftRearDoor = 0,
+                            LeftRearFender = 0,
+                            Luggage = 0,
+                            RearBumper = 0,
+                            RightFrontDoor = 0,
+                            RightFrontFender = 0,
+                            RightRearDoor = 0,
+                            RightRearFender = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("db7257a0-5a57-4960-8a34-7f4f798470a2"),
+                            Bonnet = 0,
+                            Ceiling = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Frontbumper = 0,
+                            LeftFrontDoor = 0,
+                            LeftFrontFender = 0,
+                            LeftRearDoor = 2,
+                            LeftRearFender = 0,
+                            Luggage = 0,
+                            RearBumper = 0,
+                            RightFrontDoor = 0,
+                            RightFrontFender = 0,
+                            RightRearDoor = 0,
+                            RightRearFender = 2
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.BodyType", b =>
@@ -307,8 +500,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("Id");
 
-                    b.Property<Guid>("BodyName")
-                        .HasColumnType("uuid")
+                    b.Property<string>("BodyName")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("BodyName");
 
                     b.Property<DateTime>("CreatedDate")
@@ -331,6 +525,29 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BodyTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
+                            BodyName = "Hatchback",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Door = "4"
+                        },
+                        new
+                        {
+                            Id = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
+                            BodyName = "Sedan",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Door = "4"
+                        },
+                        new
+                        {
+                            Id = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
+                            BodyName = "SUV",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Door = "4"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Brand", b =>
@@ -365,6 +582,29 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c571076a-f830-4682-bfb3-5ca69537ee41"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Logo = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722869825/cpoit6q62nuhyb9byxkn.png",
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = new Guid("0f1e4581-6b0b-4b9f-a4ab-3b292c082456"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Logo = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722869832/vqmnm1pnw8ny9rdyku28.svg",
+                            Name = "Land Rover"
+                        },
+                        new
+                        {
+                            Id = new Guid("96ec5f7f-8b0f-41b9-9694-e9968fd49f7a"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Logo = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722106757/dalglsprdgaabq0m7jmg.png",
+                            Name = "MINI"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Campaign", b =>
@@ -404,6 +644,16 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Campaigns", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4ddb2ea7-21a7-4d1d-9367-bdf25cc75ac8"),
+                            Banner = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722923108/g09uyd5sinylzgo2xtjj.jpg",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bu Bir Kampanya Detayı",
+                            Title = "Bu Bir Kampanya"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
@@ -443,7 +693,7 @@ namespace Persistence.Migrations
                         .HasColumnName("EngineId");
 
                     b.Property<DateTime>("Inquiry")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("Inquiry");
 
                     b.Property<int>("Kilometers")
@@ -507,6 +757,68 @@ namespace Persistence.Migrations
                     b.HasIndex("TransmissionId");
 
                     b.ToTable("Cars", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"),
+                            BodyTypeId = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
+                            CarModelId = new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"),
+                            ChassisNumber = "1HGCM82633A123456",
+                            ColorId = new Guid("38211267-9cce-4040-adae-0c64bc26dab8"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EngineId = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
+                            Inquiry = new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Kilometers = 60000,
+                            Plate = "34GS407",
+                            Price = 25000.00m,
+                            SellerId = new Guid("056dd418-5114-4ea1-baf3-07d4b8fc26f6"),
+                            SpareKey = true,
+                            SpareWheel = true,
+                            TramerId = new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"),
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
+                            WheelType = "Alloy"
+                        },
+                        new
+                        {
+                            Id = new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"),
+                            BodyTypeId = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
+                            CarModelId = new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"),
+                            ChassisNumber = "2HGCM82644A654321",
+                            ColorId = new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EngineId = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
+                            Inquiry = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Kilometers = 45000,
+                            Plate = "22AB123",
+                            Price = 20000.00m,
+                            SellerId = new Guid("785d6af9-4404-4d7a-ad3e-82319812b037"),
+                            SpareKey = true,
+                            SpareWheel = false,
+                            TramerId = new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"),
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
+                            WheelType = "Steel"
+                        },
+                        new
+                        {
+                            Id = new Guid("48f8a123-6b7d-4a2e-928b-c1e6beb2e7f2"),
+                            BodyTypeId = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
+                            CarModelId = new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"),
+                            ChassisNumber = "3HGCM82655A789012",
+                            ColorId = new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EngineId = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
+                            Inquiry = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Kilometers = 75000,
+                            Plate = "78CD456",
+                            Price = 18000.00m,
+                            SellerId = new Guid("667742ae-ae24-4d8c-9029-57ab5ba305ba"),
+                            SpareKey = false,
+                            SpareWheel = true,
+                            TramerId = new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"),
+                            TransmissionId = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
+                            WheelType = "Alloy"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.CarColor", b =>
@@ -536,6 +848,26 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarColors", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("38211267-9cce-4040-adae-0c64bc26dab8"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Red"
+                        },
+                        new
+                        {
+                            Id = new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Blue"
+                        },
+                        new
+                        {
+                            Id = new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Black"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.CarModel", b =>
@@ -571,6 +903,29 @@ namespace Persistence.Migrations
                     b.HasIndex("BrandId");
 
                     b.ToTable("CarModels", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"),
+                            BrandId = new Guid("c571076a-f830-4682-bfb3-5ca69537ee41"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelName = "520i"
+                        },
+                        new
+                        {
+                            Id = new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"),
+                            BrandId = new Guid("0f1e4581-6b0b-4b9f-a4ab-3b292c082456"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelName = "Range Rover"
+                        },
+                        new
+                        {
+                            Id = new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"),
+                            BrandId = new Guid("96ec5f7f-8b0f-41b9-9694-e9968fd49f7a"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelName = "Cooper Countryman"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ChassisPart", b =>
@@ -611,6 +966,35 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ChassisParts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e59f7e66-cc28-4270-84ed-aa6812f00935"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsBackPanelChanged = false,
+                            IsFrontPanelChanged = false,
+                            IsLeftChassisChanged = false,
+                            IsRightChassisChanged = false
+                        },
+                        new
+                        {
+                            Id = new Guid("352dd90f-0292-4613-b5d9-3540a723c6dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsBackPanelChanged = false,
+                            IsFrontPanelChanged = false,
+                            IsLeftChassisChanged = false,
+                            IsRightChassisChanged = false
+                        },
+                        new
+                        {
+                            Id = new Guid("85262f34-ace7-4f68-8b20-8ed9a0fd77c6"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsBackPanelChanged = false,
+                            IsFrontPanelChanged = false,
+                            IsLeftChassisChanged = false,
+                            IsRightChassisChanged = false
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>
@@ -637,10 +1021,6 @@ namespace Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("FirstName");
 
-                    b.Property<bool>("IsSmsConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("IsSmsConfirmed");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text")
@@ -665,6 +1045,48 @@ namespace Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Customers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("27ca8f20-333f-4fc2-a535-c156a2aec150"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerType = 2,
+                            FirstName = "Burak",
+                            LastName = "Keçeci",
+                            Phone = "5555555555",
+                            UserId = new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e")
+                        },
+                        new
+                        {
+                            Id = new Guid("ab623e31-88ab-48cb-8942-2c541343d651"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerType = 2,
+                            FirstName = "Meryem",
+                            LastName = "Talay",
+                            Phone = "5555555555",
+                            UserId = new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d")
+                        },
+                        new
+                        {
+                            Id = new Guid("d2f17680-26d1-4ac3-90c6-4ffec9e5c0ad"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerType = 3,
+                            FirstName = "Ali",
+                            LastName = "Laçin",
+                            Phone = "5555555555",
+                            UserId = new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf")
+                        },
+                        new
+                        {
+                            Id = new Guid("b1e3b9cd-1c82-4f68-a70e-8349c28af525"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerType = 1,
+                            FirstName = "Sefa",
+                            LastName = "Pehlivan",
+                            Phone = "5555555555",
+                            UserId = new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.CustomerAdvertLog", b =>
@@ -705,6 +1127,76 @@ namespace Persistence.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("CustomerAdvertLogs", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5015e481-036b-4f18-a500-28ecdbab1327"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            ContactStatus = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = new Guid("27ca8f20-333f-4fc2-a535-c156a2aec150")
+                        },
+                        new
+                        {
+                            Id = new Guid("2b6897d8-6964-4d3f-9bd7-e4e16a9285d1"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            ContactStatus = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = new Guid("ab623e31-88ab-48cb-8942-2c541343d651")
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.CustomerFavorite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<Guid>("AdvertId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("AdvertId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CustomerId");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdvertId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("CustomerFavorites", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("374b8206-bc64-47e1-8a3b-3359fb8eba1f"),
+                            AdvertId = new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = new Guid("ab623e31-88ab-48cb-8942-2c541343d651")
+                        },
+                        new
+                        {
+                            Id = new Guid("3bdf5ae4-4e67-445b-85f9-005575de78fd"),
+                            AdvertId = new Guid("87b836e5-0f84-4bc0-8825-0a3c50277385"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = new Guid("ab623e31-88ab-48cb-8942-2c541343d651")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.EmailAuthenticator", b =>
@@ -756,6 +1248,9 @@ namespace Persistence.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("Acceleration");
 
+                    b.Property<double>("AverageConsumptionRate")
+                        .HasColumnType("double precision");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
@@ -772,10 +1267,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("EngineNo");
-
-                    b.Property<Guid>("FuelConsumptionId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("FuelConsumptionId");
 
                     b.Property<int>("FuelTankVolume")
                         .HasColumnType("integer")
@@ -797,17 +1288,71 @@ namespace Persistence.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("MotorPower");
 
+                    b.Property<double>("OutOfTownConsumptionRate")
+                        .HasColumnType("double precision");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
 
-                    b.HasKey("Id");
+                    b.Property<double>("UrbanConsumptionRate")
+                        .HasColumnType("double precision");
 
-                    b.HasIndex("FuelConsumptionId");
+                    b.HasKey("Id");
 
                     b.HasIndex("FuelTypeId");
 
                     b.ToTable("Engines", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
+                            Acceleration = 5.5,
+                            AverageConsumptionRate = 3.0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EngineCapacity = 2000,
+                            EngineNo = "ENG123456789",
+                            FuelTankVolume = 60,
+                            FuelTypeId = new Guid("55126902-8144-4e5a-9b4f-06cc32304d57"),
+                            MaximumSpeed = 240,
+                            MaximumTorque = 350,
+                            MotorPower = 250,
+                            OutOfTownConsumptionRate = 3.3999999999999999,
+                            UrbanConsumptionRate = 2.7999999999999998
+                        },
+                        new
+                        {
+                            Id = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
+                            Acceleration = 7.0,
+                            AverageConsumptionRate = 3.2000000000000002,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EngineCapacity = 1500,
+                            EngineNo = "ENG987654321",
+                            FuelTankVolume = 50,
+                            FuelTypeId = new Guid("5e44df51-9db5-46cc-b9ab-7c64a491e2fe"),
+                            MaximumSpeed = 220,
+                            MaximumTorque = 250,
+                            MotorPower = 180,
+                            OutOfTownConsumptionRate = 3.3999999999999999,
+                            UrbanConsumptionRate = 3.0
+                        },
+                        new
+                        {
+                            Id = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
+                            Acceleration = 6.0,
+                            AverageConsumptionRate = 3.1000000000000001,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EngineCapacity = 1800,
+                            EngineNo = "ENG456789123",
+                            FuelTankVolume = 55,
+                            FuelTypeId = new Guid("7c27ae08-d686-43b7-9fc2-5a9df75963de"),
+                            MaximumSpeed = 230,
+                            MaximumTorque = 300,
+                            MotorPower = 200,
+                            OutOfTownConsumptionRate = 3.5,
+                            UrbanConsumptionRate = 2.8999999999999999
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ExpertizeResult", b =>
@@ -838,7 +1383,7 @@ namespace Persistence.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("InquiryDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("InquiryDate");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -854,42 +1399,35 @@ namespace Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("ExpertizeResults", (string)null);
-                });
 
-            modelBuilder.Entity("Domain.Entities.FuelConsumption", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id");
-
-                    b.Property<double>("Average")
-                        .HasColumnType("double precision")
-                        .HasColumnName("Average");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("CreatedDate");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("DeletedDate");
-
-                    b.Property<double>("OutOfTown")
-                        .HasColumnType("double precision")
-                        .HasColumnName("OutOfTown");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("UpdatedDate");
-
-                    b.Property<double>("Urban")
-                        .HasColumnType("double precision")
-                        .HasColumnName("Urban");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FuelConsumptions", (string)null);
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"),
+                            BodyShellPartId = new Guid("3eeff5e8-58ab-4f64-82a9-05d77b83b4ef"),
+                            CarDamageInformationRecord = 30000,
+                            ChassisPartId = new Guid("e59f7e66-cc28-4270-84ed-aa6812f00935"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InquiryDate = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"),
+                            BodyShellPartId = new Guid("8c9d2d89-affb-4202-9953-ab86cf490ca0"),
+                            CarDamageInformationRecord = 0,
+                            ChassisPartId = new Guid("352dd90f-0292-4613-b5d9-3540a723c6dc"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InquiryDate = new DateTime(2021, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"),
+                            BodyShellPartId = new Guid("db7257a0-5a57-4960-8a34-7f4f798470a2"),
+                            CarDamageInformationRecord = 4000,
+                            ChassisPartId = new Guid("85262f34-ace7-4f68-8b20-8ed9a0fd77c6"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InquiryDate = new DateTime(2020, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.FuelType", b =>
@@ -919,6 +1457,26 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FuelTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7c27ae08-d686-43b7-9fc2-5a9df75963de"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Electric"
+                        },
+                        new
+                        {
+                            Id = new Guid("5e44df51-9db5-46cc-b9ab-7c64a491e2fe"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Diesel"
+                        },
+                        new
+                        {
+                            Id = new Guid("55126902-8144-4e5a-9b4f-06cc32304d57"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Petrol"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Generation", b =>
@@ -948,6 +1506,26 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Generations", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d94a19fa-9478-4514-8238-e08eb534a209"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "7.Nesil Makyaj"
+                        },
+                        new
+                        {
+                            Id = new Guid("ccb47a46-d3ee-421f-b731-8810a62a0628"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "4.Nesil Makyaj"
+                        },
+                        new
+                        {
+                            Id = new Guid("353a7e00-a2ba-4111-af4a-21302b0d8f50"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "2.Nesil"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.GenerationImage", b =>
@@ -1004,10 +1582,10 @@ namespace Persistence.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("LicenceNo");
 
-                    b.Property<string>("LicenceOwner")
+                    b.Property<string>("ProvidedBy")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("LicenceOwner");
+                        .HasColumnName("ProvidedBy");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
@@ -1016,6 +1594,29 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Licences", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7f30d80f-3a7b-429c-81a5-0c9507839691"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenceNo = 3401870,
+                            ProvidedBy = "Borusan Otomotiv"
+                        },
+                        new
+                        {
+                            Id = new Guid("e99ccd48-51a3-46c0-b539-a28cec7d214c"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenceNo = 6401872,
+                            ProvidedBy = "Borusan Otomotiv"
+                        },
+                        new
+                        {
+                            Id = new Guid("d1993933-0185-4333-888c-36f226993e1c"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenceNo = 3501870,
+                            ProvidedBy = "Borusan Otomotiv"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Location", b =>
@@ -1053,11 +1654,6 @@ namespace Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Longitute");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Name");
-
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
@@ -1065,6 +1661,35 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("59a7ddc2-3920-4652-9543-797fbd1d3d38"),
+                            Address = "Firüzköy Yolu No: 21 Avcılar",
+                            City = "Istanbul",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Latitute = "40.992769",
+                            Longitute = "28.716821"
+                        },
+                        new
+                        {
+                            Id = new Guid("2f565ad5-7ae1-42ad-82f2-96944052aa27"),
+                            Address = "Akpınar, Bilim Cd. No:2, 34485 Sancaktepe",
+                            City = "Istanbul",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Latitute = "40.9753623",
+                            Longitute = "29.2244372"
+                        },
+                        new
+                        {
+                            Id = new Guid("4744af1a-89ba-4d1b-890c-9d3e3c755cda"),
+                            Address = "Firüzköy Yolu No: 21 Avcılar",
+                            City = "Istanbul",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Latitute = "40.992769",
+                            Longitute = "28.716821"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ModalExtension", b =>
@@ -1134,6 +1759,53 @@ namespace Persistence.Migrations
                     b.HasIndex("GenerationId");
 
                     b.ToTable("ModalExtensions", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"),
+                            CarModelId = new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmptyWeight = 0.0,
+                            FuelTank = 0.0,
+                            GenerationId = new Guid("d94a19fa-9478-4514-8238-e08eb534a209"),
+                            Height = 1557.0,
+                            Lenght = 4299.0,
+                            LuggageCapacity = 0.0,
+                            ModelYear = 2021,
+                            Name = "520i Luxury Line",
+                            Width = 1822.0
+                        },
+                        new
+                        {
+                            Id = new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"),
+                            CarModelId = new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmptyWeight = 0.0,
+                            FuelTank = 0.0,
+                            GenerationId = new Guid("ccb47a46-d3ee-421f-b731-8810a62a0628"),
+                            Height = 1557.0,
+                            Lenght = 4299.0,
+                            LuggageCapacity = 0.0,
+                            ModelYear = 2021,
+                            Name = "2.0 PHEV Vogue",
+                            Width = 1822.0
+                        },
+                        new
+                        {
+                            Id = new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"),
+                            CarModelId = new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmptyWeight = 0.0,
+                            FuelTank = 0.0,
+                            GenerationId = new Guid("353a7e00-a2ba-4111-af4a-21302b0d8f50"),
+                            Height = 1557.0,
+                            Lenght = 4299.0,
+                            LuggageCapacity = 0.0,
+                            ModelYear = 2021,
+                            Name = "1.5 Pepper",
+                            Width = 1822.0
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.OperationClaim", b =>
@@ -1777,253 +2449,253 @@ namespace Persistence.Migrations
                         {
                             Id = 102,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Admin"
+                            Name = "FuelTypes.Admin"
                         },
                         new
                         {
                             Id = 103,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Read"
+                            Name = "FuelTypes.Read"
                         },
                         new
                         {
                             Id = 104,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Write"
+                            Name = "FuelTypes.Write"
                         },
                         new
                         {
                             Id = 105,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Create"
+                            Name = "FuelTypes.Create"
                         },
                         new
                         {
                             Id = 106,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Update"
+                            Name = "FuelTypes.Update"
                         },
                         new
                         {
                             Id = 107,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelConsumptions.Delete"
+                            Name = "FuelTypes.Delete"
                         },
                         new
                         {
                             Id = 108,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Admin"
+                            Name = "Generations.Admin"
                         },
                         new
                         {
                             Id = 109,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Read"
+                            Name = "Generations.Read"
                         },
                         new
                         {
                             Id = 110,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Write"
+                            Name = "Generations.Write"
                         },
                         new
                         {
                             Id = 111,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Create"
+                            Name = "Generations.Create"
                         },
                         new
                         {
                             Id = 112,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Update"
+                            Name = "Generations.Update"
                         },
                         new
                         {
                             Id = 113,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "FuelTypes.Delete"
+                            Name = "Generations.Delete"
                         },
                         new
                         {
                             Id = 114,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Admin"
+                            Name = "Licences.Admin"
                         },
                         new
                         {
                             Id = 115,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Read"
+                            Name = "Licences.Read"
                         },
                         new
                         {
                             Id = 116,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Write"
+                            Name = "Licences.Write"
                         },
                         new
                         {
                             Id = 117,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Create"
+                            Name = "Licences.Create"
                         },
                         new
                         {
                             Id = 118,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Update"
+                            Name = "Licences.Update"
                         },
                         new
                         {
                             Id = 119,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generations.Delete"
+                            Name = "Licences.Delete"
                         },
                         new
                         {
                             Id = 120,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Admin"
+                            Name = "Locations.Admin"
                         },
                         new
                         {
                             Id = 121,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Read"
+                            Name = "Locations.Read"
                         },
                         new
                         {
                             Id = 122,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Write"
+                            Name = "Locations.Write"
                         },
                         new
                         {
                             Id = 123,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Create"
+                            Name = "Locations.Create"
                         },
                         new
                         {
                             Id = 124,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Update"
+                            Name = "Locations.Update"
                         },
                         new
                         {
                             Id = 125,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Delete"
+                            Name = "Locations.Delete"
                         },
                         new
                         {
                             Id = 126,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Admin"
+                            Name = "Tags.Admin"
                         },
                         new
                         {
                             Id = 127,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Read"
+                            Name = "Tags.Read"
                         },
                         new
                         {
                             Id = 128,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Write"
+                            Name = "Tags.Write"
                         },
                         new
                         {
                             Id = 129,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Create"
+                            Name = "Tags.Create"
                         },
                         new
                         {
                             Id = 130,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Update"
+                            Name = "Tags.Update"
                         },
                         new
                         {
                             Id = 131,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Delete"
+                            Name = "Tags.Delete"
                         },
                         new
                         {
                             Id = 132,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Admin"
+                            Name = "Transmissions.Admin"
                         },
                         new
                         {
                             Id = 133,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Read"
+                            Name = "Transmissions.Read"
                         },
                         new
                         {
                             Id = 134,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Write"
+                            Name = "Transmissions.Write"
                         },
                         new
                         {
                             Id = 135,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Create"
+                            Name = "Transmissions.Create"
                         },
                         new
                         {
                             Id = 136,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Update"
+                            Name = "Transmissions.Update"
                         },
                         new
                         {
                             Id = 137,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Delete"
+                            Name = "Transmissions.Delete"
                         },
                         new
                         {
                             Id = 138,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Admin"
+                            Name = "Customers.Admin"
                         },
                         new
                         {
                             Id = 139,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Read"
+                            Name = "Customers.Read"
                         },
                         new
                         {
                             Id = 140,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Write"
+                            Name = "Customers.Write"
                         },
                         new
                         {
                             Id = 141,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Create"
+                            Name = "Customers.Create"
                         },
                         new
                         {
                             Id = 142,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Update"
+                            Name = "Customers.Update"
                         },
                         new
                         {
                             Id = 143,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Delete"
+                            Name = "Customers.Delete"
                         },
                         new
                         {
@@ -2065,397 +2737,325 @@ namespace Persistence.Migrations
                         {
                             Id = 150,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Admin"
+                            Name = "Locations.Admin"
                         },
                         new
                         {
                             Id = 151,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Read"
+                            Name = "Locations.Read"
                         },
                         new
                         {
                             Id = 152,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Write"
+                            Name = "Locations.Write"
                         },
                         new
                         {
                             Id = 153,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Create"
+                            Name = "Locations.Create"
                         },
                         new
                         {
                             Id = 154,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Update"
+                            Name = "Locations.Update"
                         },
                         new
                         {
                             Id = 155,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Delete"
+                            Name = "Locations.Delete"
                         },
                         new
                         {
                             Id = 156,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Admin"
+                            Name = "ExpertizeResults.Admin"
                         },
                         new
                         {
                             Id = 157,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Read"
+                            Name = "ExpertizeResults.Read"
                         },
                         new
                         {
                             Id = 158,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Write"
+                            Name = "ExpertizeResults.Write"
                         },
                         new
                         {
                             Id = 159,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Create"
+                            Name = "ExpertizeResults.Create"
                         },
                         new
                         {
                             Id = 160,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Update"
+                            Name = "ExpertizeResults.Update"
                         },
                         new
                         {
                             Id = 161,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Delete"
+                            Name = "ExpertizeResults.Delete"
                         },
                         new
                         {
                             Id = 162,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Admin"
+                            Name = "Adverts.Admin"
                         },
                         new
                         {
                             Id = 163,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Read"
+                            Name = "Adverts.Read"
                         },
                         new
                         {
                             Id = 164,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Write"
+                            Name = "Adverts.Write"
                         },
                         new
                         {
                             Id = 165,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Create"
+                            Name = "Adverts.Create"
                         },
                         new
                         {
                             Id = 166,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Update"
+                            Name = "Adverts.Update"
                         },
                         new
                         {
                             Id = 167,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Delete"
+                            Name = "Adverts.Delete"
                         },
                         new
                         {
                             Id = 168,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Admin"
+                            Name = "CarModels.Admin"
                         },
                         new
                         {
                             Id = 169,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Read"
+                            Name = "CarModels.Read"
                         },
                         new
                         {
                             Id = 170,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Write"
+                            Name = "CarModels.Write"
                         },
                         new
                         {
                             Id = 171,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Create"
+                            Name = "CarModels.Create"
                         },
                         new
                         {
                             Id = 172,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Update"
+                            Name = "CarModels.Update"
                         },
                         new
                         {
                             Id = 173,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Delete"
+                            Name = "CarModels.Delete"
                         },
                         new
                         {
                             Id = 174,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Admin"
+                            Name = "AdvertImages.Admin"
                         },
                         new
                         {
                             Id = 175,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Read"
+                            Name = "AdvertImages.Read"
                         },
                         new
                         {
                             Id = 176,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Write"
+                            Name = "AdvertImages.Write"
                         },
                         new
                         {
                             Id = 177,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Create"
+                            Name = "AdvertImages.Create"
                         },
                         new
                         {
                             Id = 178,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Update"
+                            Name = "AdvertImages.Update"
                         },
                         new
                         {
                             Id = 179,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Delete"
+                            Name = "AdvertImages.Delete"
                         },
                         new
                         {
                             Id = 180,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Admin"
+                            Name = "ModalExtensions.Admin"
                         },
                         new
                         {
                             Id = 181,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Read"
+                            Name = "ModalExtensions.Read"
                         },
                         new
                         {
                             Id = 182,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Write"
+                            Name = "ModalExtensions.Write"
                         },
                         new
                         {
                             Id = 183,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Create"
+                            Name = "ModalExtensions.Create"
                         },
                         new
                         {
                             Id = 184,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Update"
+                            Name = "ModalExtensions.Update"
                         },
                         new
                         {
                             Id = 185,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Delete"
+                            Name = "ModalExtensions.Delete"
                         },
                         new
                         {
                             Id = 186,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Admin"
+                            Name = "GenerationImages.Admin"
                         },
                         new
                         {
                             Id = 187,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Read"
+                            Name = "GenerationImages.Read"
                         },
                         new
                         {
                             Id = 188,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Write"
+                            Name = "GenerationImages.Write"
                         },
                         new
                         {
                             Id = 189,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Create"
+                            Name = "GenerationImages.Create"
                         },
                         new
                         {
                             Id = 190,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Update"
+                            Name = "GenerationImages.Update"
                         },
                         new
                         {
                             Id = 191,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Delete"
+                            Name = "GenerationImages.Delete"
                         },
                         new
                         {
                             Id = 192,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Admin"
+                            Name = "Cars.Admin"
                         },
                         new
                         {
                             Id = 193,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Read"
+                            Name = "Cars.Read"
                         },
                         new
                         {
                             Id = 194,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Write"
+                            Name = "Cars.Write"
                         },
                         new
                         {
                             Id = 195,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Create"
+                            Name = "Cars.Create"
                         },
                         new
                         {
                             Id = 196,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Update"
+                            Name = "Cars.Update"
                         },
                         new
                         {
                             Id = 197,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Delete"
+                            Name = "Cars.Delete"
                         },
                         new
                         {
                             Id = 198,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Admin"
+                            Name = "CustomerFavorites.Admin"
                         },
                         new
                         {
                             Id = 199,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Read"
+                            Name = "CustomerFavorites.Read"
                         },
                         new
                         {
                             Id = 200,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Write"
+                            Name = "CustomerFavorites.Write"
                         },
                         new
                         {
                             Id = 201,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Create"
+                            Name = "CustomerFavorites.Create"
                         },
                         new
                         {
                             Id = 202,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Update"
+                            Name = "CustomerFavorites.Update"
                         },
                         new
                         {
                             Id = 203,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Delete"
-                        },
-                        new
-                        {
-                            Id = 204,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Admin"
-                        },
-                        new
-                        {
-                            Id = 205,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Read"
-                        },
-                        new
-                        {
-                            Id = 206,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Write"
-                        },
-                        new
-                        {
-                            Id = 207,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Create"
-                        },
-                        new
-                        {
-                            Id = 208,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Update"
-                        },
-                        new
-                        {
-                            Id = 209,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Delete"
-                        },
-                        new
-                        {
-                            Id = 210,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Admin"
-                        },
-                        new
-                        {
-                            Id = 211,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Read"
-                        },
-                        new
-                        {
-                            Id = 212,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Write"
-                        },
-                        new
-                        {
-                            Id = 213,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Create"
-                        },
-                        new
-                        {
-                            Id = 214,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Update"
-                        },
-                        new
-                        {
-                            Id = 215,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Delete"
+                            Name = "CustomerFavorites.Delete"
                         });
                 });
 
@@ -2519,7 +3119,7 @@ namespace Persistence.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("ExpiresDate");
 
                     b.Property<string>("ReasonRevoked")
@@ -2535,7 +3135,7 @@ namespace Persistence.Migrations
                         .HasColumnName("RevokedByIp");
 
                     b.Property<DateTime?>("RevokedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("RevokedDate");
 
                     b.Property<string>("Token")
@@ -2611,6 +3211,38 @@ namespace Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Sellers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("056dd418-5114-4ea1-baf3-07d4b8fc26f6"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenceId = new Guid("7f30d80f-3a7b-429c-81a5-0c9507839691"),
+                            LocationId = new Guid("59a7ddc2-3920-4652-9543-797fbd1d3d38"),
+                            Name = "Borusan Avcılar",
+                            PhoneNumber = "5354567890",
+                            UserId = new Guid("b73f6541-460e-4d9d-97eb-1402f63df038")
+                        },
+                        new
+                        {
+                            Id = new Guid("785d6af9-4404-4d7a-ad3e-82319812b037"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenceId = new Guid("e99ccd48-51a3-46c0-b539-a28cec7d214c"),
+                            LocationId = new Guid("2f565ad5-7ae1-42ad-82f2-96944052aa27"),
+                            Name = "Borusan Samandıra",
+                            PhoneNumber = "5426543210",
+                            UserId = new Guid("69bd8e0f-59d4-4532-ae32-03cec3e39158")
+                        },
+                        new
+                        {
+                            Id = new Guid("667742ae-ae24-4d8c-9029-57ab5ba305ba"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenceId = new Guid("d1993933-0185-4333-888c-36f226993e1c"),
+                            LocationId = new Guid("4744af1a-89ba-4d1b-890c-9d3e3c755cda"),
+                            Name = "Kececi Oto",
+                            PhoneNumber = "5556667777",
+                            UserId = new Guid("398b5d31-f2e2-473f-8f40-78f7e79af217")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Tag", b =>
@@ -2640,6 +3272,14 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("873dbb53-f3ca-4bda-a0d7-18ae10ca9f3e"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "İkinci El"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Transmission", b =>
@@ -2669,6 +3309,20 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Transmissions", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Automatic"
+                        },
+                        new
+                        {
+                            Id = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Manuel"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -2716,12 +3370,75 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f26dc11a-e11b-406f-9408-54d051829307"),
+                            Id = new Guid("a6588bf5-56e9-4f00-88f9-24a35913498a"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 133, 55, 6, 168, 83, 66, 116, 8, 216, 65, 108, 40, 165, 0, 188, 88, 154, 18, 61, 210, 210, 42, 46, 135, 159, 74, 88, 139, 141, 174, 114, 121, 203, 202, 18, 173, 61, 77, 215, 67, 99, 246, 86, 177, 211, 247, 252, 49, 61, 244, 173, 47, 179, 131, 252, 123, 247, 255, 31, 8, 23, 87, 235, 198 },
-                            PasswordSalt = new byte[] { 184, 112, 89, 237, 85, 72, 234, 28, 154, 236, 165, 165, 138, 196, 100, 207, 115, 92, 114, 171, 109, 194, 3, 36, 160, 43, 219, 40, 71, 49, 235, 144, 135, 197, 208, 140, 92, 220, 221, 67, 29, 92, 96, 93, 200, 189, 143, 19, 84, 22, 108, 113, 108, 114, 96, 130, 36, 154, 144, 23, 100, 98, 3, 119, 175, 246, 107, 232, 38, 97, 212, 212, 83, 19, 243, 255, 4, 171, 55, 220, 26, 66, 166, 47, 50, 147, 163, 216, 150, 48, 248, 70, 204, 8, 226, 77, 63, 11, 118, 3, 7, 232, 220, 151, 250, 3, 152, 53, 181, 147, 135, 124, 209, 79, 77, 154, 73, 30, 141, 129, 218, 167, 73, 114, 147, 7, 232, 60 }
+                            Email = "admin@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
+                        },
+                        new
+                        {
+                            Id = new Guid("b73f6541-460e-4d9d-97eb-1402f63df038"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "avcilar@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
+                        },
+                        new
+                        {
+                            Id = new Guid("69bd8e0f-59d4-4532-ae32-03cec3e39158"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "samandira@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
+                        },
+                        new
+                        {
+                            Id = new Guid("398b5d31-f2e2-473f-8f40-78f7e79af217"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "kececi@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
+                        },
+                        new
+                        {
+                            Id = new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "burak@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
+                        },
+                        new
+                        {
+                            Id = new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "meryem@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
+                        },
+                        new
+                        {
+                            Id = new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ali@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
+                        },
+                        new
+                        {
+                            Id = new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237"),
+                            AuthenticatorType = 0,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "sefa@borusan.com",
+                            PasswordHash = new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 },
+                            PasswordSalt = new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }
                         });
                 });
 
@@ -2763,10 +3480,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("da479124-a385-4e92-b833-f254d89bfadc"),
+                            Id = new Guid("6acdb044-28ba-4c86-a66d-b7a5f5bb244c"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("f26dc11a-e11b-406f-9408-54d051829307")
+                            UserId = new Guid("a6588bf5-56e9-4f00-88f9-24a35913498a")
                         });
                 });
 
@@ -2934,6 +3651,25 @@ namespace Persistence.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("Domain.Entities.CustomerFavorite", b =>
+                {
+                    b.HasOne("Domain.Entities.Advert", "Advert")
+                        .WithMany("CustomerFavorites")
+                        .HasForeignKey("AdvertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Customer", "Customer")
+                        .WithMany("CustomerFavorites")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advert");
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("Domain.Entities.EmailAuthenticator", b =>
                 {
                     b.HasOne("Domain.Entities.User", "User")
@@ -2947,19 +3683,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Engine", b =>
                 {
-                    b.HasOne("Domain.Entities.FuelConsumption", "FuelConsumption")
-                        .WithMany("Engines")
-                        .HasForeignKey("FuelConsumptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.FuelType", "FuelType")
                         .WithMany("Engines")
                         .HasForeignKey("FuelTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("FuelConsumption");
 
                     b.Navigation("FuelType");
                 });
@@ -3086,6 +3814,8 @@ namespace Persistence.Migrations
                     b.Navigation("AdvertImages");
 
                     b.Navigation("CustomerAdvertLogs");
+
+                    b.Navigation("CustomerFavorites");
                 });
 
             modelBuilder.Entity("Domain.Entities.Blog", b =>
@@ -3140,6 +3870,8 @@ namespace Persistence.Migrations
                     b.Navigation("Appointments");
 
                     b.Navigation("CustomerAdvertLogs");
+
+                    b.Navigation("CustomerFavorites");
                 });
 
             modelBuilder.Entity("Domain.Entities.Engine", b =>
@@ -3151,11 +3883,6 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("Car")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.FuelConsumption", b =>
-                {
-                    b.Navigation("Engines");
                 });
 
             modelBuilder.Entity("Domain.Entities.FuelType", b =>
