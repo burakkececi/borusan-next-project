@@ -72,19 +72,6 @@ public class RegisterCommand : IRequest<RegisteredResponse>
             Domain.Entities.RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
 
             RegisteredResponse registeredResponse = new() { AccessToken = createdAccessToken, RefreshToken = addedRefreshToken };
-
-            var @event = new UserRegisterEvent()
-            {
-                UserEmailAdress = request.UserForRegisterDto.Email
-            };
-
-            QueueFactory.SendMessageToExchange(
-                                                exchangeName: RabbitMQConstants.UserExchangeName,
-                                                exchangeType: RabbitMQConstants.DefaultExchangeType,
-                                                queueName: RabbitMQConstants.UserRegisterQueueName,
-                                                obj: @event
-                                                );
-
             return registeredResponse;
         }
     }

@@ -11,14 +11,24 @@ namespace Common
     {
         public static IServiceCollection AddCommonServices(this IServiceCollection services)
         {
-            services.AddSingleton<UserRegisterEventConsumer>(provider =>
+            services.AddSingleton<UserRegisterVerificationEventConsumer>(provider =>
             {
                 var connectionFactory = new ConnectionFactory() { HostName = RabbitMQConstants.RabbitMQHost };
                 var connection = connectionFactory.CreateConnection();
                 var channel = connection.CreateModel();
                 var mailService = provider.GetRequiredService<IMailService>();
-                var queueName = RabbitMQConstants.UserRegisterQueueName;
-                return new UserRegisterEventConsumer(channel, queueName, mailService);
+                var queueName = RabbitMQConstants.UserRegisterVerificationQueueName;
+                return new UserRegisterVerificationEventConsumer(channel, queueName, mailService);
+            });
+
+            services.AddSingleton<UserAuthenticatorCodeEventConsumer>(provider =>
+            {
+                var connectionFactory = new ConnectionFactory() { HostName = RabbitMQConstants.RabbitMQHost };
+                var connection = connectionFactory.CreateConnection();
+                var channel = connection.CreateModel();
+                var mailService = provider.GetRequiredService<IMailService>();
+                var queueName = RabbitMQConstants.UserRegisterAuthenticatorCodeQueueName;
+                return new UserAuthenticatorCodeEventConsumer(channel, queueName, mailService);
             });
 
             return services;
@@ -27,8 +37,12 @@ namespace Common
         public static IApplicationBuilder AddConsumerStart(this IApplicationBuilder app)
         {
             // User Register Consumer
-            var userRegisterConsumer = app.ApplicationServices.GetService<UserRegisterEventConsumer>();
+            var userRegisterConsumer = app.ApplicationServices.GetService<UserRegisterVerificationEventConsumer>();
             userRegisterConsumer?.StartConsuming();
+
+            // User Authenticator Code Consumer
+            var userAuthenticatorCodeConsumer = app.ApplicationServices.GetService<UserAuthenticatorCodeEventConsumer>();
+            userAuthenticatorCodeConsumer?.StartConsuming();
 
             return app;
         }

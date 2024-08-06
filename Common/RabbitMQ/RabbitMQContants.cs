@@ -11,6 +11,8 @@ public class RabbitMQConstants
     public const string DefaultExchangeType = "direct";
 
     public const string UserExchangeName = "UserExchange";
-    public const string UserRegisterQueueName = "UserRegisterQueue";
+    public const string UserRegisterVerificationQueueName = "UserRegisterVerificationQueue";
+    public const string UserRegisterAuthenticatorCodeQueueName = "UserRegisterAuthenticatorCodeQueue";
+
 
 }

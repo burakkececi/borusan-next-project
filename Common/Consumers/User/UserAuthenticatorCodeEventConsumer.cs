@@ -8,20 +8,26 @@ using System.Threading.Tasks;
 using NArchitecture.Core.Mailing;
 using MimeKit;
 using Common.Events.User;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Web;
+using Common.RabbitMQ;
 
 namespace Common.Consumers.User;
 
-public class UserRegisterEventConsumer
+public class UserAuthenticatorCodeEventConsumer
 {
     private readonly IModel _channel;
     private readonly string _queueName;
     private readonly IMailService _mailService;
 
-    public UserRegisterEventConsumer(IModel channel, string queueName, IMailService mailService)
+    public UserAuthenticatorCodeEventConsumer(IModel channel, string queueName, IMailService mailService)
     {
         _channel = channel;
         _queueName = queueName;
         _mailService = mailService;
+
+        QueueFactory.EnsureExchange(_channel, RabbitMQConstants.UserExchangeName);
+        QueueFactory.EnsureQueue(_channel, _queueName, RabbitMQConstants.UserExchangeName);
     }
 
     public void StartConsuming()
@@ -43,10 +49,10 @@ public class UserRegisterEventConsumer
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
 
-            var userRegisterEvent = JsonSerializer.Deserialize<UserRegisterEvent>(message);
+            var userAuthenticatorCodeEvent = JsonSerializer.Deserialize<UserAuthenticatorCodeEvent>(message);
 
-            if (userRegisterEvent != null)
-                SendEmail(userRegisterEvent.UserEmailAdress);
+            if (userAuthenticatorCodeEvent != null)
+                SendEmail(userAuthenticatorCodeEvent.UserEmailAdress, userAuthenticatorCodeEvent.AuthenticatorCode);
         }
         catch (Exception ex)
         {
@@ -54,15 +60,17 @@ public class UserRegisterEventConsumer
         }
     }
 
-    private void SendEmail(string emailAddress)
+    private void SendEmail(string emailAddress, string authenticatorCode)
     {
-        var mail = new Mail
-        {
-            ToList = new List<MailboxAddress> { new MailboxAddress("", emailAddress) },
-            Subject = "Kayıt Onayı",
-            HtmlBody = "Kayıt işleminiz başarıyla tamamlandı."
-        };
+        var toEmailList = new List<MailboxAddress> { new(name: emailAddress, emailAddress) };
 
-        _mailService.SendMail(mail);
+        _mailService.SendMail(
+            new Mail
+            {
+                ToList = toEmailList,
+                Subject = "Authenticator Code - NArchitecture",
+                HtmlBody = $"Enter your authenticator code: {authenticatorCode}"
+            }
+        );
     }
 }

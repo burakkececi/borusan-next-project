@@ -1,4 +1,6 @@
 ﻿using Application.Services.Repositories;
+using Common.Events.User;
+using Common.RabbitMQ;
 using Domain.Entities;
 using MimeKit;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
@@ -6,6 +8,7 @@ using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Security.EmailAuthenticator;
 using NArchitecture.Core.Security.Enums;
 using NArchitecture.Core.Security.OtpAuthenticator;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace Application.Services.AuthenticatorService;
 
@@ -90,16 +93,18 @@ public class AuthenticatorManager : IAuthenticatorService
         emailAuthenticator.ActivationKey = authenticatorCode;
         await _emailAuthenticatorRepository.UpdateAsync(emailAuthenticator);
 
-        var toEmailList = new List<MailboxAddress> { new(name: user.Email, address: user.Email) };
+        var @event = new UserAuthenticatorCodeEvent()
+        {
+            UserEmailAdress = user.Email,
+            AuthenticatorCode = authenticatorCode
+        };
 
-        _mailService.SendMail(
-            new Mail
-            {
-                ToList = toEmailList,
-                Subject = "Authenticator Code - NArchitecture",
-                HtmlBody = $"Enter your authenticator code: {authenticatorCode}"
-            }
-        );
+        QueueFactory.SendMessageToExchange(
+                                            exchangeName: RabbitMQConstants.UserExchangeName,
+                                            exchangeType: RabbitMQConstants.DefaultExchangeType,
+                                            queueName: RabbitMQConstants.UserRegisterAuthenticatorCodeQueueName,
+                                            obj: @event
+                                            );
     }
 
     private async Task VerifyAuthenticatorCodeWithEmail(User user, string authenticatorCode)

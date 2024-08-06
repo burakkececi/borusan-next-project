@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Web;
 
 namespace Common.Events.User;
-public class UserRegisterEvent
+public class UserRegisterVerificationEvent
 {
     public string UserEmailAdress { get; set; }
+    public string VerifyEmailUrlPrefix { get; set; }
+    public string AddedEmailAuthenticatorActivationKey { get; set; }
 }
