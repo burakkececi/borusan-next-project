@@ -11,8 +11,7 @@ namespace Application.Features.Appointments.Commands.Create;
 
 public class CreateAppointmentCommand : IRequest<CreatedAppointmentResponse>, ISecuredRequest
 {
-    public required DateTime Date { get; set; }
-    public required DateTime Time { get; set; }
+    public required DateTime DateAndTime { get; set; }
     public required Guid CarId { get; set; }
     public required Guid CustomerId { get; set; }
 

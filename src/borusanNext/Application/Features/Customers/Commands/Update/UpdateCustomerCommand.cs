@@ -17,7 +17,6 @@ public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecured
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Phone { get; set; }
-    public required bool IsSmsConfirmed { get; set; }
     public required CustomerType CustomerType { get; set; }
 
     public string[] Roles => [Admin, Write, CustomersOperationClaims.Update];

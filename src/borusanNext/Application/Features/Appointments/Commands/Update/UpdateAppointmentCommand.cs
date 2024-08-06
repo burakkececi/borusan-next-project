@@ -12,8 +12,7 @@ namespace Application.Features.Appointments.Commands.Update;
 public class UpdateAppointmentCommand : IRequest<UpdatedAppointmentResponse>, ISecuredRequest
 {
     public Guid Id { get; set; }
-    public required DateTime Date { get; set; }
-    public required DateTime Time { get; set; }
+    public required DateTime DateAndTime { get; set; }
     public required Guid CarId { get; set; }
     public required Guid CustomerId { get; set; }
 

@@ -15,6 +15,9 @@ public class UpdateEngineCommandValidator : AbstractValidator<UpdateEngineComman
         RuleFor(c => c.MaximumSpeed).NotEmpty();
         RuleFor(c => c.FuelTankVolume).NotEmpty();
         RuleFor(c => c.FuelTypeId).NotEmpty();
-        RuleFor(c => c.FuelConsumptionId).NotEmpty();
+        RuleFor(c => c.OutOfTownConsumptionRate).NotEmpty();
+        RuleFor(c => c.UrbanConsumptionRate).NotEmpty();
+        RuleFor(c => c.AverageConsumptionRate).NotEmpty();
+
     }
 }

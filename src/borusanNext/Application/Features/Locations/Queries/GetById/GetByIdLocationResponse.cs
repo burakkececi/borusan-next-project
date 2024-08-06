@@ -5,7 +5,6 @@ namespace Application.Features.Locations.Queries.GetById;
 public class GetByIdLocationResponse : IResponse
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
     public string City { get; set; }
     public string Address { get; set; }
     public string Latitute { get; set; }

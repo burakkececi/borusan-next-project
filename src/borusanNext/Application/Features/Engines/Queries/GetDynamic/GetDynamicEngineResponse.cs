@@ -17,5 +17,7 @@ public class GetDynamicChassisPartResponse:IResponse
     public int MaximumSpeed { get; set; }
     public int FuelTankVolume { get; set; }
     public Guid FuelTypeId { get; set; }
-    public Guid FuelConsumptionId { get; set; }
+    public double OutOfTownConsumptionRate { get; set; }
+    public double UrbanConsumptionRate { get; set; }
+    public double AverageConsumptionRate { get; set; }
 }

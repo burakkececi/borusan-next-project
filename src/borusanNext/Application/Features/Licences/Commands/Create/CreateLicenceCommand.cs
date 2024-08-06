@@ -12,7 +12,7 @@ namespace Application.Features.Licences.Commands.Create;
 public class CreateLicenceCommand : IRequest<CreatedLicenceResponse>, ISecuredRequest
 {
     public required int LicenceNo { get; set; }
-    public required string LicenceOwner { get; set; }
+    public required string ProvidedBy { get; set; }
 
     public string[] Roles => [Admin, Write, LicencesOperationClaims.Create];
 

@@ -7,6 +7,6 @@ public class CreateLicenceCommandValidator : AbstractValidator<CreateLicenceComm
     public CreateLicenceCommandValidator()
     {
         RuleFor(c => c.LicenceNo).NotEmpty();
-        RuleFor(c => c.LicenceOwner).NotEmpty();
+        RuleFor(c => c.ProvidedBy).NotEmpty();
     }
 }

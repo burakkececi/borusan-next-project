@@ -1,5 +1,4 @@
 using Application.Features.Sellers.Constants;
-using Application.Features.Sellers.Constants;
 using Application.Features.Sellers.Rules;
 using Application.Services.Repositories;
 using AutoMapper;

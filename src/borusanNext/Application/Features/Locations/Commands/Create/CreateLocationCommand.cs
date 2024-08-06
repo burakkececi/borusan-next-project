@@ -11,10 +11,11 @@ namespace Application.Features.Locations.Commands.Create;
 
 public class CreateLocationCommand : IRequest<CreatedLocationResponse>, ISecuredRequest
 {
-    public required string Name { get; set; }
     public required string City { get; set; }
     public required string Address { get; set; }
-    
+    public required string Latitute { get; set; }
+    public required string Longtitute { get; set; }
+
 
     public string[] Roles => [Admin, Write, LocationsOperationClaims.Create];
 

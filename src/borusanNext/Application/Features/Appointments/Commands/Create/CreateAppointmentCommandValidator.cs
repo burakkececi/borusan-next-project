@@ -6,8 +6,7 @@ public class CreateAppointmentCommandValidator : AbstractValidator<CreateAppoint
 {
     public CreateAppointmentCommandValidator()
     {
-        RuleFor(c => c.Date).NotEmpty();
-        RuleFor(c => c.Time).NotEmpty();
+        RuleFor(c => c.DateAndTime).NotEmpty();
         RuleFor(c => c.CarId).NotEmpty();
         RuleFor(c => c.CustomerId).NotEmpty();
     }

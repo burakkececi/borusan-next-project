@@ -10,6 +10,5 @@ public class GetDynamicAdvertResponse:IResponse
 {
     public Guid Id { get; set; }
     public int AdvertNo { get; set; }
-    public string FeaturedImageURL { get; set; }
     public Guid CarId { get; set; }
 }
