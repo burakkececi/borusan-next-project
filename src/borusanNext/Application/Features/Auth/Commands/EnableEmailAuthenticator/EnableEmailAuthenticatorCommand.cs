@@ -7,7 +7,6 @@ using Common.Events.User;
 using Common.RabbitMQ;
 using Domain.Entities;
 using MediatR;
-using MimeKit;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Security.Enums;
