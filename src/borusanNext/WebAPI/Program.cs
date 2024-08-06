@@ -1,4 +1,5 @@
 using Application;
+using Common.RabbitMQ;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -13,8 +14,11 @@ using NArchitecture.Core.Security.Encryption;
 using NArchitecture.Core.Security.JWT;
 using NArchitecture.Core.Security.WebApi.Swagger.Extensions;
 using Persistence;
+using RabbitMQ.Client;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI;
+using Common;
+using Common.Consumers.User;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +38,7 @@ builder.Services.AddApplicationServices(
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddCommonServices();  
 
 const string tokenOptionsConfigurationSection = "TokenOptions";
 TokenOptions tokenOptions =
@@ -83,6 +88,8 @@ builder.Services.AddSwaggerGen(opt =>
     opt.OperationFilter<BearerSecurityRequirementOperationFilter>();
 });
 
+
+
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true); // Enable timestamp without time zone for postgresql
 
 WebApplication app = builder.Build();
@@ -100,6 +107,7 @@ if (app.Environment.IsDevelopment())
 if (app.Environment.IsProduction())
     app.ConfigureCustomExceptionMiddleware();
 
+app.Services.GetService<UserRegisterEventConsumer>().StartConsuming();
 app.UseDbMigrationApplier();
 
 app.UseAuthentication();

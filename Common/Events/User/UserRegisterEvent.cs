@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Common.Events.User;
 public class UserRegisterEvent
 {
-    // buraya user kayıt olunca olacak olan olaylar gelicek.
+    public string UserEmailAdress { get; set; }
 }
