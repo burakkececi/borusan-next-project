@@ -19,6 +19,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI;
 using Common;
 using Common.Consumers.User;
+using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -38,7 +39,12 @@ builder.Services.AddApplicationServices(
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddCommonServices();  
+builder.Services.AddCommonServices();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true; 
+});
 
 const string tokenOptionsConfigurationSection = "TokenOptions";
 TokenOptions tokenOptions =
@@ -61,7 +67,6 @@ builder
     });
 
 builder.Services.AddDistributedMemoryCache();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(opt =>
     opt.AddDefaultPolicy(p =>
