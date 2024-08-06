@@ -3,6 +3,7 @@ using RabbitMQ.Client;
 using Common.RabbitMQ;
 using NArchitecture.Core.Mailing;
 using Common.Consumers.User;
+using Microsoft.AspNetCore.Builder;
 
 namespace Common
 {
@@ -21,6 +22,15 @@ namespace Common
             });
 
             return services;
+        }
+
+        public static IApplicationBuilder AddConsumerStart(this IApplicationBuilder app)
+        {
+            // User Register Consumer
+            var userRegisterConsumer = app.ApplicationServices.GetService<UserRegisterEventConsumer>();
+            userRegisterConsumer?.StartConsuming();
+
+            return app;
         }
     }
 }

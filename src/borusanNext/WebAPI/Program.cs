@@ -107,7 +107,8 @@ if (app.Environment.IsDevelopment())
 if (app.Environment.IsProduction())
     app.ConfigureCustomExceptionMiddleware();
 
-app.Services.GetService<UserRegisterEventConsumer>().StartConsuming();
+app.AddConsumerStart();
+
 app.UseDbMigrationApplier();
 
 app.UseAuthentication();
