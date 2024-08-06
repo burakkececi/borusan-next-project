@@ -6,6 +6,8 @@ using MediatR;
 using NArchitecture.Core.Application.Dtos;
 using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
+using Common.Events.User;
+using Common.RabbitMQ;
 
 namespace Application.Features.Auth.Commands.Register;
 

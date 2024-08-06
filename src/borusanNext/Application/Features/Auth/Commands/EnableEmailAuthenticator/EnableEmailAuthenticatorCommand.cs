@@ -3,6 +3,8 @@ using Application.Features.Auth.Rules;
 using Application.Services.AuthenticatorService;
 using Application.Services.Repositories;
 using Application.Services.UsersService;
+using Common.Events.User;
+using Common.RabbitMQ;
 using Domain.Entities;
 using MediatR;
 using MimeKit;
@@ -68,17 +70,19 @@ public class EnableEmailAuthenticatorCommand : IRequest, ISecuredRequest
             EmailAuthenticator emailAuthenticator = await _authenticatorService.CreateEmailAuthenticator(user);
             EmailAuthenticator addedEmailAuthenticator = await _emailAuthenticatorRepository.AddAsync(emailAuthenticator);
 
-            var toEmailList = new List<MailboxAddress> { new(name: user.Email, user.Email) };
+            var @event = new UserRegisterVerificationEvent()
+            {
+                UserEmailAdress = user.Email,
+                VerifyEmailUrlPrefix = request.VerifyEmailUrlPrefix,
+                AddedEmailAuthenticatorActivationKey = addedEmailAuthenticator.ActivationKey,
+            };
 
-            _mailService.SendMail(
-                new Mail
-                {
-                    ToList = toEmailList,
-                    Subject = "Verify Your Email - BorusanNext",
-                    HtmlBody =
-                        $"Click on the link to verify your email: <a href='{request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}'>click here.</a>"
-                }
-            );
+            QueueFactory.SendMessageToExchange(
+                                                exchangeName: RabbitMQConstants.UserExchangeName,
+                                                exchangeType: RabbitMQConstants.DefaultExchangeType,
+                                                queueName: RabbitMQConstants.UserRegisterVerificationQueueName,
+                                                obj: @event
+                                                );
         }
     }
 }
