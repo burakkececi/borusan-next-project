@@ -6,6 +6,8 @@ public class CreateTransmissionCommandValidator : AbstractValidator<CreateTransm
 {
     public CreateTransmissionCommandValidator()
     {
-        RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.Name)
+            .NotEmpty().WithMessage("Name cannot be empty")
+            .WithName("Name");
     }
 }

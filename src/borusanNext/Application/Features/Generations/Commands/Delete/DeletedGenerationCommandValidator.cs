@@ -6,6 +6,9 @@ public class DeleteGenerationCommandValidator : AbstractValidator<DeleteGenerati
 {
     public DeleteGenerationCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.Id)
+            .NotNull().WithMessage("Id cannot be null")
+            .NotEqual(Guid.Empty).WithMessage("Id cannot be an empty GUID")
+            .WithName("Generation Delete Id");
     }
 }
