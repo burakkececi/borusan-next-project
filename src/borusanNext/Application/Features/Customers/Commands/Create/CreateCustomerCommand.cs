@@ -38,6 +38,7 @@ public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>, ISecured
         {
             Customer customer = _mapper.Map<Customer>(request);
 
+            await _customerBusinessRules.UserIdShouldExistWhenBindingToCustomer(customer.UserId, cancellationToken);
             await _customerRepository.AddAsync(customer);
 
             CreatedCustomerResponse response = _mapper.Map<CreatedCustomerResponse>(customer);

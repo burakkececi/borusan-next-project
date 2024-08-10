@@ -10,12 +10,14 @@ namespace Application.Features.GenerationImages.Rules;
 public class GenerationImageBusinessRules : BaseBusinessRules
 {
     private readonly IGenerationImageRepository _generationImageRepository;
+    private readonly IGenerationRepository _generationRepository;
     private readonly ILocalizationService _localizationService;
 
-    public GenerationImageBusinessRules(IGenerationImageRepository generationImageRepository, ILocalizationService localizationService)
+    public GenerationImageBusinessRules(IGenerationImageRepository generationImageRepository, ILocalizationService localizationService, IGenerationRepository generationRepository)
     {
         _generationImageRepository = generationImageRepository;
         _localizationService = localizationService;
+        _generationRepository = generationRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -38,5 +40,17 @@ public class GenerationImageBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await GenerationImageShouldExistWhenSelected(generationImage);
+    }
+
+    public async Task GenerationIdShouldExistWhenBindingToGenerationImages(Guid id, CancellationToken cancellationToken)
+    {
+        Generation? generation = await _generationRepository.GetAsync(
+            predicate: e => e.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+            );
+
+        if (generation == null)
+            await throwBusinessException(GenerationImagesBusinessMessages.GenerationNotExists);
     }
 }

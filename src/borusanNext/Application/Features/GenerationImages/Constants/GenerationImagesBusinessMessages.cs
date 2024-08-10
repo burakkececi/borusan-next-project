@@ -5,4 +5,6 @@ public static class GenerationImagesBusinessMessages
     public const string SectionName = "GenerationImage";
 
     public const string GenerationImageNotExists = "GenerationImageNotExists";
+
+    public const string GenerationNotExists = "GenerationNotExists";
 }

@@ -1,1 +1,4 @@
 SellerNotExists: Seller don't exists.
+UserIdNotExist: UserIdNotExist
+LocationIdNotExist: LocationIdNotExist
+LicenceIdNotExist: LicenceIdNotExist

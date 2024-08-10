@@ -36,6 +36,9 @@ public class CreateSellerCommand : IRequest<CreatedSellerResponse>, ISecuredRequ
         public async Task<CreatedSellerResponse> Handle(CreateSellerCommand request, CancellationToken cancellationToken)
         {
             Seller seller = _mapper.Map<Seller>(request);
+            await _sellerBusinessRules.UserIdShouldExistWhenBindingToSeller(seller.UserId, cancellationToken);
+            await _sellerBusinessRules.LocationIdShouldExistWhenBindingToSeller(seller.LocationId, cancellationToken);
+            await _sellerBusinessRules.LicenceIdShouldExistWhenBindingToSeller(seller.LicenceId, cancellationToken);
 
             await _sellerRepository.AddAsync(seller);
 

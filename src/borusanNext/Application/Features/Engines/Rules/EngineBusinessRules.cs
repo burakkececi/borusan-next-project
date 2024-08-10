@@ -10,12 +10,14 @@ namespace Application.Features.Engines.Rules;
 public class EngineBusinessRules : BaseBusinessRules
 {
     private readonly IEngineRepository _engineRepository;
+    private readonly IFuelTypeRepository _fuelTypeRepository;
     private readonly ILocalizationService _localizationService;
 
-    public EngineBusinessRules(IEngineRepository engineRepository, ILocalizationService localizationService)
+    public EngineBusinessRules(IEngineRepository engineRepository, ILocalizationService localizationService, IFuelTypeRepository fuelTypeRepository)
     {
         _engineRepository = engineRepository;
         _localizationService = localizationService;
+        _fuelTypeRepository = fuelTypeRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -38,5 +40,17 @@ public class EngineBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await EngineShouldExistWhenSelected(engine);
+    }
+
+    public async Task FuelTypeIdShouldExistWhenBindingToEngine(Guid id, CancellationToken cancellationToken)
+    {
+        FuelType? fuelType = await _fuelTypeRepository.GetAsync(
+            predicate: e => e.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+            );
+
+        if (fuelType == null)
+            await throwBusinessException(EnginesBusinessMessages.FuelTypeNotExists);
     }
 }
