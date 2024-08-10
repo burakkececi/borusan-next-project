@@ -39,6 +39,7 @@ public class CreateGenerationImageCommand : IRequest<CreatedGenerationImageRespo
         {
             GenerationImage generationImage = _mapper.Map<GenerationImage>(request);
 
+            await _generationImageBusinessRules.GenerationIdShouldExistWhenBindingToGenerationImages(generationImage.GenerationId, cancellationToken);
             generationImage.ImageURL = await _imageServiceBase.UploadAsync(request.ImageURL);
 
             await _generationImageRepository.AddAsync(generationImage);

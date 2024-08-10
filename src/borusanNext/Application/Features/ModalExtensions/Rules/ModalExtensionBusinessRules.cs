@@ -10,12 +10,16 @@ namespace Application.Features.ModalExtensions.Rules;
 public class ModalExtensionBusinessRules : BaseBusinessRules
 {
     private readonly IModalExtensionRepository _modalExtensionRepository;
+    private readonly IGenerationRepository _generationRepository;
+    private readonly ICarModelRepository _carModelRepository;
     private readonly ILocalizationService _localizationService;
 
-    public ModalExtensionBusinessRules(IModalExtensionRepository modalExtensionRepository, ILocalizationService localizationService)
+    public ModalExtensionBusinessRules(IModalExtensionRepository modalExtensionRepository, ILocalizationService localizationService, IGenerationRepository generationRepository, ICarModelRepository carModelRepository)
     {
         _modalExtensionRepository = modalExtensionRepository;
         _localizationService = localizationService;
+        _generationRepository = generationRepository;
+        _carModelRepository = carModelRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -38,5 +42,29 @@ public class ModalExtensionBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await ModalExtensionShouldExistWhenSelected(modalExtension);
+    }
+
+    public async Task GenerationIdShouldExistWhenBindingToModalExtensions(Guid id, CancellationToken cancellationToken)
+    {
+        Generation? generation = await _generationRepository.GetAsync(
+            predicate: e => e.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+            );
+
+        if (generation == null)
+            await throwBusinessException(ModalExtensionsBusinessMessages.GenerationNotExists);
+    }
+
+    public async Task CarModelIdShouldExistWhenBindingToModalExtensions(Guid id, CancellationToken cancellationToken)
+    {
+        CarModel? carModel = await _carModelRepository.GetAsync(
+            predicate: e => e.Id == id,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+            );
+
+        if (carModel == null)
+            await throwBusinessException(ModalExtensionsBusinessMessages.CarModelNotExists);
     }
 }

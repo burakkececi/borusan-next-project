@@ -6,6 +6,9 @@ public class DeleteEngineCommandValidator : AbstractValidator<DeleteEngineComman
 {
     public DeleteEngineCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.Id)
+            .NotNull().WithMessage("Id cannot be null")
+            .NotEqual(Guid.Empty).WithMessage("Id cannot be an empty GUID")
+            .WithName("Engine Delete Id");
     }
 }

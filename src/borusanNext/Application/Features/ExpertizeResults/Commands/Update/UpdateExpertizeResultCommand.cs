@@ -39,6 +39,8 @@ public class UpdateExpertizeResultCommand : IRequest<UpdatedExpertizeResultRespo
             await _expertizeResultBusinessRules.ExpertizeResultShouldExistWhenSelected(expertizeResult);
             expertizeResult = _mapper.Map(request, expertizeResult);
 
+            await _expertizeResultBusinessRules.ChassisPartIdShouldExistWhenBindingToExpertizeResults(expertizeResult.ChassisPartId, cancellationToken);
+            await _expertizeResultBusinessRules.BodyShellPartIdShouldExistWhenBindingToExpertizeResults(expertizeResult.BodyShellPartId, cancellationToken);
             await _expertizeResultRepository.UpdateAsync(expertizeResult!);
 
             UpdatedExpertizeResultResponse response = _mapper.Map<UpdatedExpertizeResultResponse>(expertizeResult);

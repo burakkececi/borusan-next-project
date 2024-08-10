@@ -39,6 +39,7 @@ public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecured
         {
             Customer? customer = await _customerRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _customerBusinessRules.CustomerShouldExistWhenSelected(customer);
+            await _customerBusinessRules.UserIdShouldExistWhenBindingToCustomer(customer.UserId, cancellationToken);
             customer = _mapper.Map(request, customer);
 
             await _customerRepository.UpdateAsync(customer!);

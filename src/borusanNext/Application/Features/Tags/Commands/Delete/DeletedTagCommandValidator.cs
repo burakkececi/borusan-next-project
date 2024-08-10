@@ -6,6 +6,9 @@ public class DeleteTagCommandValidator : AbstractValidator<DeleteTagCommand>
 {
     public DeleteTagCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.Id)
+            .NotNull().WithMessage("Id cannot be null")
+            .NotEqual(Guid.Empty).WithMessage("Id cannot be an empty GUID")
+            .WithName("Tag Delete Id");
     }
 }

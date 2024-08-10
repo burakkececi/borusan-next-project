@@ -29,14 +29,14 @@ public sealed class AdvertDetailsReadModel
     public Guid TramerId { get; set; }
     public Guid SellerId { get; set; }
 
-    //public virtual CarModel CarModel { get; set; }
-    //public virtual CarColor Color { get; set; }
-    //public virtual Engine Engine { get; set; }
-    //public virtual BodyType BodyType { get; set; }
-    //public virtual Transmission Transmission { get; set; }
-    //public virtual ExpertizeResult ExpertizeResult { get; set; }
-    //public virtual Advert Advert { get; set; }
-    //public virtual Seller Seller { get; set; }
-    //public virtual ICollection<Appointment> Appointments { get; set; }
+    public CarModel CarModel { get; set; }
+    public CarColor Color { get; set; }
+    public Engine Engine { get; set; }
+    public BodyType BodyType { get; set; }
+    public Transmission Transmission { get; set; }
+    public ExpertizeResult ExpertizeResult { get; set; }
+    public Advert Advert { get; set; }
+    public Seller Seller { get; set; }
+    public ICollection<Appointment> Appointments { get; set; }
 
 }

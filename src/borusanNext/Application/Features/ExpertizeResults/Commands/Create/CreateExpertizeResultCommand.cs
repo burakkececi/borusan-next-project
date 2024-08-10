@@ -35,7 +35,8 @@ public class CreateExpertizeResultCommand : IRequest<CreatedExpertizeResultRespo
         public async Task<CreatedExpertizeResultResponse> Handle(CreateExpertizeResultCommand request, CancellationToken cancellationToken)
         {
             ExpertizeResult expertizeResult = _mapper.Map<ExpertizeResult>(request);
-
+            await _expertizeResultBusinessRules.ChassisPartIdShouldExistWhenBindingToExpertizeResults(expertizeResult.ChassisPartId, cancellationToken);
+            await _expertizeResultBusinessRules.BodyShellPartIdShouldExistWhenBindingToExpertizeResults(expertizeResult.BodyShellPartId, cancellationToken);
             await _expertizeResultRepository.AddAsync(expertizeResult);
 
             CreatedExpertizeResultResponse response = _mapper.Map<CreatedExpertizeResultResponse>(expertizeResult);

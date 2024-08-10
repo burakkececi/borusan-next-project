@@ -6,6 +6,9 @@ public class DeleteFuelTypeCommandValidator : AbstractValidator<DeleteFuelTypeCo
 {
     public DeleteFuelTypeCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.Id)
+            .NotNull().WithMessage("Id cannot be null")
+            .NotEqual(Guid.Empty).WithMessage("Id cannot be an empty GUID")
+            .WithName("FuelTypes Update Id");
     }
 }

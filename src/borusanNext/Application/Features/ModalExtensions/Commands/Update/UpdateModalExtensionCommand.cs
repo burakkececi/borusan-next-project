@@ -43,6 +43,9 @@ public class UpdateModalExtensionCommand : IRequest<UpdatedModalExtensionRespons
         {
             ModalExtension? modalExtension = await _modalExtensionRepository.GetAsync(predicate: me => me.Id == request.Id, cancellationToken: cancellationToken);
             await _modalExtensionBusinessRules.ModalExtensionShouldExistWhenSelected(modalExtension);
+            await _modalExtensionBusinessRules.CarModelIdShouldExistWhenBindingToModalExtensions(modalExtension.CarModelId, cancellationToken);
+            await _modalExtensionBusinessRules.GenerationIdShouldExistWhenBindingToModalExtensions(modalExtension.GenerationId, cancellationToken);
+
             modalExtension = _mapper.Map(request, modalExtension);
 
             await _modalExtensionRepository.UpdateAsync(modalExtension!);
