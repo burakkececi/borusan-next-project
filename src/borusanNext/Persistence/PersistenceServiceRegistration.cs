@@ -52,6 +52,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IGenerationImageRepository, GenerationImageRepository>();
         services.AddScoped<ICarRepository, CarRepository>();
         services.AddScoped<ICustomerFavoriteRepository, CustomerFavoriteRepository>();
+        services.AddScoped<IAdvertDetailsReadRepository, AdvertDetailsReadRepository>();
         return services;
     }
 }

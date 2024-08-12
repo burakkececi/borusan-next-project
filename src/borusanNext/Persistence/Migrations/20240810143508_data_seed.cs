@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class seed_data : Migration
+    public partial class data_seed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -614,7 +614,7 @@ namespace Persistence.Migrations
                     WheelType = table.Column<string>(type: "text", nullable: false),
                     SpareWheel = table.Column<bool>(type: "boolean", nullable: false),
                     Price = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    CarModelId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ModalExtensionId = table.Column<Guid>(type: "uuid", nullable: false),
                     ColorId = table.Column<Guid>(type: "uuid", nullable: false),
                     EngineId = table.Column<Guid>(type: "uuid", nullable: false),
                     BodyTypeId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -641,12 +641,6 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Cars_CarModels_CarModelId",
-                        column: x => x.CarModelId,
-                        principalTable: "CarModels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Cars_Engines_EngineId",
                         column: x => x.EngineId,
                         principalTable: "Engines",
@@ -656,6 +650,12 @@ namespace Persistence.Migrations
                         name: "FK_Cars_ExpertizeResults_TramerId",
                         column: x => x.TramerId,
                         principalTable: "ExpertizeResults",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cars_ModalExtensions_ModalExtensionId",
+                        column: x => x.ModalExtensionId,
+                        principalTable: "ModalExtensions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -1139,14 +1139,14 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "PasswordHash", "PasswordSalt", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "sefa@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null },
-                    { new Guid("398b5d31-f2e2-473f-8f40-78f7e79af217"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "kececi@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null },
-                    { new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "burak@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null },
-                    { new Guid("69bd8e0f-59d4-4532-ae32-03cec3e39158"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "samandira@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null },
-                    { new Guid("a6588bf5-56e9-4f00-88f9-24a35913498a"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null },
-                    { new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ali@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null },
-                    { new Guid("b73f6541-460e-4d9d-97eb-1402f63df038"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "avcilar@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null },
-                    { new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "meryem@borusan.com", new byte[] { 83, 151, 70, 61, 195, 195, 178, 226, 147, 63, 198, 86, 85, 141, 240, 4, 181, 227, 137, 146, 36, 145, 100, 75, 119, 85, 206, 36, 122, 103, 170, 184, 208, 216, 14, 99, 37, 254, 114, 231, 57, 42, 91, 18, 53, 113, 179, 35, 99, 96, 117, 156, 170, 241, 38, 234, 249, 211, 2, 0, 39, 111, 210, 86 }, new byte[] { 203, 89, 123, 148, 37, 162, 181, 245, 115, 96, 25, 248, 154, 72, 88, 107, 91, 179, 167, 54, 123, 17, 108, 86, 15, 94, 123, 64, 142, 42, 58, 154, 129, 24, 30, 220, 65, 116, 132, 19, 46, 65, 60, 27, 32, 122, 111, 250, 253, 33, 111, 97, 210, 37, 108, 254, 100, 151, 121, 110, 169, 118, 142, 94, 14, 72, 70, 77, 161, 53, 77, 118, 14, 25, 73, 115, 5, 228, 255, 41, 70, 63, 90, 40, 13, 204, 178, 45, 245, 169, 100, 126, 38, 221, 89, 20, 14, 77, 18, 204, 100, 174, 71, 234, 143, 206, 190, 66, 193, 238, 10, 84, 78, 130, 126, 82, 158, 207, 138, 227, 232, 31, 82, 136, 250, 224, 177, 146 }, null }
+                    { new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "sefa@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null },
+                    { new Guid("398b5d31-f2e2-473f-8f40-78f7e79af217"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "kececi@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null },
+                    { new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "burak@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null },
+                    { new Guid("69bd8e0f-59d4-4532-ae32-03cec3e39158"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "samandira@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null },
+                    { new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ali@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null },
+                    { new Guid("b73f6541-460e-4d9d-97eb-1402f63df038"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "avcilar@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null },
+                    { new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "meryem@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null },
+                    { new Guid("e4cd1e5f-37b6-474d-88ba-cf6dfdca9207"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@borusan.com", new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 }, new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1213,17 +1213,7 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("6acdb044-28ba-4c86-a66d-b7a5f5bb244c"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("a6588bf5-56e9-4f00-88f9-24a35913498a") });
-
-            migrationBuilder.InsertData(
-                table: "Cars",
-                columns: new[] { "Id", "BodyTypeId", "CarModelId", "ChassisNumber", "ColorId", "CreatedDate", "DeletedDate", "EngineId", "Inquiry", "Kilometers", "Plate", "Price", "SellerId", "SpareKey", "SpareWheel", "TramerId", "TransmissionId", "UpdatedDate", "WheelType" },
-                values: new object[,]
-                {
-                    { new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"), new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"), new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"), "2HGCM82644A654321", new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"), new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 45000, "22AB123", 20000.00m, new Guid("785d6af9-4404-4d7a-ad3e-82319812b037"), true, false, new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"), new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"), null, "Steel" },
-                    { new Guid("48f8a123-6b7d-4a2e-928b-c1e6beb2e7f2"), new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"), new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"), "3HGCM82655A789012", new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"), new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 75000, "78CD456", 18000.00m, new Guid("667742ae-ae24-4d8c-9029-57ab5ba305ba"), false, true, new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"), new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"), null, "Alloy" },
-                    { new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"), new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"), new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"), "1HGCM82633A123456", new Guid("38211267-9cce-4040-adae-0c64bc26dab8"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"), new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 60000, "34GS407", 25000.00m, new Guid("056dd418-5114-4ea1-baf3-07d4b8fc26f6"), true, true, new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"), new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"), null, "Alloy" }
-                });
+                values: new object[] { new Guid("d4611002-39eb-4493-9483-5555f84f711e"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("e4cd1e5f-37b6-474d-88ba-cf6dfdca9207") });
 
             migrationBuilder.InsertData(
                 table: "ModalExtensions",
@@ -1233,6 +1223,16 @@ namespace Persistence.Migrations
                     { new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"), new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0.0, 0.0, new Guid("ccb47a46-d3ee-421f-b731-8810a62a0628"), 1557.0, 4299.0, 0.0, 2021, "2.0 PHEV Vogue", null, 1822.0 },
                     { new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"), new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0.0, 0.0, new Guid("353a7e00-a2ba-4111-af4a-21302b0d8f50"), 1557.0, 4299.0, 0.0, 2021, "1.5 Pepper", null, 1822.0 },
                     { new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"), new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0.0, 0.0, new Guid("d94a19fa-9478-4514-8238-e08eb534a209"), 1557.0, 4299.0, 0.0, 2021, "520i Luxury Line", null, 1822.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cars",
+                columns: new[] { "Id", "BodyTypeId", "ChassisNumber", "ColorId", "CreatedDate", "DeletedDate", "EngineId", "Inquiry", "Kilometers", "ModalExtensionId", "Plate", "Price", "SellerId", "SpareKey", "SpareWheel", "TramerId", "TransmissionId", "UpdatedDate", "WheelType" },
+                values: new object[,]
+                {
+                    { new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"), new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"), "2HGCM82644A654321", new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"), new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 45000, new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"), "22AB123", 20000.00m, new Guid("785d6af9-4404-4d7a-ad3e-82319812b037"), true, false, new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"), new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"), null, "Steel" },
+                    { new Guid("48f8a123-6b7d-4a2e-928b-c1e6beb2e7f2"), new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"), "3HGCM82655A789012", new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"), new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 75000, new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"), "78CD456", 18000.00m, new Guid("667742ae-ae24-4d8c-9029-57ab5ba305ba"), false, true, new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"), new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"), null, "Alloy" },
+                    { new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"), new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"), "1HGCM82633A123456", new Guid("38211267-9cce-4040-adae-0c64bc26dab8"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"), new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 60000, new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"), "34GS407", 25000.00m, new Guid("056dd418-5114-4ea1-baf3-07d4b8fc26f6"), true, true, new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"), new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"), null, "Alloy" }
                 });
 
             migrationBuilder.InsertData(
@@ -1331,11 +1331,6 @@ namespace Persistence.Migrations
                 column: "BodyTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_CarModelId",
-                table: "Cars",
-                column: "CarModelId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cars_ColorId",
                 table: "Cars",
                 column: "ColorId");
@@ -1344,6 +1339,12 @@ namespace Persistence.Migrations
                 name: "IX_Cars_EngineId",
                 table: "Cars",
                 column: "EngineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_ModalExtensionId",
+                table: "Cars",
+                column: "ModalExtensionId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_SellerId",
@@ -1491,9 +1492,6 @@ namespace Persistence.Migrations
                 name: "GenerationImages");
 
             migrationBuilder.DropTable(
-                name: "ModalExtensions");
-
-            migrationBuilder.DropTable(
                 name: "OtpAuthenticators");
 
             migrationBuilder.DropTable(
@@ -1515,9 +1513,6 @@ namespace Persistence.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Generations");
-
-            migrationBuilder.DropTable(
                 name: "OperationClaims");
 
             migrationBuilder.DropTable(
@@ -1530,22 +1525,19 @@ namespace Persistence.Migrations
                 name: "CarColors");
 
             migrationBuilder.DropTable(
-                name: "CarModels");
-
-            migrationBuilder.DropTable(
                 name: "Engines");
 
             migrationBuilder.DropTable(
                 name: "ExpertizeResults");
 
             migrationBuilder.DropTable(
+                name: "ModalExtensions");
+
+            migrationBuilder.DropTable(
                 name: "Sellers");
 
             migrationBuilder.DropTable(
                 name: "Transmissions");
-
-            migrationBuilder.DropTable(
-                name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "FuelTypes");
@@ -1557,6 +1549,12 @@ namespace Persistence.Migrations
                 name: "ChassisParts");
 
             migrationBuilder.DropTable(
+                name: "CarModels");
+
+            migrationBuilder.DropTable(
+                name: "Generations");
+
+            migrationBuilder.DropTable(
                 name: "Licences");
 
             migrationBuilder.DropTable(
@@ -1564,6 +1562,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Brands");
         }
     }
 }
