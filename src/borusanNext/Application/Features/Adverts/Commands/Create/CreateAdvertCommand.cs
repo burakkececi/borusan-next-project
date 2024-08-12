@@ -37,7 +37,7 @@ public class CreateAdvertCommand : IRequest<CreatedAdvertResponse>, ISecuredRequ
         public async Task<CreatedAdvertResponse> Handle(CreateAdvertCommand request, CancellationToken cancellationToken)
         {
             Advert advert = _mapper.Map<Advert>(request);
-
+            await _advertBusinessRules.CarIdShouldExistWhenSelected(request.CarId, cancellationToken);
             await _advertRepository.AddAsync(advert);
 
             CreatedAdvertResponse response = _mapper.Map<CreatedAdvertResponse>(advert);

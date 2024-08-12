@@ -10,11 +10,20 @@ namespace Application.Features.CustomerFavorites.Rules;
 public class CustomerFavoriteBusinessRules : BaseBusinessRules
 {
     private readonly ICustomerFavoriteRepository _customerFavoriteRepository;
+    private readonly ICustomerRepository _customerRepository; 
+    private readonly IAdvertRepository _advertRepository;     
     private readonly ILocalizationService _localizationService;
 
-    public CustomerFavoriteBusinessRules(ICustomerFavoriteRepository customerFavoriteRepository, ILocalizationService localizationService)
+    public CustomerFavoriteBusinessRules(
+        ICustomerFavoriteRepository customerFavoriteRepository,
+        ICustomerRepository customerRepository, 
+        IAdvertRepository advertRepository,     
+        ILocalizationService localizationService
+    )
     {
         _customerFavoriteRepository = customerFavoriteRepository;
+        _customerRepository = customerRepository; 
+        _advertRepository = advertRepository;     
         _localizationService = localizationService;
     }
 
@@ -38,5 +47,33 @@ public class CustomerFavoriteBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await CustomerFavoriteShouldExistWhenSelected(customerFavorite);
+    }
+
+    public async Task CustomerIdShouldExistWhenSelected(Guid customerId, CancellationToken cancellationToken)
+    {
+        Customer? customer = await _customerRepository.GetAsync(
+            predicate: c => c.Id == customerId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (customer == null)
+        {
+            await throwBusinessException(CustomerFavoritesBusinessMessages.CustomerNotExists); 
+        }
+    }
+
+    public async Task AdvertIdShouldExistWhenSelected(Guid advertId, CancellationToken cancellationToken)
+    {
+        Advert? advert = await _advertRepository.GetAsync(
+            predicate: a => a.Id == advertId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (advert == null)
+        {
+            await throwBusinessException(CustomerFavoritesBusinessMessages.AdvertNotExists); 
+        }
     }
 }

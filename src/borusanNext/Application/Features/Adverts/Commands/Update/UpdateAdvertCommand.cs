@@ -39,7 +39,8 @@ public class UpdateAdvertCommand : IRequest<UpdatedAdvertResponse>, ISecuredRequ
         {
             Advert? advert = await _advertRepository.GetAsync(predicate: a => a.Id == request.Id, cancellationToken: cancellationToken);
             await _advertBusinessRules.AdvertShouldExistWhenSelected(advert);
-            
+            await _advertBusinessRules.CarIdShouldExistWhenSelected(request.CarId, cancellationToken);
+
             advert.AdvertNo = request.AdvertNo;
             advert.CarId = request.CarId; 
 

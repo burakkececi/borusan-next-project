@@ -37,6 +37,9 @@ public class UpdateCustomerAdvertLogCommand : IRequest<UpdatedCustomerAdvertLogR
         {
             CustomerAdvertLog? customerAdvertLog = await _customerAdvertLogRepository.GetAsync(predicate: cal => cal.Id == request.Id, cancellationToken: cancellationToken);
             await _customerAdvertLogBusinessRules.CustomerAdvertLogShouldExistWhenSelected(customerAdvertLog);
+            await _customerAdvertLogBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
+            await _customerAdvertLogBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
+           
             customerAdvertLog = _mapper.Map(request, customerAdvertLog);
 
             await _customerAdvertLogRepository.UpdateAsync(customerAdvertLog!);

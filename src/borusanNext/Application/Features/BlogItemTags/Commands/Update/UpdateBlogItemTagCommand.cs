@@ -35,6 +35,9 @@ public class UpdateBlogItemTagCommand : IRequest<UpdatedBlogItemTagResponse>, IS
         {
             BlogItemTag? blogItemTag = await _blogItemTagRepository.GetAsync(predicate: bit => bit.Id == request.Id, cancellationToken: cancellationToken);
             await _blogItemTagBusinessRules.BlogItemTagShouldExistWhenSelected(blogItemTag);
+            await _blogItemTagBusinessRules.BlogIdShouldExistWhenSelected(request.BlogId, cancellationToken);
+            await _blogItemTagBusinessRules.TagIdShouldExistWhenSelected(request.TagId, cancellationToken);
+
             blogItemTag = _mapper.Map(request, blogItemTag);
 
             await _blogItemTagRepository.UpdateAsync(blogItemTag!);

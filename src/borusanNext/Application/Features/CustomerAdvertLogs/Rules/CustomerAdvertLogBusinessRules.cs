@@ -10,11 +10,20 @@ namespace Application.Features.CustomerAdvertLogs.Rules;
 public class CustomerAdvertLogBusinessRules : BaseBusinessRules
 {
     private readonly ICustomerAdvertLogRepository _customerAdvertLogRepository;
+    private readonly ICustomerRepository _customerRepository; 
+    private readonly IAdvertRepository _advertRepository;     
     private readonly ILocalizationService _localizationService;
 
-    public CustomerAdvertLogBusinessRules(ICustomerAdvertLogRepository customerAdvertLogRepository, ILocalizationService localizationService)
+    public CustomerAdvertLogBusinessRules(
+        ICustomerAdvertLogRepository customerAdvertLogRepository,
+        ICustomerRepository customerRepository, 
+        IAdvertRepository advertRepository,     
+        ILocalizationService localizationService
+    )
     {
         _customerAdvertLogRepository = customerAdvertLogRepository;
+        _customerRepository = customerRepository; 
+        _advertRepository = advertRepository;     
         _localizationService = localizationService;
     }
 
@@ -38,5 +47,33 @@ public class CustomerAdvertLogBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await CustomerAdvertLogShouldExistWhenSelected(customerAdvertLog);
+    }
+
+    public async Task CustomerIdShouldExistWhenSelected(Guid customerId, CancellationToken cancellationToken)
+    {
+        Customer? customer = await _customerRepository.GetAsync(
+            predicate: c => c.Id == customerId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (customer == null)
+        {
+            await throwBusinessException(CustomerAdvertLogsBusinessMessages.CustomerNotExists); 
+        }
+    }
+
+    public async Task AdvertIdShouldExistWhenSelected(Guid advertId, CancellationToken cancellationToken)
+    {
+        Advert? advert = await _advertRepository.GetAsync(
+            predicate: a => a.Id == advertId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (advert == null)
+        {
+            await throwBusinessException(CustomerAdvertLogsBusinessMessages.AdvertNotExists); 
+        }
     }
 }

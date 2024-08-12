@@ -36,6 +36,9 @@ public class CreateCustomerAdvertLogCommand : IRequest<CreatedCustomerAdvertLogR
         {
             CustomerAdvertLog customerAdvertLog = _mapper.Map<CustomerAdvertLog>(request);
 
+            await _customerAdvertLogBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
+            await _customerAdvertLogBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
+
             await _customerAdvertLogRepository.AddAsync(customerAdvertLog);
 
             CreatedCustomerAdvertLogResponse response = _mapper.Map<CreatedCustomerAdvertLogResponse>(customerAdvertLog);

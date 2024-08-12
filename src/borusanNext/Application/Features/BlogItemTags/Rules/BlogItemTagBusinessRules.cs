@@ -10,11 +10,20 @@ namespace Application.Features.BlogItemTags.Rules;
 public class BlogItemTagBusinessRules : BaseBusinessRules
 {
     private readonly IBlogItemTagRepository _blogItemTagRepository;
+    private readonly ITagRepository _tagRepository; 
+    private readonly IBlogRepository _blogRepository; 
     private readonly ILocalizationService _localizationService;
 
-    public BlogItemTagBusinessRules(IBlogItemTagRepository blogItemTagRepository, ILocalizationService localizationService)
+    public BlogItemTagBusinessRules(
+        IBlogItemTagRepository blogItemTagRepository,
+        ITagRepository tagRepository, 
+        IBlogRepository blogRepository, 
+        ILocalizationService localizationService
+    )
     {
         _blogItemTagRepository = blogItemTagRepository;
+        _tagRepository = tagRepository; 
+        _blogRepository = blogRepository; 
         _localizationService = localizationService;
     }
 
@@ -38,5 +47,34 @@ public class BlogItemTagBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await BlogItemTagShouldExistWhenSelected(blogItemTag);
+    }
+
+    public async Task TagIdShouldExistWhenSelected(Guid tagId, CancellationToken cancellationToken)
+    {
+        var tag = await _tagRepository.GetAsync(
+            predicate: t => t.Id == tagId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (tag == null)
+        {
+            string messageKey = BlogItemTagsBusinessMessages.TagNotExists; 
+            await throwBusinessException(messageKey);
+        }
+    }
+    public async Task BlogIdShouldExistWhenSelected(Guid blogId, CancellationToken cancellationToken)
+    {
+        var blog = await _blogRepository.GetAsync(
+            predicate: b => b.Id == blogId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (blog == null)
+        {
+            string messageKey = BlogItemTagsBusinessMessages.BlogNotExists; 
+            await throwBusinessException(messageKey);
+        }
     }
 }

@@ -1,11 +1,14 @@
 using FluentValidation;
 
-namespace Application.Features.CarColors.Commands.Create;
-
-public class CreateCarColorCommandValidator : AbstractValidator<CreateCarColorCommand>
+namespace Application.Features.CarColors.Commands.Create
 {
-    public CreateCarColorCommandValidator()
+    public class CreateCarColorCommandValidator : AbstractValidator<CreateCarColorCommand>
     {
-        RuleFor(c => c.Name).NotEmpty();
+        public CreateCarColorCommandValidator()
+        {
+            RuleFor(c => c.Name)
+                .NotEmpty().WithMessage("Name cannot be empty.")
+                .MaximumLength(50).WithMessage("Name cannot exceed 50 characters.");
+        }
     }
 }

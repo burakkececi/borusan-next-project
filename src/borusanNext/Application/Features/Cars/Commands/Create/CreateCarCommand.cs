@@ -47,6 +47,14 @@ public class CreateCarCommand : IRequest<CreatedCarResponse>, ISecuredRequest
         {
             Car car = _mapper.Map<Car>(request);
 
+            await _carBusinessRules.CarModelIdShouldExistWhenSelected(request.CarModelId, cancellationToken);
+            await _carBusinessRules.CarColorIdShouldExistWhenSelected(request.ColorId, cancellationToken);
+            await _carBusinessRules.EngineIdShouldExistWhenSelected(request.EngineId, cancellationToken);
+            await _carBusinessRules.BodyTypeIdShouldExistWhenSelected(request.BodyTypeId, cancellationToken);
+            await _carBusinessRules.TransmissionIdShouldExistWhenSelected(request.TransmissionId, cancellationToken);
+            await _carBusinessRules.ExpertizeResultIdShouldExistWhenSelected(request.TramerId, cancellationToken);
+            await _carBusinessRules.SellerIdShouldExistWhenSelected(request.SellerId, cancellationToken);
+
             await _carRepository.AddAsync(car);
 
             CreatedCarResponse response = _mapper.Map<CreatedCarResponse>(car);

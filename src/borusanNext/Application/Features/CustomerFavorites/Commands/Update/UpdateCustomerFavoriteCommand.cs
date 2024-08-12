@@ -35,6 +35,9 @@ public class UpdateCustomerFavoriteCommand : IRequest<UpdatedCustomerFavoriteRes
         {
             CustomerFavorite? customerFavorite = await _customerFavoriteRepository.GetAsync(predicate: cf => cf.Id == request.Id, cancellationToken: cancellationToken);
             await _customerFavoriteBusinessRules.CustomerFavoriteShouldExistWhenSelected(customerFavorite);
+            await _customerFavoriteBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
+            await _customerFavoriteBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
+            
             customerFavorite = _mapper.Map(request, customerFavorite);
 
             await _customerFavoriteRepository.UpdateAsync(customerFavorite!);
