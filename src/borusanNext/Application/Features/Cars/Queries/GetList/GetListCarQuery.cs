@@ -34,7 +34,7 @@ public class GetListCarQuery : IRequest<GetListResponse<GetListCarListItemDto>>,
             IPaginate<Car> cars = await _carRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                include: i => i.Include(p => p.CarModel)
+                include: i => i.Include(p => p.ModalExtension)
                                .Include(p => p.Color)
                                .Include(p => p.Engine)
                                .Include(p => p.BodyType)
