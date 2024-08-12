@@ -40,6 +40,8 @@ public class UpdateAdvertImageCommand : IRequest<UpdatedAdvertImageResponse>, IS
             AdvertImage? advertImage = await _advertImageRepository.GetAsync(predicate: ai => ai.Id == request.Id, cancellationToken: cancellationToken);
             await _advertImageBusinessRules.AdvertImageShouldExistWhenSelected(advertImage);
 
+            await _advertImageBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
+
             advertImage.ImageURL = await _imageServiceBase.UpdateAsync(request.ImageURL, advertImage.ImageURL);
             advertImage.AdvertId = request.AdvertId;
 

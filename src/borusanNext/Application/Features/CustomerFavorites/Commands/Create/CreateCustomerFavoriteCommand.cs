@@ -33,6 +33,8 @@ public class CreateCustomerFavoriteCommand : IRequest<CreatedCustomerFavoriteRes
         public async Task<CreatedCustomerFavoriteResponse> Handle(CreateCustomerFavoriteCommand request, CancellationToken cancellationToken)
         {
             CustomerFavorite customerFavorite = _mapper.Map<CustomerFavorite>(request);
+            await _customerFavoriteBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
+            await _customerFavoriteBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
 
             await _customerFavoriteRepository.AddAsync(customerFavorite);
 

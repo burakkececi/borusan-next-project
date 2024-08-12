@@ -35,7 +35,11 @@ public class UpdateAppointmentCommand : IRequest<UpdatedAppointmentResponse>, IS
         public async Task<UpdatedAppointmentResponse> Handle(UpdateAppointmentCommand request, CancellationToken cancellationToken)
         {
             Appointment? appointment = await _appointmentRepository.GetAsync(predicate: a => a.Id == request.Id, cancellationToken: cancellationToken);
+           
             await _appointmentBusinessRules.AppointmentShouldExistWhenSelected(appointment);
+            await _appointmentBusinessRules.CarIdShouldExistWhenSelected(request.CarId, cancellationToken);
+            await _appointmentBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
+
             appointment = _mapper.Map(request, appointment);
 
             await _appointmentRepository.UpdateAsync(appointment!);

@@ -10,11 +10,17 @@ namespace Application.Features.AdvertImages.Rules;
 public class AdvertImageBusinessRules : BaseBusinessRules
 {
     private readonly IAdvertImageRepository _advertImageRepository;
+    private readonly IAdvertRepository _advertRepository; 
     private readonly ILocalizationService _localizationService;
 
-    public AdvertImageBusinessRules(IAdvertImageRepository advertImageRepository, ILocalizationService localizationService)
+    public AdvertImageBusinessRules(
+        IAdvertImageRepository advertImageRepository,
+        IAdvertRepository advertRepository, 
+        ILocalizationService localizationService
+    )
     {
         _advertImageRepository = advertImageRepository;
+        _advertRepository = advertRepository; 
         _localizationService = localizationService;
     }
 
@@ -38,5 +44,20 @@ public class AdvertImageBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await AdvertImageShouldExistWhenSelected(advertImage);
+    }
+
+    public async Task AdvertIdShouldExistWhenSelected(Guid advertId, CancellationToken cancellationToken)
+    {
+        var advert = await _advertRepository.GetAsync(
+            predicate: a => a.Id == advertId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (advert == null)
+        {
+            string messageKey = AdvertImagesBusinessMessages.AdvertNotExists; 
+            await throwBusinessException(messageKey);
+        }
     }
 }

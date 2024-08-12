@@ -10,11 +10,13 @@ namespace Application.Features.CarModels.Rules;
 public class CarModelBusinessRules : BaseBusinessRules
 {
     private readonly ICarModelRepository _carModelRepository;
+    private readonly IBrandRepository _brandRepository; 
     private readonly ILocalizationService _localizationService;
 
-    public CarModelBusinessRules(ICarModelRepository carModelRepository, ILocalizationService localizationService)
+    public CarModelBusinessRules(ICarModelRepository carModelRepository, IBrandRepository brandRepository, ILocalizationService localizationService)
     {
         _carModelRepository = carModelRepository;
+        _brandRepository = brandRepository; 
         _localizationService = localizationService;
     }
 
@@ -38,5 +40,18 @@ public class CarModelBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await CarModelShouldExistWhenSelected(carModel);
+    }
+    public async Task BrandIdShouldExistWhenSelected(Guid brandId, CancellationToken cancellationToken)
+    {
+        Brand? brand = await _brandRepository.GetAsync(
+            predicate: b => b.Id == brandId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (brand == null)
+        {
+            await throwBusinessException(CarModelsBusinessMessages.BrandNotExists); 
+        }
     }
 }

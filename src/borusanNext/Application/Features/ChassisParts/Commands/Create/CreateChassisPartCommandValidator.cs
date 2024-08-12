@@ -1,14 +1,22 @@
 using FluentValidation;
 
-namespace Application.Features.ChassisParts.Commands.Create;
-
-public class CreateChassisPartCommandValidator : AbstractValidator<CreateChassisPartCommand>
+namespace Application.Features.ChassisParts.Commands.Create
 {
-    public CreateChassisPartCommandValidator()
+    public class CreateChassisPartCommandValidator : AbstractValidator<CreateChassisPartCommand>
     {
-        RuleFor(c => c.IsRightChassisChanged).NotEmpty();
-        RuleFor(c => c.IsLeftChassisChanged).NotEmpty();
-        RuleFor(c => c.IsFrontPanelChanged).NotEmpty();
-        RuleFor(c => c.IsBackPanelChanged).NotEmpty();
+        public CreateChassisPartCommandValidator()
+        {
+            RuleFor(c => c.IsRightChassisChanged)
+                .NotEmpty().WithMessage("IsRightChassisChanged cannot be empty.");
+
+            RuleFor(c => c.IsLeftChassisChanged)
+                .NotEmpty().WithMessage("IsLeftChassisChanged cannot be empty.");
+
+            RuleFor(c => c.IsFrontPanelChanged)
+                .NotEmpty().WithMessage("IsFrontPanelChanged cannot be empty.");
+
+            RuleFor(c => c.IsBackPanelChanged)
+                .NotEmpty().WithMessage("IsBackPanelChanged cannot be empty.");
+        }
     }
 }

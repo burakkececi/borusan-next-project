@@ -7,8 +7,9 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
 {
     public RegisterCommandValidator()
     {
-        RuleFor(c => c.UserForRegisterDto.Email).NotEmpty().EmailAddress();
+        RuleFor(c => c.UserForRegisterDto.Email).NotNull().NotEmpty().EmailAddress();
         RuleFor(c => c.UserForRegisterDto.Password)
+            .NotNull()
             .NotEmpty()
             .MinimumLength(6)
             .Must(StrongPassword)

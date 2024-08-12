@@ -33,6 +33,7 @@ public class CreateCarModelCommand : IRequest<CreatedCarModelResponse>, ISecured
         public async Task<CreatedCarModelResponse> Handle(CreateCarModelCommand request, CancellationToken cancellationToken)
         {
             CarModel carModel = _mapper.Map<CarModel>(request);
+            await _carModelBusinessRules.BrandIdShouldExistWhenSelected(request.BrandId, cancellationToken);
 
             await _carModelRepository.AddAsync(carModel);
 

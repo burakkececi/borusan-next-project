@@ -5,4 +5,6 @@ public static class AdvertsBusinessMessages
     public const string SectionName = "Advert";
 
     public const string AdvertNotExists = "AdvertNotExists";
+
+    public const string CarNotExists = "CarNotExists";
 }

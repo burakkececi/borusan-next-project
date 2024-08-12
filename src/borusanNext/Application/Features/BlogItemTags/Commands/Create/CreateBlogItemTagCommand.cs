@@ -34,6 +34,9 @@ public class CreateBlogItemTagCommand : IRequest<CreatedBlogItemTagResponse>, IS
         {
             BlogItemTag blogItemTag = _mapper.Map<BlogItemTag>(request);
 
+            await _blogItemTagBusinessRules.BlogIdShouldExistWhenSelected(request.BlogId, cancellationToken);
+            await _blogItemTagBusinessRules.TagIdShouldExistWhenSelected(request.TagId, cancellationToken);
+
             await _blogItemTagRepository.AddAsync(blogItemTag);
 
             CreatedBlogItemTagResponse response = _mapper.Map<CreatedBlogItemTagResponse>(blogItemTag);
