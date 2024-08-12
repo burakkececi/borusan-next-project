@@ -1,4 +1,3 @@
-using Application.Features.Adverts.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -8,6 +7,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Adverts.Constants.AdvertsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Adverts.Queries.GetList;
 
@@ -32,7 +32,8 @@ public class GetListAdvertQuery : IRequest<GetListResponse<GetListAdvertListItem
         {
             IPaginate<Advert> adverts = await _advertRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
+                include: i => i.Include(p => p.Car).Include(p => p.AdvertImages),
                 cancellationToken: cancellationToken
             );
 

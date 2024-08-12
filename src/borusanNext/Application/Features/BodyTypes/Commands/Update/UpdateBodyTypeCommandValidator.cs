@@ -1,13 +1,21 @@
 using FluentValidation;
 
-namespace Application.Features.BodyTypes.Commands.Update;
-
-public class UpdateBodyTypeCommandValidator : AbstractValidator<UpdateBodyTypeCommand>
+namespace Application.Features.BodyTypes.Commands.Update
 {
-    public UpdateBodyTypeCommandValidator()
+    public class UpdateBodyTypeCommandValidator : AbstractValidator<UpdateBodyTypeCommand>
     {
-        RuleFor(c => c.Id).NotEmpty();
-        RuleFor(c => c.BodyName).NotEmpty();
-        RuleFor(c => c.Door).NotEmpty();
+        public UpdateBodyTypeCommandValidator()
+        {
+            RuleFor(c => c.Id)
+                .NotEmpty().WithMessage("Id cannot be empty.");
+
+            RuleFor(c => c.BodyName)
+                .NotEmpty().WithMessage("BodyName cannot be empty.")
+                .MaximumLength(50).WithMessage("BodyName must not exceed 50 characters.");
+
+            RuleFor(c => c.Door)
+                .NotEmpty().WithMessage("Door cannot be empty.")
+                .MaximumLength(20).WithMessage("Door must not exceed 20 characters.");
+        }
     }
 }

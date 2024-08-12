@@ -34,7 +34,10 @@ public class UpdateCarModelCommand : IRequest<UpdatedCarModelResponse>, ISecured
         public async Task<UpdatedCarModelResponse> Handle(UpdateCarModelCommand request, CancellationToken cancellationToken)
         {
             CarModel? carModel = await _carModelRepository.GetAsync(predicate: cm => cm.Id == request.Id, cancellationToken: cancellationToken);
+            
             await _carModelBusinessRules.CarModelShouldExistWhenSelected(carModel);
+            await _carModelBusinessRules.BrandIdShouldExistWhenSelected(request.BrandId, cancellationToken);
+
             carModel = _mapper.Map(request, carModel);
 
             await _carModelRepository.UpdateAsync(carModel!);

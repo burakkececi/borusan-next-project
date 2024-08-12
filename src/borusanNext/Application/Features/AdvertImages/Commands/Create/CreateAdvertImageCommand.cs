@@ -38,6 +38,7 @@ public class CreateAdvertImageCommand : IRequest<CreatedAdvertImageResponse>, IS
         {
             AdvertImage advertImage = _mapper.Map<AdvertImage>(request);
 
+            await _advertImageBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
             advertImage.ImageURL = await _imageServiceBase.UploadAsync(request.ImageURL);
 
             await _advertImageRepository.AddAsync(advertImage);

@@ -91,15 +91,6 @@ public class AdvertDetailsReadModel
     public string Seller_Name { get; set; }
     public string Seller_PhoneNumber { get; set; }
 
-    //public virtual CarModel CarModel { get; set; }
-    //public virtual CarColor Color { get; set; }
-    //public virtual Engine Engine { get; set; }
-    //public virtual BodyType BodyType { get; set; }
-    //public virtual Transmission Transmission { get; set; }
-    //public virtual ExpertizeResult ExpertizeResult { get; set; }
-    //public virtual Advert Advert { get; set; }
-    //public virtual Seller Seller { get; set; }
-    //public virtual ICollection<Appointment> Appointments { get; set; }
     public Guid LicenceId { get; set; }
     public int Licence_LicenceNo { get; set; }
     public string Licence_ProvidedBy { get; set; }

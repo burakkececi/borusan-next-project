@@ -6,6 +6,8 @@ public class DeleteCustomerCommandValidator : AbstractValidator<DeleteCustomerCo
 {
     public DeleteCustomerCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.Id).NotEmpty().WithMessage("Id cannot be empty")
+                          .NotEqual(Guid.Empty).WithMessage("Id cannot be empty or can be invalid.")
+                          .WithName("Customer Delete Id");
     }
 }

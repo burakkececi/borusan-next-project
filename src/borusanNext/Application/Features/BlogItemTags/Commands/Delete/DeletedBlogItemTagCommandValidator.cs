@@ -1,11 +1,20 @@
 using FluentValidation;
+using System;
 
-namespace Application.Features.BlogItemTags.Commands.Delete;
-
-public class DeleteBlogItemTagCommandValidator : AbstractValidator<DeleteBlogItemTagCommand>
+namespace Application.Features.BlogItemTags.Commands.Delete
 {
-    public DeleteBlogItemTagCommandValidator()
+    public class DeleteBlogItemTagCommandValidator : AbstractValidator<DeleteBlogItemTagCommand>
     {
-        RuleFor(c => c.Id).NotEmpty();
+        public DeleteBlogItemTagCommandValidator()
+        {
+            RuleFor(c => c.Id)
+                .NotNull().WithMessage("Id cannot be null.")
+                .NotEmpty().WithMessage("Id cannot be empty.")
+                .Must(BeValidGuid).WithMessage("Id must be a valid GUID.");
+        }
+        private bool BeValidGuid(Guid id)
+        {
+            return id != Guid.Empty;
+        }
     }
 }

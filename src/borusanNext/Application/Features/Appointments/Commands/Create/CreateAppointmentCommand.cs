@@ -34,6 +34,8 @@ public class CreateAppointmentCommand : IRequest<CreatedAppointmentResponse>, IS
         public async Task<CreatedAppointmentResponse> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
         {
             Appointment appointment = _mapper.Map<Appointment>(request);
+            await _appointmentBusinessRules.CarIdShouldExistWhenSelected(request.CarId, cancellationToken);
+            await _appointmentBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
 
             await _appointmentRepository.AddAsync(appointment);
 

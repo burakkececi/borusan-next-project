@@ -6,6 +6,8 @@ public class CreateTagCommandValidator : AbstractValidator<CreateTagCommand>
 {
     public CreateTagCommandValidator()
     {
-        RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.Name)
+            .NotEmpty().WithMessage("Name cannot be empty")
+            .WithName("Name");
     }
 }

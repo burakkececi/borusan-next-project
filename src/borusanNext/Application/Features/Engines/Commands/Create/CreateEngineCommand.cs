@@ -42,7 +42,7 @@ public class CreateEngineCommand : IRequest<CreatedEngineResponse>, ISecuredRequ
         public async Task<CreatedEngineResponse> Handle(CreateEngineCommand request, CancellationToken cancellationToken)
         {
             Engine engine = _mapper.Map<Engine>(request);
-
+            await _engineBusinessRules.FuelTypeIdShouldExistWhenBindingToEngine(engine.FuelTypeId, cancellationToken);
             await _engineRepository.AddAsync(engine);
 
             CreatedEngineResponse response = _mapper.Map<CreatedEngineResponse>(engine);

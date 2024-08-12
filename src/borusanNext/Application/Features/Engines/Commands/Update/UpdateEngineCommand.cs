@@ -44,8 +44,10 @@ public class UpdateEngineCommand : IRequest<UpdatedEngineResponse>, ISecuredRequ
         {
             Engine? engine = await _engineRepository.GetAsync(predicate: e => e.Id == request.Id, cancellationToken: cancellationToken);
             await _engineBusinessRules.EngineShouldExistWhenSelected(engine);
+
             engine = _mapper.Map(request, engine);
 
+            await _engineBusinessRules.FuelTypeIdShouldExistWhenBindingToEngine(engine.FuelTypeId, cancellationToken);
             await _engineRepository.UpdateAsync(engine!);
 
             UpdatedEngineResponse response = _mapper.Map<UpdatedEngineResponse>(engine);

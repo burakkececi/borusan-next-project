@@ -5,4 +5,6 @@ public static class CustomersBusinessMessages
     public const string SectionName = "Customer";
 
     public const string CustomerNotExists = "CustomerNotExists";
+
+    public const string UserIdNotExist = "UserIdNotExist";
 }

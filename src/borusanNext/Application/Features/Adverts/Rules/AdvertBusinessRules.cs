@@ -10,11 +10,17 @@ namespace Application.Features.Adverts.Rules;
 public class AdvertBusinessRules : BaseBusinessRules
 {
     private readonly IAdvertRepository _advertRepository;
+    private readonly ICarRepository _carRepository;
     private readonly ILocalizationService _localizationService;
 
-    public AdvertBusinessRules(IAdvertRepository advertRepository, ILocalizationService localizationService)
+    public AdvertBusinessRules(
+        IAdvertRepository advertRepository,
+        ICarRepository carRepository, 
+        ILocalizationService localizationService
+    )
     {
         _advertRepository = advertRepository;
+        _carRepository = carRepository; 
         _localizationService = localizationService;
     }
 
@@ -38,5 +44,20 @@ public class AdvertBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await AdvertShouldExistWhenSelected(advert);
+    }
+
+    public async Task CarIdShouldExistWhenSelected(Guid carId, CancellationToken cancellationToken)
+    {
+        var car = await _carRepository.GetAsync(
+            predicate: c => c.Id == carId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (car == null)
+        {
+            string messageKey = AdvertsBusinessMessages.CarNotExists;
+            await throwBusinessException(messageKey);
+        }
     }
 }

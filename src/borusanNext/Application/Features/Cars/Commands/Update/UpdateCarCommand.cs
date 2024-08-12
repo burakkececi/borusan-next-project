@@ -47,7 +47,16 @@ public class UpdateCarCommand : IRequest<UpdatedCarResponse>, ISecuredRequest
         public async Task<UpdatedCarResponse> Handle(UpdateCarCommand request, CancellationToken cancellationToken)
         {
             Car? car = await _carRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
+            
             await _carBusinessRules.CarShouldExistWhenSelected(car);
+            await _carBusinessRules.CarModelIdShouldExistWhenSelected(request.CarModelId, cancellationToken);
+            await _carBusinessRules.CarColorIdShouldExistWhenSelected(request.ColorId, cancellationToken);
+            await _carBusinessRules.EngineIdShouldExistWhenSelected(request.EngineId, cancellationToken);
+            await _carBusinessRules.BodyTypeIdShouldExistWhenSelected(request.BodyTypeId, cancellationToken);
+            await _carBusinessRules.TransmissionIdShouldExistWhenSelected(request.TransmissionId, cancellationToken);
+            await _carBusinessRules.ExpertizeResultIdShouldExistWhenSelected(request.TramerId, cancellationToken);
+            await _carBusinessRules.SellerIdShouldExistWhenSelected(request.SellerId, cancellationToken);
+
             car = _mapper.Map(request, car);
 
             await _carRepository.UpdateAsync(car!);

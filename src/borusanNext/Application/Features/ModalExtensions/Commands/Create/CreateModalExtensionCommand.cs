@@ -41,7 +41,8 @@ public class CreateModalExtensionCommand : IRequest<CreatedModalExtensionRespons
         public async Task<CreatedModalExtensionResponse> Handle(CreateModalExtensionCommand request, CancellationToken cancellationToken)
         {
             ModalExtension modalExtension = _mapper.Map<ModalExtension>(request);
-
+            await _modalExtensionBusinessRules.CarModelIdShouldExistWhenBindingToModalExtensions(modalExtension.CarModelId, cancellationToken);
+            await _modalExtensionBusinessRules.GenerationIdShouldExistWhenBindingToModalExtensions(modalExtension.GenerationId, cancellationToken);
             await _modalExtensionRepository.AddAsync(modalExtension);
 
             CreatedModalExtensionResponse response = _mapper.Map<CreatedModalExtensionResponse>(modalExtension);

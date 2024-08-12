@@ -41,6 +41,8 @@ public class UpdateGenerationImageCommand : IRequest<UpdatedGenerationImageRespo
             await _generationImageBusinessRules.GenerationImageShouldExistWhenSelected(generationImage);
             generationImage = _mapper.Map(request, generationImage);
 
+            await _generationImageBusinessRules.GenerationIdShouldExistWhenBindingToGenerationImages(generationImage.GenerationId, cancellationToken);
+
             generationImage.ImageURL = await _imageServiceBase.UpdateAsync(request.ImageURL, generationImage.ImageURL);
 
             await _generationImageRepository.UpdateAsync(generationImage!);
