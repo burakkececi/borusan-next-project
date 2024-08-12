@@ -21,6 +21,6 @@ public class ModalExtension : Entity<Guid>
 
     public virtual CarModel CarModel { get; set; }
     public virtual Generation Generation { get; set; }
-    
+    public virtual Car Car { get; set; }
 
 }

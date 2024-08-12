@@ -13,7 +13,6 @@ public class CarModel : Entity<Guid>
     public Guid BrandId { get; set; }
 
     public virtual Brand Brand { get; set; }
-    public virtual ICollection<Car> Cars { get; set; }
     public virtual ICollection<ModalExtension> ModalExtensions { get; set; }
 }
 
