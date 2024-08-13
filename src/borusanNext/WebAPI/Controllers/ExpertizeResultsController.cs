@@ -6,6 +6,10 @@ using Application.Features.ExpertizeResults.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Cars.Queries.GetDynamic;
+using Application.Features.Models.Queries.GetDynamic;
+using NArchitecture.Core.Persistence.Dynamic;
+using Application.Features.ExpertizeResults.Queries.GetDynamic;
 
 namespace WebAPI.Controllers;
 
@@ -55,6 +59,20 @@ public class ExpertizeResultsController : BaseController
         GetListExpertizeResultQuery query = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListExpertizeResultListItemDto> response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpPost("GetDynamic")]
+    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    {
+        GetDynamicExpertizeResultQuery getDynamicQuery = new()
+        {
+            DynamicQuery = dynamicQuery,
+            PageRequest = pageRequest
+        };
+
+        GetListResponse<GetDynamicExpertizeResponse> response = await Mediator.Send(getDynamicQuery);
 
         return Ok(response);
     }

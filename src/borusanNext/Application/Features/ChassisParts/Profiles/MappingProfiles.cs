@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
 using Application.Features.Engines.Queries.GetDynamic;
+using Application.Features.ChassisParts.Queries.GetDynamic;
 
 namespace Application.Features.ChassisParts.Profiles;
 
@@ -29,7 +30,7 @@ public class MappingProfiles : Profile
         CreateMap<ChassisPart, GetListChassisPartListItemDto>();
         CreateMap<IPaginate<ChassisPart>, GetListResponse<GetListChassisPartListItemDto>>();
 
-        CreateMap<ChassisPart, GetDynamicChassisPartResponse>().ReverseMap();
-        CreateMap<IPaginate<ChassisPart>, GetListResponse<GetDynamicChassisPartResponse>>().ReverseMap();
+        CreateMap<ChassisPart, GetDynamicChassisPartsResponse>().ReverseMap();
+        CreateMap<IPaginate<ChassisPart>, GetListResponse<GetDynamicChassisPartsResponse>>().ReverseMap();
     }
 }

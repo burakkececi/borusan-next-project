@@ -1,4 +1,5 @@
-﻿using NArchitecture.Core.Application.Responses;
+﻿using NArchitecture.Core.Application.Dtos;
+using NArchitecture.Core.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ public class GetDynamicCarResponse : IResponse
     public bool SpareWheel { get; set; }
     public decimal Price { get; set; }
     public string CarModelName { get; set; }
+    public string BrandName { get; set; }
+    public string GenerationName { get; set; }
+    public string ModelExtensionName { get; set; }
     public Guid CarModelId { get; set; }
     public string ColorName { get; set; }
     public Guid ColorId { get; set; }

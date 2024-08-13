@@ -3,6 +3,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
@@ -10,13 +11,13 @@ using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.Brands.Queries.GetDynamic;
 
-public class GetDynamicQuery : IRequest<GetListResponse<GetDynamicResponse>>
+public class GetDynamicBrandQuery : IRequest<GetListResponse<GetDynamicBrandResponse>>
 {
     public PageRequest PageRequest { get; set; }
 
     public DynamicQuery DynamicQuery { get; set; }
 
-    public class GetDynamicQueryHandler : IRequestHandler<GetDynamicQuery, GetListResponse<GetDynamicResponse>>
+    public class GetDynamicQueryHandler : IRequestHandler<GetDynamicBrandQuery, GetListResponse<GetDynamicBrandResponse>>
     {
         private readonly IMapper _mapper;
         private readonly BrandBusinessRules _brandBusinessRules;
@@ -29,16 +30,17 @@ public class GetDynamicQuery : IRequest<GetListResponse<GetDynamicResponse>>
             _brandRepository = brandRepository;
         }
 
-        public async Task<GetListResponse<GetDynamicResponse>> Handle(GetDynamicQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetDynamicBrandResponse>> Handle(GetDynamicBrandQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Brand> brands = await _brandRepository.GetListByDynamicAsync(
                 dynamic: request.DynamicQuery,
                 index: request.PageRequest.PageIndex,
+                include: i => i.Include(c => c.CarModels),
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken);
 
 
-            GetListResponse<GetDynamicResponse> response = _mapper.Map<GetListResponse<GetDynamicResponse>>(brands);
+            GetListResponse<GetDynamicBrandResponse> response = _mapper.Map<GetListResponse<GetDynamicBrandResponse>>(brands);
             return response;
         }
     }

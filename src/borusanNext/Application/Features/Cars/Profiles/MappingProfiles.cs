@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
 using Application.Features.CarModels.Queries.GetDynamic;
+using Application.Features.Cars.Queries.GetDynamic;
 
 namespace Application.Features.Cars.Profiles;
 
@@ -28,7 +29,17 @@ public class MappingProfiles : Profile
 
         CreateMap<Car, GetListCarListItemDto>();
         CreateMap<IPaginate<Car>, GetListResponse<GetListCarListItemDto>>();
-        CreateMap<Car, GetDynamicCarModelsResponse>();
-        CreateMap<IPaginate<Car>, GetListResponse<GetDynamicCarModelsResponse>>();
+
+        CreateMap<Car, GetDynamicCarResponse>()
+        .ForMember(dest => dest.SellerName, opt => opt.MapFrom(src => src.Seller.Name))
+        .ForMember(dest => dest.CarModelName, opt => opt.MapFrom(src => src.ModalExtension.CarModel.ModelName))
+        .ForMember(dest => dest.CarModelId, opt => opt.MapFrom(src => src.ModalExtension.CarModelId))
+        .ForMember(dest => dest.ModelExtensionName, opt => opt.MapFrom(src => src.ModalExtension.Name))
+        .ForMember(dest => dest.GenerationName, opt => opt.MapFrom(src => src.ModalExtension.Generation.Name))
+        .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.ModalExtension.CarModel.Brand.Name))
+        .ForMember(dest => dest.ColorName, opt => opt.MapFrom(src => src.Color.Name))
+        .ForMember(dest => dest.SellerName, opt => opt.MapFrom(src => src.Seller.Name));
+
+        CreateMap<IPaginate<Car>, GetListResponse<GetDynamicCarResponse>>();
     }
 }

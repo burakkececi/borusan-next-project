@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Engines.Queries.GetDynamic;
-public class GetDynamicChassisPartResponse:IResponse 
+public class GetDynamicEngineResponse:IResponse 
 {
     public Guid Id { get; set; }
     public string EngineNo { get; set; }
