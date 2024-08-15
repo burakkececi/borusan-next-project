@@ -30,6 +30,6 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<GenerationImage>, GetListResponse<GetListGenerationImageListItemDto>>(); 
         
         CreateMap<GenerationImage, GetByGenerationIdGenerationImagesResponse>();
-        CreateMap<IPaginate<GenerationImage>, GetListResponse<GetByGenerationIdGenerationImagesResponse>>();
+        CreateMap<List<GenerationImage>, GetListResponse<GetByGenerationIdGenerationImagesResponse>>();
     }
 }

@@ -16,12 +16,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.AdvertImages.Queries.GetByAdvertId;
-public class GetByAdvertIdAdvertImageQuery: IRequest<GetListResponse<GetByAdvertIdAdvertImageResponse>>
+public class GetByAdvertIdAdvertImageQuery: IRequest<List<GetByAdvertIdAdvertImageResponse>>
 {
     public Guid AdvertId { get; set; }
 
 
-    public class GetByCarIdAdvertImageQueryHandler : IRequestHandler<GetByAdvertIdAdvertImageQuery, GetListResponse<GetByAdvertIdAdvertImageResponse>>
+    public class GetByCarIdAdvertImageQueryHandler : IRequestHandler<GetByAdvertIdAdvertImageQuery, List<GetByAdvertIdAdvertImageResponse>>
     {
         private readonly IMapper _mapper;
         private readonly IAdvertImageRepository _advertImageRepository;
@@ -34,17 +34,11 @@ public class GetByAdvertIdAdvertImageQuery: IRequest<GetListResponse<GetByAdvert
             _advertImageBusinessRules = advertImageBusinessRules;
         }
 
-        public async Task<GetListResponse<GetByAdvertIdAdvertImageResponse>> Handle(GetByAdvertIdAdvertImageQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetByAdvertIdAdvertImageResponse>> Handle(GetByAdvertIdAdvertImageQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<AdvertImage> advertImages = await _advertImageRepository.GetListAsync(
-                predicate: c => c.AdvertId == request.AdvertId,
-                index: 0,
-                size: 1000,
-                cancellationToken: cancellationToken
-            );
+            List<AdvertImage> advertImages = await _advertImageRepository.GetByAdvertId( request.AdvertId);
 
-
-            GetListResponse<GetByAdvertIdAdvertImageResponse> response = _mapper.Map<GetListResponse<GetByAdvertIdAdvertImageResponse>>(advertImages);
+            List<GetByAdvertIdAdvertImageResponse> response = _mapper.Map<List<GetByAdvertIdAdvertImageResponse>>(advertImages);
             return response;
         }
     }

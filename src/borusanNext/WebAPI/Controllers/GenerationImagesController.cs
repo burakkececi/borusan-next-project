@@ -55,7 +55,7 @@ public class GenerationImagesController : BaseController
     {
         GetByGenerationIdGenerationImagesQuery query = new() { GenerationId = generationid };
 
-        GetListResponse<GetByGenerationIdGenerationImagesResponse> response = await Mediator.Send(query);
+        List<GetByGenerationIdGenerationImagesResponse> response = await Mediator.Send(query);
 
         return Ok(response);
     }

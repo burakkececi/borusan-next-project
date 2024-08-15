@@ -28,7 +28,7 @@ public class MappingProfiles : Profile
 
 
         CreateMap<AdvertImage, GetByAdvertIdAdvertImageResponse>();
-        CreateMap<IPaginate<AdvertImage>, GetListResponse<GetByAdvertIdAdvertImageResponse>>();
+        CreateMap<List<AdvertImage>, GetListResponse<GetByAdvertIdAdvertImageResponse>>();
 
 
         CreateMap<AdvertImage, GetListAdvertImageListItemDto>();

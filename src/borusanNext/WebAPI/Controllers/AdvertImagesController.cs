@@ -55,7 +55,7 @@ public class AdvertImagesController : BaseController
     {
         GetByAdvertIdAdvertImageQuery query = new() { AdvertId = advertid };
 
-        GetListResponse<GetByAdvertIdAdvertImageResponse> response = await Mediator.Send(query);
+        List<GetByAdvertIdAdvertImageResponse> response = await Mediator.Send(query);
 
         return Ok(response);
     }
