@@ -6,10 +6,11 @@ using Application.Features.GenerationImages.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.GenerationImages.Queries.GetByGenerationId;
 
 namespace WebAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class GenerationImagesController : BaseController
 {
@@ -45,6 +46,16 @@ public class GenerationImagesController : BaseController
         GetByIdGenerationImageQuery query = new() { Id = id };
 
         GetByIdGenerationImageResponse response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpGet("{generationid}")]
+    public async Task<ActionResult<GetByGenerationIdGenerationImagesResponse>> GetByGenerationId([FromRoute] Guid generationid)
+    {
+        GetByGenerationIdGenerationImagesQuery query = new() { GenerationId = generationid };
+
+        GetListResponse<GetByGenerationIdGenerationImagesResponse> response = await Mediator.Send(query);
 
         return Ok(response);
     }

@@ -31,16 +31,20 @@ public class GetByIdCarQuery : IRequest<GetByIdCarResponse>, ISecuredRequest
 
         public async Task<GetByIdCarResponse> Handle(GetByIdCarQuery request, CancellationToken cancellationToken)
         {
-            Car? car = await _carRepository.GetAsync(predicate: c => c.Id == request.Id, include: i => i
+            Car? car = await _carRepository.GetAsync(predicate: c => c.Id == request.Id, 
+                include: i => i
                  .Include(i => i.ModalExtension).Include(modelExtension => modelExtension.ModalExtension.CarModel)
                     .Include(i => i.ModalExtension).ThenInclude(modal => modal.Generation)
                     .Include(i => i.ModalExtension).ThenInclude(modal => modal.CarModel).ThenInclude(modal => modal.Brand)
                     .Include(i => i.Engine).ThenInclude(fuel => fuel.FuelType)
                     .Include(i => i.BodyType)
                     .Include(i => i.Transmission)
-                    .Include(i => i.Seller)
-                    .Include(i => i.ExpertizeResult)
-                    .Include(i => i.Color), cancellationToken: cancellationToken);
+                    .Include(i => i.Seller).ThenInclude(modal => modal.Location)
+                    .Include(i => i.Seller).ThenInclude(modal => modal.Licence)
+                    .Include(i => i.ExpertizeResult).ThenInclude(modal => modal.ChassisPart)
+                    .Include(i => i.ExpertizeResult).ThenInclude(modal => modal.BodyShellPart)
+                    .Include(i => i.Color),
+                cancellationToken: cancellationToken);
             await _carBusinessRules.CarShouldExistWhenSelected(car);
 
             GetByIdCarResponse response = _mapper.Map<GetByIdCarResponse>(car);

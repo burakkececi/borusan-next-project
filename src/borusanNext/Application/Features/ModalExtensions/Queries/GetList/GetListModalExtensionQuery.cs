@@ -34,7 +34,7 @@ public class GetListModalExtensionQuery : IRequest<GetListResponse<GetListModalE
             IPaginate<ModalExtension> modalExtensions = await _modalExtensionRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                include: i => i.Include(m => m.Generation).Include(m => m.CarModel),
+                include: i => i.Include(m => m.Generation).Include(m => m.CarModel).ThenInclude(m => m.Brand),
                 cancellationToken: cancellationToken
             );
 
