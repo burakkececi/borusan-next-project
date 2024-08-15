@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Brands.Queries.GetDynamic;
-public class GetDynamicResponse:IDto
+public class GetDynamicBrandResponse:IDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

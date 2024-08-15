@@ -34,13 +34,16 @@ public class GetListCarQuery : IRequest<GetListResponse<GetListCarListItemDto>>,
             IPaginate<Car> cars = await _carRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                include: i => i.Include(p => p.ModalExtension)
-                               .Include(p => p.Color)
-                               .Include(p => p.Engine)
-                               .Include(p => p.BodyType)
-                               .Include(p => p.Transmission)
-                               .Include(p => p.ExpertizeResult)
-                               .Include(p => p.Seller),
+                include: i => i
+                 .Include(i => i.ModalExtension).Include(modelExtension => modelExtension.ModalExtension.CarModel)
+                    .Include(i => i.ModalExtension).ThenInclude(modal => modal.Generation)
+                    .Include(i => i.ModalExtension).ThenInclude(modal => modal.CarModel).ThenInclude(modal => modal.Brand)
+                    .Include(i => i.Engine).ThenInclude(fuel => fuel.FuelType)
+                    .Include(i => i.BodyType)
+                    .Include(i => i.Transmission)
+                    .Include(i => i.Seller)
+                    .Include(i => i.ExpertizeResult)
+                    .Include(i => i.Color),
                 cancellationToken: cancellationToken
             );
 

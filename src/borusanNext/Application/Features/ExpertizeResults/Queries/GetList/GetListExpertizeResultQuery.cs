@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.ExpertizeResults.Constants.ExpertizeResultsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.ExpertizeResults.Queries.GetList;
 
@@ -32,7 +33,8 @@ public class GetListExpertizeResultQuery : IRequest<GetListResponse<GetListExper
         {
             IPaginate<ExpertizeResult> expertizeResults = await _expertizeResultRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
+                include: i => i.Include(e => e.ChassisPart).Include(e => e.BodyShellPart),
                 cancellationToken: cancellationToken
             );
 

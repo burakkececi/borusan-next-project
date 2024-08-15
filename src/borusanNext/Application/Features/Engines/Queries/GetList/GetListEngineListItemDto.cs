@@ -1,3 +1,4 @@
+using Domain.Entities;
 using NArchitecture.Core.Application.Dtos;
 
 namespace Application.Features.Engines.Queries.GetList;
@@ -12,7 +13,7 @@ public class GetListEngineListItemDto : IDto
     public double Acceleration { get; set; }
     public int MaximumSpeed { get; set; }
     public int FuelTankVolume { get; set; }
-    public Guid FuelTypeId { get; set; }
+    public FuelType FuelType { get; set; }
     public double OutOfTownConsumptionRate { get; set; }
     public double UrbanConsumptionRate { get; set; }
     public double AverageConsumptionRate { get; set; }

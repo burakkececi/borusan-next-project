@@ -6,6 +6,10 @@ using Application.Features.CarColors.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Cars.Queries.GetDynamic;
+using Application.Features.Models.Queries.GetDynamic;
+using NArchitecture.Core.Persistence.Dynamic;
+using Application.Features.CarColors.Queries.GetDynamic;
 
 namespace WebAPI.Controllers;
 
@@ -55,6 +59,20 @@ public class CarColorsController : BaseController
         GetListCarColorQuery query = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListCarColorListItemDto> response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpPost("GetDynamic")]
+    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    {
+        GetDynamicColorQuery getDynamicQuery = new()
+        {
+            DynamicQuery = dynamicQuery,
+            PageRequest = pageRequest
+        };
+
+        GetListResponse<GetDynamicColorResponse> response = await Mediator.Send(getDynamicQuery);
 
         return Ok(response);
     }

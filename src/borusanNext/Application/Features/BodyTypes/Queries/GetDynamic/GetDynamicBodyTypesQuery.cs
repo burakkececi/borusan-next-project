@@ -38,7 +38,6 @@ public class GetDynamicBodyTypesQuery : IRequest<GetListResponse<GetDynamicBodyT
         {
             IPaginate<BodyType> bodyType = await _bodyTypeRepository.GetListByDynamicAsync(
               dynamic: request.DynamicQuery,
-              include: i => i.Include(b=>b.Cars),
               index: request.PageRequest.PageIndex,
               size: request.PageRequest.PageSize,
               cancellationToken: cancellationToken);

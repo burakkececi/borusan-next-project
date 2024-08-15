@@ -1,4 +1,5 @@
-﻿using NArchitecture.Core.Application.Responses;
+﻿using Domain.Entities;
+using NArchitecture.Core.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Engines.Queries.GetDynamic;
-public class GetDynamicChassisPartResponse:IResponse 
+public class GetDynamicEngineResponse:IResponse 
 {
     public Guid Id { get; set; }
     public string EngineNo { get; set; }
@@ -16,7 +17,7 @@ public class GetDynamicChassisPartResponse:IResponse
     public double Acceleration { get; set; }
     public int MaximumSpeed { get; set; }
     public int FuelTankVolume { get; set; }
-    public Guid FuelTypeId { get; set; }
+    public FuelType FuelType { get; set; }
     public double OutOfTownConsumptionRate { get; set; }
     public double UrbanConsumptionRate { get; set; }
     public double AverageConsumptionRate { get; set; }

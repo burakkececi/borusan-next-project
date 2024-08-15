@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domain.Entities;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,12 @@ public class GetDynamicModalExtensionsResponse:IRequest
     public double LuggageCapacity { get; set; }
     public double EmptyWeight { get; set; }
     public int ModelYear { get; set; }
+
     public Guid CarModelId { get; set; }
+    public string CarModelName { get; set; }
+    public Guid BrandId { get; set; }
+    public string BrandName { get; set; }
+    public string BrandLogo { get; set; }
     public Guid GenerationId { get; set; }
+    public string GenerationName { get; set; }
 }

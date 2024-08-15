@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Appointments.Constants.AppointmentsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Appointments.Queries.GetById;
 
@@ -30,7 +31,7 @@ public class GetByIdAppointmentQuery : IRequest<GetByIdAppointmentResponse>, ISe
 
         public async Task<GetByIdAppointmentResponse> Handle(GetByIdAppointmentQuery request, CancellationToken cancellationToken)
         {
-            Appointment? appointment = await _appointmentRepository.GetAsync(predicate: a => a.Id == request.Id, cancellationToken: cancellationToken);
+            Appointment? appointment = await _appointmentRepository.GetAsync(predicate: a => a.Id == request.Id, include: i => i.Include(appoiment => appoiment.Car).Include(appoiment => appoiment.Customer), cancellationToken: cancellationToken);
             await _appointmentBusinessRules.AppointmentShouldExistWhenSelected(appointment);
 
             GetByIdAppointmentResponse response = _mapper.Map<GetByIdAppointmentResponse>(appointment);

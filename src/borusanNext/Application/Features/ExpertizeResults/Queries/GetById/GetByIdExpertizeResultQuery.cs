@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.ExpertizeResults.Constants.ExpertizeResultsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.ExpertizeResults.Queries.GetById;
 
@@ -30,7 +31,7 @@ public class GetByIdExpertizeResultQuery : IRequest<GetByIdExpertizeResultRespon
 
         public async Task<GetByIdExpertizeResultResponse> Handle(GetByIdExpertizeResultQuery request, CancellationToken cancellationToken)
         {
-            ExpertizeResult? expertizeResult = await _expertizeResultRepository.GetAsync(predicate: er => er.Id == request.Id, cancellationToken: cancellationToken);
+            ExpertizeResult? expertizeResult = await _expertizeResultRepository.GetAsync(predicate: er => er.Id == request.Id, include: i => i.Include(e => e.ChassisPart).Include(e => e.BodyShellPart), cancellationToken: cancellationToken);
             await _expertizeResultBusinessRules.ExpertizeResultShouldExistWhenSelected(expertizeResult);
 
             GetByIdExpertizeResultResponse response = _mapper.Map<GetByIdExpertizeResultResponse>(expertizeResult);

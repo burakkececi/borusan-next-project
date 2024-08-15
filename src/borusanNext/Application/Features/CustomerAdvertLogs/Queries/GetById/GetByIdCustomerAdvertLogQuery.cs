@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.CustomerAdvertLogs.Constants.CustomerAdvertLogsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.CustomerAdvertLogs.Queries.GetById;
 
@@ -30,7 +31,7 @@ public class GetByIdCustomerAdvertLogQuery : IRequest<GetByIdCustomerAdvertLogRe
 
         public async Task<GetByIdCustomerAdvertLogResponse> Handle(GetByIdCustomerAdvertLogQuery request, CancellationToken cancellationToken)
         {
-            CustomerAdvertLog? customerAdvertLog = await _customerAdvertLogRepository.GetAsync(predicate: cal => cal.Id == request.Id, cancellationToken: cancellationToken);
+            CustomerAdvertLog? customerAdvertLog = await _customerAdvertLogRepository.GetAsync(predicate: cal => cal.Id == request.Id, include: i => i.Include(c => c.Customer).Include(c => c.Advert), cancellationToken: cancellationToken);
             await _customerAdvertLogBusinessRules.CustomerAdvertLogShouldExistWhenSelected(customerAdvertLog);
 
             GetByIdCustomerAdvertLogResponse response = _mapper.Map<GetByIdCustomerAdvertLogResponse>(customerAdvertLog);

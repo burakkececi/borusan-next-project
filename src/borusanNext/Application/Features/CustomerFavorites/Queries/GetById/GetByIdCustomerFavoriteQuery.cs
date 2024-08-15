@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.CustomerFavorites.Constants.CustomerFavoritesOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.CustomerFavorites.Queries.GetById;
 
@@ -30,7 +31,8 @@ public class GetByIdCustomerFavoriteQuery : IRequest<GetByIdCustomerFavoriteResp
 
         public async Task<GetByIdCustomerFavoriteResponse> Handle(GetByIdCustomerFavoriteQuery request, CancellationToken cancellationToken)
         {
-            CustomerFavorite? customerFavorite = await _customerFavoriteRepository.GetAsync(predicate: cf => cf.Id == request.Id, cancellationToken: cancellationToken);
+            CustomerFavorite? customerFavorite = await _customerFavoriteRepository.GetAsync(predicate: cf => cf.Id == request.Id, include: i => i.Include(c => c.Customer).Include(c => c.Advert),
+ cancellationToken: cancellationToken);
             await _customerFavoriteBusinessRules.CustomerFavoriteShouldExistWhenSelected(customerFavorite);
 
             GetByIdCustomerFavoriteResponse response = _mapper.Map<GetByIdCustomerFavoriteResponse>(customerFavorite);

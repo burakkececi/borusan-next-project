@@ -1,4 +1,5 @@
-﻿using NArchitecture.Core.Application.Responses;
+﻿using Domain.Entities;
+using NArchitecture.Core.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,5 @@ public class GetDynamicCarModelsResponse:IResponse
 {
     public Guid Id { get; set; }
     public string ModelName { get; set; }
-    public Guid BrandId { get; set; }
+    public Brand Brand { get; set; }
 }

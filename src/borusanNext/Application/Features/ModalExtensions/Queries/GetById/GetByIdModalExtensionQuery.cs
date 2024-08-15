@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.ModalExtensions.Constants.ModalExtensionsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.ModalExtensions.Queries.GetById;
 
@@ -30,7 +31,7 @@ public class GetByIdModalExtensionQuery : IRequest<GetByIdModalExtensionResponse
 
         public async Task<GetByIdModalExtensionResponse> Handle(GetByIdModalExtensionQuery request, CancellationToken cancellationToken)
         {
-            ModalExtension? modalExtension = await _modalExtensionRepository.GetAsync(predicate: me => me.Id == request.Id, cancellationToken: cancellationToken);
+            ModalExtension? modalExtension = await _modalExtensionRepository.GetAsync(predicate: me => me.Id == request.Id, include: i => i.Include(m => m.Generation).Include(m => m.CarModel),cancellationToken: cancellationToken);
             await _modalExtensionBusinessRules.ModalExtensionShouldExistWhenSelected(modalExtension);
 
             GetByIdModalExtensionResponse response = _mapper.Map<GetByIdModalExtensionResponse>(modalExtension);

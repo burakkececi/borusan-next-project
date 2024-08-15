@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Appointments.Constants.AppointmentsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Appointments.Queries.GetList;
 
@@ -32,6 +33,7 @@ public class GetListAppointmentQuery : IRequest<GetListResponse<GetListAppointme
         {
             IPaginate<Appointment> appointments = await _appointmentRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
+                include: i => i.Include(appoiment => appoiment.Car).Include(appoiment => appoiment.Customer),
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken
             );

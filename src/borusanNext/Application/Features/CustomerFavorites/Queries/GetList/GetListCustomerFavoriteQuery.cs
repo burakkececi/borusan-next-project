@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.CustomerFavorites.Constants.CustomerFavoritesOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.CustomerFavorites.Queries.GetList;
 
@@ -32,7 +33,8 @@ public class GetListCustomerFavoriteQuery : IRequest<GetListResponse<GetListCust
         {
             IPaginate<CustomerFavorite> customerFavorites = await _customerFavoriteRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
+                include: i => i.Include(c => c.Customer).Include(c => c.Advert),
                 cancellationToken: cancellationToken
             );
 
