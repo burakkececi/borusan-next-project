@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.ModalExtensions.Constants.ModalExtensionsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.ModalExtensions.Queries.GetList;
 
@@ -32,7 +33,8 @@ public class GetListModalExtensionQuery : IRequest<GetListResponse<GetListModalE
         {
             IPaginate<ModalExtension> modalExtensions = await _modalExtensionRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
+                include: i => i.Include(m => m.Generation).Include(m => m.CarModel),
                 cancellationToken: cancellationToken
             );
 

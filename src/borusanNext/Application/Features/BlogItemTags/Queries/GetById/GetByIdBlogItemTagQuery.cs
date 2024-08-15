@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.BlogItemTags.Constants.BlogItemTagsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.BlogItemTags.Queries.GetById;
 
@@ -30,7 +31,7 @@ public class GetByIdBlogItemTagQuery : IRequest<GetByIdBlogItemTagResponse>, ISe
 
         public async Task<GetByIdBlogItemTagResponse> Handle(GetByIdBlogItemTagQuery request, CancellationToken cancellationToken)
         {
-            BlogItemTag? blogItemTag = await _blogItemTagRepository.GetAsync(predicate: bit => bit.Id == request.Id, cancellationToken: cancellationToken);
+            BlogItemTag? blogItemTag = await _blogItemTagRepository.GetAsync(predicate: bit => bit.Id == request.Id, include: i => i.Include(blogItem => blogItem.Blog).Include(blogItem => blogItem.Tag), cancellationToken: cancellationToken);
             await _blogItemTagBusinessRules.BlogItemTagShouldExistWhenSelected(blogItemTag);
 
             GetByIdBlogItemTagResponse response = _mapper.Map<GetByIdBlogItemTagResponse>(blogItemTag);

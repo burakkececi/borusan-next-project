@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.CustomerAdvertLogs.Constants.CustomerAdvertLogsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.CustomerAdvertLogs.Queries.GetList;
 
@@ -32,7 +33,8 @@ public class GetListCustomerAdvertLogQuery : IRequest<GetListResponse<GetListCus
         {
             IPaginate<CustomerAdvertLog> customerAdvertLogs = await _customerAdvertLogRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
+                include: i => i.Include(c => c.Customer).Include(c => c.Advert),
                 cancellationToken: cancellationToken
             );
 

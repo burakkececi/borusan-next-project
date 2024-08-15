@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using Domain.Entities;
+using Domain.Enums;
 using NArchitecture.Core.Application.Responses;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,7 @@ public class GetDynamicCustomerResponse:IResponse
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Phone { get; set; }
+    public Customer Customer { get; set; }
+    public CustomerAdvertLog CustomerAdvertLog { get; set; }
     public CustomerType CustomerType { get; set; }
 }

@@ -35,7 +35,6 @@ public class GetDynamicBrandQuery : IRequest<GetListResponse<GetDynamicBrandResp
             IPaginate<Brand> brands = await _brandRepository.GetListByDynamicAsync(
                 dynamic: request.DynamicQuery,
                 index: request.PageRequest.PageIndex,
-                include: i => i.Include(c => c.CarModels),
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken);
 

@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Engines.Constants.EnginesOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Engines.Queries.GetById;
 
@@ -30,7 +31,7 @@ public class GetByIdEngineQuery : IRequest<GetByIdEngineResponse>, ISecuredReque
 
         public async Task<GetByIdEngineResponse> Handle(GetByIdEngineQuery request, CancellationToken cancellationToken)
         {
-            Engine? engine = await _engineRepository.GetAsync(predicate: e => e.Id == request.Id, cancellationToken: cancellationToken);
+            Engine? engine = await _engineRepository.GetAsync(predicate: e => e.Id == request.Id, include: i => i.Include(e => e.FuelType), cancellationToken: cancellationToken);
             await _engineBusinessRules.EngineShouldExistWhenSelected(engine);
 
             GetByIdEngineResponse response = _mapper.Map<GetByIdEngineResponse>(engine);

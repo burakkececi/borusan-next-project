@@ -39,7 +39,6 @@ public class GetDynamicChassisPartsQuery:IRequest<GetListResponse<GetDynamicChas
             IPaginate<ChassisPart> chassisPart = await _chassisPartRepository.GetListByDynamicAsync(
                dynamic: request.DynamicQuery,
                index: request.PageRequest.PageIndex,
-               include: i => i.Include(c => c.ExpertizeResult),
                size: request.PageRequest.PageSize,
                cancellationToken: cancellationToken);
 

@@ -1,4 +1,5 @@
-﻿using NArchitecture.Core.Application.Responses;
+﻿using Domain.Entities;
+using NArchitecture.Core.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace Application.Features.BlogItemTags.Queries.GetDynamic;
 public class GetDynamicBlogItemResponse:IResponse
 {
     public Guid Id { get; set; }
+
     public Guid TagId { get; set; }
+    public string TagName { get; set; }
+
     public Guid BlogId { get; set; }
+    public string BlogTitle { get; set; }
+    public string BlogDescription { get; set; }
+    public string BlogBanner { get; set; }
 }

@@ -41,12 +41,10 @@ public class GetDynamicCarQuery : IRequest<GetListResponse<GetDynamicCarResponse
                  .Include(i => i.ModalExtension).Include(modelExtension => modelExtension.ModalExtension.CarModel)
                     .Include(i => i.ModalExtension).ThenInclude(modal=>modal.Generation)
                     .Include(i => i.ModalExtension).ThenInclude(modal=>modal.CarModel).ThenInclude(modal => modal.Brand)
-                    .Include(i => i.Engine).Include(fuel => fuel.Engine.FuelType)
+                    .Include(i => i.Engine).ThenInclude(fuel => fuel.FuelType)
                     .Include(i => i.BodyType)
                     .Include(i => i.Transmission)
-                    .Include(i => i.Advert)
                     .Include(i => i.Seller)
-                    .Include(i => i.Appointments)
                     .Include(i => i.ExpertizeResult)
                     .Include(i => i.Color),
              cancellationToken: cancellationToken);

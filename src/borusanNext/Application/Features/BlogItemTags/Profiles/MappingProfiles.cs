@@ -24,11 +24,33 @@ public class MappingProfiles : Profile
         CreateMap<DeleteBlogItemTagCommand, BlogItemTag>();
         CreateMap<BlogItemTag, DeletedBlogItemTagResponse>();
 
-        CreateMap<BlogItemTag, GetByIdBlogItemTagResponse>();
+        CreateMap<BlogItemTag, GetByIdBlogItemTagResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.TagId, opt => opt.MapFrom(src => src.Tag.Id))
+            .ForMember(dest => dest.TagName, opt => opt.MapFrom(src => src.Tag.Name))
+            .ForMember(dest => dest.BlogId, opt => opt.MapFrom(src => src.Blog.Id))
+            .ForMember(dest => dest.BlogTitle, opt => opt.MapFrom(src => src.Blog.Title))
+            .ForMember(dest => dest.BlogDescription, opt => opt.MapFrom(src => src.Blog.Description))
+            .ForMember(dest => dest.BlogBanner, opt => opt.MapFrom(src => src.Blog.Banner));
 
-        CreateMap<BlogItemTag, GetListBlogItemTagListItemDto>();
+        CreateMap<BlogItemTag, GetListBlogItemTagListItemDto>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.TagId, opt => opt.MapFrom(src => src.Tag.Id))
+            .ForMember(dest => dest.TagName, opt => opt.MapFrom(src => src.Tag.Name))
+            .ForMember(dest => dest.BlogId, opt => opt.MapFrom(src => src.Blog.Id))
+            .ForMember(dest => dest.BlogTitle, opt => opt.MapFrom(src => src.Blog.Title))
+            .ForMember(dest => dest.BlogDescription, opt => opt.MapFrom(src => src.Blog.Description))
+            .ForMember(dest => dest.BlogBanner, opt => opt.MapFrom(src => src.Blog.Banner));
         CreateMap<IPaginate<BlogItemTag>, GetListResponse<GetListBlogItemTagListItemDto>>();
-        CreateMap<BlogItemTag, GetDynamicBlogItemResponse>();
+        CreateMap<BlogItemTag, GetDynamicBlogItemResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.TagId, opt => opt.MapFrom(src => src.Tag.Id))
+            .ForMember(dest => dest.TagName, opt => opt.MapFrom(src => src.Tag.Name))
+            .ForMember(dest => dest.BlogId, opt => opt.MapFrom(src => src.Blog.Id))
+            .ForMember(dest => dest.BlogTitle, opt => opt.MapFrom(src => src.Blog.Title))
+            .ForMember(dest => dest.BlogDescription, opt => opt.MapFrom(src => src.Blog.Description))
+            .ForMember(dest => dest.BlogBanner, opt => opt.MapFrom(src => src.Blog.Banner))
+            ;
         CreateMap<IPaginate<BlogItemTag>, GetListResponse<GetDynamicBlogItemResponse>>();
     }
 }

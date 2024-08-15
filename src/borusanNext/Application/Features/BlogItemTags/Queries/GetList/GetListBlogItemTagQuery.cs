@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.BlogItemTags.Constants.BlogItemTagsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.BlogItemTags.Queries.GetList;
 
@@ -32,6 +33,7 @@ public class GetListBlogItemTagQuery : IRequest<GetListResponse<GetListBlogItemT
         {
             IPaginate<BlogItemTag> blogItemTags = await _blogItemTagRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
+                include: i => i.Include(blogItem => blogItem.Blog).Include(blogItem => blogItem.Tag),
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken
             );
