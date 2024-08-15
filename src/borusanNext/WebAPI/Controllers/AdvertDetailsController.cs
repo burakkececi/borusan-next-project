@@ -1,6 +1,6 @@
 ﻿using Application.Features.AdvertDetails.Queries.GetDynamic;
+using Common.Persistance.Elastic.Queries;
 using Microsoft.AspNetCore.Mvc;
-using NArchitecture.Core.Persistence.Dynamic;
 
 namespace WebAPI.Controllers;
 
@@ -9,12 +9,11 @@ namespace WebAPI.Controllers;
 public class AdvertDetailsController : BaseController
 {
     [HttpPost("GetAdvertDetailsDynamic")]
-    public async Task<IActionResult> GetAdvertDetailsDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] int pageSize, [FromQuery] int pageIndex)
+    public async Task<IActionResult> GetAdvertDetailsDynamic([FromBody] ElasticQuery elasticQuery)
     {
         GetDynamicAdvertDetailsQuery getDynamicQuery = new()
         {
-            DynamicQuery = dynamicQuery,
-            PageRequest = new() { PageIndex = pageIndex, PageSize = pageSize }
+            ElasticQuery = elasticQuery
         };
         var response = await Mediator.Send(getDynamicQuery);
         return Ok(response);

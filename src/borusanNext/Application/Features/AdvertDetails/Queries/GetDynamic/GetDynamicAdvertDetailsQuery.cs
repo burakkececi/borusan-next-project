@@ -2,20 +2,20 @@
 using Application.Services.Repositories;
 using AutoMapper;
 using MediatR;
-using NArchitecture.Core.Application.Requests;
+using Application.Features.AdvertDetails.Constants;
+using Common.Persistance.Elastic.Queries;
+using Common.Persistance.Elastic.Models;
+using Application.Services.ElasticSearch;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Responses;
-using NArchitecture.Core.ElasticSearch;
-using NArchitecture.Core.ElasticSearch.Models;
-using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.AdvertDetails.Queries.GetDynamic;
-public class GetDynamicAdvertDetailsQuery : IRequest<GetListResponse<AdvertDetailsReadModel>>
+public class GetDynamicAdvertDetailsQuery : IRequest<GetListResponse<AdvertDetailsReadModel>>, ISecuredRequest
 {
-    public PageRequest PageRequest { get; set; }
-    public DynamicQuery DynamicQuery { get; set; }
-    //public string Query { get; set; }
-    //public string[] Fields { get; set; }
+    public ElasticQuery ElasticQuery { get; set; }
+
+    public string[] Roles => [AdvertDetailsOperationClaims.Admin, AdvertDetailsOperationClaims.Read];
 
     public class GetDynamicAdvertDetailsQueryHandler : IRequestHandler<GetDynamicAdvertDetailsQuery, GetListResponse<AdvertDetailsReadModel>>
     {
@@ -33,25 +33,30 @@ public class GetDynamicAdvertDetailsQuery : IRequest<GetListResponse<AdvertDetai
 
         public async Task<GetListResponse<AdvertDetailsReadModel>> Handle(GetDynamicAdvertDetailsQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<AdvertDetailsReadModel> advertDetails = await _advertDetailsReadRepository.GetListByDynamicAsync(
-                dynamic: request.DynamicQuery,
-                index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize,
-                cancellationToken: cancellationToken
-                );
+            //IPaginate<AdvertDetailsReadModel> advertDetails = await _advertDetailsReadRepository.GetListByDynamicAsync(
+            //    dynamic: request.DynamicQuery,
+            //    index: request.PageRequest.PageIndex,
+            //    size: request.PageRequest.PageSize,
+            //    cancellationToken: cancellationToken
+            //    );
 
-            GetListResponse<AdvertDetailsReadModel> response = _mapper.Map<GetListResponse<AdvertDetailsReadModel>>(advertDetails);
+            var advertDetails = await _elasticSearch.GetSearchBySimpleQueryString<AdvertDetailsReadModel>(new SearchByQueryParameters()
+            {
+                IndexName = "advertdetails",
+                From = request.ElasticQuery.From,
+                Size = request.ElasticQuery.Size,
+                Order = request.ElasticQuery.Order,
+                Queries = request.ElasticQuery.Queries,
+                Filters = request.ElasticQuery.Filters
+            });
+
+            IPaginate<AdvertDetailsReadModel> listOfAdverts = advertDetails
+                                                                .Select(p => p.Item)
+                                                                .AsQueryable()
+                                                                .ToPaginate(request.ElasticQuery.From, request.ElasticQuery.Size, 0);
+
+            GetListResponse<AdvertDetailsReadModel> response = _mapper.Map<GetListResponse<AdvertDetailsReadModel>>(listOfAdverts);
             return response;
-
-            //var advertDetails = _elasticSearch.GetSearchBySimpleQueryString<AdvertDetailsReadModel>(new SearchByQueryParameters()
-            //{
-            //    IndexName = "advertdetails",
-            //    From = request.PageRequest.PageIndex,
-            //    Size = request.PageRequest.PageSize,
-            //    Fields = request.Fields,
-            //    Query = request.Query,
-            //    QueryName = "advert_details_search"
-            //});
         }
     }
 }
