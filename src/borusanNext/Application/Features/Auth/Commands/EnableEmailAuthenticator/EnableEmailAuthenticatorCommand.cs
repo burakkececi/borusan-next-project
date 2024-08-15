@@ -1,10 +1,9 @@
-﻿using System.Web;
-using Application.Features.Auth.Rules;
+﻿using Application.Features.Auth.Rules;
 using Application.Services.AuthenticatorService;
 using Application.Services.Repositories;
 using Application.Services.UsersService;
-using Common.Events.User;
-using Common.RabbitMQ;
+using Common.Infrastructure.Events.User;
+using Common.Infrastructure.RabbitMQ;
 using Domain.Entities;
 using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;

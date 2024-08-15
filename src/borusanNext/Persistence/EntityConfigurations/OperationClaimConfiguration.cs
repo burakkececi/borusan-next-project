@@ -33,6 +33,7 @@ using Application.Features.Sellers.Constants;
 using Application.Features.AdvertImages.Constants;
 using Application.Features.GenerationImages.Constants;
 using Application.Features.CustomerFavorites.Constants;
+using Application.Features.AdvertDetails.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -541,6 +542,15 @@ featureOperationClaims.AddRange(
                 new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Create },
                 new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Update },
                 new() { Id = ++lastId, Name = CustomerFavoritesOperationClaims.Delete },
+            ]
+        );
+        #endregion
+
+        #region AdvertDetails Readonly
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = AdvertDetailsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = AdvertDetailsOperationClaims.Read }
             ]
         );
         #endregion

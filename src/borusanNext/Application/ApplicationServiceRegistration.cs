@@ -13,8 +13,6 @@ using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Logging.Abstraction;
 using NArchitecture.Core.CrossCuttingConcerns.Logging.Configurations;
 using NArchitecture.Core.CrossCuttingConcerns.Logging.Serilog.File;
-using NArchitecture.Core.ElasticSearch;
-using NArchitecture.Core.ElasticSearch.Models;
 using NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
@@ -47,6 +45,7 @@ using Application.Services.Sellers;
 using Application.Services.AdvertImages;
 using Application.Services.GenerationImages;
 using Application.Services.CustomerFavorites;
+using Application.Services.ElasticSearch;
 
 namespace Application;
 
@@ -56,7 +55,6 @@ public static class ApplicationServiceRegistration
         this IServiceCollection services,
         MailSettings mailSettings,
         FileLogConfiguration fileLogConfiguration,
-        ElasticSearchConfig elasticSearchConfig,
         TokenOptions tokenOptions
     )
     {
@@ -78,7 +76,6 @@ public static class ApplicationServiceRegistration
 
         services.AddSingleton<IMailService, MailKitMailService>(_ => new MailKitMailService(mailSettings));
         services.AddSingleton<ILogger, SerilogFileLogger>(_ => new SerilogFileLogger(fileLogConfiguration));
-        services.AddSingleton<IElasticSearch, ElasticSearchManager>(_ => new ElasticSearchManager(elasticSearchConfig));
 
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();
