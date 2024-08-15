@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
-using Common.RabbitMQ;
 using NArchitecture.Core.Mailing;
-using Common.Consumers.User;
 using Microsoft.AspNetCore.Builder;
+using Common.Infrastructure.RabbitMQ;
+using Common.Infrastructure.Consumers.User;
 
 namespace Common
 {

@@ -7,20 +7,20 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using NArchitecture.Core.Mailing;
 using MimeKit;
-using Common.Events.User;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Web;
-using Common.RabbitMQ;
+using Common.Infrastructure.RabbitMQ;
+using Common.Infrastructure.Events.User;
 
-namespace Common.Consumers.User;
+namespace Common.Infrastructure.Consumers.User;
 
-public class UserRegisterVerificationEventConsumer
+public class UserAuthenticatorCodeEventConsumer
 {
     private readonly IModel _channel;
     private readonly string _queueName;
     private readonly IMailService _mailService;
 
-    public UserRegisterVerificationEventConsumer(IModel channel, string queueName, IMailService mailService)
+    public UserAuthenticatorCodeEventConsumer(IModel channel, string queueName, IMailService mailService)
     {
         _channel = channel;
         _queueName = queueName;
@@ -49,10 +49,10 @@ public class UserRegisterVerificationEventConsumer
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
 
-            var userRegisterEvent = JsonSerializer.Deserialize<UserRegisterVerificationEvent>(message);
+            var userAuthenticatorCodeEvent = JsonSerializer.Deserialize<UserAuthenticatorCodeEvent>(message);
 
-            if (userRegisterEvent != null)
-                SendEmail(userRegisterEvent.UserEmailAdress,userRegisterEvent.VerifyEmailUrlPrefix,userRegisterEvent.AddedEmailAuthenticatorActivationKey);
+            if (userAuthenticatorCodeEvent != null)
+                SendEmail(userAuthenticatorCodeEvent.UserEmailAdress, userAuthenticatorCodeEvent.AuthenticatorCode);
         }
         catch (Exception ex)
         {
@@ -60,7 +60,7 @@ public class UserRegisterVerificationEventConsumer
         }
     }
 
-    private void SendEmail(string emailAddress, string verifyEmailUrlPrefix, string addedEmailAuthenticatorActivationKey)
+    private void SendEmail(string emailAddress, string authenticatorCode)
     {
         var toEmailList = new List<MailboxAddress> { new(name: emailAddress, emailAddress) };
 
@@ -68,9 +68,8 @@ public class UserRegisterVerificationEventConsumer
             new Mail
             {
                 ToList = toEmailList,
-                Subject = "Verify Your Email - BorusanNext",
-                HtmlBody =
-                    $"Click on the link to verify your email: <a href='{verifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticatorActivationKey)}'>click here.</a>"
+                Subject = "Authenticator Code - NArchitecture",
+                HtmlBody = $"Enter your authenticator code: {authenticatorCode}"
             }
         );
     }

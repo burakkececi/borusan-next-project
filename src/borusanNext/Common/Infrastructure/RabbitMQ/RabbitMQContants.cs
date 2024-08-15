@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.RabbitMQ;
+namespace Common.Infrastructure.RabbitMQ;
 public class RabbitMQConstants
 {
     public const string RabbitMQHost = "localhost";

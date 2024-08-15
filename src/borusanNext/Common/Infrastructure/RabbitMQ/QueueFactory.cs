@@ -4,7 +4,7 @@ using System;
 using System.Text;
 using System.Text.Json;
 
-namespace Common.RabbitMQ
+namespace Common.Infrastructure.RabbitMQ
 {
     public static class QueueFactory
     {

@@ -1,14 +1,12 @@
 ﻿using Application.Services.Repositories;
-using Common.Events.User;
-using Common.RabbitMQ;
+using Common.Infrastructure.Events.User;
+using Common.Infrastructure.RabbitMQ;
 using Domain.Entities;
-using MimeKit;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Security.EmailAuthenticator;
 using NArchitecture.Core.Security.Enums;
 using NArchitecture.Core.Security.OtpAuthenticator;
-using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace Application.Services.AuthenticatorService;
 

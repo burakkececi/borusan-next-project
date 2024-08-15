@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Common.Events.User;
+namespace Common.Infrastructure.Events.User;
 public class UserAuthenticatorCodeEvent
 {
     public string UserEmailAdress { get; set; }
