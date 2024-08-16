@@ -6,6 +6,10 @@ using Application.Features.BodyTypes.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Cars.Queries.GetDynamic;
+using Application.Features.Models.Queries.GetDynamic;
+using NArchitecture.Core.Persistence.Dynamic;
+using Application.Features.BodyTypes.Queries.GetDynamic;
 
 namespace WebAPI.Controllers;
 
@@ -55,6 +59,20 @@ public class BodyTypesController : BaseController
         GetListBodyTypeQuery query = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListBodyTypeListItemDto> response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpPost("GetDynamic")]
+    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    {
+        GetDynamicBodyTypesQuery getDynamicQuery = new()
+        {
+            DynamicQuery = dynamicQuery,
+            PageRequest = pageRequest
+        };
+
+        GetListResponse<GetDynamicBodyTypesResponse> response = await Mediator.Send(getDynamicQuery);
 
         return Ok(response);
     }

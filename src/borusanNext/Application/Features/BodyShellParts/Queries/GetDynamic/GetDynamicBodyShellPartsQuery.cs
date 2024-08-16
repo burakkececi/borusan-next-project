@@ -38,7 +38,6 @@ public class GetDynamicBodyShellPartsQuery : IRequest<GetListResponse<GetDynamic
         {
             IPaginate<BodyShellPart> bodyShellPart = await _bodyShellPartRepository.GetListByDynamicAsync(
                dynamic: request.DynamicQuery,
-               include: i => i.Include(b => b.ExpertizeResult),
                index: request.PageRequest.PageIndex,
                size: request.PageRequest.PageSize,
                cancellationToken: cancellationToken);

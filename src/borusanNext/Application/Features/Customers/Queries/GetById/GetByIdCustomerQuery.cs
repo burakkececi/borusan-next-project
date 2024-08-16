@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Customers.Constants.CustomersOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Customers.Queries.GetById;
 
@@ -30,7 +31,8 @@ public class GetByIdCustomerQuery : IRequest<GetByIdCustomerResponse>, ISecuredR
 
         public async Task<GetByIdCustomerResponse> Handle(GetByIdCustomerQuery request, CancellationToken cancellationToken)
         {
-            Customer? customer = await _customerRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
+            Customer? customer = await _customerRepository.GetAsync(predicate: c => c.Id == request.Id, include: i => i
+                 .Include(c => c.CustomerFavorites).Include(c => c.Appointments).Include(c => c.CustomerAdvertLogs), cancellationToken: cancellationToken);
             await _customerBusinessRules.CustomerShouldExistWhenSelected(customer);
 
             GetByIdCustomerResponse response = _mapper.Map<GetByIdCustomerResponse>(customer);

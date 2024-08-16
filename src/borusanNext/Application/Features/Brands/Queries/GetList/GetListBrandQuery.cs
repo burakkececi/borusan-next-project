@@ -31,8 +31,7 @@ public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDt
 
         public async Task<GetListResponse<GetListBrandListItemDto>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Brand> brands = await _brandRepository.GetListAsync(include:
-                b=>b.Include(c=>c.CarModels),
+            IPaginate<Brand> brands = await _brandRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken

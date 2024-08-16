@@ -6,6 +6,11 @@ using Application.Features.BlogItemTags.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Cars.Queries.GetDynamic;
+using Application.Features.Models.Queries.GetDynamic;
+using NArchitecture.Core.Persistence.Dynamic;
+using Application.Features.Brands.Queries.GetDynamic;
+using Application.Features.BlogItemTags.Queries.GetDynamic;
 
 namespace WebAPI.Controllers;
 
@@ -55,6 +60,20 @@ public class BlogItemTagsController : BaseController
         GetListBlogItemTagQuery query = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListBlogItemTagListItemDto> response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpPost("GetDynamic")]
+    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    {
+        GetDynamicBlogItemQuery getDynamicQuery = new()
+        {
+            DynamicQuery = dynamicQuery,
+            PageRequest = pageRequest
+        };
+
+        GetListResponse<GetDynamicBlogItemResponse> response = await Mediator.Send(getDynamicQuery);
 
         return Ok(response);
     }

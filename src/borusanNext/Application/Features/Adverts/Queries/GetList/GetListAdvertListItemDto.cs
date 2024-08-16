@@ -8,5 +8,4 @@ public class GetListAdvertListItemDto : IDto
 {
     public Guid Id { get; set; }
     public int AdvertNo { get; set; }
-    public AdvertDetailsReadModel AdvertDetailsReadModel { get; set; }
 }

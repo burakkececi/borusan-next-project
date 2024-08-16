@@ -16,11 +16,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Engines.Queries.GetDynamic;
-public class GetDynamicEngineQuery:IRequest<GetListResponse<GetDynamicChassisPartResponse>>
+public class GetDynamicEngineQuery:IRequest<GetListResponse<GetDynamicEngineResponse>>
 {
     public PageRequest  PageRequest { get; set; }
     public DynamicQuery DynamicQuery { get; set; }
-    public class GetDynamicEngineQueryHandler : IRequestHandler<GetDynamicEngineQuery, GetListResponse<GetDynamicChassisPartResponse>>
+    public class GetDynamicEngineQueryHandler : IRequestHandler<GetDynamicEngineQuery, GetListResponse<GetDynamicEngineResponse>>
     {
         private readonly IMapper _mapper;
         private readonly IEngineRepository _engineRepository;
@@ -33,7 +33,7 @@ public class GetDynamicEngineQuery:IRequest<GetListResponse<GetDynamicChassisPar
             _businessRules = businessRules;
         }
 
-        public async Task<GetListResponse<GetDynamicChassisPartResponse>> Handle(GetDynamicEngineQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetDynamicEngineResponse>> Handle(GetDynamicEngineQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Engine> engine = await _engineRepository.GetListByDynamicAsync(
                 dynamic: request.DynamicQuery,
@@ -43,7 +43,7 @@ public class GetDynamicEngineQuery:IRequest<GetListResponse<GetDynamicChassisPar
                 cancellationToken: cancellationToken);
 
 
-            GetListResponse<GetDynamicChassisPartResponse> response = _mapper.Map<GetListResponse<GetDynamicChassisPartResponse>>(engine);
+            GetListResponse<GetDynamicEngineResponse> response = _mapper.Map<GetListResponse<GetDynamicEngineResponse>>(engine);
             return response;
         }
     }

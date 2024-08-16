@@ -38,7 +38,7 @@ public class GetDynamicExpertizeResultQuery:IRequest<GetListResponse<GetDynamicE
         {
             IPaginate<ExpertizeResult> expertizeResult = await _expertizeResultRepository.GetListByDynamicAsync(
                 dynamic: request.DynamicQuery,
-                include: i => i.Include(e=>e.ChassisPart).Include(e=>e.BodyShellPart).Include(e=>e.Car),
+                include: i => i.Include(e=>e.ChassisPart).Include(e=>e.BodyShellPart),
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken);

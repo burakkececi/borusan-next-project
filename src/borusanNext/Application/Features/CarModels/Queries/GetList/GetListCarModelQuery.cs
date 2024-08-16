@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.CarModels.Constants.CarModelsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.CarModels.Queries.GetList;
 
@@ -32,6 +33,7 @@ public class GetListCarModelQuery : IRequest<GetListResponse<GetListCarModelList
         {
             IPaginate<CarModel> carModels = await _carModelRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
+                include: i => i.Include(c => c.Brand),
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken
             );

@@ -37,8 +37,7 @@ public class GetDynamicCarModelsQuery : IRequest<GetListResponse<GetDynamicCarMo
         {
             IPaginate<CarModel> carModel = await _carModelRepository.GetListByDynamicAsync(
                dynamic: request.DynamicQuery,
-               include: i => i.Include(c => c.Brand)
-                            .Include(c => c.ModalExtensions).ThenInclude(modal => modal.Generation),
+               include: i => i.Include(c => c.Brand),
                index: request.PageRequest.PageIndex,
                size: request.PageRequest.PageSize,
                cancellationToken: cancellationToken);

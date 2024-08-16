@@ -33,7 +33,6 @@ public class GetListAdvertQuery : IRequest<GetListResponse<GetListAdvertListItem
             IPaginate<Advert> adverts = await _advertRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                include: i => i.Include(p => p.Car).Include(p => p.AdvertImages),
                 cancellationToken: cancellationToken
             );
 

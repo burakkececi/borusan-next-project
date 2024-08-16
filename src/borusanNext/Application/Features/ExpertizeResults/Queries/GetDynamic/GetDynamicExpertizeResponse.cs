@@ -1,4 +1,5 @@
-﻿using NArchitecture.Core.Application.Responses;
+﻿using Domain.Entities;
+using NArchitecture.Core.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ public class GetDynamicExpertizeResponse:IResponse
     public Guid Id { get; set; }
     public int CarDamageInformationRecord { get; set; }
     public DateTime InquiryDate { get; set; }
-    public Guid ChassisPartId { get; set; }
-    public Guid BodyShellPartId { get; set; }
+    public ChassisPart ChassisPart { get; set; }
+    public BodyShellPart BodyShellPart { get; set; }
 }

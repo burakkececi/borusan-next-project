@@ -36,16 +36,18 @@ public class GetDynamicCarQuery : IRequest<GetListResponse<GetDynamicCarResponse
             IPaginate<Car> models = await _carRepository.GetListByDynamicAsync(
              dynamic: request.DynamicQuery,
              index: request.PageRequest.PageIndex,
+             size: request.PageRequest.PageSize,
              include: i => i
                  .Include(i => i.ModalExtension).Include(modelExtension => modelExtension.ModalExtension.CarModel)
-                    //.Include(i => i.CarModel.ModalExtensions).ThenInclude(modal=>modal.Generation)
-                    .Include(i => i.Engine).Include(fuel => fuel.Engine.FuelType)
+                    .Include(i => i.ModalExtension).ThenInclude(modal=>modal.Generation)
+                    .Include(i => i.ModalExtension).ThenInclude(modal=>modal.CarModel).ThenInclude(modal => modal.Brand)
+                    .Include(i => i.Engine).ThenInclude(fuel => fuel.FuelType)
                     .Include(i => i.BodyType)
                     .Include(i => i.Transmission)
+                    .Include(i => i.Seller)
+                    .Include(i => i.ExpertizeResult)
                     .Include(i => i.Color),
-             size: request.PageRequest.PageSize,
              cancellationToken: cancellationToken);
-
 
             GetListResponse<GetDynamicCarResponse> response = _mapper.Map<GetListResponse<GetDynamicCarResponse>>(models);
             return response;

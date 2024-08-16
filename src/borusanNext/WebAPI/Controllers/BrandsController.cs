@@ -8,6 +8,8 @@ using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Application.Features.Brands.Queries.GetDynamic;
 using NArchitecture.Core.Persistence.Dynamic;
+using Application.Features.Cars.Queries.GetDynamic;
+using Application.Features.Models.Queries.GetDynamic;
 
 namespace WebAPI.Controllers;
 
@@ -60,15 +62,18 @@ public class BrandsController : BaseController
 
         return Ok(response);
     }
+
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] int pageSize, [FromQuery] int pageIndex)
+    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
-        GetDynamicQuery getDynamicQuery = new()
+        GetDynamicBrandQuery getDynamicQuery = new()
         {
             DynamicQuery = dynamicQuery,
-            PageRequest = new() { PageIndex = pageIndex, PageSize = pageSize }
+            PageRequest = pageRequest
         };
-        var response = await Mediator.Send(getDynamicQuery);
+
+        GetListResponse<GetDynamicBrandResponse> response = await Mediator.Send(getDynamicQuery);
+
         return Ok(response);
     }
 }

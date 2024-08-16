@@ -35,7 +35,6 @@ public class GetDynamicAdvertQuery : IRequest<GetListResponse<GetDynamicAdvertRe
         {
             IPaginate<Advert> advert = await _advertRepository.GetListByDynamicAsync(
                 dynamic: request.DynamicQuery,
-                include:i=>i.Include(advert=>advert.Car),
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken);

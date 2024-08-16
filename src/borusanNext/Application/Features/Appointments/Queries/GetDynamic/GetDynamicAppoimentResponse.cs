@@ -1,4 +1,5 @@
-﻿using NArchitecture.Core.Application.Responses;
+﻿using Domain.Entities;
+using NArchitecture.Core.Application.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ public class GetDynamicAppoimentResponse:IResponse
 {
     public Guid Id { get; set; }
     public DateTime DateAndTime { get; set; }
-    public Guid CarId { get; set; }
-    public Guid CustomerId { get; set; }
+    public Car Car { get; set; }
+    public Customer Customer { get; set; }
 }

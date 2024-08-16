@@ -6,6 +6,10 @@ using Application.Features.Sellers.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Cars.Queries.GetDynamic;
+using Application.Features.Models.Queries.GetDynamic;
+using NArchitecture.Core.Persistence.Dynamic;
+using Application.Features.Sellers.Queries.GetDynamic;
 
 namespace WebAPI.Controllers;
 
@@ -55,6 +59,20 @@ public class SellersController : BaseController
         GetListSellerQuery query = new() { PageRequest = pageRequest };
 
         GetListResponse<GetListSellerListItemDto> response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpPost("GetDynamic")]
+    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    {
+        GetDynamicSellerQuery getDynamicQuery = new()
+        {
+            DynamicQuery = dynamicQuery,
+            PageRequest = pageRequest
+        };
+
+        GetListResponse<GetDynamicSellerResponse> response = await Mediator.Send(getDynamicQuery);
 
         return Ok(response);
     }

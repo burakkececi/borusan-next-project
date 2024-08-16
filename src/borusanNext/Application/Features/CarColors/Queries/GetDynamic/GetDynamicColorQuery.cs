@@ -37,7 +37,6 @@ public class GetDynamicColorQuery : IRequest<GetListResponse<GetDynamicColorResp
         {
             IPaginate<CarColor> carColor = await _carColorRepository.GetListByDynamicAsync(
                dynamic: request.DynamicQuery,
-               include: i => i.Include(c => c.Cars),
                index: request.PageRequest.PageIndex,
                size: request.PageRequest.PageSize,
                cancellationToken: cancellationToken);

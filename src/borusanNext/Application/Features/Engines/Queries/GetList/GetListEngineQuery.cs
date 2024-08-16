@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Engines.Constants.EnginesOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Engines.Queries.GetList;
 
@@ -32,7 +33,8 @@ public class GetListEngineQuery : IRequest<GetListResponse<GetListEngineListItem
         {
             IPaginate<Engine> engines = await _engineRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
+                include: i => i.Include(e => e.FuelType),
                 cancellationToken: cancellationToken
             );
 
