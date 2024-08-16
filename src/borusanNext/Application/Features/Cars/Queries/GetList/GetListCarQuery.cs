@@ -41,8 +41,10 @@ public class GetListCarQuery : IRequest<GetListResponse<GetListCarListItemDto>>,
                     .Include(i => i.Engine).ThenInclude(fuel => fuel.FuelType)
                     .Include(i => i.BodyType)
                     .Include(i => i.Transmission)
-                    .Include(i => i.Seller)
-                    .Include(i => i.ExpertizeResult)
+                    .Include(i => i.Seller).ThenInclude(modal => modal.Location)
+                    .Include(i => i.Seller).ThenInclude(modal => modal.Licence)
+                    .Include(i => i.ExpertizeResult).ThenInclude(modal => modal.ChassisPart)
+                    .Include(i => i.ExpertizeResult).ThenInclude(modal => modal.BodyShellPart)
                     .Include(i => i.Color),
                 cancellationToken: cancellationToken
             );

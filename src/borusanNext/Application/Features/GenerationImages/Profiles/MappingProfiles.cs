@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.GenerationImages.Queries.GetByGenerationId;
 
 namespace Application.Features.GenerationImages.Profiles;
 
@@ -26,6 +27,9 @@ public class MappingProfiles : Profile
         CreateMap<GenerationImage, GetByIdGenerationImageResponse>();
 
         CreateMap<GenerationImage, GetListGenerationImageListItemDto>();
-        CreateMap<IPaginate<GenerationImage>, GetListResponse<GetListGenerationImageListItemDto>>();
+        CreateMap<IPaginate<GenerationImage>, GetListResponse<GetListGenerationImageListItemDto>>(); 
+        
+        CreateMap<GenerationImage, GetByGenerationIdGenerationImagesResponse>();
+        CreateMap<List<GenerationImage>, GetListResponse<GetByGenerationIdGenerationImagesResponse>>();
     }
 }

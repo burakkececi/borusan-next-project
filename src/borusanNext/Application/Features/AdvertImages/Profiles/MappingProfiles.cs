@@ -7,6 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
+using Application.Features.AdvertImages.Queries.GetByAdvertId;
 
 namespace Application.Features.AdvertImages.Profiles;
 
@@ -24,6 +25,11 @@ public class MappingProfiles : Profile
         CreateMap<AdvertImage, DeletedAdvertImageResponse>();
 
         CreateMap<AdvertImage, GetByIdAdvertImageResponse>();
+
+
+        CreateMap<AdvertImage, GetByAdvertIdAdvertImageResponse>();
+        CreateMap<List<AdvertImage>, GetListResponse<GetByAdvertIdAdvertImageResponse>>();
+
 
         CreateMap<AdvertImage, GetListAdvertImageListItemDto>();
         CreateMap<IPaginate<AdvertImage>, GetListResponse<GetListAdvertImageListItemDto>>();

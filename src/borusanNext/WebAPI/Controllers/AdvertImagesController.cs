@@ -6,10 +6,11 @@ using Application.Features.AdvertImages.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.AdvertImages.Queries.GetByAdvertId;
 
 namespace WebAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class AdvertImagesController : BaseController
 {
@@ -45,6 +46,16 @@ public class AdvertImagesController : BaseController
         GetByIdAdvertImageQuery query = new() { Id = id };
 
         GetByIdAdvertImageResponse response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpGet("{advertid}")]
+    public async Task<ActionResult<GetByIdAdvertImageResponse>> GetByCarId([FromRoute] Guid advertid)
+    {
+        GetByAdvertIdAdvertImageQuery query = new() { AdvertId = advertid };
+
+        List<GetByAdvertIdAdvertImageResponse> response = await Mediator.Send(query);
 
         return Ok(response);
     }

@@ -37,7 +37,7 @@ public class GetDynamicModalExtensionsQuery:IRequest<GetListResponse<GetDynamicM
         {
             IPaginate<ModalExtension> modalExtension = await _modalExtensionRepository.GetListByDynamicAsync(
              dynamic: request.DynamicQuery,
-             include:i=>i.Include(m=>m.Generation).Include(m => m.CarModel),
+             include:i=>i.Include(m=>m.Generation).Include(m => m.CarModel).ThenInclude(m => m.Brand),
              index: request.PageRequest.PageIndex,
              size: request.PageRequest.PageSize,
              cancellationToken: cancellationToken);
