@@ -10,6 +10,7 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NArchitecture.Core.Application.Dtos;
+using NArchitecture.Core.Security.JWT;
 
 namespace WebAPI.Controllers;
 
@@ -28,7 +29,7 @@ public class AuthController : BaseController
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
+    public async Task<ActionResult<LoggedResponse.LoggedHttpResponse>> Login([FromBody] UserForLoginDto userForLoginDto)
     {
         LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IpAddress = getIpAddress() };
         LoggedResponse result = await Mediator.Send(loginCommand);
@@ -49,7 +50,7 @@ public class AuthController : BaseController
     }
 
     [HttpGet("RefreshToken")]
-    public async Task<IActionResult> RefreshToken()
+    public async Task<ActionResult<AccessToken>> RefreshToken()
     {
         RefreshTokenCommand refreshTokenCommand =
             new() { RefreshToken = getRefreshTokenFromCookies(), IpAddress = getIpAddress() };
