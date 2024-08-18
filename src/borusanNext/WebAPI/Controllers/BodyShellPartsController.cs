@@ -54,7 +54,7 @@ public class BodyShellPartsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListBodyShellPartQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListBodyShellPartListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListBodyShellPartQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class BodyShellPartsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicBodyShellPartsResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicBodyShellPartsQuery getDynamicQuery = new()
         {

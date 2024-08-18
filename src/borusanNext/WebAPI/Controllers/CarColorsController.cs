@@ -54,7 +54,7 @@ public class CarColorsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListCarColorQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListCarColorListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListCarColorQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class CarColorsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicColorResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicColorQuery getDynamicQuery = new()
         {

@@ -54,7 +54,7 @@ public class EnginesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListEngineQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListEngineListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListEngineQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class EnginesController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicEngineResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicEngineQuery getDynamicQuery = new()
         {

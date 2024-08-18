@@ -55,7 +55,7 @@ public class BlogItemTagsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListBlogItemTagQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListBlogItemTagListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListBlogItemTagQuery query = new() { PageRequest = pageRequest };
 
@@ -65,7 +65,7 @@ public class BlogItemTagsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicBlogItemResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicBlogItemQuery getDynamicQuery = new()
         {

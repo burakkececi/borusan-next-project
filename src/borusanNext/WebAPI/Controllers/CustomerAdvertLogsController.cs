@@ -50,7 +50,7 @@ public class CustomerAdvertLogsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListCustomerAdvertLogQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListCustomerAdvertLogListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListCustomerAdvertLogQuery query = new() { PageRequest = pageRequest };
 

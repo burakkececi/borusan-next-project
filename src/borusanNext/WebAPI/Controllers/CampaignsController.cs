@@ -54,7 +54,7 @@ public class CampaignsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListCampaignQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListCampaignListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListCampaignQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class CampaignsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicCampaignsResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicCampaignsQuery getDynamicQuery = new()
         {

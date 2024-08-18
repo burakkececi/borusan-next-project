@@ -54,7 +54,7 @@ public class ChassisPartsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListChassisPartQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListChassisPartListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListChassisPartQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class ChassisPartsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicChassisPartsResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicChassisPartsQuery getDynamicQuery = new()
         {

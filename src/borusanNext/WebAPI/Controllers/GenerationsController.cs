@@ -54,7 +54,7 @@ public class GenerationsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListGenerationQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListGenerationListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListGenerationQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class GenerationsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicGenerationResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicGenerationQuery getDynamicQuery = new()
         {

@@ -55,7 +55,7 @@ public class AppointmentsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListAppointmentQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListAppointmentListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListAppointmentQuery query = new() { PageRequest = pageRequest };
 
@@ -65,7 +65,7 @@ public class AppointmentsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicAppoimentResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicAppoimentQuery getDynamicQuery = new()
         {

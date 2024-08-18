@@ -54,7 +54,7 @@ public class ModalExtensionsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListModalExtensionQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListModalExtensionListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListModalExtensionQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class ModalExtensionsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicModalExtensionsResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicModalExtensionsQuery getDynamicQuery = new()
         {
