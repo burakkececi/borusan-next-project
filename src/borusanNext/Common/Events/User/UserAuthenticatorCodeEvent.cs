@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Common.Infrastructure.Events.User;
-public class UserAuthenticatorCodeEvent
+namespace Common.Events.User;
+public class UserAuthenticatorCodeEvent : BaseEvent
 {
-    public string UserEmailAdress { get; set; }
+    public string UserEmailAddress { get; set; }
     public string AuthenticatorCode { get; set; }
 }

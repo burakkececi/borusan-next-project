@@ -15,7 +15,6 @@ using NArchitecture.Core.Security.WebApi.Swagger.Extensions;
 using Persistence;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI;
-using Common;
 using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -36,7 +35,6 @@ builder.Services.AddInfrastructureServices(
     elasticSearchConfig: builder.Configuration.GetSection("ElasticSearchConfig").Get<ElasticSearchConfig>()
         ?? throw new InvalidOperationException("ElasticSearchConfig section cannot found in configuration."));
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddCommonServices();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -106,8 +104,6 @@ if (app.Environment.IsDevelopment())
 
 if (app.Environment.IsProduction())
     app.ConfigureCustomExceptionMiddleware();
-
-app.AddConsumerStart();
 
 app.UseDbMigrationApplier();
 

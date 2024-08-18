@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-OutboxJobService-73fb6fbc-9664-4540-8a20-1e28ccac7c44</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+    <PackageReference Include="Quartz" Version="3.13.0" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.13.0" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
+</Project>

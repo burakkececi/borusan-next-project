@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using Application.Models;
+using Common.Models;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -44,6 +45,8 @@ public class BaseDbContext : DbContext
     public DbSet<GenerationImage> GenerationImages { get; set; }
     public DbSet<CustomerFavorite> CustomerFavorites { get; set; }
     public DbSet<AdvertDetailsReadModel> AdvertDetails { get; set; }
+    public DbSet<OutboxEvent> OutboxEvents { get; set; }
+    public DbSet<InboxEvent> InboxEvent { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

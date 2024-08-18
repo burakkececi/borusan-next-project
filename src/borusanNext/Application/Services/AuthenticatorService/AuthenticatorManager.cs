@@ -1,6 +1,6 @@
 ﻿using Application.Services.Repositories;
-using Common.Infrastructure.Events.User;
-using Common.Infrastructure.RabbitMQ;
+using Common.Events.User;
+using Common.Models;
 using Domain.Entities;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Mailing;
@@ -17,6 +17,7 @@ public class AuthenticatorManager : IAuthenticatorService
     private readonly IMailService _mailService;
     private readonly IOtpAuthenticatorHelper _otpAuthenticatorHelper;
     private readonly IOtpAuthenticatorRepository _otpAuthenticatorRepository;
+    private readonly IOutboxEventRepository _outboxEventRepository;
 
     public AuthenticatorManager(
         IEmailAuthenticatorHelper emailAuthenticatorHelper,
@@ -24,13 +25,15 @@ public class AuthenticatorManager : IAuthenticatorService
         IMailService mailService,
         IOtpAuthenticatorHelper otpAuthenticatorHelper,
         IOtpAuthenticatorRepository otpAuthenticatorRepository
-    )
+,
+        IOutboxEventRepository outboxEventRepository)
     {
         _emailAuthenticatorHelper = emailAuthenticatorHelper;
         _emailAuthenticatorRepository = emailAuthenticatorRepository;
         _mailService = mailService;
         _otpAuthenticatorHelper = otpAuthenticatorHelper;
         _otpAuthenticatorRepository = otpAuthenticatorRepository;
+        _outboxEventRepository = outboxEventRepository;
     }
 
     public async Task<EmailAuthenticator> CreateEmailAuthenticator(User user)
@@ -93,16 +96,14 @@ public class AuthenticatorManager : IAuthenticatorService
 
         var @event = new UserAuthenticatorCodeEvent()
         {
-            UserEmailAdress = user.Email,
+            Id = Guid.NewGuid(),
+            UserEmailAddress = user.Email,
             AuthenticatorCode = authenticatorCode
         };
 
-        QueueFactory.SendMessageToExchange(
-                                            exchangeName: RabbitMQConstants.UserExchangeName,
-                                            exchangeType: RabbitMQConstants.DefaultExchangeType,
-                                            queueName: RabbitMQConstants.UserRegisterAuthenticatorCodeQueueName,
-                                            obj: @event
-                                            );
+        OutboxEvent outboxEvent = new(@event, @event.Id, DateTime.Now.ToUniversalTime());
+        await _outboxEventRepository.AddAsync(outboxEvent);
+        await _outboxEventRepository.SaveChangesAsync();
     }
 
     private async Task VerifyAuthenticatorCodeWithEmail(User user, string authenticatorCode)

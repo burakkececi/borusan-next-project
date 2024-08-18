@@ -2,8 +2,8 @@
 using Application.Services.AuthenticatorService;
 using Application.Services.Repositories;
 using Application.Services.UsersService;
-using Common.Infrastructure.Events.User;
-using Common.Infrastructure.RabbitMQ;
+using Common.Events.User;
+using Common.Models;
 using Domain.Entities;
 using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
@@ -37,6 +37,7 @@ public class EnableEmailAuthenticatorCommand : IRequest, ISecuredRequest
         private readonly IEmailAuthenticatorRepository _emailAuthenticatorRepository;
         private readonly IMailService _mailService;
         private readonly IUserService _userService;
+        private readonly IOutboxEventRepository _outboxEventRepository;
 
         public EnableEmailAuthenticatorCommandHandler(
             IUserService userService,
@@ -44,13 +45,15 @@ public class EnableEmailAuthenticatorCommand : IRequest, ISecuredRequest
             IMailService mailService,
             AuthBusinessRules authBusinessRules,
             IAuthenticatorService authenticatorService
-        )
+,
+            IOutboxEventRepository outboxEventRepository)
         {
             _userService = userService;
             _emailAuthenticatorRepository = emailAuthenticatorRepository;
             _mailService = mailService;
             _authBusinessRules = authBusinessRules;
             _authenticatorService = authenticatorService;
+            _outboxEventRepository = outboxEventRepository;
         }
 
         public async Task Handle(EnableEmailAuthenticatorCommand request, CancellationToken cancellationToken)
@@ -70,17 +73,15 @@ public class EnableEmailAuthenticatorCommand : IRequest, ISecuredRequest
 
             var @event = new UserRegisterVerificationEvent()
             {
-                UserEmailAdress = user.Email,
+                Id = Guid.NewGuid(),
+                UserEmailAddress = user.Email,
                 VerifyEmailUrlPrefix = request.VerifyEmailUrlPrefix,
-                AddedEmailAuthenticatorActivationKey = addedEmailAuthenticator.ActivationKey,
+                AddedEmailAuthenticatorActivationKey = addedEmailAuthenticator.ActivationKey!,
             };
 
-            QueueFactory.SendMessageToExchange(
-                                                exchangeName: RabbitMQConstants.UserExchangeName,
-                                                exchangeType: RabbitMQConstants.DefaultExchangeType,
-                                                queueName: RabbitMQConstants.UserRegisterVerificationQueueName,
-                                                obj: @event
-                                                );
+            OutboxEvent outboxEvent = new(@event, @event.Id, DateTime.Now.ToUniversalTime());
+            await _outboxEventRepository.AddAsync(outboxEvent);
+            await _outboxEventRepository.SaveChangesAsync();
         }
     }
 }
