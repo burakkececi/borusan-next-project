@@ -10,11 +10,10 @@ namespace Common.Infrastructure.RabbitMQ
     {
         public static void SendMessageToExchange(string exchangeName, string exchangeType, string queueName, object obj)
         {
-            using var connection = CreateConnection();
-            using var channel = connection.CreateModel();
-
-            EnsureExchange(channel, exchangeName, exchangeType);
-            EnsureQueue(channel, queueName, exchangeName);
+            var channel = CreateBasicConsumer()
+                                .EnsureExchange(exchangeName, exchangeType)
+                                .EnsureQueue(queueName, exchangeName)
+                                .Model;
 
             var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(obj));
 
@@ -30,19 +29,39 @@ namespace Common.Infrastructure.RabbitMQ
             return factory.CreateConnection();
         }
 
-        public static void EnsureExchange(IModel channel, string exchangeName, string exchangeType = RabbitMQConstants.DefaultExchangeType)
+        public static EventingBasicConsumer EnsureExchange(this EventingBasicConsumer consumer,
+                                          string exchangeName,
+                                          string exchangeType = RabbitMQConstants.DefaultExchangeType)
         {
-            channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType, durable: false, autoDelete: false);
+            consumer.Model.ExchangeDeclare(exchange: exchangeName,
+                                           type: exchangeType,
+                                           durable: false,
+                                           autoDelete: false);
+
+            return consumer;
         }
 
-        public static void EnsureQueue(IModel channel, string queueName, string exchangeName)
+        public static EventingBasicConsumer EnsureQueue(this EventingBasicConsumer consumer,
+                                       string queueName,
+                                       string exchangeName)
         {
-            channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
-            channel.QueueBind(queueName, exchangeName, queueName);
+            consumer.Model.QueueDeclare(queue: queueName,
+                                        durable: false,
+                                        exclusive: false,
+                                        autoDelete: false,
+                                        arguments: null);
+
+            consumer.Model.QueueBind(queueName, exchangeName, queueName);
+
+            return consumer;
         }
 
-        public static EventingBasicConsumer CreateConsumer(IModel channel)
+        public static EventingBasicConsumer CreateBasicConsumer()
         {
+            var factory = new ConnectionFactory() { HostName = RabbitMQConstants.RabbitMQHost };
+            var connection = factory.CreateConnection();
+            var channel = connection.CreateModel();
+
             return new EventingBasicConsumer(channel);
         }
     }
