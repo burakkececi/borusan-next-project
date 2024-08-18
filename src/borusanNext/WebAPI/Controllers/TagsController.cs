@@ -50,7 +50,7 @@ public class TagsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListTagQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListTagListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListTagQuery query = new() { PageRequest = pageRequest };
 

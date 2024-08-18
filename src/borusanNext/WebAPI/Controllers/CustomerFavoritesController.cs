@@ -50,7 +50,7 @@ public class CustomerFavoritesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListCustomerFavoriteQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListCustomerFavoriteListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListCustomerFavoriteQuery query = new() { PageRequest = pageRequest };
 

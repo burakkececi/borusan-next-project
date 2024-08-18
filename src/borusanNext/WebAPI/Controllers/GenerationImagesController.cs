@@ -51,7 +51,7 @@ public class GenerationImagesController : BaseController
     }
 
     [HttpGet("{generationid}")]
-    public async Task<ActionResult<GetByGenerationIdGenerationImagesResponse>> GetByGenerationId([FromRoute] Guid generationid)
+    public async Task<ActionResult<List<GetByGenerationIdGenerationImagesResponse>>> GetByGenerationId([FromRoute] Guid generationid)
     {
         GetByGenerationIdGenerationImagesQuery query = new() { GenerationId = generationid };
 
@@ -61,7 +61,7 @@ public class GenerationImagesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListGenerationImageQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListGenerationImageListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListGenerationImageQuery query = new() { PageRequest = pageRequest };
 

@@ -51,7 +51,7 @@ public class AdvertImagesController : BaseController
     }
 
     [HttpGet("{advertid}")]
-    public async Task<ActionResult<GetByIdAdvertImageResponse>> GetByCarId([FromRoute] Guid advertid)
+    public async Task<ActionResult<List<GetByAdvertIdAdvertImageResponse>>> GetByCarId([FromRoute] Guid advertid)
     {
         GetByAdvertIdAdvertImageQuery query = new() { AdvertId = advertid };
 
@@ -61,7 +61,7 @@ public class AdvertImagesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListAdvertImageQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListAdvertImageListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListAdvertImageQuery query = new() { PageRequest = pageRequest };
 

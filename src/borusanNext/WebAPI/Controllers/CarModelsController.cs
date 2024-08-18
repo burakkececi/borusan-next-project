@@ -54,7 +54,7 @@ public class CarModelsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListCarModelQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListCarModelListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListCarModelQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class CarModelsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicCarModelsResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicCarModelsQuery getDynamicQuery = new()
         {

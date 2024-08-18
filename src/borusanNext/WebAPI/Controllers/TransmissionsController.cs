@@ -54,7 +54,7 @@ public class TransmissionsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListTransmissionQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListTransmissionListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListTransmissionQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class TransmissionsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicTransmissionResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicTransmissionQuery getDynamicQuery = new()
         {

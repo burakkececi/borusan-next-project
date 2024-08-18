@@ -54,7 +54,7 @@ public class ExpertizeResultsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListExpertizeResultQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListExpertizeResultListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListExpertizeResultQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class ExpertizeResultsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicExpertizeResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicExpertizeResultQuery getDynamicQuery = new()
         {

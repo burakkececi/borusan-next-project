@@ -54,7 +54,7 @@ public class LicencesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListLicenceQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListLicenceListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListLicenceQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class LicencesController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicLicenceResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicLicenseQuery getDynamicQuery = new()
         {

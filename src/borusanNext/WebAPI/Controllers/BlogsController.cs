@@ -50,7 +50,7 @@ public class BlogsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListBlogQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListBlogListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListBlogQuery query = new() { PageRequest = pageRequest };
 

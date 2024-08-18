@@ -54,7 +54,7 @@ public class SellersController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListSellerQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListSellerListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListSellerQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class SellersController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicSellerResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicSellerQuery getDynamicQuery = new()
         {

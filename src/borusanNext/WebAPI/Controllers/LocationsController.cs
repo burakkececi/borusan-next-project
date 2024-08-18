@@ -54,7 +54,7 @@ public class LocationsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListLocationQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListLocationListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListLocationQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class LocationsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicLocaitonResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicLocationQuery getDynamicQuery = new()
         {

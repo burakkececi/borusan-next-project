@@ -55,7 +55,7 @@ public class AdvertsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListAdvertQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListAdvertListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListAdvertQuery query = new() { PageRequest = pageRequest };
 
@@ -65,7 +65,7 @@ public class AdvertsController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicAdvertResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicAdvertQuery getDynamicQuery = new()
         {

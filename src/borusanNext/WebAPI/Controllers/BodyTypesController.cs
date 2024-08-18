@@ -54,7 +54,7 @@ public class BodyTypesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListBodyTypeQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListBodyTypeListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListBodyTypeQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class BodyTypesController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicBodyTypesResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicBodyTypesQuery getDynamicQuery = new()
         {

@@ -54,7 +54,7 @@ public class FuelTypesController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetListFuelTypeQuery>> GetList([FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetListFuelTypeListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListFuelTypeQuery query = new() { PageRequest = pageRequest };
 
@@ -64,7 +64,7 @@ public class FuelTypesController : BaseController
     }
 
     [HttpPost("GetDynamic")]
-    public async Task<IActionResult> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
+    public async Task<ActionResult<GetListResponse<GetDynamicFuelTypeResponse>>> GetDynamic([FromBody] DynamicQuery dynamicQuery, [FromQuery] PageRequest pageRequest)
     {
         GetDynamicFuelTypesQuery getDynamicQuery = new()
         {
