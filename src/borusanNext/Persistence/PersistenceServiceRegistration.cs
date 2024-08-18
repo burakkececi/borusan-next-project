@@ -13,8 +13,10 @@ public static class PersistenceServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("BorusanNextDb")).EnableSensitiveDataLogging()
-    .LogTo(Console.WriteLine, LogLevel.Information));
+        services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(configuration
+                                                                            .GetConnectionString("BorusanNextDb"))
+                                                                            .EnableSensitiveDataLogging()
+                                                                            .LogTo(Console.WriteLine, LogLevel.Information));
         services.AddDbMigrationApplier(buildServices => buildServices.GetRequiredService<BaseDbContext>());
 
         services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();
@@ -53,6 +55,9 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ICarRepository, CarRepository>();
         services.AddScoped<ICustomerFavoriteRepository, CustomerFavoriteRepository>();
         services.AddScoped<IAdvertDetailsReadRepository, AdvertDetailsReadRepository>();
+        services.AddScoped<IOutboxEventRepository, OutboxEventRepository>();
+        services.AddScoped<IInboxEventRepository, InboxEventRepository>();
+
         return services;
     }
 }

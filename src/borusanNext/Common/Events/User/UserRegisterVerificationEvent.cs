@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Common.Infrastructure.Events.User;
-public class UserRegisterVerificationEvent
+namespace Common.Events.User;
+public class UserRegisterVerificationEvent : BaseEvent
 {
-    public string UserEmailAdress { get; set; }
+    public string UserEmailAddress { get; set; }
     public string VerifyEmailUrlPrefix { get; set; }
     public string AddedEmailAuthenticatorActivationKey { get; set; }
 }
