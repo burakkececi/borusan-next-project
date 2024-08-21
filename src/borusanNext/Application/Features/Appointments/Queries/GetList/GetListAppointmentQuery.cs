@@ -1,4 +1,3 @@
-using Application.Features.Appointments.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;

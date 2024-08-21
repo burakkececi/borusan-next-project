@@ -3,7 +3,8 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using static Application.Features.Brands.Constants.BrandsOperationClaims;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
@@ -11,11 +12,13 @@ using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.Brands.Queries.GetDynamic;
 
-public class GetDynamicBrandQuery : IRequest<GetListResponse<GetDynamicBrandResponse>>
+public class GetDynamicBrandQuery : IRequest<GetListResponse<GetDynamicBrandResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
 
     public class GetDynamicQueryHandler : IRequestHandler<GetDynamicBrandQuery, GetListResponse<GetDynamicBrandResponse>>
     {

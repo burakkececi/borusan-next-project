@@ -1,25 +1,25 @@
-﻿using Application.Features.Cars.Queries.GetDynamic;
-using Application.Features.Customers.Rules;
+﻿using Application.Features.Customers.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Application.Features.Customers.Constants.CustomersOperationClaims;
+
 
 namespace Application.Features.Customers.Queries.GetDynamic;
-public class GetDynamicCustomerQuery : IRequest<GetListResponse<GetDynamicCustomerResponse>>
+public class GetDynamicCustomerQuery : IRequest<GetListResponse<GetDynamicCustomerResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
+
     public class GetDynamicCustomerQueryHandler : IRequestHandler<GetDynamicCustomerQuery, GetListResponse<GetDynamicCustomerResponse>>
     {
         private readonly IMapper _mapper;

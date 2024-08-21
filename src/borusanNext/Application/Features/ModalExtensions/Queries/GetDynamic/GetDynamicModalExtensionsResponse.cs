@@ -26,4 +26,22 @@ public class GetDynamicModalExtensionsResponse:IRequest
     public string BrandLogo { get; set; }
     public Guid GenerationId { get; set; }
     public string GenerationName { get; set; }
+    public Guid EngineId { get; set; }
+    public string EngineNo { get; set; }
+    public int EngineCapacity { get; set; }
+    public int MotorPower { get; set; }
+    public int MaximumTorque { get; set; }
+    public double Acceleration { get; set; }
+    public int MaximumSpeed { get; set; }
+    public int FuelTankVolume { get; set; }
+    public double OutOfTownConsumptionRate { get; set; }
+    public double UrbanConsumptionRate { get; set; }
+    public double AverageConsumptionRate { get; set; }
+    public string FuelTypeName { get; set; }
+    public Guid BodyTypeId { get; set; }
+    public string BodyTypeName { get; set; }
+    public string BodyTypeDoor { get; set; }
+    public Guid TransmissionId { get; set; }
+    public string TranmissionName { get; set; }
+
 }

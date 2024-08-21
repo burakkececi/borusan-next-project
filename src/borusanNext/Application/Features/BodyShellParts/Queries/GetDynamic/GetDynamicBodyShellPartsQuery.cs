@@ -1,26 +1,25 @@
-﻿using Application.Features.BlogItemTags.Queries.GetDynamic;
-using Application.Features.BodyShellParts.Rules;
+﻿using Application.Features.BodyShellParts.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Application.Features.BodyShellParts.Constants.BodyShellPartsOperationClaims;
+
 
 namespace Application.Features.BodyShellParts.Queries.GetDynamic;
-public class GetDynamicBodyShellPartsQuery : IRequest<GetListResponse<GetDynamicBodyShellPartsResponse>>
+public class GetDynamicBodyShellPartsQuery : IRequest<GetListResponse<GetDynamicBodyShellPartsResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
+
     public class GetDynamicBodyShellPartsQueryHandler : IRequestHandler<GetDynamicBodyShellPartsQuery, GetListResponse<GetDynamicBodyShellPartsResponse>>
     {
         private readonly IMapper _mapper;

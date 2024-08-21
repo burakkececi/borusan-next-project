@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Features.Cars.Queries.GetDynamic;
 using Application.Features.Models.Queries.GetDynamic;
 using NArchitecture.Core.Persistence.Dynamic;
-using Application.Features.Transmissions.Queries.GetDyanmic;
+using Application.Features.Transmissions.Queries.GetDynamic;
 
 namespace WebAPI.Controllers;
 

@@ -6,40 +6,52 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.CustomerFavorites.Constants.CustomerFavoritesOperationClaims;
+using Common.Events.CustomerFavorite;
+using Common.Models;
 
 namespace Application.Features.CustomerFavorites.Commands.Create;
 
-public class CreateCustomerFavoriteCommand : IRequest<CreatedCustomerFavoriteResponse>, ISecuredRequest
+public class CreateCustomerFavoriteCommand : IRequest<Unit>, ISecuredRequest
 {
     public required Guid CustomerId { get; set; }
     public required Guid AdvertId { get; set; }
 
     public string[] Roles => [Admin, Write, CustomerFavoritesOperationClaims.Create];
 
-    public class CreateCustomerFavoriteCommandHandler : IRequestHandler<CreateCustomerFavoriteCommand, CreatedCustomerFavoriteResponse>
+    public class CreateCustomerFavoriteCommandHandler : IRequestHandler<CreateCustomerFavoriteCommand, Unit>
     {
         private readonly IMapper _mapper;
         private readonly ICustomerFavoriteRepository _customerFavoriteRepository;
         private readonly CustomerFavoriteBusinessRules _customerFavoriteBusinessRules;
+        private readonly IOutboxEventRepository _outboxEventRepository;
 
         public CreateCustomerFavoriteCommandHandler(IMapper mapper, ICustomerFavoriteRepository customerFavoriteRepository,
-                                         CustomerFavoriteBusinessRules customerFavoriteBusinessRules)
+                                         CustomerFavoriteBusinessRules customerFavoriteBusinessRules, IOutboxEventRepository outboxEventRepository)
         {
             _mapper = mapper;
             _customerFavoriteRepository = customerFavoriteRepository;
             _customerFavoriteBusinessRules = customerFavoriteBusinessRules;
+            _outboxEventRepository = outboxEventRepository;
         }
 
-        public async Task<CreatedCustomerFavoriteResponse> Handle(CreateCustomerFavoriteCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateCustomerFavoriteCommand request, CancellationToken cancellationToken)
         {
             CustomerFavorite customerFavorite = _mapper.Map<CustomerFavorite>(request);
             await _customerFavoriteBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
             await _customerFavoriteBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
 
-            await _customerFavoriteRepository.AddAsync(customerFavorite);
+            var @event = new CreateCustomerFavoriteEvent()
+            {
+                Id = customerFavorite.Id,
+                CustomerId = customerFavorite.CustomerId,
+                AdvertId = customerFavorite.AdvertId
+            };
 
-            CreatedCustomerFavoriteResponse response = _mapper.Map<CreatedCustomerFavoriteResponse>(customerFavorite);
-            return response;
+            OutboxEvent outboxEvent = new(@event, @event.Id, DateTime.Now.ToUniversalTime());
+            await _outboxEventRepository.AddAsync(outboxEvent);
+            await _outboxEventRepository.SaveChangesAsync();
+
+            return Unit.Value;
         }
     }
 }

@@ -9,14 +9,23 @@ using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Sellers.Constants.SellersOperationClaims;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Caching;
 
 namespace Application.Features.Sellers.Queries.GetList;
 
-public class GetListSellerQuery : IRequest<GetListResponse<GetListSellerListItemDto>>, ISecuredRequest
+public class GetListSellerQuery : IRequest<GetListResponse<GetListSellerListItemDto>>, ISecuredRequest, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public string[] Roles => [Admin, Read];
+
+    public bool BypassCache => false;
+
+    public string CacheKey => $"GetListSellerQuery.PageIndex={PageRequest.PageIndex}&PageSize={PageRequest.PageSize}";
+
+    public string? CacheGroupKey => "Seller.Get";
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListSellerQueryHandler : IRequestHandler<GetListSellerQuery, GetListResponse<GetListSellerListItemDto>>
     {
@@ -33,7 +42,7 @@ public class GetListSellerQuery : IRequest<GetListResponse<GetListSellerListItem
         {
             IPaginate<Seller> sellers = await _sellerRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
                 include: i => i.Include(s => s.Location).Include(s => s.Licence),
                 cancellationToken: cancellationToken
             );

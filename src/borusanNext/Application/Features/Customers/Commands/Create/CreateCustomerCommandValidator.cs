@@ -1,4 +1,3 @@
-using Domain.Enums;
 using FluentValidation;
 
 namespace Application.Features.Customers.Commands.Create;

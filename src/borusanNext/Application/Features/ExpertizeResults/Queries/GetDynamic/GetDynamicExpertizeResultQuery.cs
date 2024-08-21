@@ -5,22 +5,22 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Dynamic.Core;
-using System.Text;
-using System.Threading.Tasks;
+using static Application.Features.ExpertizeResults.Constants.ExpertizeResultsOperationClaims;
+
 
 namespace Application.Features.ExpertizeResults.Queries.GetDynamic;
-public class GetDynamicExpertizeResultQuery:IRequest<GetListResponse<GetDynamicExpertizeResponse>>
+public class GetDynamicExpertizeResultQuery:IRequest<GetListResponse<GetDynamicExpertizeResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
+
     public class GetDynamicExpertizeResultQueryHandler : IRequestHandler<GetDynamicExpertizeResultQuery, GetListResponse<GetDynamicExpertizeResponse>>
     {
         private readonly IMapper _mapper;

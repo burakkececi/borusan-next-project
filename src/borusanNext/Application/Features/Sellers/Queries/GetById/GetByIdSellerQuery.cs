@@ -7,14 +7,23 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Sellers.Constants.SellersOperationClaims;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Caching;
 
 namespace Application.Features.Sellers.Queries.GetById;
 
-public class GetByIdSellerQuery : IRequest<GetByIdSellerResponse>, ISecuredRequest
+public class GetByIdSellerQuery : IRequest<GetByIdSellerResponse>, ISecuredRequest, ICachableRequest
 {
     public Guid Id { get; set; }
 
     public string[] Roles => [Admin, Read];
+
+    public bool BypassCache => false;
+
+    public string CacheKey => $"GetByIdSellerQuery.{Id}";
+
+    public string? CacheGroupKey => "Seller.Get";
+
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetByIdSellerQueryHandler : IRequestHandler<GetByIdSellerQuery, GetByIdSellerResponse>
     {

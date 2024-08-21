@@ -5,21 +5,22 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Application.Features.ModalExtensions.Constants.ModalExtensionsOperationClaims;
+
 
 namespace Application.Features.ModalExtensions.Queries.GetDynamic;
-public class GetDynamicModalExtensionsQuery:IRequest<GetListResponse<GetDynamicModalExtensionsResponse>>
+public class GetDynamicModalExtensionsQuery : IRequest<GetListResponse<GetDynamicModalExtensionsResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
+
     public class GetDynamicModalExtensionsQueryHandler : IRequestHandler<GetDynamicModalExtensionsQuery, GetListResponse<GetDynamicModalExtensionsResponse>>
     {
         private readonly IMapper _mapper;
@@ -37,7 +38,11 @@ public class GetDynamicModalExtensionsQuery:IRequest<GetListResponse<GetDynamicM
         {
             IPaginate<ModalExtension> modalExtension = await _modalExtensionRepository.GetListByDynamicAsync(
              dynamic: request.DynamicQuery,
-             include:i=>i.Include(m=>m.Generation).Include(m => m.CarModel).ThenInclude(m => m.Brand),
+             include: i => i.Include(m => m.Generation)
+                         .Include(m => m.CarModel).ThenInclude(m => m.Brand)
+                         .Include(m => m.Engine).ThenInclude(m => m.FuelType)
+                         .Include(m => m.BodyType)
+                         .Include(m => m.Transmission),
              index: request.PageRequest.PageIndex,
              size: request.PageRequest.PageSize,
              cancellationToken: cancellationToken);

@@ -4,21 +4,22 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Application.Features.Transmissions.Constants.TransmissionsOperationClaims;
 
-namespace Application.Features.Transmissions.Queries.GetDyanmic;
-public class GetDynamicTransmissionQuery:IRequest<GetListResponse<GetDynamicTransmissionResponse>>
+
+namespace Application.Features.Transmissions.Queries.GetDynamic;
+public class GetDynamicTransmissionQuery : IRequest<GetListResponse<GetDynamicTransmissionResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
+
     public class GetDynamicTransmissionQueryHandler : IRequestHandler<GetDynamicTransmissionQuery, GetListResponse<GetDynamicTransmissionResponse>>
     {
         private readonly IMapper _mapper;

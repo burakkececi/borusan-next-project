@@ -1,11 +1,11 @@
 ﻿using Application.Features.Adverts.Queries.GetDynamic;
 using Application.Features.Adverts.Rules;
-using Application.Features.Brands.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using static Application.Features.Adverts.Constants.AdvertsOperationClaims;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
@@ -13,11 +13,13 @@ using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.Brands.Queries.GetDynamic;
 
-public class GetDynamicAdvertQuery : IRequest<GetListResponse<GetDynamicAdvertResponse>>
+public class GetDynamicAdvertQuery : IRequest<GetListResponse<GetDynamicAdvertResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
 
     public class GetDynamicAdvertQueryHandler : IRequestHandler<GetDynamicAdvertQuery, GetListResponse<GetDynamicAdvertResponse>>
     {
@@ -25,10 +27,10 @@ public class GetDynamicAdvertQuery : IRequest<GetListResponse<GetDynamicAdvertRe
         private readonly AdvertBusinessRules _advertBusinessRules;
         private readonly IAdvertRepository _advertRepository;
 
-        public GetDynamicAdvertQueryHandler(IAdvertRepository advertRepository,IMapper mapper)
+        public GetDynamicAdvertQueryHandler(IAdvertRepository advertRepository, IMapper mapper)
         {
             _advertRepository = advertRepository;
-            _mapper=mapper;
+            _mapper = mapper;
         }
 
         public async Task<GetListResponse<GetDynamicAdvertResponse>> Handle(GetDynamicAdvertQuery request, CancellationToken cancellationToken)

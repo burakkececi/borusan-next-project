@@ -6,6 +6,8 @@ using Application.Features.CustomerFavorites.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Application.Features.CustomerFavorites.Queries.GetByCustomerId;
 
 namespace WebAPI.Controllers;
 
@@ -14,29 +16,29 @@ namespace WebAPI.Controllers;
 public class CustomerFavoritesController : BaseController
 {
     [HttpPost]
-    public async Task<ActionResult<CreatedCustomerFavoriteResponse>> Add([FromBody] CreateCustomerFavoriteCommand command)
+    public async Task<ActionResult<Unit>> Add([FromBody] CreateCustomerFavoriteCommand command)
     {
-        CreatedCustomerFavoriteResponse response = await Mediator.Send(command);
+        await Mediator.Send(command);
 
-        return CreatedAtAction(nameof(GetById), new { response.Id }, response);
+        return CreatedAtAction(nameof(GetById), "In process...");
     }
 
     [HttpPut]
-    public async Task<ActionResult<UpdatedCustomerFavoriteResponse>> Update([FromBody] UpdateCustomerFavoriteCommand command)
+    public async Task<ActionResult<Unit>> Update([FromBody] UpdateCustomerFavoriteCommand command)
     {
-        UpdatedCustomerFavoriteResponse response = await Mediator.Send(command);
+        await Mediator.Send(command);
 
-        return Ok(response);
+        return Ok("In process...");
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<DeletedCustomerFavoriteResponse>> Delete([FromRoute] Guid id)
+    public async Task<ActionResult<Unit>> Delete([FromRoute] Guid id)
     {
         DeleteCustomerFavoriteCommand command = new() { Id = id };
 
-        DeletedCustomerFavoriteResponse response = await Mediator.Send(command);
+        await Mediator.Send(command);
 
-        return Ok(response);
+        return Ok("In process...");
     }
 
     [HttpGet("{id}")]
@@ -45,6 +47,16 @@ public class CustomerFavoritesController : BaseController
         GetByIdCustomerFavoriteQuery query = new() { Id = id };
 
         GetByIdCustomerFavoriteResponse response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpGet("customer/{customerId}")]
+    public async Task<ActionResult<GetListResponse<GetByCustomerIdCustomerFavoriteListItemDto>>> GetByCustomerId([FromQuery] PageRequest pageRequest, [FromRoute] Guid customerId)
+    {
+        GetByCustomerIdCustomerFavoriteQuery query = new() { PageRequest = pageRequest, CustomerId = customerId };
+
+        GetListResponse<GetByCustomerIdCustomerFavoriteListItemDto> response = await Mediator.Send(query);
 
         return Ok(response);
     }

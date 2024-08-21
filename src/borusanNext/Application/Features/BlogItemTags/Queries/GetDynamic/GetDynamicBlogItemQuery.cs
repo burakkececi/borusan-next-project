@@ -1,15 +1,12 @@
-﻿using Application.Features.Adverts.Queries.GetDynamic;
-using Application.Features.Adverts.Rules;
-using Application.Features.Appointments.Queries.GetDynamic;
-using Application.Features.Appointments.Rules;
+﻿using static Application.Features.BlogItemTags.Constants.BlogItemTagsOperationClaims;
 using Application.Features.BlogItemTags.Queries.GetDynamic;
 using Application.Features.BlogItemTags.Rules;
-using Application.Features.Brands.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
@@ -17,12 +14,13 @@ using NArchitecture.Core.Persistence.Paging;
 
 namespace Application.Features.Brands.Queries.GetDynamic;
 
-public class GetDynamicBlogItemQuery : IRequest<GetListResponse<GetDynamicBlogItemResponse>>
+public class GetDynamicBlogItemQuery : IRequest<GetListResponse<GetDynamicBlogItemResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public DynamicQuery DynamicQuery { get; set; }
 
+    public string[] Roles => [Admin, Read];
 
     public class GetDynamicBlogItemQueryHandler : IRequestHandler<GetDynamicBlogItemQuery, GetListResponse<GetDynamicBlogItemResponse>>
     {

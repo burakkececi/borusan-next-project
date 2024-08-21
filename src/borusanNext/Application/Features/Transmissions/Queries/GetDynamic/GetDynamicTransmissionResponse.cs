@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Transmissions.Queries.GetDyanmic;
+namespace Application.Features.Transmissions.Queries.GetDynamic;
 public class GetDynamicTransmissionResponse:IResponse
 {
     public Guid Id { get; set; }

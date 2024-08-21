@@ -53,12 +53,12 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.EmptyWeight, opt => opt.MapFrom(src => src.EmptyWeight))
             .ForMember(dest => dest.ModelYear, opt => opt.MapFrom(src => src.ModelYear))
             .ForMember(dest => dest.CarModelId, opt => opt.MapFrom(src => src.CarModel.Id))
-            .ForMember(dest => dest.CarModelName, opt => opt.MapFrom(src => src.CarModel.ModelName))
+            //.ForMember(dest => dest.CarModelName, opt => opt.MapFrom(src => src.CarModel.ModelName))
             .ForMember(dest => dest.BrandId, opt => opt.MapFrom(src => src.CarModel.Brand.Id))
-            .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.CarModel.Brand.Name))
-            .ForMember(dest => dest.BrandLogo, opt => opt.MapFrom(src => src.CarModel.Brand.Logo))
-            .ForMember(dest => dest.GenerationId, opt => opt.MapFrom(src => src.Generation.Id))
-            .ForMember(dest => dest.GenerationName, opt => opt.MapFrom(src => src.Generation.Name));
+            //.ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.CarModel.Brand.Name))
+            //.ForMember(dest => dest.BrandLogo, opt => opt.MapFrom(src => src.CarModel.Brand.Logo))
+            .ForMember(dest => dest.GenerationId, opt => opt.MapFrom(src => src.Generation.Id));
+        //.ForMember(dest => dest.GenerationName, opt => opt.MapFrom(src => src.Generation.Name));
         CreateMap<IPaginate<ModalExtension>, GetListResponse<GetListModalExtensionListItemDto>>();
         CreateMap<ModalExtension, GetDynamicModalExtensionsResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -77,6 +77,20 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.BrandLogo, opt => opt.MapFrom(src => src.CarModel.Brand.Logo))
             .ForMember(dest => dest.GenerationId, opt => opt.MapFrom(src => src.Generation.Id))
             .ForMember(dest => dest.GenerationName, opt => opt.MapFrom(src => src.Generation.Name))
+            .ForMember(dest => dest.EngineNo, opt => opt.MapFrom(src => src.Engine.EngineNo))
+            .ForMember(dest => dest.EngineCapacity, opt => opt.MapFrom(src => src.Engine.EngineCapacity))
+            .ForMember(dest => dest.MotorPower, opt => opt.MapFrom(src => src.Engine.MotorPower))
+            .ForMember(dest => dest.MaximumTorque, opt => opt.MapFrom(src => src.Engine.MaximumTorque))
+            .ForMember(dest => dest.Acceleration, opt => opt.MapFrom(src => src.Engine.Acceleration))
+            .ForMember(dest => dest.MaximumSpeed, opt => opt.MapFrom(src => src.Engine.MaximumSpeed))
+            .ForMember(dest => dest.FuelTankVolume, opt => opt.MapFrom(src => src.Engine.FuelTankVolume))
+            .ForMember(dest => dest.OutOfTownConsumptionRate, opt => opt.MapFrom(src => src.Engine.AverageConsumptionRate))
+            .ForMember(dest => dest.UrbanConsumptionRate, opt => opt.MapFrom(src => src.Engine.UrbanConsumptionRate))
+            .ForMember(dest => dest.AverageConsumptionRate, opt => opt.MapFrom(src => src.Engine.AverageConsumptionRate))
+            .ForMember(dest => dest.FuelTypeName, opt => opt.MapFrom(src => src.Engine.FuelType.Name))
+            .ForMember(dest => dest.BodyTypeName, opt => opt.MapFrom(src => src.BodyType.BodyName))
+            .ForMember(dest => dest.BodyTypeDoor, opt => opt.MapFrom(src => src.BodyType.Door))
+            .ForMember(dest => dest.TranmissionName, opt => opt.MapFrom(src => src.Transmission.Name))
             ;
         CreateMap<IPaginate<ModalExtension>, GetListResponse<GetDynamicModalExtensionsResponse>>();
     }

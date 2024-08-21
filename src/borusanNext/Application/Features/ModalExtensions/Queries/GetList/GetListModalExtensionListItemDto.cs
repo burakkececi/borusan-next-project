@@ -16,10 +16,9 @@ public class GetListModalExtensionListItemDto : IDto
     public int ModelYear { get; set; }
 
     public Guid CarModelId { get; set; }
-    public string CarModelName { get; set; }
     public Guid BrandId { get; set; }
-    public string BrandName { get; set; }
-    public string BrandLogo { get; set; }
     public Guid GenerationId { get; set; }
-    public string GenerationName { get; set; }
+    public Guid EngineId { get; set; }
+    public Guid BodyTypeId { get; set; }
+    public Guid TransmissionId { get; set; }
 }

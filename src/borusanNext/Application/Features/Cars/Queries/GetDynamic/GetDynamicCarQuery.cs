@@ -6,18 +6,24 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
+using static Application.Features.Cars.Constants.CarsOperationClaims;
+
 
 namespace Application.Features.Models.Queries.GetDynamic;
 
-public class GetDynamicCarQuery : IRequest<GetListResponse<GetDynamicCarResponse>>
+public class GetDynamicCarQuery : IRequest<GetListResponse<GetDynamicCarResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
+
     public class GetDynamicCarQueryHandler : IRequestHandler<GetDynamicCarQuery, GetListResponse<GetDynamicCarResponse>>
     {
         private readonly IMapper _mapper;

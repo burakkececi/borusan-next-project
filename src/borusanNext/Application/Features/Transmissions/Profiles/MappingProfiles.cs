@@ -7,7 +7,7 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
-using Application.Features.Transmissions.Queries.GetDyanmic;
+using Application.Features.Transmissions.Queries.GetDynamic;
 
 namespace Application.Features.Transmissions.Profiles;
 

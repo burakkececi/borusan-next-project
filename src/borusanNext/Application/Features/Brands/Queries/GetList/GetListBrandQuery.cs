@@ -1,4 +1,3 @@
-using Application.Features.Brands.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -8,15 +7,25 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Brands.Constants.BrandsOperationClaims;
-using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Caching;
 
 namespace Application.Features.Brands.Queries.GetList;
 
-public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDto>>, ISecuredRequest
+public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDto>>, ISecuredRequest, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
     public string[] Roles => [Admin, Read];
+
+    public bool BypassCache => false;
+
+    public string CacheKey => $"GetListBrandQuery.PageIndex={PageRequest.PageIndex}&PageSize={PageRequest.PageSize}";
+
+    public string? CacheGroupKey => "Brand.Get";
+
+    public TimeSpan? SlidingExpiration => TimeSpan.FromHours(12);
+
+    public int Interval => 10;
 
     public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, GetListResponse<GetListBrandListItemDto>>
     {

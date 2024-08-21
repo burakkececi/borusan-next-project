@@ -7,6 +7,8 @@ using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.CustomerFavorites.Constants.CustomerFavoritesOperationClaims;
 using Microsoft.EntityFrameworkCore;
+using NArchitecture.Core.Application.Pipelines.Caching;
+using NArchitecture.Core.Application.Requests;
 
 namespace Application.Features.CustomerFavorites.Queries.GetById;
 

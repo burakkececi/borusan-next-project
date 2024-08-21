@@ -4,21 +4,22 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Dynamic;
 using NArchitecture.Core.Persistence.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Application.Features.Licences.Constants.LicencesOperationClaims;
+
 
 namespace Application.Features.Licences.Queries.GetDynamic;
-public class GetDynamicLicenseQuery:IRequest<GetListResponse<GetDynamicLicenceResponse>>
+public class GetDynamicLicenseQuery:IRequest<GetListResponse<GetDynamicLicenceResponse>>, ISecuredRequest
 {
     public PageRequest PageRequest { get; set; }
     public DynamicQuery DynamicQuery { get; set; }
+
+    public string[] Roles => [Admin, Read];
+
     public class GetDynamicLicenseQueryHandler : IRequestHandler<GetDynamicLicenseQuery, GetListResponse<GetDynamicLicenceResponse>>
     {
         private readonly IMapper _mapper;
