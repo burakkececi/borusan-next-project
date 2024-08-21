@@ -14,17 +14,11 @@ public class Car : Entity<Guid>
 
     public Guid ModalExtensionId { get; set; }
     public Guid ColorId { get; set; }
-    public Guid EngineId { get; set; }
-    public Guid BodyTypeId { get; set; }
-    public Guid TransmissionId { get; set; }
     public Guid TramerId { get; set; }
     public Guid SellerId { get; set; }
 
     public virtual ModalExtension ModalExtension { get; set; }
     public virtual CarColor Color { get; set; }
-    public virtual Engine Engine { get; set; }
-    public virtual BodyType BodyType { get; set; }
-    public virtual Transmission Transmission { get; set; }
     public virtual ExpertizeResult ExpertizeResult { get; set; }
     public virtual Advert Advert { get; set; }
     public virtual Seller Seller { get; set; }

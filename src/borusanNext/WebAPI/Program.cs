@@ -61,7 +61,11 @@ builder
         };
     });
 
-builder.Services.AddDistributedMemoryCache();
+//builder.Services.AddDistributedMemoryCache();
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "localhost:6379";
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(opt =>
     opt.AddDefaultPolicy(p =>

@@ -22,5 +22,5 @@ public class Engine : Entity<Guid>
     public Guid FuelTypeId { get; set; }
 
     public virtual FuelType FuelType { get; set; }
-    public virtual ICollection<Car> Cars { get; set; }
+    public virtual ICollection<ModalExtension> ModalExtensions { get; set; }
 }

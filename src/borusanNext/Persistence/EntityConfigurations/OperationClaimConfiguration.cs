@@ -34,6 +34,7 @@ using Application.Features.AdvertImages.Constants;
 using Application.Features.GenerationImages.Constants;
 using Application.Features.CustomerFavorites.Constants;
 using Application.Features.AdvertDetails.Constants;
+using Application.Features.CarModelDetails.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -551,6 +552,15 @@ featureOperationClaims.AddRange(
             [
                 new() { Id = ++lastId, Name = AdvertDetailsOperationClaims.Admin },
                 new() { Id = ++lastId, Name = AdvertDetailsOperationClaims.Read }
+            ]
+        );
+        #endregion
+
+        #region CarModelDetails Readonly
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = CarModelDetailsOperationClaims.Admin },
+                new() { Id = ++lastId, Name = CarModelDetailsOperationClaims.Read }
             ]
         );
         #endregion

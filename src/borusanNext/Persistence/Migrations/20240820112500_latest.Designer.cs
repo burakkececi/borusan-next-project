@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240810143508_data_seed")]
-    partial class data_seed
+    [Migration("20240820112500_latest")]
+    partial class latest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,97 +27,114 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Application.Models.AdvertDetailsReadModel", b =>
                 {
-                    b.Property<double>("Acceleration")
-                        .HasColumnType("double precision");
-
                     b.Property<Guid>("AdvertId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("AdvertId");
 
-                    b.Property<string>("AdvertNo")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("AdvertNo")
+                        .HasColumnType("integer")
                         .HasColumnName("AdvertNo");
 
-                    b.Property<double>("AverageConsumptionRate")
-                        .HasColumnType("double precision");
-
                     b.Property<Guid>("BodyShellPartId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("BodyShellPartId");
 
                     b.Property<int>("BodyShellPart_Bonnet")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_Bonnet");
 
                     b.Property<int>("BodyShellPart_Ceiling")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_Ceiling");
 
-                    b.Property<int>("BodyShellPart_Frontbumper")
-                        .HasColumnType("integer");
+                    b.Property<int>("BodyShellPart_FrontBumper")
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_FrontBumper");
 
                     b.Property<int>("BodyShellPart_LeftFrontDoor")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_LeftFrontDoor");
 
                     b.Property<int>("BodyShellPart_LeftFrontFender")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_LeftFrontFender");
 
                     b.Property<int>("BodyShellPart_LeftRearDoor")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_LeftRearDoor");
 
                     b.Property<int>("BodyShellPart_LeftRearFender")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_LeftRearFender");
 
                     b.Property<int>("BodyShellPart_Luggage")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_Luggage");
 
                     b.Property<int>("BodyShellPart_RearBumper")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_RearBumper");
 
                     b.Property<int>("BodyShellPart_RightFrontDoor")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_RightFrontDoor");
 
                     b.Property<int>("BodyShellPart_RightFrontFender")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_RightFrontFender");
 
                     b.Property<int>("BodyShellPart_RightRearDoor")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_RightRearDoor");
 
                     b.Property<int>("BodyShellPart_RightRearFender")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("BodyShellPart_RightRearFender");
 
                     b.Property<Guid>("BodyTypeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("BodyType_BodyName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("uuid")
+                        .HasColumnName("BodyTypeId");
 
                     b.Property<string>("BodyType_Door")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("BodyType_Door");
+
+                    b.Property<string>("BodyType_Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BodyType_Name");
 
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("BrandId");
 
                     b.Property<string>("Brand_Logo")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Brand_Logo");
 
                     b.Property<string>("Brand_Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Brand_Name");
 
                     b.Property<int>("CarDamageInformationRecord")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("CarDamageInformationRecord");
 
                     b.Property<Guid>("CarId")
                         .HasColumnType("uuid")
                         .HasColumnName("CarId");
 
                     b.Property<Guid>("CarModelId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("CarModelId");
 
                     b.Property<string>("CarModel_Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("CarModel_Name");
 
                     b.Property<string>("ChassisNumber")
                         .IsRequired()
@@ -125,133 +142,182 @@ namespace Persistence.Migrations
                         .HasColumnName("ChassisNumber");
 
                     b.Property<Guid>("ChassisPartId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("ChassisPartId");
 
                     b.Property<bool>("ChassisPart_IsBackPanelChanged")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("ChassisPart_IsBackPanelChanged");
 
                     b.Property<bool>("ChassisPart_IsFrontPanelChanged")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("ChassisPart_IsFrontPanelChanged");
 
                     b.Property<bool>("ChassisPart_IsLeftChassisChanged")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("ChassisPart_IsLeftChassisChanged");
 
                     b.Property<bool>("ChassisPart_IsRightChassisChanged")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("ChassisPart_IsRightChassisChanged");
 
                     b.Property<Guid>("ColorId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("ColorId");
 
                     b.Property<string>("Color_Name")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("EngineCapacity")
-                        .HasColumnType("integer");
+                        .HasColumnType("text")
+                        .HasColumnName("Color_Name");
 
                     b.Property<Guid>("EngineId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("EngineId");
 
-                    b.Property<string>("EngineNo")
+                    b.Property<double>("Engine_Acceleration")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Engine_Acceleration");
+
+                    b.Property<double>("Engine_AverageConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Engine_AverageConsumptionRate");
+
+                    b.Property<int>("Engine_EngineCapacity")
+                        .HasColumnType("integer")
+                        .HasColumnName("Engine_EngineCapacity");
+
+                    b.Property<string>("Engine_EngineNo")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Engine_EngineNo");
 
-                    b.Property<int>("FuelTankVolume")
-                        .HasColumnType("integer");
+                    b.Property<int>("Engine_FuelTankVolume")
+                        .HasColumnType("integer")
+                        .HasColumnName("Engine_FuelTankVolume");
+
+                    b.Property<int>("Engine_MaximumSpeed")
+                        .HasColumnType("integer")
+                        .HasColumnName("Engine_MaximumSpeed");
+
+                    b.Property<int>("Engine_MaximumTorque")
+                        .HasColumnType("integer")
+                        .HasColumnName("Engine_MaximumTorque");
+
+                    b.Property<int>("Engine_MotorPower")
+                        .HasColumnType("integer")
+                        .HasColumnName("Engine_MotorPower");
+
+                    b.Property<double>("Engine_OutOfTownConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Engine_OutOfTownConsumptionRate");
+
+                    b.Property<double>("Engine_UrbanConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Engine_UrbanConsumptionRate");
 
                     b.Property<Guid>("FuelTypeId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("FuelTypeId");
 
                     b.Property<string>("FuelType_Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("FuelType_Name");
 
                     b.Property<Guid>("GenerationId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("GenerationId");
 
                     b.Property<string>("Generation_Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Generation_Name");
 
                     b.Property<DateTime>("Inquiry")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("Inquiry");
 
                     b.Property<DateTime>("InquiryDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("InquiryDate");
 
                     b.Property<int>("Kilometers")
                         .HasColumnType("integer")
                         .HasColumnName("Kilometers");
 
                     b.Property<Guid>("LicenceId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LicenceId");
 
                     b.Property<int>("Licence_LicenceNo")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Licence_LicenceNo");
 
                     b.Property<string>("Licence_ProvidedBy")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Licence_ProvidedBy");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("LocationId");
 
                     b.Property<string>("Location_Address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Location_Address");
 
                     b.Property<string>("Location_City")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Location_City");
 
                     b.Property<string>("Location_Latitute")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Location_Latitute");
 
                     b.Property<string>("Location_Longitute")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Location_Longitute");
 
-                    b.Property<int>("MaximumSpeed")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("ModalExtensionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("ModalExtensionId");
 
-                    b.Property<int>("MaximumTorque")
-                        .HasColumnType("integer");
+                    b.Property<double>("ModalExtension_EmptyWeight")
+                        .HasColumnType("double precision")
+                        .HasColumnName("ModalExtension_EmptyWeight");
 
-                    b.Property<Guid>("ModelExtensionId")
-                        .HasColumnType("uuid");
+                    b.Property<double>("ModalExtension_FuelTank")
+                        .HasColumnType("double precision")
+                        .HasColumnName("ModalExtension_FuelTank");
 
-                    b.Property<double>("ModelExtension_EmptyWeight")
-                        .HasColumnType("double precision");
+                    b.Property<double>("ModalExtension_Height")
+                        .HasColumnType("double precision")
+                        .HasColumnName("ModalExtension_Height");
 
-                    b.Property<double>("ModelExtension_FuelTank")
-                        .HasColumnType("double precision");
+                    b.Property<double>("ModalExtension_Length")
+                        .HasColumnType("double precision")
+                        .HasColumnName("ModalExtension_Length");
 
-                    b.Property<double>("ModelExtension_Height")
-                        .HasColumnType("double precision");
+                    b.Property<double>("ModalExtension_LuggageCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("ModalExtension_LuggageCapacity");
 
-                    b.Property<double>("ModelExtension_Lenght")
-                        .HasColumnType("double precision");
+                    b.Property<int>("ModalExtension_ModelYear")
+                        .HasColumnType("integer")
+                        .HasColumnName("ModalExtension_ModelYear");
 
-                    b.Property<double>("ModelExtension_LuggageCapacity")
-                        .HasColumnType("double precision");
-
-                    b.Property<int>("ModelExtension_ModelYear")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ModelExtension_Name")
+                    b.Property<string>("ModalExtension_Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("ModalExtension_Name");
 
-                    b.Property<double>("ModelExtension_Width")
-                        .HasColumnType("double precision");
-
-                    b.Property<int>("MotorPower")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("OutOfTownConsumptionRate")
-                        .HasColumnType("double precision");
+                    b.Property<double>("ModalExtension_Width")
+                        .HasColumnType("double precision")
+                        .HasColumnName("ModalExtension_Width");
 
                     b.Property<string>("Plate")
                         .IsRequired()
@@ -263,15 +329,18 @@ namespace Persistence.Migrations
                         .HasColumnName("Price");
 
                     b.Property<Guid>("SellerId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("SellerId");
 
                     b.Property<string>("Seller_Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Seller_Name");
 
                     b.Property<string>("Seller_PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Seller_PhoneNumber");
 
                     b.Property<bool>("SpareKey")
                         .HasColumnType("boolean")
@@ -282,17 +351,17 @@ namespace Persistence.Migrations
                         .HasColumnName("SpareWheel");
 
                     b.Property<Guid>("TramerId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TramerId");
 
                     b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("TransmissionId");
 
                     b.Property<string>("Transmission_Name")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<double>("UrbanConsumptionRate")
-                        .HasColumnType("double precision");
+                        .HasColumnType("text")
+                        .HasColumnName("Transmission_Name");
 
                     b.Property<string>("WheelType")
                         .IsRequired()
@@ -301,7 +370,208 @@ namespace Persistence.Migrations
 
                     b.ToTable((string)null);
 
-                    b.ToView("AdvertDetails", (string)null);
+                    b.ToView("vm_advertdetails", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Models.CarModelDetailsReadModel", b =>
+                {
+                    b.Property<double>("Acceleration")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Acceleration");
+
+                    b.Property<double>("AverageConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("AverageConsumptionRate");
+
+                    b.Property<string>("BodyTypeDoor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BodyTypeDoor");
+
+                    b.Property<Guid>("BodyTypeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("BodyTypeId");
+
+                    b.Property<string>("BodyTypeName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BodyTypeName");
+
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("BrandId");
+
+                    b.Property<string>("BrandLogo")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BrandLogo");
+
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BrandName");
+
+                    b.Property<Guid>("CarModelId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CarModelId");
+
+                    b.Property<string>("CarModelName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("CarModelName");
+
+                    b.Property<double>("EmptyWeight")
+                        .HasColumnType("double precision")
+                        .HasColumnName("EmptyWeight");
+
+                    b.Property<int>("EngineCapacity")
+                        .HasColumnType("integer")
+                        .HasColumnName("EngineCapacity");
+
+                    b.Property<Guid>("EngineId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("EngineId");
+
+                    b.Property<string>("EngineNo")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("EngineNo");
+
+                    b.Property<double>("FuelTank")
+                        .HasColumnType("double precision")
+                        .HasColumnName("FuelTank");
+
+                    b.Property<int>("FuelTankVolume")
+                        .HasColumnType("integer")
+                        .HasColumnName("FuelTankVolume");
+
+                    b.Property<string>("FuelTypeName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("FuelTypeName");
+
+                    b.Property<Guid>("GenerationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("GenerationId");
+
+                    b.Property<string>("GenerationName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("GenerationName");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Height");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<double>("Length")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Length");
+
+                    b.Property<double>("LuggageCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("LuggageCapacity");
+
+                    b.Property<int>("MaximumSpeed")
+                        .HasColumnType("integer")
+                        .HasColumnName("MaximumSpeed");
+
+                    b.Property<int>("MaximumTorque")
+                        .HasColumnType("integer")
+                        .HasColumnName("MaximumTorque");
+
+                    b.Property<string>("ModalExtensionName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ModalExtensionName");
+
+                    b.Property<int>("ModelYear")
+                        .HasColumnType("integer")
+                        .HasColumnName("ModelYear");
+
+                    b.Property<int>("MotorPower")
+                        .HasColumnType("integer")
+                        .HasColumnName("MotorPower");
+
+                    b.Property<double>("OutOfTownConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("OutOfTownConsumptionRate");
+
+                    b.Property<Guid>("TransmissionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("TransmissionId");
+
+                    b.Property<string>("TransmissionName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("TransmissionName");
+
+                    b.Property<double>("UrbanConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("UrbanConsumptionRate");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Width");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("vm_carmodeldetails", (string)null);
+                });
+
+            modelBuilder.Entity("Common.Models.InboxEvent", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Processed")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InboxEvents", "event");
+                });
+
+            modelBuilder.Entity("Common.Models.OutboxEvent", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("OccuredOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ProcessedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("State")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OutboxEvents", "event");
                 });
 
             modelBuilder.Entity("Domain.Entities.Advert", b =>
@@ -942,10 +1212,6 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("Id");
 
-                    b.Property<Guid>("BodyTypeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("BodyTypeId");
-
                     b.Property<string>("ChassisNumber")
                         .IsRequired()
                         .HasColumnType("text")
@@ -962,10 +1228,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
-
-                    b.Property<Guid>("EngineId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("EngineId");
 
                     b.Property<DateTime>("Inquiry")
                         .HasColumnType("timestamp without time zone")
@@ -1005,10 +1267,6 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("TramerId");
 
-                    b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("TransmissionId");
-
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
@@ -1020,11 +1278,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BodyTypeId");
-
                     b.HasIndex("ColorId");
-
-                    b.HasIndex("EngineId");
 
                     b.HasIndex("ModalExtensionId")
                         .IsUnique();
@@ -1034,19 +1288,15 @@ namespace Persistence.Migrations
                     b.HasIndex("TramerId")
                         .IsUnique();
 
-                    b.HasIndex("TransmissionId");
-
                     b.ToTable("Cars", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"),
-                            BodyTypeId = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
                             ChassisNumber = "1HGCM82633A123456",
                             ColorId = new Guid("38211267-9cce-4040-adae-0c64bc26dab8"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EngineId = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
                             Inquiry = new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Kilometers = 60000,
                             ModalExtensionId = new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"),
@@ -1056,17 +1306,14 @@ namespace Persistence.Migrations
                             SpareKey = true,
                             SpareWheel = true,
                             TramerId = new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"),
-                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             WheelType = "Alloy"
                         },
                         new
                         {
                             Id = new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"),
-                            BodyTypeId = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
                             ChassisNumber = "2HGCM82644A654321",
                             ColorId = new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EngineId = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
                             Inquiry = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Kilometers = 45000,
                             ModalExtensionId = new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"),
@@ -1076,17 +1323,14 @@ namespace Persistence.Migrations
                             SpareKey = true,
                             SpareWheel = false,
                             TramerId = new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"),
-                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             WheelType = "Steel"
                         },
                         new
                         {
                             Id = new Guid("48f8a123-6b7d-4a2e-928b-c1e6beb2e7f2"),
-                            BodyTypeId = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
                             ChassisNumber = "3HGCM82655A789012",
                             ColorId = new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EngineId = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
                             Inquiry = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Kilometers = 75000,
                             ModalExtensionId = new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"),
@@ -1096,7 +1340,6 @@ namespace Persistence.Migrations
                             SpareKey = false,
                             SpareWheel = true,
                             TramerId = new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"),
-                            TransmissionId = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
                             WheelType = "Alloy"
                         });
                 });
@@ -1979,6 +2222,10 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("Id");
 
+                    b.Property<Guid>("BodyTypeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("BodyTypeId");
+
                     b.Property<Guid>("CarModelId")
                         .HasColumnType("uuid")
                         .HasColumnName("CarModelId");
@@ -1994,6 +2241,10 @@ namespace Persistence.Migrations
                     b.Property<double>("EmptyWeight")
                         .HasColumnType("double precision")
                         .HasColumnName("EmptyWeight");
+
+                    b.Property<Guid>("EngineId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("EngineId");
 
                     b.Property<double>("FuelTank")
                         .HasColumnType("double precision")
@@ -2024,6 +2275,10 @@ namespace Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Name");
 
+                    b.Property<Guid>("TransmissionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("TransmissionId");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
@@ -2034,9 +2289,15 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BodyTypeId");
+
                     b.HasIndex("CarModelId");
 
+                    b.HasIndex("EngineId");
+
                     b.HasIndex("GenerationId");
+
+                    b.HasIndex("TransmissionId");
 
                     b.ToTable("ModalExtensions", (string)null);
 
@@ -2044,9 +2305,11 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"),
+                            BodyTypeId = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
                             CarModelId = new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmptyWeight = 0.0,
+                            EngineId = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
                             FuelTank = 0.0,
                             GenerationId = new Guid("d94a19fa-9478-4514-8238-e08eb534a209"),
                             Height = 1557.0,
@@ -2054,14 +2317,17 @@ namespace Persistence.Migrations
                             LuggageCapacity = 0.0,
                             ModelYear = 2021,
                             Name = "520i Luxury Line",
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             Width = 1822.0
                         },
                         new
                         {
                             Id = new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"),
+                            BodyTypeId = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
                             CarModelId = new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmptyWeight = 0.0,
+                            EngineId = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
                             FuelTank = 0.0,
                             GenerationId = new Guid("ccb47a46-d3ee-421f-b731-8810a62a0628"),
                             Height = 1557.0,
@@ -2069,14 +2335,17 @@ namespace Persistence.Migrations
                             LuggageCapacity = 0.0,
                             ModelYear = 2021,
                             Name = "2.0 PHEV Vogue",
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             Width = 1822.0
                         },
                         new
                         {
                             Id = new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"),
+                            BodyTypeId = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
                             CarModelId = new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmptyWeight = 0.0,
+                            EngineId = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
                             FuelTank = 0.0,
                             GenerationId = new Guid("353a7e00-a2ba-4111-af4a-21302b0d8f50"),
                             Height = 1557.0,
@@ -2084,6 +2353,7 @@ namespace Persistence.Migrations
                             LuggageCapacity = 0.0,
                             ModelYear = 2021,
                             Name = "1.5 Pepper",
+                            TransmissionId = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
                             Width = 1822.0
                         });
                 });
@@ -3336,6 +3606,30 @@ namespace Persistence.Migrations
                             Id = 203,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "CustomerFavorites.Delete"
+                        },
+                        new
+                        {
+                            Id = 204,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertDetails.Admin"
+                        },
+                        new
+                        {
+                            Id = 205,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AdvertDetails.Read"
+                        },
+                        new
+                        {
+                            Id = 206,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "CarModelDetails.Admin"
+                        },
+                        new
+                        {
+                            Id = 207,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "CarModelDetails.Read"
                         });
                 });
 
@@ -3650,12 +3944,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e4cd1e5f-37b6-474d-88ba-cf6dfdca9207"),
+                            Id = new Guid("7d9e3a9f-3dc4-45c4-91c1-37c59f4fd8c7"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         },
                         new
                         {
@@ -3663,8 +3957,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "avcilar@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         },
                         new
                         {
@@ -3672,8 +3966,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "samandira@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         },
                         new
                         {
@@ -3681,8 +3975,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "kececi@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         },
                         new
                         {
@@ -3690,8 +3984,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "burak@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         },
                         new
                         {
@@ -3699,8 +3993,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "meryem@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         },
                         new
                         {
@@ -3708,8 +4002,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ali@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         },
                         new
                         {
@@ -3717,8 +4011,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "sefa@borusan.com",
-                            PasswordHash = new byte[] { 121, 11, 38, 238, 177, 129, 113, 132, 120, 242, 149, 237, 244, 128, 33, 234, 208, 128, 55, 75, 158, 137, 146, 179, 36, 39, 129, 37, 240, 44, 157, 44, 87, 20, 119, 210, 165, 166, 119, 198, 243, 81, 98, 219, 147, 128, 59, 119, 199, 141, 95, 150, 151, 35, 237, 69, 217, 37, 90, 246, 13, 16, 0, 236 },
-                            PasswordSalt = new byte[] { 129, 213, 139, 19, 223, 148, 207, 23, 29, 119, 174, 93, 88, 180, 169, 136, 24, 77, 27, 2, 97, 230, 47, 250, 175, 133, 253, 77, 71, 131, 181, 247, 11, 132, 56, 108, 150, 42, 70, 95, 232, 28, 83, 109, 125, 184, 134, 72, 136, 114, 69, 189, 10, 157, 81, 24, 249, 248, 110, 127, 138, 205, 236, 17, 113, 171, 10, 87, 155, 145, 176, 213, 162, 236, 72, 194, 217, 174, 114, 181, 227, 79, 237, 200, 27, 21, 198, 248, 179, 207, 100, 227, 181, 185, 87, 179, 38, 41, 151, 243, 182, 232, 181, 129, 215, 126, 218, 147, 113, 71, 86, 239, 99, 24, 43, 31, 16, 120, 197, 133, 146, 193, 22, 213, 49, 170, 228, 159 }
+                            PasswordHash = new byte[] { 194, 106, 134, 72, 142, 183, 165, 5, 174, 71, 119, 160, 35, 108, 101, 184, 180, 107, 9, 45, 25, 156, 224, 218, 64, 117, 98, 61, 69, 231, 185, 37, 175, 241, 43, 87, 171, 234, 242, 87, 203, 100, 246, 237, 123, 221, 235, 116, 172, 38, 58, 65, 6, 10, 126, 51, 135, 181, 116, 210, 49, 209, 34, 83 },
+                            PasswordSalt = new byte[] { 58, 75, 225, 195, 230, 87, 223, 137, 60, 227, 111, 107, 32, 33, 30, 133, 204, 16, 252, 133, 43, 235, 88, 241, 38, 125, 208, 166, 185, 147, 82, 149, 129, 136, 40, 149, 77, 17, 10, 142, 241, 176, 229, 139, 153, 45, 187, 104, 149, 169, 140, 132, 128, 82, 160, 130, 175, 221, 68, 191, 32, 51, 134, 234, 188, 102, 57, 39, 145, 54, 129, 64, 137, 86, 85, 181, 204, 147, 0, 35, 208, 122, 92, 105, 206, 18, 120, 184, 0, 184, 250, 130, 216, 19, 4, 192, 194, 220, 44, 162, 10, 250, 236, 150, 101, 148, 67, 48, 160, 75, 151, 86, 107, 92, 14, 213, 1, 111, 81, 109, 132, 126, 69, 4, 50, 120, 26, 211 }
                         });
                 });
 
@@ -3760,10 +4054,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d4611002-39eb-4493-9483-5555f84f711e"),
+                            Id = new Guid("70cf7672-2f94-4025-ae23-d9a876d61037"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("e4cd1e5f-37b6-474d-88ba-cf6dfdca9207")
+                            UserId = new Guid("7d9e3a9f-3dc4-45c4-91c1-37c59f4fd8c7")
                         });
                 });
 
@@ -3833,21 +4127,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
-                    b.HasOne("Domain.Entities.BodyType", "BodyType")
-                        .WithMany("Cars")
-                        .HasForeignKey("BodyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.CarColor", "Color")
                         .WithMany("Cars")
                         .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Engine", "Engine")
-                        .WithMany("Cars")
-                        .HasForeignKey("EngineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -3869,25 +4151,13 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Transmission", "Transmission")
-                        .WithMany("Cars")
-                        .HasForeignKey("TransmissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BodyType");
-
                     b.Navigation("Color");
-
-                    b.Navigation("Engine");
 
                     b.Navigation("ExpertizeResult");
 
                     b.Navigation("ModalExtension");
 
                     b.Navigation("Seller");
-
-                    b.Navigation("Transmission");
                 });
 
             modelBuilder.Entity("Domain.Entities.CarModel", b =>
@@ -4004,9 +4274,21 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.ModalExtension", b =>
                 {
+                    b.HasOne("Domain.Entities.BodyType", "BodyType")
+                        .WithMany("ModalExtensions")
+                        .HasForeignKey("BodyTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.CarModel", "CarModel")
                         .WithMany("ModalExtensions")
                         .HasForeignKey("CarModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Engine", "Engine")
+                        .WithMany("ModalExtensions")
+                        .HasForeignKey("EngineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -4016,9 +4298,21 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Transmission", "Transmission")
+                        .WithMany("ModalExtensions")
+                        .HasForeignKey("TransmissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BodyType");
+
                     b.Navigation("CarModel");
 
+                    b.Navigation("Engine");
+
                     b.Navigation("Generation");
+
+                    b.Navigation("Transmission");
                 });
 
             modelBuilder.Entity("Domain.Entities.OtpAuthenticator", b =>
@@ -4111,7 +4405,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.BodyType", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("ModalExtensions");
                 });
 
             modelBuilder.Entity("Domain.Entities.Brand", b =>
@@ -4154,7 +4448,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Engine", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("ModalExtensions");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExpertizeResult", b =>
@@ -4207,7 +4501,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Transmission", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("ModalExtensions");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

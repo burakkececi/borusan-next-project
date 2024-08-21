@@ -6,6 +6,6 @@ public class Transmission : Entity<Guid>
 {
     public string Name { get; set; }
 
-    public virtual ICollection<Car> Cars { get; set; }
+    public virtual ICollection<ModalExtension> ModalExtensions { get; set; }
 
 }

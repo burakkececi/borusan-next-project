@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projections.UserService", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dispatcher", "src\borusanNext\Dispatcher\Dispatcher.csproj", "{ADF07048-7290-45F3-8E01-3C9612D98875}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projections.FavoriteService", "src\borusanNext\Projections.FavoriteService\Projections.FavoriteService.csproj", "{03273429-319C-4B81-8671-32FD37772DFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{ADF07048-7290-45F3-8E01-3C9612D98875}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADF07048-7290-45F3-8E01-3C9612D98875}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADF07048-7290-45F3-8E01-3C9612D98875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03273429-319C-4B81-8671-32FD37772DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03273429-319C-4B81-8671-32FD37772DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03273429-319C-4B81-8671-32FD37772DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03273429-319C-4B81-8671-32FD37772DFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{ABE4087E-9534-4F89-9A55-434E2D5680B7} = {F4CFDEC8-18F0-4A9C-A16B-3045B325FA69}
 		{F2E02E4A-325D-4BF8-993B-C1C7B8467B1F} = {F4CFDEC8-18F0-4A9C-A16B-3045B325FA69}
 		{ADF07048-7290-45F3-8E01-3C9612D98875} = {F4CFDEC8-18F0-4A9C-A16B-3045B325FA69}
+		{03273429-319C-4B81-8671-32FD37772DFF} = {F4CFDEC8-18F0-4A9C-A16B-3045B325FA69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9208CFCE-156A-49CD-9E43-32CE67AAB957}

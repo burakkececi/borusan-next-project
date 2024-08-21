@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240818164056_inbox_event_added")]
-    partial class inbox_event_added
+    [Migration("20240820112526_views")]
+    partial class views
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -371,6 +371,155 @@ namespace Persistence.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("vm_advertdetails", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Models.CarModelDetailsReadModel", b =>
+                {
+                    b.Property<double>("Acceleration")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Acceleration");
+
+                    b.Property<double>("AverageConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("AverageConsumptionRate");
+
+                    b.Property<string>("BodyTypeDoor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BodyTypeDoor");
+
+                    b.Property<Guid>("BodyTypeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("BodyTypeId");
+
+                    b.Property<string>("BodyTypeName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BodyTypeName");
+
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("BrandId");
+
+                    b.Property<string>("BrandLogo")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BrandLogo");
+
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("BrandName");
+
+                    b.Property<Guid>("CarModelId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CarModelId");
+
+                    b.Property<string>("CarModelName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("CarModelName");
+
+                    b.Property<double>("EmptyWeight")
+                        .HasColumnType("double precision")
+                        .HasColumnName("EmptyWeight");
+
+                    b.Property<int>("EngineCapacity")
+                        .HasColumnType("integer")
+                        .HasColumnName("EngineCapacity");
+
+                    b.Property<Guid>("EngineId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("EngineId");
+
+                    b.Property<string>("EngineNo")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("EngineNo");
+
+                    b.Property<double>("FuelTank")
+                        .HasColumnType("double precision")
+                        .HasColumnName("FuelTank");
+
+                    b.Property<int>("FuelTankVolume")
+                        .HasColumnType("integer")
+                        .HasColumnName("FuelTankVolume");
+
+                    b.Property<string>("FuelTypeName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("FuelTypeName");
+
+                    b.Property<Guid>("GenerationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("GenerationId");
+
+                    b.Property<string>("GenerationName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("GenerationName");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Height");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<double>("Length")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Length");
+
+                    b.Property<double>("LuggageCapacity")
+                        .HasColumnType("double precision")
+                        .HasColumnName("LuggageCapacity");
+
+                    b.Property<int>("MaximumSpeed")
+                        .HasColumnType("integer")
+                        .HasColumnName("MaximumSpeed");
+
+                    b.Property<int>("MaximumTorque")
+                        .HasColumnType("integer")
+                        .HasColumnName("MaximumTorque");
+
+                    b.Property<string>("ModalExtensionName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ModalExtensionName");
+
+                    b.Property<int>("ModelYear")
+                        .HasColumnType("integer")
+                        .HasColumnName("ModelYear");
+
+                    b.Property<int>("MotorPower")
+                        .HasColumnType("integer")
+                        .HasColumnName("MotorPower");
+
+                    b.Property<double>("OutOfTownConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("OutOfTownConsumptionRate");
+
+                    b.Property<Guid>("TransmissionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("TransmissionId");
+
+                    b.Property<string>("TransmissionName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("TransmissionName");
+
+                    b.Property<double>("UrbanConsumptionRate")
+                        .HasColumnType("double precision")
+                        .HasColumnName("UrbanConsumptionRate");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("double precision")
+                        .HasColumnName("Width");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("vm_carmodeldetails", (string)null);
                 });
 
             modelBuilder.Entity("Common.Models.InboxEvent", b =>
@@ -1063,10 +1212,6 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("Id");
 
-                    b.Property<Guid>("BodyTypeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("BodyTypeId");
-
                     b.Property<string>("ChassisNumber")
                         .IsRequired()
                         .HasColumnType("text")
@@ -1083,10 +1228,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
-
-                    b.Property<Guid>("EngineId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("EngineId");
 
                     b.Property<DateTime>("Inquiry")
                         .HasColumnType("timestamp without time zone")
@@ -1126,10 +1267,6 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("TramerId");
 
-                    b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("TransmissionId");
-
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
@@ -1141,11 +1278,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BodyTypeId");
-
                     b.HasIndex("ColorId");
-
-                    b.HasIndex("EngineId");
 
                     b.HasIndex("ModalExtensionId")
                         .IsUnique();
@@ -1155,19 +1288,15 @@ namespace Persistence.Migrations
                     b.HasIndex("TramerId")
                         .IsUnique();
 
-                    b.HasIndex("TransmissionId");
-
                     b.ToTable("Cars", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"),
-                            BodyTypeId = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
                             ChassisNumber = "1HGCM82633A123456",
                             ColorId = new Guid("38211267-9cce-4040-adae-0c64bc26dab8"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EngineId = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
                             Inquiry = new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Kilometers = 60000,
                             ModalExtensionId = new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"),
@@ -1177,17 +1306,14 @@ namespace Persistence.Migrations
                             SpareKey = true,
                             SpareWheel = true,
                             TramerId = new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"),
-                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             WheelType = "Alloy"
                         },
                         new
                         {
                             Id = new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"),
-                            BodyTypeId = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
                             ChassisNumber = "2HGCM82644A654321",
                             ColorId = new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EngineId = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
                             Inquiry = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Kilometers = 45000,
                             ModalExtensionId = new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"),
@@ -1197,17 +1323,14 @@ namespace Persistence.Migrations
                             SpareKey = true,
                             SpareWheel = false,
                             TramerId = new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"),
-                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             WheelType = "Steel"
                         },
                         new
                         {
                             Id = new Guid("48f8a123-6b7d-4a2e-928b-c1e6beb2e7f2"),
-                            BodyTypeId = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
                             ChassisNumber = "3HGCM82655A789012",
                             ColorId = new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EngineId = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
                             Inquiry = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Kilometers = 75000,
                             ModalExtensionId = new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"),
@@ -1217,7 +1340,6 @@ namespace Persistence.Migrations
                             SpareKey = false,
                             SpareWheel = true,
                             TramerId = new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"),
-                            TransmissionId = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
                             WheelType = "Alloy"
                         });
                 });
@@ -2100,6 +2222,10 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("Id");
 
+                    b.Property<Guid>("BodyTypeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("BodyTypeId");
+
                     b.Property<Guid>("CarModelId")
                         .HasColumnType("uuid")
                         .HasColumnName("CarModelId");
@@ -2115,6 +2241,10 @@ namespace Persistence.Migrations
                     b.Property<double>("EmptyWeight")
                         .HasColumnType("double precision")
                         .HasColumnName("EmptyWeight");
+
+                    b.Property<Guid>("EngineId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("EngineId");
 
                     b.Property<double>("FuelTank")
                         .HasColumnType("double precision")
@@ -2145,6 +2275,10 @@ namespace Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Name");
 
+                    b.Property<Guid>("TransmissionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("TransmissionId");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
@@ -2155,9 +2289,15 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BodyTypeId");
+
                     b.HasIndex("CarModelId");
 
+                    b.HasIndex("EngineId");
+
                     b.HasIndex("GenerationId");
+
+                    b.HasIndex("TransmissionId");
 
                     b.ToTable("ModalExtensions", (string)null);
 
@@ -2165,9 +2305,11 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"),
+                            BodyTypeId = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
                             CarModelId = new Guid("86a6edf9-745f-4a0f-9413-110b4cd6bfb6"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmptyWeight = 0.0,
+                            EngineId = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
                             FuelTank = 0.0,
                             GenerationId = new Guid("d94a19fa-9478-4514-8238-e08eb534a209"),
                             Height = 1557.0,
@@ -2175,14 +2317,17 @@ namespace Persistence.Migrations
                             LuggageCapacity = 0.0,
                             ModelYear = 2021,
                             Name = "520i Luxury Line",
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             Width = 1822.0
                         },
                         new
                         {
                             Id = new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"),
+                            BodyTypeId = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
                             CarModelId = new Guid("534e852f-1bcf-4ae3-9ae4-4b5976bdfd87"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmptyWeight = 0.0,
+                            EngineId = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
                             FuelTank = 0.0,
                             GenerationId = new Guid("ccb47a46-d3ee-421f-b731-8810a62a0628"),
                             Height = 1557.0,
@@ -2190,14 +2335,17 @@ namespace Persistence.Migrations
                             LuggageCapacity = 0.0,
                             ModelYear = 2021,
                             Name = "2.0 PHEV Vogue",
+                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             Width = 1822.0
                         },
                         new
                         {
                             Id = new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"),
+                            BodyTypeId = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
                             CarModelId = new Guid("1c852177-9ca6-4ff6-af49-eb88c0f72cff"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmptyWeight = 0.0,
+                            EngineId = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
                             FuelTank = 0.0,
                             GenerationId = new Guid("353a7e00-a2ba-4111-af4a-21302b0d8f50"),
                             Height = 1557.0,
@@ -2205,6 +2353,7 @@ namespace Persistence.Migrations
                             LuggageCapacity = 0.0,
                             ModelYear = 2021,
                             Name = "1.5 Pepper",
+                            TransmissionId = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
                             Width = 1822.0
                         });
                 });
@@ -3469,6 +3618,18 @@ namespace Persistence.Migrations
                             Id = 205,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "AdvertDetails.Read"
+                        },
+                        new
+                        {
+                            Id = 206,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "CarModelDetails.Admin"
+                        },
+                        new
+                        {
+                            Id = 207,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "CarModelDetails.Read"
                         });
                 });
 
@@ -3783,12 +3944,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("166c3fa3-295e-4994-8e09-b0ea1540d43d"),
+                            Id = new Guid("c9c05de8-481d-48ff-9d87-37063870d41d"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         },
                         new
                         {
@@ -3796,8 +3957,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "avcilar@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         },
                         new
                         {
@@ -3805,8 +3966,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "samandira@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         },
                         new
                         {
@@ -3814,8 +3975,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "kececi@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         },
                         new
                         {
@@ -3823,8 +3984,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "burak@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         },
                         new
                         {
@@ -3832,8 +3993,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "meryem@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         },
                         new
                         {
@@ -3841,8 +4002,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ali@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         },
                         new
                         {
@@ -3850,8 +4011,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "sefa@borusan.com",
-                            PasswordHash = new byte[] { 224, 230, 31, 121, 66, 221, 191, 224, 168, 229, 225, 161, 150, 80, 253, 159, 31, 202, 58, 57, 73, 56, 47, 15, 147, 219, 64, 238, 162, 109, 81, 248, 208, 210, 132, 172, 12, 88, 192, 70, 98, 222, 254, 104, 238, 50, 157, 40, 77, 53, 225, 63, 159, 60, 30, 70, 177, 237, 8, 92, 227, 225, 91, 216 },
-                            PasswordSalt = new byte[] { 248, 231, 54, 159, 232, 179, 78, 193, 239, 51, 140, 207, 153, 190, 212, 33, 194, 192, 161, 243, 123, 223, 140, 86, 41, 177, 63, 45, 181, 97, 2, 27, 43, 169, 254, 202, 232, 109, 177, 159, 80, 172, 251, 3, 86, 249, 7, 74, 53, 170, 88, 215, 201, 129, 98, 29, 183, 221, 66, 118, 35, 180, 184, 111, 205, 187, 189, 188, 168, 153, 131, 19, 120, 160, 125, 101, 141, 69, 209, 211, 221, 184, 90, 19, 164, 118, 140, 56, 151, 193, 19, 191, 47, 149, 87, 97, 123, 208, 68, 95, 17, 30, 91, 176, 120, 10, 228, 221, 21, 16, 185, 98, 6, 213, 174, 199, 216, 153, 100, 195, 6, 175, 195, 56, 147, 198, 42, 48 }
+                            PasswordHash = new byte[] { 134, 247, 126, 240, 207, 178, 113, 251, 149, 251, 175, 200, 121, 217, 5, 225, 233, 198, 77, 84, 150, 126, 3, 194, 182, 140, 221, 93, 239, 67, 203, 169, 62, 200, 81, 143, 86, 20, 72, 7, 191, 84, 113, 151, 254, 226, 120, 159, 44, 11, 145, 21, 200, 140, 250, 187, 174, 25, 95, 23, 120, 116, 253, 106 },
+                            PasswordSalt = new byte[] { 66, 174, 142, 46, 118, 147, 217, 222, 145, 61, 90, 26, 74, 15, 109, 105, 80, 209, 224, 198, 154, 87, 139, 34, 238, 234, 188, 31, 128, 88, 23, 151, 47, 189, 208, 49, 73, 142, 150, 81, 45, 235, 86, 78, 159, 190, 1, 170, 224, 19, 249, 157, 28, 131, 27, 140, 153, 41, 220, 99, 53, 255, 27, 105, 188, 70, 158, 30, 252, 102, 127, 130, 125, 16, 157, 19, 254, 86, 237, 144, 73, 9, 32, 176, 112, 197, 109, 128, 61, 247, 79, 179, 99, 106, 0, 247, 101, 141, 192, 47, 125, 133, 145, 59, 92, 30, 5, 87, 122, 246, 118, 213, 192, 16, 126, 17, 180, 44, 66, 239, 62, 97, 166, 29, 179, 244, 75, 87 }
                         });
                 });
 
@@ -3893,10 +4054,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("793bff12-0345-4366-8824-bc039c537899"),
+                            Id = new Guid("0cf7c4fa-d857-4de9-adc5-bb1296251400"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("166c3fa3-295e-4994-8e09-b0ea1540d43d")
+                            UserId = new Guid("c9c05de8-481d-48ff-9d87-37063870d41d")
                         });
                 });
 
@@ -3966,21 +4127,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
-                    b.HasOne("Domain.Entities.BodyType", "BodyType")
-                        .WithMany("Cars")
-                        .HasForeignKey("BodyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.CarColor", "Color")
                         .WithMany("Cars")
                         .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Engine", "Engine")
-                        .WithMany("Cars")
-                        .HasForeignKey("EngineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -4002,25 +4151,13 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Transmission", "Transmission")
-                        .WithMany("Cars")
-                        .HasForeignKey("TransmissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BodyType");
-
                     b.Navigation("Color");
-
-                    b.Navigation("Engine");
 
                     b.Navigation("ExpertizeResult");
 
                     b.Navigation("ModalExtension");
 
                     b.Navigation("Seller");
-
-                    b.Navigation("Transmission");
                 });
 
             modelBuilder.Entity("Domain.Entities.CarModel", b =>
@@ -4137,9 +4274,21 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.ModalExtension", b =>
                 {
+                    b.HasOne("Domain.Entities.BodyType", "BodyType")
+                        .WithMany("ModalExtensions")
+                        .HasForeignKey("BodyTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.CarModel", "CarModel")
                         .WithMany("ModalExtensions")
                         .HasForeignKey("CarModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Engine", "Engine")
+                        .WithMany("ModalExtensions")
+                        .HasForeignKey("EngineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -4149,9 +4298,21 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Transmission", "Transmission")
+                        .WithMany("ModalExtensions")
+                        .HasForeignKey("TransmissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BodyType");
+
                     b.Navigation("CarModel");
 
+                    b.Navigation("Engine");
+
                     b.Navigation("Generation");
+
+                    b.Navigation("Transmission");
                 });
 
             modelBuilder.Entity("Domain.Entities.OtpAuthenticator", b =>
@@ -4244,7 +4405,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.BodyType", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("ModalExtensions");
                 });
 
             modelBuilder.Entity("Domain.Entities.Brand", b =>
@@ -4287,7 +4448,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Engine", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("ModalExtensions");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExpertizeResult", b =>
@@ -4340,7 +4501,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Transmission", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("ModalExtensions");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

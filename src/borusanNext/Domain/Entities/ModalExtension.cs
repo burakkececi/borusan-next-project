@@ -18,9 +18,15 @@ public class ModalExtension : Entity<Guid>
     public int ModelYear { get; set; }
     public Guid CarModelId { get; set; }
     public Guid GenerationId { get; set; }
+    public Guid EngineId { get; set; }
+    public Guid BodyTypeId { get; set; }
+    public Guid TransmissionId { get; set; }
 
     public virtual CarModel CarModel { get; set; }
     public virtual Generation Generation { get; set; }
     public virtual Car Car { get; set; }
+    public virtual Engine Engine { get; set; }
+    public virtual BodyType BodyType { get; set; }
+    public virtual Transmission Transmission { get; set; }
 
 }

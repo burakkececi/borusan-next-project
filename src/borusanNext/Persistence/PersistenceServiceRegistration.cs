@@ -57,6 +57,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IAdvertDetailsReadRepository, AdvertDetailsReadRepository>();
         services.AddScoped<IOutboxEventRepository, OutboxEventRepository>();
         services.AddScoped<IInboxEventRepository, InboxEventRepository>();
+        services.AddScoped<ICarModelDetailsReadRepository, CarModelDetailsReadRepository>();
 
         return services;
     }

@@ -47,6 +47,7 @@ public class BaseDbContext : DbContext
     public DbSet<AdvertDetailsReadModel> AdvertDetails { get; set; }
     public DbSet<OutboxEvent> OutboxEvents { get; set; }
     public DbSet<InboxEvent> InboxEvent { get; set; }
+    public DbSet<CarModelDetailsReadModel> CarModelDetails { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

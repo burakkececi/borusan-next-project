@@ -21,9 +21,6 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
         builder.Property(c => c.Price).HasColumnName("Price").HasPrecision(18, 2).IsRequired();
         builder.Property(c => c.ModalExtensionId).HasColumnName("ModalExtensionId").IsRequired();
         builder.Property(c => c.ColorId).HasColumnName("ColorId").IsRequired();
-        builder.Property(c => c.EngineId).HasColumnName("EngineId").IsRequired();
-        builder.Property(c => c.BodyTypeId).HasColumnName("BodyTypeId").IsRequired();
-        builder.Property(c => c.TransmissionId).HasColumnName("TransmissionId").IsRequired();
         builder.Property(c => c.TramerId).HasColumnName("TramerId").IsRequired();
         builder.Property(c => c.SellerId).HasColumnName("SellerId").IsRequired();
         builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").HasColumnType("timestamp").IsRequired();
@@ -34,9 +31,6 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
 
         builder.HasOne(p => p.ExpertizeResult).WithOne(p => p.Car).HasForeignKey<Car>(p => p.TramerId);
         builder.HasOne(p => p.ModalExtension).WithOne(p => p.Car).HasForeignKey<Car>(p => p.ModalExtensionId);
-        builder.HasOne(p => p.Engine).WithMany(p => p.Cars).HasForeignKey(p => p.EngineId);
-        builder.HasOne(p => p.BodyType).WithMany(p => p.Cars).HasForeignKey(p => p.BodyTypeId);
-        builder.HasOne(p => p.Transmission).WithMany(p => p.Cars).HasForeignKey(p => p.TransmissionId);
         builder.HasOne(p => p.Color).WithMany(p => p.Cars).HasForeignKey(p => p.ColorId);
         builder.HasOne(p => p.Seller).WithMany(p => p.Cars).HasForeignKey(p => p.SellerId);
 
@@ -55,9 +49,6 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
 
                             ModalExtensionId = new Guid("e1721aa6-b49b-4290-8f71-ae5d17267d5a"),
                             ColorId = new Guid("38211267-9cce-4040-adae-0c64bc26dab8"),
-                            EngineId = new Guid("12f9441e-92f2-4333-9e55-b1131c1bfde3"),
-                            BodyTypeId = new Guid("1e6fa0ec-590b-4d7f-8036-63f823390031"),
-                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             TramerId = new Guid("47e992e3-6561-49ff-a827-0e19aaf10345"),
                             SellerId = new Guid("056dd418-5114-4ea1-baf3-07d4b8fc26f6"),
                         },
@@ -75,9 +66,6 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
 
                             ModalExtensionId = new Guid("0333574e-400f-4ae4-80f2-0ac061efd7c8"),
                             ColorId = new Guid("22596234-0c65-4e4e-9db4-bbf0584af494"),
-                            EngineId = new Guid("f235cb8f-559a-4659-8bba-8fba8b0737d6"),
-                            BodyTypeId = new Guid("7204f988-a804-43d0-8f9c-4084c1c5dfc0"),
-                            TransmissionId = new Guid("b830d944-aa1b-4074-9a24-1ff60f1cd38d"),
                             TramerId = new Guid("0ce199f9-3627-44bb-b3c2-fbd72c6799c2"),
                             SellerId = new Guid("785d6af9-4404-4d7a-ad3e-82319812b037"),
                         },
@@ -95,9 +83,6 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
 
                             ModalExtensionId = new Guid("40b9b81b-ccb9-4906-ad6d-7f0c2a9c728d"),
                             ColorId = new Guid("22b793c7-8706-4850-aaa8-0f2fac8a2858"),
-                            EngineId = new Guid("0106e5db-0b88-4231-9cc0-263868fb5c01"),
-                            BodyTypeId = new Guid("491df778-2c1a-4d5f-a0c9-d28b5ffcb747"),
-                            TransmissionId = new Guid("2c450873-2f0b-4da2-a7ff-245ca5c73e19"),
                             TramerId = new Guid("b8cb292b-c61b-4c73-9f20-f8fe2b746b5a"),
                             SellerId = new Guid("667742ae-ae24-4d8c-9029-57ab5ba305ba"),
                         }
