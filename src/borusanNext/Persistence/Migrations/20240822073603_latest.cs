@@ -716,7 +716,6 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     AdvertNo = table.Column<int>(type: "integer", nullable: false),
                     CarId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SellerId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "timestamp", nullable: true)
@@ -728,11 +727,6 @@ namespace Persistence.Migrations
                         name: "FK_Adverts_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Adverts_Sellers_SellerId",
-                        column: x => x.SellerId,
-                        principalTable: "Sellers",
                         principalColumn: "Id");
                 });
 
@@ -1278,11 +1272,11 @@ namespace Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Adverts",
-                columns: new[] { "Id", "AdvertNo", "CarId", "CreatedDate", "DeletedDate", "SellerId", "UpdatedDate" },
+                columns: new[] { "Id", "AdvertNo", "CarId", "CreatedDate", "DeletedDate", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { new Guid("87b836e5-0f84-4bc0-8825-0a3c50277385"), 2, new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null },
-                    { new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"), 1, new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null }
+                    { new Guid("87b836e5-0f84-4bc0-8825-0a3c50277385"), 2, new Guid("12f8c123-4b6d-4a1e-928b-c1e6beb2e6f1"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null },
+                    { new Guid("8e23dc9d-8db3-4ac8-93e4-369fe02c17dc"), 1, new Guid("948018bd-0032-4a6e-928b-c1e6beb2e76b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1335,11 +1329,6 @@ namespace Persistence.Migrations
                 table: "Adverts",
                 column: "CarId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Adverts_SellerId",
-                table: "Adverts",
-                column: "SellerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_CarId",

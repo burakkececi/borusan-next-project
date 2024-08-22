@@ -14,7 +14,7 @@ public static class PersistenceServiceRegistration
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(configuration
-                                                                            .GetConnectionString("BorusanNextDb"))
+                                                                            .GetConnectionString("BorusanNextLive"))
                                                                             .EnableSensitiveDataLogging()
                                                                             .LogTo(Console.WriteLine, LogLevel.Information));
         services.AddDbMigrationApplier(buildServices => buildServices.GetRequiredService<BaseDbContext>());

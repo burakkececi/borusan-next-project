@@ -12,7 +12,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     {
         services.AddScoped<IMailService, MailKitMailService>(_ => new MailKitMailService(hostContext.Configuration.GetSection("MailSettings").Get<MailSettings>()));
         services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(hostContext.Configuration
-                                                                            .GetConnectionString("DefaultConnection")));
+                                                                            .GetConnectionString("BorusanNextLive")));
 
         services.AddMassTransit(configurator =>
         {

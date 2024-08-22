@@ -7,7 +7,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
         services.AddDbContext<BaseDbContext>(options =>
-            options.UseNpgsql(hostContext.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(hostContext.Configuration.GetConnectionString("BorusanNextLive")));
 
         services.AddMassTransit(configurator =>
         {
