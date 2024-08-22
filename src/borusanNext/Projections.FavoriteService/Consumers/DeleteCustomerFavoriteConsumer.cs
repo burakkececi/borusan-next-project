@@ -1,0 +1,44 @@
+﻿using Common.Events.CustomerFavorite;
+using Common.Models;
+using Domain.Entities;
+using MassTransit;
+using Persistence.Contexts;
+
+namespace Projections.FavoriteService.Consumers;
+public class DeleteCustomerFavoriteConsumer : IConsumer<DeleteCustomerFavoriteEvent>
+{
+    private readonly ILogger<DeleteCustomerFavoriteEvent> _logger;
+    private readonly BaseDbContext _projectionContext;
+
+    public DeleteCustomerFavoriteConsumer(ILogger<DeleteCustomerFavoriteEvent> logger, BaseDbContext projectionContext)
+    {
+        _logger = logger;
+        _projectionContext = projectionContext;
+    }
+
+    public async Task Consume(ConsumeContext<DeleteCustomerFavoriteEvent> context)
+    {
+        var _entity = _projectionContext.Set<InboxEvent>();
+        bool hasData = _entity.Where(i => i.EventId == context.Message.Id && i.Processed).Any();
+
+        if (!hasData)
+        {
+            var entity = _projectionContext.Set<CustomerFavorite>();
+
+            entity.Remove(new()
+            {
+                Id = context.Message.Id,
+                AdvertId = context.Message.AdvertId,
+                CustomerId = context.Message.CustomerId
+            });
+
+            await _entity.AddAsync(new()
+            {
+                EventId = context.Message.Id,
+                Processed = true
+            });
+            await _projectionContext.SaveChangesAsync();
+            _logger.LogInformation(@$"EventId : {context.Message.Id} process edildi.");
+        }
+    }
+}

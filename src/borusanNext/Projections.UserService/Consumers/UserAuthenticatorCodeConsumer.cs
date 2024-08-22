@@ -4,23 +4,24 @@ using Common.Models;
 using MassTransit;
 using MimeKit;
 using NArchitecture.Core.Mailing;
-using Projections.UserService.Contexts;
-using Projections.UserService.Services;
+using Persistence.Contexts;
 using System.Linq.Dynamic.Core;
 
 namespace Projections.UserService.Consumers;
 public class UserAuthenticatorCodeConsumer : IConsumer<UserAuthenticatorCodeEvent>
 {
     private readonly IConfiguration _configuration;
-    private readonly ProjectionsUserDbContext _userDbContext;
+    private readonly BaseDbContext _userDbContext;
     private readonly ILogger<UserAuthenticatorCodeConsumer> _logger;
+    private readonly IMailService _mailService;
 
-    public UserAuthenticatorCodeConsumer(ILogger<UserAuthenticatorCodeConsumer> logger, ProjectionsUserDbContext userDbContext, IConfiguration configuration)
+    public UserAuthenticatorCodeConsumer(ILogger<UserAuthenticatorCodeConsumer> logger, BaseDbContext userDbContext, IConfiguration configuration, IMailService mailService)
     {
 
         _logger = logger;
         _userDbContext = userDbContext;
         _configuration = configuration;
+        _mailService = mailService;
     }
 
     public async Task Consume(ConsumeContext<UserAuthenticatorCodeEvent> context)
@@ -33,8 +34,6 @@ public class UserAuthenticatorCodeConsumer : IConsumer<UserAuthenticatorCodeEven
         {
             var toEmailList = new List<MailboxAddress> { new( name: context.Message.UserEmailAddress,
                                                           context.Message.UserEmailAddress) };
-
-            MailService _mailService = new(_configuration);
             _mailService.SendMail(
                 new Mail
                 {

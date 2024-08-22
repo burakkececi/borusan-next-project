@@ -5,23 +5,23 @@ using MassTransit;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using NArchitecture.Core.Mailing;
-using Persistence.Repositories;
-using Projections.UserService.Contexts;
-using Projections.UserService.Services;
+using Persistence.Contexts;
 using System.Web;
 
 namespace Projections.UserService.Consumers;
 public class UserRegisterVerificationConsumer : IConsumer<UserRegisterVerificationEvent>
 {
     private readonly IConfiguration _configuration;
-    private readonly ProjectionsUserDbContext _userDbContext;
+    private readonly BaseDbContext _userDbContext;
     private readonly ILogger<UserAuthenticatorCodeConsumer> _logger;
+    private readonly IMailService _mailService;
 
-    public UserRegisterVerificationConsumer(ILogger<UserAuthenticatorCodeConsumer> logger, ProjectionsUserDbContext userDbContext, IConfiguration configuration)
+    public UserRegisterVerificationConsumer(ILogger<UserAuthenticatorCodeConsumer> logger, BaseDbContext userDbContext, IConfiguration configuration, IMailService mailService)
     {
         _logger = logger;
         _userDbContext = userDbContext;
         _configuration = configuration;
+        _mailService = mailService;
     }
 
     public async Task Consume(ConsumeContext<UserRegisterVerificationEvent> context)
@@ -35,7 +35,6 @@ public class UserRegisterVerificationConsumer : IConsumer<UserRegisterVerificati
             var toEmailList = new List<MailboxAddress> { new( name: context.Message.UserEmailAddress,
                 context.Message.UserEmailAddress) };
 
-            MailService _mailService = new(_configuration);
             _mailService.SendMail(
                 new Mail
                 {

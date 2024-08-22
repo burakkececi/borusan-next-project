@@ -1,23 +1,19 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using NArchitecture.Core.Mailing;
-using NArchitecture.Core.Mailing.MailKit;
+using Projections.FavoriteService.Consumers;
 using Persistence.Contexts;
-using Persistence.Repositories;
-using Projections.UserService;
-using Projections.UserService.Consumers;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
-        services.AddScoped<IMailService, MailKitMailService>(_ => new MailKitMailService(hostContext.Configuration.GetSection("MailSettings").Get<MailSettings>()));
-        services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(hostContext.Configuration
-                                                                            .GetConnectionString("DefaultConnection")));
+        services.AddDbContext<BaseDbContext>(options =>
+            options.UseNpgsql(hostContext.Configuration.GetConnectionString("DefaultConnection")));
 
         services.AddMassTransit(configurator =>
         {
-            configurator.AddConsumer<UserAuthenticatorCodeConsumer>();
-            configurator.AddConsumer<UserRegisterVerificationConsumer>();
+            configurator.AddConsumer<CreateCustomerFavoriteConsumer>();
+            configurator.AddConsumer<DeleteCustomerFavoriteConsumer>();
+            configurator.AddConsumer<UpdateCustomerFavoriteConsumer>();
 
             configurator.UsingRabbitMq((context, rabbitMqConfig) =>
             {
@@ -34,7 +30,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddMassTransitHostedService();
 
         services.AddLogging();
-
-    }).Build();
+    })
+    .Build();
 
 await host.RunAsync();

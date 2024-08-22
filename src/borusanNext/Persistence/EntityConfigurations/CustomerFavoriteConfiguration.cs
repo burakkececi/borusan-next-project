@@ -19,6 +19,9 @@ public class CustomerFavoriteConfiguration : IEntityTypeConfiguration<CustomerFa
 
         builder.HasQueryFilter(cf => !cf.DeletedDate.HasValue);
 
+        builder.HasOne(p => p.Customer).WithMany(p => p.CustomerFavorites).HasForeignKey(p => p.CustomerId);
+        builder.HasOne(p => p.Advert).WithMany(p => p.CustomerFavorites).HasForeignKey(p => p.AdvertId);
+
         builder.HasData(
             new CustomerFavorite()
             {
