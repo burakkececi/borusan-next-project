@@ -2,7 +2,7 @@
 using Common.Models;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using OutboxJobService.Contexts;
+using Persistence.Contexts;
 using Quartz;
 
 namespace OutboxJobService.Jobs;
@@ -10,10 +10,10 @@ namespace OutboxJobService.Jobs;
 public class OutboxEventJob : IJob
 {
     private readonly ILogger<OutboxEventJob> _logger;
-    private readonly DispatcherDbContext _context;
+    private readonly BaseDbContext _context;
     private readonly IPublishEndpoint _publisher;
 
-    public OutboxEventJob(ILogger<OutboxEventJob> logger, IPublishEndpoint publisher, DispatcherDbContext dispatcherContext)
+    public OutboxEventJob(ILogger<OutboxEventJob> logger, IPublishEndpoint publisher, BaseDbContext dispatcherContext)
     {
         _logger = logger;
         _publisher = publisher;

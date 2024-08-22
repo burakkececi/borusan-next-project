@@ -1,14 +1,14 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using OutboxJobService.Contexts;
 using OutboxJobService.Jobs;
+using Persistence.Contexts;
 using Quartz;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
-        services.AddDbContext<DispatcherDbContext>(options => options.UseNpgsql(hostContext.Configuration
-                                                                            .GetConnectionString("DefaultConnection")));
+        services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(hostContext.Configuration
+                                                                            .GetConnectionString("BorusanNextLive")));
 
         services.AddQuartz(configurator =>
         {
