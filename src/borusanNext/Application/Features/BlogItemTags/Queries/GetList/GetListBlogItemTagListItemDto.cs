@@ -13,5 +13,5 @@ public class GetListBlogItemTagListItemDto : IDto
     public Guid BlogId { get; set; }
     public string BlogTitle { get; set; }
     public string BlogDescription { get; set; }
-    public string BlogBanner { get; set; }
+    public DateTime CreatedDate { get; set; }
 }

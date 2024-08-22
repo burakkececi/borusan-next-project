@@ -40,7 +40,8 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.BlogId, opt => opt.MapFrom(src => src.Blog.Id))
             .ForMember(dest => dest.BlogTitle, opt => opt.MapFrom(src => src.Blog.Title))
             .ForMember(dest => dest.BlogDescription, opt => opt.MapFrom(src => src.Blog.Description))
-            .ForMember(dest => dest.BlogBanner, opt => opt.MapFrom(src => src.Blog.Banner));
+            .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.Blog.CreatedDate));
+
         CreateMap<IPaginate<BlogItemTag>, GetListResponse<GetListBlogItemTagListItemDto>>();
         CreateMap<BlogItemTag, GetDynamicBlogItemResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -52,5 +53,10 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.BlogBanner, opt => opt.MapFrom(src => src.Blog.Banner))
             ;
         CreateMap<IPaginate<BlogItemTag>, GetListResponse<GetDynamicBlogItemResponse>>();
+
+        CreateMap<BlogItemTag, GetByBlogIdBlogItemTagQueryResponse>()
+            .ForMember(dest => dest.Tag, opt => opt.MapFrom(src => src.Tag.Name));
+        CreateMap<IPaginate<BlogItemTag>, GetListResponse<GetByBlogIdBlogItemTagQueryResponse>>();
+
     }
 }
