@@ -54,6 +54,16 @@ public class BlogItemTagsController : BaseController
         return Ok(response);
     }
 
+    [HttpGet("blog/{blogId}")]
+    public async Task<ActionResult<GetListResponse<GetByBlogIdBlogItemTagQueryResponse>>> GetByBlogId([FromQuery] PageRequest pageRequest, [FromRoute] Guid blogId)
+    {
+        GetByBlogIdBlogItemTagQuery query = new() { PageRequest = pageRequest, BlogId = blogId };
+
+        GetListResponse<GetByBlogIdBlogItemTagQueryResponse> response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
     [HttpGet]
     public async Task<ActionResult<GetListResponse<GetListBlogItemTagListItemDto>>> GetList([FromQuery] PageRequest pageRequest)
     {
