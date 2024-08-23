@@ -6,6 +6,7 @@ using Domain.Entities;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.ModalExtensions.Constants.ModalExtensionsOperationClaims;
+using Application.Features.Cars.Rules;
 
 namespace Application.Features.ModalExtensions.Commands.Create;
 
@@ -21,6 +22,9 @@ public class CreateModalExtensionCommand : IRequest<CreatedModalExtensionRespons
     public required int ModelYear { get; set; }
     public required Guid CarModelId { get; set; }
     public required Guid GenerationId { get; set; }
+    public Guid EngineId { get; set; }
+    public Guid BodyTypeId { get; set; }
+    public Guid TransmissionId { get; set; }
 
     public string[] Roles => [Admin, Write, ModalExtensionsOperationClaims.Create];
 
@@ -42,6 +46,9 @@ public class CreateModalExtensionCommand : IRequest<CreatedModalExtensionRespons
         {
             ModalExtension modalExtension = _mapper.Map<ModalExtension>(request);
             await _modalExtensionBusinessRules.CarModelIdShouldExistWhenBindingToModalExtensions(modalExtension.CarModelId, cancellationToken);
+            await _modalExtensionBusinessRules.EngineIdShouldExistWhenSelected(request.EngineId, cancellationToken);
+            await _modalExtensionBusinessRules.BodyTypeIdShouldExistWhenSelected(request.BodyTypeId, cancellationToken);
+            await _modalExtensionBusinessRules.TransmissionIdShouldExistWhenSelected(request.TransmissionId, cancellationToken);
             await _modalExtensionBusinessRules.GenerationIdShouldExistWhenBindingToModalExtensions(modalExtension.GenerationId, cancellationToken);
             await _modalExtensionRepository.AddAsync(modalExtension);
 

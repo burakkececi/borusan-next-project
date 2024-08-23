@@ -15,4 +15,6 @@ public class CreatedModalExtensionResponse : IResponse
     public int ModelYear { get; set; }
     public Guid CarModelId { get; set; }
     public Guid GenerationId { get; set; }
+    public Guid EngineId { get; set; }
+
 }

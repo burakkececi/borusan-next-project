@@ -22,6 +22,9 @@ public class UpdateModalExtensionCommand : IRequest<UpdatedModalExtensionRespons
     public required int ModelYear { get; set; }
     public required Guid CarModelId { get; set; }
     public required Guid GenerationId { get; set; }
+    public Guid EngineId { get; set; }
+    public Guid BodyTypeId { get; set; }
+    public Guid TransmissionId { get; set; }
 
     public string[] Roles => [Admin, Write, ModalExtensionsOperationClaims.Update];
 
@@ -43,8 +46,11 @@ public class UpdateModalExtensionCommand : IRequest<UpdatedModalExtensionRespons
         {
             ModalExtension? modalExtension = await _modalExtensionRepository.GetAsync(predicate: me => me.Id == request.Id, cancellationToken: cancellationToken);
             await _modalExtensionBusinessRules.ModalExtensionShouldExistWhenSelected(modalExtension);
-            await _modalExtensionBusinessRules.CarModelIdShouldExistWhenBindingToModalExtensions(modalExtension.CarModelId, cancellationToken);
-            await _modalExtensionBusinessRules.GenerationIdShouldExistWhenBindingToModalExtensions(modalExtension.GenerationId, cancellationToken);
+            await _modalExtensionBusinessRules.CarModelIdShouldExistWhenBindingToModalExtensions(request.CarModelId, cancellationToken);
+            await _modalExtensionBusinessRules.EngineIdShouldExistWhenSelected(request.EngineId, cancellationToken);
+            await _modalExtensionBusinessRules.BodyTypeIdShouldExistWhenSelected(request.BodyTypeId, cancellationToken);
+            await _modalExtensionBusinessRules.TransmissionIdShouldExistWhenSelected(request.TransmissionId, cancellationToken)
+            await _modalExtensionBusinessRules.GenerationIdShouldExistWhenBindingToModalExtensions(request.GenerationId, cancellationToken);
 
             modalExtension = _mapper.Map(request, modalExtension);
 

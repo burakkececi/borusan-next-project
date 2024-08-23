@@ -25,7 +25,7 @@ public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCo
 
         RuleFor(c => c.Phone)
             .NotEmpty().WithMessage("Phone cannot be empty")
-            .Matches(@"^(0\d{3} \d{3} \d{2} \d{2})$").WithMessage("Phone number is not valid")
+            .Matches(@"^(\d{3}\d{3}\d{2}\d{2})$").WithMessage("Phone number is not valid")
             .WithName("Customer Create Phone");
 
         RuleFor(c => c.CustomerType)

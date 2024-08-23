@@ -4,6 +4,7 @@ using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
 using Domain.Entities;
+using Application.Features.Cars.Constants;
 
 namespace Application.Features.ModalExtensions.Rules;
 
@@ -13,12 +14,26 @@ public class ModalExtensionBusinessRules : BaseBusinessRules
     private readonly IGenerationRepository _generationRepository;
     private readonly ICarModelRepository _carModelRepository;
     private readonly ILocalizationService _localizationService;
+    private readonly IEngineRepository _engineRepository;
+    private readonly IBodyTypeRepository _bodyTypeRepository;
+    private readonly ITransmissionRepository _transmissionRepository;
 
-    public ModalExtensionBusinessRules(IModalExtensionRepository modalExtensionRepository, ILocalizationService localizationService, IGenerationRepository generationRepository, ICarModelRepository carModelRepository)
+
+    public ModalExtensionBusinessRules(IModalExtensionRepository modalExtensionRepository,
+                                       ILocalizationService localizationService,
+                                       IGenerationRepository generationRepository,
+                                       ICarModelRepository carModelRepository,
+                                       IEngineRepository engineRepository,
+                                       IBodyTypeRepository bodyTypeRepository,
+                                       ITransmissionRepository transmissionRepository
+                                        )
     {
         _modalExtensionRepository = modalExtensionRepository;
         _localizationService = localizationService;
         _generationRepository = generationRepository;
+        _engineRepository = engineRepository;
+        _bodyTypeRepository = bodyTypeRepository;
+        _transmissionRepository = transmissionRepository;
         _carModelRepository = carModelRepository;
     }
 
@@ -67,4 +82,48 @@ public class ModalExtensionBusinessRules : BaseBusinessRules
         if (carModel == null)
             await throwBusinessException(ModalExtensionsBusinessMessages.CarModelNotExists);
     }
+
+
+    public async Task EngineIdShouldExistWhenSelected(Guid engineId, CancellationToken cancellationToken)
+    {
+        Engine? engine = await _engineRepository.GetAsync(
+            predicate: e => e.Id == engineId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (engine == null)
+        {
+            await throwBusinessException(CarsBusinessMessages.EngineNotExists);
+        }
+    }
+
+    public async Task BodyTypeIdShouldExistWhenSelected(Guid bodyTypeId, CancellationToken cancellationToken)
+    {
+        BodyType? bodyType = await _bodyTypeRepository.GetAsync(
+            predicate: bt => bt.Id == bodyTypeId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (bodyType == null)
+        {
+            await throwBusinessException(CarsBusinessMessages.BodyTypeNotExists);
+        }
+    }
+
+    public async Task TransmissionIdShouldExistWhenSelected(Guid transmissionId, CancellationToken cancellationToken)
+    {
+        Transmission? transmission = await _transmissionRepository.GetAsync(
+            predicate: t => t.Id == transmissionId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (transmission == null)
+        {
+            await throwBusinessException(CarsBusinessMessages.TransmissionNotExists);
+        }
+    }
+
 }

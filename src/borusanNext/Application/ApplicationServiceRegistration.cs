@@ -45,7 +45,6 @@ using Application.Services.Sellers;
 using Application.Services.AdvertImages;
 using Application.Services.GenerationImages;
 using Application.Services.CustomerFavorites;
-using Application.Services.ElasticSearch;
 
 namespace Application;
 

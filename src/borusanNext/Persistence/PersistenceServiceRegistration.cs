@@ -14,9 +14,7 @@ public static class PersistenceServiceRegistration
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(configuration
-                                                                            .GetConnectionString("BorusanNextLive"))
-                                                                            .EnableSensitiveDataLogging()
-                                                                            .LogTo(Console.WriteLine, LogLevel.Information));
+                                                                            .GetConnectionString("BorusanNextLive")));
         services.AddDbMigrationApplier(buildServices => buildServices.GetRequiredService<BaseDbContext>());
 
         services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();
