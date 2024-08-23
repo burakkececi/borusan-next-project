@@ -324,7 +324,7 @@ namespace Persistence.Migrations
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -348,13 +348,13 @@ namespace Persistence.Migrations
                         column: x => x.BodyShellPartId,
                         principalTable: "BodyShellParts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ExpertizeResults_ChassisParts_ChassisPartId",
                         column: x => x.ChassisPartId,
                         principalTable: "ChassisParts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -385,7 +385,7 @@ namespace Persistence.Migrations
                         column: x => x.FuelTypeId,
                         principalTable: "FuelTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -407,7 +407,7 @@ namespace Persistence.Migrations
                         column: x => x.GenerationId,
                         principalTable: "Generations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -429,13 +429,13 @@ namespace Persistence.Migrations
                         column: x => x.BlogId,
                         principalTable: "Blogs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BlogItemTags_Tags_TagId",
                         column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -447,6 +447,8 @@ namespace Persistence.Migrations
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
+                    IsPhoneVerified = table.Column<bool>(type: "boolean", nullable: false),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
                     CustomerType = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
@@ -460,7 +462,7 @@ namespace Persistence.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -483,7 +485,7 @@ namespace Persistence.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -506,7 +508,7 @@ namespace Persistence.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -534,7 +536,7 @@ namespace Persistence.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -559,19 +561,19 @@ namespace Persistence.Migrations
                         column: x => x.LicenceId,
                         principalTable: "Licences",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Sellers_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Sellers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -593,13 +595,13 @@ namespace Persistence.Migrations
                         column: x => x.OperationClaimId,
                         principalTable: "OperationClaims",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserOperationClaims_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -632,31 +634,31 @@ namespace Persistence.Migrations
                         column: x => x.BodyTypeId,
                         principalTable: "BodyTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ModalExtensions_CarModels_CarModelId",
                         column: x => x.CarModelId,
                         principalTable: "CarModels",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ModalExtensions_Engines_EngineId",
                         column: x => x.EngineId,
                         principalTable: "Engines",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ModalExtensions_Generations_GenerationId",
                         column: x => x.GenerationId,
                         principalTable: "Generations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ModalExtensions_Transmissions_TransmissionId",
                         column: x => x.TransmissionId,
                         principalTable: "Transmissions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -688,25 +690,25 @@ namespace Persistence.Migrations
                         column: x => x.ColorId,
                         principalTable: "CarColors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_ExpertizeResults_TramerId",
                         column: x => x.TramerId,
                         principalTable: "ExpertizeResults",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_ModalExtensions_ModalExtensionId",
                         column: x => x.ModalExtensionId,
                         principalTable: "ModalExtensions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_Sellers_SellerId",
                         column: x => x.SellerId,
                         principalTable: "Sellers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -776,7 +778,7 @@ namespace Persistence.Migrations
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -799,13 +801,13 @@ namespace Persistence.Migrations
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CustomerAdvertLogs_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -827,13 +829,13 @@ namespace Persistence.Migrations
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CustomerFavorites_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -1174,14 +1176,14 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "PasswordHash", "PasswordSalt", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "sefa@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null },
-                    { new Guid("398b5d31-f2e2-473f-8f40-78f7e79af217"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "kececi@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null },
-                    { new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "burak@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null },
-                    { new Guid("69bd8e0f-59d4-4532-ae32-03cec3e39158"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "samandira@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null },
-                    { new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ali@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null },
-                    { new Guid("b73f6541-460e-4d9d-97eb-1402f63df038"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "avcilar@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null },
-                    { new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "meryem@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null },
-                    { new Guid("f626ed3d-5324-4dcd-844b-e9167c5e7a34"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@borusan.com", new byte[] { 5, 69, 51, 39, 8, 217, 21, 205, 136, 82, 170, 31, 71, 133, 164, 233, 27, 25, 30, 4, 254, 103, 145, 180, 5, 167, 149, 105, 141, 220, 130, 194, 147, 120, 22, 233, 118, 140, 57, 185, 150, 201, 229, 62, 67, 221, 254, 189, 103, 49, 19, 161, 84, 13, 201, 177, 107, 122, 11, 69, 38, 100, 42, 83 }, new byte[] { 97, 72, 138, 232, 213, 8, 43, 100, 152, 59, 200, 207, 125, 224, 169, 227, 126, 79, 248, 122, 39, 51, 200, 143, 86, 33, 30, 226, 185, 84, 181, 223, 246, 55, 127, 121, 250, 192, 77, 38, 58, 237, 102, 105, 88, 135, 109, 30, 152, 44, 12, 252, 107, 98, 45, 62, 102, 207, 240, 113, 40, 57, 118, 53, 190, 124, 73, 141, 20, 118, 167, 172, 218, 62, 185, 118, 206, 253, 1, 103, 84, 99, 117, 208, 149, 130, 95, 86, 202, 1, 240, 239, 128, 216, 64, 46, 87, 45, 67, 228, 31, 85, 239, 172, 241, 117, 112, 153, 53, 87, 73, 228, 88, 156, 63, 67, 247, 46, 54, 93, 104, 23, 123, 153, 117, 105, 178, 65 }, null }
+                    { new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "sefa@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null },
+                    { new Guid("398b5d31-f2e2-473f-8f40-78f7e79af217"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "kececi@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null },
+                    { new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "burak@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null },
+                    { new Guid("69bd8e0f-59d4-4532-ae32-03cec3e39158"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "samandira@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null },
+                    { new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ali@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null },
+                    { new Guid("b73f6541-460e-4d9d-97eb-1402f63df038"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "avcilar@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null },
+                    { new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "meryem@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null },
+                    { new Guid("cb72bc53-4095-42e6-a158-ee2fabebfc30"), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@borusan.com", new byte[] { 12, 0, 222, 42, 60, 56, 3, 154, 52, 233, 218, 245, 241, 246, 222, 120, 69, 180, 79, 1, 45, 18, 201, 12, 247, 166, 72, 130, 220, 210, 76, 15, 185, 41, 42, 136, 171, 95, 246, 99, 132, 231, 225, 121, 71, 154, 109, 110, 212, 204, 39, 205, 152, 107, 80, 49, 187, 236, 133, 143, 174, 57, 106, 44 }, new byte[] { 171, 242, 187, 121, 229, 66, 103, 182, 229, 240, 227, 173, 131, 93, 217, 68, 197, 54, 233, 168, 40, 249, 236, 159, 225, 114, 134, 43, 75, 169, 81, 234, 30, 187, 19, 107, 248, 1, 156, 14, 208, 138, 34, 52, 32, 30, 193, 196, 45, 169, 144, 115, 254, 46, 34, 81, 75, 99, 203, 14, 117, 195, 228, 19, 66, 143, 217, 134, 56, 179, 157, 91, 15, 240, 221, 242, 152, 132, 176, 237, 86, 104, 252, 129, 140, 179, 227, 119, 47, 198, 23, 82, 176, 223, 102, 186, 235, 135, 35, 87, 204, 230, 235, 50, 130, 80, 11, 173, 80, 10, 250, 126, 172, 56, 203, 128, 53, 219, 87, 155, 183, 139, 48, 48, 9, 123, 149, 87 }, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1206,13 +1208,13 @@ namespace Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "Id", "CreatedDate", "CustomerType", "DeletedDate", "FirstName", "LastName", "Phone", "UpdatedDate", "UserId" },
+                columns: new[] { "Id", "CreatedDate", "CustomerType", "DateOfBirth", "DeletedDate", "FirstName", "IsPhoneVerified", "LastName", "Phone", "UpdatedDate", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("27ca8f20-333f-4fc2-a535-c156a2aec150"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, "Burak", "Keçeci", "5555555555", null, new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e") },
-                    { new Guid("ab623e31-88ab-48cb-8942-2c541343d651"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, "Meryem", "Talay", "5555555555", null, new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d") },
-                    { new Guid("b1e3b9cd-1c82-4f68-a70e-8349c28af525"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "Sefa", "Pehlivan", "5555555555", null, new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237") },
-                    { new Guid("d2f17680-26d1-4ac3-90c6-4ffec9e5c0ad"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, null, "Ali", "Laçin", "5555555555", null, new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf") }
+                    { new Guid("27ca8f20-333f-4fc2-a535-c156a2aec150"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateOnly(1, 1, 1), null, "Burak", false, "Keçeci", "5555555555", null, new Guid("6444d306-ab8e-4e84-a6ff-77037d68fd2e") },
+                    { new Guid("ab623e31-88ab-48cb-8942-2c541343d651"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateOnly(1, 1, 1), null, "Meryem", false, "Talay", "5555555555", null, new Guid("bd4dd3dc-72e4-42cb-bde3-0fcb1867b10d") },
+                    { new Guid("b1e3b9cd-1c82-4f68-a70e-8349c28af525"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateOnly(1, 1, 1), null, "Sefa", false, "Pehlivan", "5555555555", null, new Guid("36160d4c-8a2a-4959-9769-ebf2bd812237") },
+                    { new Guid("d2f17680-26d1-4ac3-90c6-4ffec9e5c0ad"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, new DateOnly(1, 1, 1), null, "Ali", false, "Laçin", "5555555555", null, new Guid("ada31c5d-6014-46d2-a1c3-ed8007e898cf") }
                 });
 
             migrationBuilder.InsertData(
@@ -1248,7 +1250,7 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
-                values: new object[] { new Guid("878ab7a5-2f51-44ad-9a7e-12490985862d"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("f626ed3d-5324-4dcd-844b-e9167c5e7a34") });
+                values: new object[] { new Guid("d9a4aff6-9c81-45d7-ace0-4a1c2d4a2d2e"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, new Guid("cb72bc53-4095-42e6-a158-ee2fabebfc30") });
 
             migrationBuilder.InsertData(
                 table: "ModalExtensions",

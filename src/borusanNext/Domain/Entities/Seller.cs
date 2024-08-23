@@ -19,6 +19,5 @@ public class Seller : Entity<Guid>
     public virtual Location Location { get; set; }
 
     public virtual User User { get; set; }
-    public virtual ICollection<Advert> Adverts { get; set; }
     public virtual ICollection<Car> Cars { get; set; }
 }

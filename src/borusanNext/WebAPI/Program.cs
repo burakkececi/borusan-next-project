@@ -64,7 +64,13 @@ builder
 //builder.Services.AddDistributedMemoryCache();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = "localhost:6379";
+    options.ConfigurationOptions = new()
+    {
+        EndPoints = { builder.Configuration["RedisConfiguration:Endpoint"] },
+        Password = builder.Configuration["RedisConfiguration:Password"],
+        Ssl = Convert.ToBoolean(builder.Configuration["RedisConfiguration:UseSSL"])
+    };
+
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(opt =>

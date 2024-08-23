@@ -14,7 +14,8 @@ public class Customer : Entity<Guid>
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Phone { get; set; }
-    // public bool IsPhoneVerified { get; set; }
+    public bool IsPhoneVerified { get; set; }
+    public DateOnly DateOfBirth { get; set; }
     public CustomerType CustomerType { get; set; }
 
     public virtual User User { get; set; }
