@@ -51,9 +51,6 @@ public class UpdateCarCommand : IRequest<UpdatedCarResponse>, ISecuredRequest
             await _carBusinessRules.CarShouldExistWhenSelected(car);
             await _carBusinessRules.CarModelIdShouldExistWhenSelected(request.CarModelId, cancellationToken);
             await _carBusinessRules.CarColorIdShouldExistWhenSelected(request.ColorId, cancellationToken);
-            await _carBusinessRules.EngineIdShouldExistWhenSelected(request.EngineId, cancellationToken);
-            await _carBusinessRules.BodyTypeIdShouldExistWhenSelected(request.BodyTypeId, cancellationToken);
-            await _carBusinessRules.TransmissionIdShouldExistWhenSelected(request.TransmissionId, cancellationToken);
             await _carBusinessRules.ExpertizeResultIdShouldExistWhenSelected(request.TramerId, cancellationToken);
             await _carBusinessRules.SellerIdShouldExistWhenSelected(request.SellerId, cancellationToken);
 

@@ -49,7 +49,7 @@ public class UpdateModalExtensionCommand : IRequest<UpdatedModalExtensionRespons
             await _modalExtensionBusinessRules.CarModelIdShouldExistWhenBindingToModalExtensions(request.CarModelId, cancellationToken);
             await _modalExtensionBusinessRules.EngineIdShouldExistWhenSelected(request.EngineId, cancellationToken);
             await _modalExtensionBusinessRules.BodyTypeIdShouldExistWhenSelected(request.BodyTypeId, cancellationToken);
-            await _modalExtensionBusinessRules.TransmissionIdShouldExistWhenSelected(request.TransmissionId, cancellationToken)
+            await _modalExtensionBusinessRules.TransmissionIdShouldExistWhenSelected(request.TransmissionId, cancellationToken);
             await _modalExtensionBusinessRules.GenerationIdShouldExistWhenBindingToModalExtensions(request.GenerationId, cancellationToken);
 
             modalExtension = _mapper.Map(request, modalExtension);
