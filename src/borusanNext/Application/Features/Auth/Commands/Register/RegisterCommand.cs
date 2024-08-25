@@ -1,9 +1,11 @@
-﻿using Application.Features.Auth.Rules;
+﻿using Application.Dtos.User;
+using Application.Features.Auth.Rules;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
-using NArchitecture.Core.Application.Dtos;
+using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Security.Hashing;
 using NArchitecture.Core.Security.JWT;
 
@@ -47,18 +49,38 @@ public class RegisterCommand : IRequest<RegisteredResponse>
         {
             await _authBusinessRules.UserEmailShouldBeNotExists(request.UserForRegisterDto.Email);
 
-            HashingHelper.CreatePasswordHash(
-                request.UserForRegisterDto.Password,
-                passwordHash: out byte[] passwordHash,
-                passwordSalt: out byte[] passwordSalt
-            );
-            User newUser =
-                new()
-                {
-                    Email = request.UserForRegisterDto.Email,
-                    PasswordHash = passwordHash,
-                    PasswordSalt = passwordSalt,
-                };
+            if (request.UserForRegisterDto.AuthProvider == 0 && request.UserForRegisterDto.Password == null)
+            {
+                throw new BusinessException("Password cannot be null");
+            }
+
+            User newUser;
+            if (request.UserForRegisterDto.AuthProvider == 0)
+            {
+                HashingHelper.CreatePasswordHash(
+                                request.UserForRegisterDto.Password,
+                                passwordHash: out byte[] passwordHash,
+                                passwordSalt: out byte[] passwordSalt
+                            );
+                newUser =
+                    new()
+                    {
+                        Email = request.UserForRegisterDto.Email,
+                        PasswordHash = passwordHash,
+                        PasswordSalt = passwordSalt,
+                        Provider = 0
+                    };
+            }
+            else
+            {
+                newUser =
+                     new()
+                     {
+                         Email = request.UserForRegisterDto.Email,
+                         Provider = (AuthProvider)request.UserForRegisterDto.AuthProvider
+                     };
+            }
+
             User createdUser = await _userRepository.AddAsync(newUser);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);

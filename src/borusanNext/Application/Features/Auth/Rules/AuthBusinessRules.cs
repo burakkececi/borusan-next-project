@@ -1,10 +1,10 @@
 using Application.Features.Auth.Constants;
 using Application.Services.Repositories;
 using Domain.Entities;
+using Domain.Enums;
 using NArchitecture.Core.Application.Rules;
 using NArchitecture.Core.CrossCuttingConcerns.Exception.Types;
 using NArchitecture.Core.Localization.Abstraction;
-using NArchitecture.Core.Security.Enums;
 using NArchitecture.Core.Security.Hashing;
 
 namespace Application.Features.Auth.Rules;
@@ -30,18 +30,6 @@ public class AuthBusinessRules : BaseBusinessRules
     {
         if (emailAuthenticator is null)
             await throwBusinessException(AuthMessages.EmailAuthenticatorDontExists);
-    }
-
-    public async Task OtpAuthenticatorShouldBeExists(OtpAuthenticator? otpAuthenticator)
-    {
-        if (otpAuthenticator is null)
-            await throwBusinessException(AuthMessages.OtpAuthenticatorDontExists);
-    }
-
-    public async Task OtpAuthenticatorThatVerifiedShouldNotBeExists(OtpAuthenticator? otpAuthenticator)
-    {
-        if (otpAuthenticator is not null && otpAuthenticator.IsVerified)
-            await throwBusinessException(AuthMessages.AlreadyVerifiedOtpAuthenticatorIsExists);
     }
 
     public async Task EmailAuthenticatorActivationKeyShouldBeExists(EmailAuthenticator emailAuthenticator)

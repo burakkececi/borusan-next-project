@@ -38,8 +38,6 @@ public class GetDynamicCustomerQuery : IRequest<GetListResponse<GetDynamicCustom
             IPaginate<Customer> customer = await _customerRepository.GetListByDynamicAsync(
              dynamic: request.DynamicQuery,
              index: request.PageRequest.PageIndex,
-             include: i => i
-                 .Include(c => c.CustomerFavorites).Include(c => c.Appointments).Include(c => c.CustomerAdvertLogs),
              size: request.PageRequest.PageSize,
              cancellationToken: cancellationToken);
 

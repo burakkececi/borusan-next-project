@@ -5,7 +5,8 @@ public class Advert : Entity<Guid>
 {
     public int AdvertNo { get; set; }
     public Guid CarId { get; set; }
-    
+    public Boolean IsDeleted { get; set; }
+
     public virtual Car Car {get;set;}
     public virtual ICollection<CustomerAdvertLog> CustomerAdvertLogs { get; set; }
     public virtual ICollection<AdvertImage> AdvertImages { get; set; }

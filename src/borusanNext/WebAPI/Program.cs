@@ -16,6 +16,7 @@ using Persistence;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI;
 using System.Text.Json.Serialization;
+using Application.Configurations;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -64,13 +65,13 @@ builder
 //builder.Services.AddDistributedMemoryCache();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
+    var config = builder.Configuration.GetSection("RedisConfig").Get<RedisConfiguration>();
     options.ConfigurationOptions = new()
     {
-        EndPoints = { builder.Configuration["RedisConfiguration:Endpoint"] },
-        Password = builder.Configuration["RedisConfiguration:Password"],
-        Ssl = Convert.ToBoolean(builder.Configuration["RedisConfiguration:UseSSL"])
+        EndPoints = { config.Endpoint },
+        Password = config.Password,
+        Ssl = config.UseSSL
     };
-
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(opt =>

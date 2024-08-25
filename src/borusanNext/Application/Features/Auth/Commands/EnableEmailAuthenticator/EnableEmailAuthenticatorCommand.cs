@@ -5,10 +5,10 @@ using Application.Services.UsersService;
 using Common.Events.User;
 using Common.Models;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Mailing;
-using NArchitecture.Core.Security.Enums;
 
 namespace Application.Features.Auth.Commands.EnableEmailAuthenticator;
 

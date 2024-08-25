@@ -34,8 +34,6 @@ public class GetListCustomerQuery : IRequest<GetListResponse<GetListCustomerList
             IPaginate<Customer> customers = await _customerRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                 include: i => i
-                 .Include(c => c.CustomerFavorites).Include(c => c.Appointments).Include(c => c.CustomerAdvertLogs),
                 cancellationToken: cancellationToken
             );
 

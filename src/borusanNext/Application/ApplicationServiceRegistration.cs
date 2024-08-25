@@ -45,6 +45,9 @@ using Application.Services.Sellers;
 using Application.Services.AdvertImages;
 using Application.Services.GenerationImages;
 using Application.Services.CustomerFavorites;
+using NArchitecture.Core.Security.EmailAuthenticator;
+using Application.Security;
+using Application.Services.JWT;
 
 namespace Application;
 
@@ -82,7 +85,8 @@ public static class ApplicationServiceRegistration
 
         services.AddYamlResourceLocalization();
 
-        services.AddSecurityServices<Guid, int, Guid>(tokenOptions);
+        services.AddScoped<ITokenHelper<int, Guid>, JwtHelper<int, Guid>>((IServiceProvider _) => new JwtHelper<int, Guid>(tokenOptions));
+        services.AddScoped<IEmailAuthenticatorHelper, EmailAuthenticatorHelper>();
 
         services.AddScoped<IBrandService, BrandManager>();
         services.AddScoped<IAdvertService, AdvertManager>();

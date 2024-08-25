@@ -10,5 +10,6 @@ public class UpdatedCustomerResponse : IResponse
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Phone { get; set; }
+    public DateOnly? DateOfBirth { get; set; }
     public CustomerType CustomerType { get; set; }
 }

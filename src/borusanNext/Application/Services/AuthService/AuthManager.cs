@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using Application.Security;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -10,7 +11,7 @@ namespace Application.Services.AuthService;
 public class AuthManager : IAuthService
 {
     private readonly IRefreshTokenRepository _refreshTokenRepository;
-    private readonly ITokenHelper<Guid, int, Guid> _tokenHelper;
+    private readonly ITokenHelper<int, Guid> _tokenHelper;
     private readonly TokenOptions _tokenOptions;
     private readonly IUserOperationClaimRepository _userOperationClaimRepository;
     private readonly IMapper _mapper;
@@ -18,7 +19,7 @@ public class AuthManager : IAuthService
     public AuthManager(
         IUserOperationClaimRepository userOperationClaimRepository,
         IRefreshTokenRepository refreshTokenRepository,
-        ITokenHelper<Guid, int, Guid> tokenHelper,
+        ITokenHelper<int, Guid> tokenHelper,
         IConfiguration configuration,
         IMapper mapper
     )
