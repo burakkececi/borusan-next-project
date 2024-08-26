@@ -36,7 +36,7 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
             {
                 Id = new Guid("96ec5f7f-8b0f-41b9-9694-e9968fd49f7a"),
                 Name = "MINI",
-                Logo = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722106757/dalglsprdgaabq0m7jmg.png"
+                Logo = "https://res.cloudinary.com/dl0cotczj/image/upload/v1724597194/szhvy5qofpb482r5yazn.png"
             }
             );
     }

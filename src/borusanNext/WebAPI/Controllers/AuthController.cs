@@ -1,15 +1,13 @@
-﻿using Application.Features.Auth.Commands.EnableEmailAuthenticator;
-using Application.Features.Auth.Commands.EnableOtpAuthenticator;
+﻿using Application.Dtos.User;
+using Application.Features.Auth.Commands.EnableEmailAuthenticator;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.RefreshToken;
 using Application.Features.Auth.Commands.Register;
 using Application.Features.Auth.Commands.RevokeToken;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
-using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NArchitecture.Core.Application.Dtos;
 using NArchitecture.Core.Security.JWT;
 
 namespace WebAPI.Controllers;
@@ -82,30 +80,11 @@ public class AuthController : BaseController
         return Ok();
     }
 
-    [HttpGet("EnableOtpAuthenticator")]
-    public async Task<IActionResult> EnableOtpAuthenticator()
-    {
-        EnableOtpAuthenticatorCommand enableOtpAuthenticatorCommand = new() { UserId = getUserIdFromRequest() };
-        EnabledOtpAuthenticatorResponse result = await Mediator.Send(enableOtpAuthenticatorCommand);
-
-        return Ok(result);
-    }
-
     [HttpGet("VerifyEmailAuthenticator")]
     public async Task<IActionResult> VerifyEmailAuthenticator(
         [FromQuery] VerifyEmailAuthenticatorCommand verifyEmailAuthenticatorCommand
     )
     {
-        await Mediator.Send(verifyEmailAuthenticatorCommand);
-        return Ok();
-    }
-
-    [HttpPost("VerifyOtpAuthenticator")]
-    public async Task<IActionResult> VerifyOtpAuthenticator([FromBody] string authenticatorCode)
-    {
-        VerifyOtpAuthenticatorCommand verifyEmailAuthenticatorCommand =
-            new() { UserId = getUserIdFromRequest(), ActivationCode = authenticatorCode };
-
         await Mediator.Send(verifyEmailAuthenticatorCommand);
         return Ok();
     }

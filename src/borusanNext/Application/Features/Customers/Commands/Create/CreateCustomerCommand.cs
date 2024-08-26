@@ -16,6 +16,8 @@ public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>, ISecured
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Phone { get; set; }
+    public bool? IsPhoneVerified { get; set; }
+    public DateOnly? DateOfBirth { get; set; }
     public required CustomerType CustomerType { get; set; }
 
     public string[] Roles => [Admin, Write, CustomersOperationClaims.Create];

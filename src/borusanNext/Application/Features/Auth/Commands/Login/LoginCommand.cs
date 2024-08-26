@@ -1,11 +1,11 @@
-﻿using Application.Features.Auth.Rules;
+﻿using Application.Dtos.User;
+using Application.Features.Auth.Rules;
 using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
 using Application.Services.UsersService;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
-using NArchitecture.Core.Application.Dtos;
-using NArchitecture.Core.Security.Enums;
 using NArchitecture.Core.Security.JWT;
 
 namespace Application.Features.Auth.Commands.Login;
@@ -54,7 +54,10 @@ public class LoginCommand : IRequest<LoggedResponse>
                 cancellationToken: cancellationToken
             );
             await _authBusinessRules.UserShouldBeExistsWhenSelected(user);
-            await _authBusinessRules.UserPasswordShouldBeMatch(user!, request.UserForLoginDto.Password);
+            if (user != null && user.Provider == AuthProvider.None)
+            {
+                await _authBusinessRules.UserPasswordShouldBeMatch(user!, request.UserForLoginDto.Password);
+            }
 
             LoggedResponse loggedResponse = new();
 
