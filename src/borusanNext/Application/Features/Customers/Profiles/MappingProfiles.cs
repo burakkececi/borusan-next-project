@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
 using Application.Features.Customers.Queries.GetDynamic;
+using Application.Features.Customers.Queries.GetByUserId;
 
 namespace Application.Features.Customers.Profiles;
 
@@ -25,6 +26,8 @@ public class MappingProfiles : Profile
         CreateMap<Customer, DeletedCustomerResponse>();
 
         CreateMap<Customer, GetByIdCustomerResponse>();
+
+        CreateMap<Customer, GetByUserIdCustomerResponse>();
 
         CreateMap<Customer, GetListCustomerListItemDto>();
         CreateMap<IPaginate<Customer>, GetListResponse<GetListCustomerListItemDto>>();

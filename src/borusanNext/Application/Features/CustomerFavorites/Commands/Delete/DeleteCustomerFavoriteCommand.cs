@@ -41,9 +41,10 @@ public class DeleteCustomerFavoriteCommand : IRequest<Unit>, ISecuredRequest
 
             var @event = new DeleteCustomerFavoriteEvent()
             {
-                Id = customerFavorite.Id,
-                CustomerId = customerFavorite.CustomerId,
-                AdvertId = customerFavorite.AdvertId
+                Id = Guid.NewGuid(),
+                CustomerFavoriteId = customerFavorite.Id,
+                AdvertId = customerFavorite.AdvertId,
+                CustomerId = customerFavorite.CustomerId
             };
 
             OutboxEvent outboxEvent = new(@event, @event.Id, DateTime.Now.ToUniversalTime());

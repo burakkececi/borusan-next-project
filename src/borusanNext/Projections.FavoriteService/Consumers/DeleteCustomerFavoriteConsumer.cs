@@ -18,8 +18,8 @@ public class DeleteCustomerFavoriteConsumer : IConsumer<DeleteCustomerFavoriteEv
 
     public async Task Consume(ConsumeContext<DeleteCustomerFavoriteEvent> context)
     {
-        var _entity = _projectionContext.Set<InboxEvent>();
-        bool hasData = _entity.Where(i => i.EventId == context.Message.Id && i.Processed).Any();
+        var _inbox = _projectionContext.Set<InboxEvent>();
+        bool hasData = _inbox.Where(i => i.EventId == context.Message.Id && i.Processed).Any();
 
         if (!hasData)
         {
@@ -27,12 +27,12 @@ public class DeleteCustomerFavoriteConsumer : IConsumer<DeleteCustomerFavoriteEv
 
             entity.Remove(new()
             {
-                Id = context.Message.Id,
+                Id = context.Message.CustomerFavoriteId,
                 AdvertId = context.Message.AdvertId,
                 CustomerId = context.Message.CustomerId
             });
 
-            await _entity.AddAsync(new()
+            await _inbox.AddAsync(new()
             {
                 EventId = context.Message.Id,
                 Processed = true

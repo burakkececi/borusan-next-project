@@ -19,12 +19,14 @@ public class GetByCustomerIdCustomerFavoriteQuery : IRequest<GetListResponse<Get
     public class GetByCustomerIdCustomerFavoriteQueryHandler : IRequestHandler<GetByCustomerIdCustomerFavoriteQuery, GetListResponse<GetByCustomerIdCustomerFavoriteListItemDto>>
     {
         private readonly ICustomerFavoriteRepository _customerFavoriteRepository;
+        private readonly IAdvertImageRepository _advertImageRepository;
         private readonly IMapper _mapper;
 
-        public GetByCustomerIdCustomerFavoriteQueryHandler(ICustomerFavoriteRepository customerFavoriteRepository, IMapper mapper)
+        public GetByCustomerIdCustomerFavoriteQueryHandler(ICustomerFavoriteRepository customerFavoriteRepository, IMapper mapper, IAdvertImageRepository advertImageRepository)
         {
             _customerFavoriteRepository = customerFavoriteRepository;
             _mapper = mapper;
+            _advertImageRepository = advertImageRepository;
         }
 
         public async Task<GetListResponse<GetByCustomerIdCustomerFavoriteListItemDto>> Handle(GetByCustomerIdCustomerFavoriteQuery request, CancellationToken cancellationToken)
@@ -35,14 +37,15 @@ public class GetByCustomerIdCustomerFavoriteQuery : IRequest<GetListResponse<Get
                 predicate: i => i.CustomerId == request.CustomerId,
                 include: i => i.Include(c => c.Customer)
                                .Include(c => c.Advert)
-                                    .ThenInclude(c => c.Car)
-                                    .ThenInclude(c => c.ModalExtension)
-                                    .ThenInclude(c => c.CarModel)
-                                    .ThenInclude(c => c.Brand),
+                                .ThenInclude(c => c.Car)
+                                .ThenInclude(c => c.ModalExtension)
+                                .ThenInclude(c => c.CarModel)
+                                .ThenInclude(c => c.Brand),
                 cancellationToken: cancellationToken
             );
 
             GetListResponse<GetByCustomerIdCustomerFavoriteListItemDto> response = _mapper.Map<GetListResponse<GetByCustomerIdCustomerFavoriteListItemDto>>(customerFavorites);
+
             return response;
         }
     }

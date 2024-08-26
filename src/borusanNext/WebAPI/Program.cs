@@ -102,7 +102,7 @@ builder.Services.AddSwaggerGen(opt =>
 
 builder.Services.AddHangfire(configuration =>
 {
-    configuration.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("HangfireConnection"));
+    configuration.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("BorusanNextJobLogs"));
 });
 
 builder.Services.AddHangfireServer();

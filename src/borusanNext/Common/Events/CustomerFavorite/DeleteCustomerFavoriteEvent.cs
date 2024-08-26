@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Common.Events.CustomerFavorite;
 public class DeleteCustomerFavoriteEvent : BaseEvent
 {
-    public Guid CustomerId { get; set; }
+    public Guid CustomerFavoriteId { get; set; }
     public Guid AdvertId { get; set; }
+    public Guid CustomerId { get; set; }
 }

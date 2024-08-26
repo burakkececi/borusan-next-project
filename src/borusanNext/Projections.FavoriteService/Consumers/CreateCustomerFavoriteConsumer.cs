@@ -2,9 +2,6 @@
 using Common.Models;
 using Domain.Entities;
 using MassTransit;
-using Microsoft.Extensions.Configuration;
-using MimeKit;
-using NArchitecture.Core.Mailing;
 using Persistence.Contexts;
 
 namespace Projections.FavoriteService.Consumers;
@@ -22,8 +19,8 @@ public class CreateCustomerFavoriteConsumer : IConsumer<CreateCustomerFavoriteEv
     public async Task Consume(ConsumeContext<CreateCustomerFavoriteEvent> context)
     {
 
-        var _entity = _projectionContext.Set<InboxEvent>();
-        bool hasData = _entity.Where(i => i.EventId == context.Message.Id && i.Processed).Any();
+        var _inbox = _projectionContext.Set<InboxEvent>();
+        bool hasData = _inbox.Where(i => i.EventId == context.Message.Id && i.Processed).Any();
 
         if (!hasData)
         {
@@ -31,12 +28,12 @@ public class CreateCustomerFavoriteConsumer : IConsumer<CreateCustomerFavoriteEv
 
             await entity.AddAsync(new()
             {
-                Id = context.Message.Id,
+                Id = context.Message.CustomerFavoriteId,
                 AdvertId = context.Message.AdvertId,
                 CustomerId = context.Message.CustomerId
             });
 
-            await _entity.AddAsync(new()
+            await _inbox.AddAsync(new()
             {
                 EventId = context.Message.Id,
                 Processed = true

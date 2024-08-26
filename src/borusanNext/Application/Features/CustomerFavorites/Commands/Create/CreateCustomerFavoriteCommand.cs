@@ -42,7 +42,8 @@ public class CreateCustomerFavoriteCommand : IRequest<Unit>, ISecuredRequest
 
             var @event = new CreateCustomerFavoriteEvent()
             {
-                Id = customerFavorite.Id,
+                Id = Guid.NewGuid(),
+                CustomerFavoriteId = Guid.NewGuid(), 
                 CustomerId = customerFavorite.CustomerId,
                 AdvertId = customerFavorite.AdvertId
             };

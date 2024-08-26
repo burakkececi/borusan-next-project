@@ -41,12 +41,13 @@ public class UpdateCustomerFavoriteCommand : IRequest<Unit>, ISecuredRequest
             await _customerFavoriteBusinessRules.CustomerFavoriteShouldExistWhenSelected(customerFavorite);
             await _customerFavoriteBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
             await _customerFavoriteBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
-            
+
             customerFavorite = _mapper.Map(request, customerFavorite);
 
             var @event = new UpdateCustomerFavoriteEvent()
             {
-                Id = customerFavorite.Id,
+                Id = Guid.NewGuid(),
+                CustomerFavoriteId = customerFavorite.Id,
                 CustomerId = customerFavorite.CustomerId,
                 AdvertId = customerFavorite.AdvertId
             };

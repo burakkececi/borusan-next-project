@@ -10,6 +10,7 @@ using Application.Features.Cars.Queries.GetDynamic;
 using Application.Features.Models.Queries.GetDynamic;
 using NArchitecture.Core.Persistence.Dynamic;
 using Application.Features.Customers.Queries.GetDynamic;
+using Application.Features.Customers.Queries.GetByUserId;
 
 namespace WebAPI.Controllers;
 
@@ -49,6 +50,16 @@ public class CustomersController : BaseController
         GetByIdCustomerQuery query = new() { Id = id };
 
         GetByIdCustomerResponse response = await Mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpGet("user/{id}")]
+    public async Task<ActionResult<GetByUserIdCustomerResponse>> GetByUserId([FromRoute] Guid id)
+    {
+        GetByUserIdCustomerQuery query = new() { UserId = id };
+
+        GetByUserIdCustomerResponse response = await Mediator.Send(query);
 
         return Ok(response);
     }

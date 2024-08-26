@@ -9,4 +9,5 @@ public class UpdateCustomerFavoriteEvent : BaseEvent
 {
     public Guid CustomerId { get; set; }
     public Guid AdvertId { get; set; }
+    public Guid CustomerFavoriteId { get; set; }
 }

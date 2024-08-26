@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Application.Features.CustomerFavorites.Queries.GetByCustomerId;
 public class GetByCustomerIdCustomerFavoriteListItemDto
 {
-    public string CustomerId { get; set; }
     public string AdvertId { get; set; }
+    public string ImageURL { get; set; }
     public string BrandName { get; set; }
     public string ModelName { get; set; }
     public int ModelYear { get; set; }

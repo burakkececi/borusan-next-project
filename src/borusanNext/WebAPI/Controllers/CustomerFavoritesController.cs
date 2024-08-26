@@ -6,7 +6,6 @@ using Application.Features.CustomerFavorites.Queries.GetList;
 using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
-using MediatR;
 using Application.Features.CustomerFavorites.Queries.GetByCustomerId;
 
 namespace WebAPI.Controllers;
@@ -16,29 +15,29 @@ namespace WebAPI.Controllers;
 public class CustomerFavoritesController : BaseController
 {
     [HttpPost]
-    public async Task<ActionResult<Unit>> Add([FromBody] CreateCustomerFavoriteCommand command)
+    public async Task<IActionResult> Add([FromBody] CreateCustomerFavoriteCommand command)
     {
         await Mediator.Send(command);
 
-        return CreatedAtAction(nameof(GetById), "In process...");
+        return StatusCode(StatusCodes.Status201Created);
     }
 
     [HttpPut]
-    public async Task<ActionResult<Unit>> Update([FromBody] UpdateCustomerFavoriteCommand command)
+    public async Task<IActionResult> Update([FromBody] UpdateCustomerFavoriteCommand command)
     {
         await Mediator.Send(command);
 
-        return Ok("In process...");
+        return Ok("Update in process...");
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Unit>> Delete([FromRoute] Guid id)
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         DeleteCustomerFavoriteCommand command = new() { Id = id };
 
         await Mediator.Send(command);
 
-        return Ok("In process...");
+        return Ok("Delete in process...");
     }
 
     [HttpGet("{id}")]
