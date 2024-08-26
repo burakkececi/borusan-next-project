@@ -1,4 +1,4 @@
-using Application;
+﻿using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -16,6 +16,8 @@ using Persistence;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI;
 using System.Text.Json.Serialization;
+using Hangfire;
+using Hangfire.PostgreSql;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -61,7 +63,6 @@ builder
         };
     });
 
-//builder.Services.AddDistributedMemoryCache();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.ConfigurationOptions = new()
@@ -70,7 +71,6 @@ builder.Services.AddStackExchangeRedisCache(options =>
         Password = builder.Configuration["RedisConfiguration:Password"],
         Ssl = Convert.ToBoolean(builder.Configuration["RedisConfiguration:UseSSL"])
     };
-
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(opt =>
@@ -98,6 +98,13 @@ builder.Services.AddSwaggerGen(opt =>
     opt.OperationFilter<BearerSecurityRequirementOperationFilter>();
 });
 
+builder.Services.AddHangfire(configuration =>
+{
+    configuration.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("HangfireConnection"));
+});
+
+builder.Services.AddHangfireServer();
+
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true); // Enable timestamp without time zone for postgresql
 
 WebApplication app = builder.Build();
@@ -113,9 +120,26 @@ if (app.Environment.IsDevelopment())
 }
 
 if (app.Environment.IsProduction())
+{
     app.ConfigureCustomExceptionMiddleware();
+}
 
 app.UseDbMigrationApplier();
+
+app.UseHangfireDashboard();
+app.UseHangfireServer();
+
+RecurringJob.AddOrUpdate<BirthdayMail>(
+    "send-birthday-emails",
+    birthdayJob => birthdayJob.SendBirthdayEmailsAsync(),
+    "0 10 * * *" // Sabah 10:00'da çalışacak
+);
+
+RecurringJob.AddOrUpdate<AppointmentReminderMail>(
+    "send-appointment-reminders",
+    appointmentJob => appointmentJob.SendAppointmentRemindersAsync(),
+    "0 19 * * *" // Öğleden sonra 19:00'da çalışacak
+);
 
 app.UseAuthentication();
 app.UseAuthorization();
