@@ -39,30 +39,10 @@ namespace Application.Features.Cars.Commands.Create
                 .GreaterThan(0).WithMessage("Price must be greater than zero.")
                 .NotNull().WithMessage("Price cannot be null.");
 
-            RuleFor(c => c.CarModelId)
-                .NotEmpty().WithMessage("Car Model Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Car Model Id must be a valid GUID.")
-                .NotNull().WithMessage("Car Model Id cannot be null.");
-
             RuleFor(c => c.ColorId)
                 .NotEmpty().WithMessage("Color Id cannot be empty.")
                 .Must(id => id != Guid.Empty).WithMessage("Color Id must be a valid GUID.")
                 .NotNull().WithMessage("Color Id cannot be null.");
-
-            RuleFor(c => c.EngineId)
-                .NotEmpty().WithMessage("Engine Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Engine Id must be a valid GUID.")
-                .NotNull().WithMessage("Engine Id cannot be null.");
-
-            RuleFor(c => c.BodyTypeId)
-                .NotEmpty().WithMessage("Body Type Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Body Type Id must be a valid GUID.")
-                .NotNull().WithMessage("Body Type Id cannot be null.");
-
-            RuleFor(c => c.TransmissionId)
-                .NotEmpty().WithMessage("Transmission Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Transmission Id must be a valid GUID.")
-                .NotNull().WithMessage("Transmission Id cannot be null.");
 
             RuleFor(c => c.TramerId)
                 .NotEmpty().WithMessage("Tramer Id cannot be empty.")

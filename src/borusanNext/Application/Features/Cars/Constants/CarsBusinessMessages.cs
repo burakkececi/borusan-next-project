@@ -19,4 +19,5 @@ public static class CarsBusinessMessages
     public const string ExpertizeResultNotExists = "ExpertizeResultNotExists";
 
     public const string SellerNotExists = "SellerNotExists";
+    public const string ModalExtensionNotExist = "ModalExtensionNotExist";
 }

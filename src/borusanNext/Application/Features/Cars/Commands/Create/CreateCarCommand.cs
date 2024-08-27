@@ -19,11 +19,8 @@ public class CreateCarCommand : IRequest<CreatedCarResponse>, ISecuredRequest
     public required string WheelType { get; set; }
     public required bool SpareWheel { get; set; }
     public required decimal Price { get; set; }
-    public required Guid CarModelId { get; set; }
+    public required Guid ModalExtensionId { get; set; }
     public required Guid ColorId { get; set; }
-    public required Guid EngineId { get; set; }
-    public required Guid BodyTypeId { get; set; }
-    public required Guid TransmissionId { get; set; }
     public required Guid TramerId { get; set; }
     public required Guid SellerId { get; set; }
 
@@ -47,10 +44,10 @@ public class CreateCarCommand : IRequest<CreatedCarResponse>, ISecuredRequest
         {
             Car car = _mapper.Map<Car>(request);
 
-            await _carBusinessRules.CarModelIdShouldExistWhenSelected(request.CarModelId, cancellationToken);
             await _carBusinessRules.CarColorIdShouldExistWhenSelected(request.ColorId, cancellationToken);
             await _carBusinessRules.ExpertizeResultIdShouldExistWhenSelected(request.TramerId, cancellationToken);
             await _carBusinessRules.SellerIdShouldExistWhenSelected(request.SellerId, cancellationToken);
+            await _carBusinessRules.ModalExtensionIdShouldExistWhenSelected(request.ModalExtensionId, cancellationToken);
 
             await _carRepository.AddAsync(car);
 

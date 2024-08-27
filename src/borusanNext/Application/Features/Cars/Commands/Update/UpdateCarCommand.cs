@@ -20,13 +20,11 @@ public class UpdateCarCommand : IRequest<UpdatedCarResponse>, ISecuredRequest
     public required string WheelType { get; set; }
     public required bool SpareWheel { get; set; }
     public required decimal Price { get; set; }
-    public required Guid CarModelId { get; set; }
+    public required Guid ModalExtensionId { get; set; }
     public required Guid ColorId { get; set; }
-    public required Guid EngineId { get; set; }
-    public required Guid BodyTypeId { get; set; }
-    public required Guid TransmissionId { get; set; }
     public required Guid TramerId { get; set; }
     public required Guid SellerId { get; set; }
+
 
     public string[] Roles => [Admin, Write, CarsOperationClaims.Update];
 
@@ -47,12 +45,11 @@ public class UpdateCarCommand : IRequest<UpdatedCarResponse>, ISecuredRequest
         public async Task<UpdatedCarResponse> Handle(UpdateCarCommand request, CancellationToken cancellationToken)
         {
             Car? car = await _carRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
-            
-            await _carBusinessRules.CarShouldExistWhenSelected(car);
-            await _carBusinessRules.CarModelIdShouldExistWhenSelected(request.CarModelId, cancellationToken);
+
             await _carBusinessRules.CarColorIdShouldExistWhenSelected(request.ColorId, cancellationToken);
             await _carBusinessRules.ExpertizeResultIdShouldExistWhenSelected(request.TramerId, cancellationToken);
             await _carBusinessRules.SellerIdShouldExistWhenSelected(request.SellerId, cancellationToken);
+            await _carBusinessRules.ModalExtensionIdShouldExistWhenSelected(request.ModalExtensionId, cancellationToken);
 
             car = _mapper.Map(request, car);
 

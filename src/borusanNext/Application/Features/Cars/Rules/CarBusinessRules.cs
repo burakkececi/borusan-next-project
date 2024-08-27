@@ -15,6 +15,7 @@ public class CarBusinessRules : BaseBusinessRules
     private readonly IExpertizeResultRepository _expertizeResultRepository; 
     private readonly ISellerRepository _sellerRepository;
     private readonly ILocalizationService _localizationService;
+    private readonly IModalExtensionRepository _modalExtensionRepository;
 
     public CarBusinessRules(
         ICarRepository carRepository,
@@ -22,7 +23,8 @@ public class CarBusinessRules : BaseBusinessRules
         ICarColorRepository carColorRepository, 
         IExpertizeResultRepository expertizeResultRepository, 
         ISellerRepository sellerRepository,
-        ILocalizationService localizationService
+        ILocalizationService localizationService,
+        IModalExtensionRepository modalExtensionRepository
     )
     {
         _carRepository = carRepository;
@@ -31,6 +33,7 @@ public class CarBusinessRules : BaseBusinessRules
         _expertizeResultRepository = expertizeResultRepository; 
         _sellerRepository = sellerRepository;
         _localizationService = localizationService;
+        _modalExtensionRepository = modalExtensionRepository;
     }
 
     private async Task throwBusinessException(string messageKey)
@@ -107,6 +110,20 @@ public class CarBusinessRules : BaseBusinessRules
         if (seller == null)
         {
             await throwBusinessException(CarsBusinessMessages.SellerNotExists);
+        }
+    }
+
+    public async Task ModalExtensionIdShouldExistWhenSelected(Guid modalExtensionId, CancellationToken cancellationToken)
+    {
+        ModalExtension? modalExtension = await _modalExtensionRepository.GetAsync(
+            predicate: m => m.Id == modalExtensionId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+
+        if (modalExtension == null)
+        {
+            await throwBusinessException(CarsBusinessMessages.ModalExtensionNotExist);
         }
     }
 }
