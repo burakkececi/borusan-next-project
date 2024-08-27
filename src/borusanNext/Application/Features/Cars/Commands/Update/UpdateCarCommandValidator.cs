@@ -37,26 +37,6 @@ namespace Application.Features.Cars.Commands.Update
                 .NotEmpty().WithMessage("Price cannot be empty.")
                 .GreaterThan(0).WithMessage("Price must be greater than zero.");
 
-            RuleFor(c => c.CarModelId)
-                .NotEmpty().WithMessage("Car Model Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Car Model Id must be a valid GUID.");
-
-            RuleFor(c => c.ColorId)
-                .NotEmpty().WithMessage("Color Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Color Id must be a valid GUID.");
-
-            RuleFor(c => c.EngineId)
-                .NotEmpty().WithMessage("Engine Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Engine Id must be a valid GUID.");
-
-            RuleFor(c => c.BodyTypeId)
-                .NotEmpty().WithMessage("Body Type Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Body Type Id must be a valid GUID.");
-
-            RuleFor(c => c.TransmissionId)
-                .NotEmpty().WithMessage("Transmission Id cannot be empty.")
-                .Must(id => id != Guid.Empty).WithMessage("Transmission Id must be a valid GUID.");
-
             RuleFor(c => c.TramerId)
                 .NotEmpty().WithMessage("Tramer Id cannot be empty.")
                 .Must(id => id != Guid.Empty).WithMessage("Tramer Id must be a valid GUID.");
