@@ -7,16 +7,16 @@ namespace Application.Features.ChassisParts.Commands.Create
         public CreateChassisPartCommandValidator()
         {
             RuleFor(c => c.IsRightChassisChanged)
-                .NotEmpty().WithMessage("IsRightChassisChanged cannot be empty.");
+                 .NotNull().WithMessage("IsRightChassisChanged cannot be null.");
 
             RuleFor(c => c.IsLeftChassisChanged)
-                .NotEmpty().WithMessage("IsLeftChassisChanged cannot be empty.");
+                .NotNull().WithMessage("IsLeftChassisChanged cannot be null.");
 
             RuleFor(c => c.IsFrontPanelChanged)
-                .NotEmpty().WithMessage("IsFrontPanelChanged cannot be empty.");
+                .NotNull().WithMessage("IsFrontPanelChanged cannot be null.");
 
             RuleFor(c => c.IsBackPanelChanged)
-                .NotEmpty().WithMessage("IsBackPanelChanged cannot be empty.");
+                .NotNull().WithMessage("IsBackPanelChanged cannot be null.");
         }
     }
 }
