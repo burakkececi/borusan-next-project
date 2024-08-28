@@ -25,13 +25,18 @@ public class MappingProfiles : Profile
         CreateMap<DeleteCustomerCommand, Customer>();
         CreateMap<Customer, DeletedCustomerResponse>();
 
-        CreateMap<Customer, GetByIdCustomerResponse>();
+        CreateMap<Customer, GetByIdCustomerResponse>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
 
-        CreateMap<Customer, GetByUserIdCustomerResponse>();
+        CreateMap<Customer, GetByUserIdCustomerResponse>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
 
-        CreateMap<Customer, GetListCustomerListItemDto>();
+        CreateMap<Customer, GetListCustomerListItemDto>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
         CreateMap<IPaginate<Customer>, GetListResponse<GetListCustomerListItemDto>>();
-        CreateMap<Customer, GetDynamicCustomerResponse>();
+
+        CreateMap<Customer, GetDynamicCustomerResponse>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
         CreateMap<IPaginate<Customer>, GetListResponse<GetDynamicCustomerResponse>>();
     }
 }

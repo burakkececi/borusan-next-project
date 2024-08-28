@@ -15,8 +15,12 @@ public class UpdateSellerCommand : IRequest<UpdatedSellerResponse>, ISecuredRequ
     public required Guid UserId { get; set; }
     public required string Name { get; set; }
     public required string PhoneNumber { get; set; }
-    public required Guid LicenceId { get; set; }
-    public required Guid LocationId { get; set; }
+    public required Guid AddressId { get; set; }
+    public required string AddressLine { get; set; }
+    public required string Latitute { get; set; }
+    public required string Longitute { get; set; }
+    public required int LicenceNo { get; set; }
+    public required string ProvidedBy { get; set; }
 
     public string[] Roles => [Admin, Write, SellersOperationClaims.Update];
 
@@ -39,8 +43,6 @@ public class UpdateSellerCommand : IRequest<UpdatedSellerResponse>, ISecuredRequ
             Seller? seller = await _sellerRepository.GetAsync(predicate: s => s.Id == request.Id, cancellationToken: cancellationToken);
             await _sellerBusinessRules.SellerShouldExistWhenSelected(seller);
             await _sellerBusinessRules.UserIdShouldExistWhenBindingToSeller(seller.UserId, cancellationToken);
-            await _sellerBusinessRules.LocationIdShouldExistWhenBindingToSeller(seller.LocationId, cancellationToken);
-            await _sellerBusinessRules.LicenceIdShouldExistWhenBindingToSeller(seller.LicenceId, cancellationToken);
 
             seller = _mapper.Map(request, seller);
 

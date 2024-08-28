@@ -43,7 +43,7 @@ public class GetListSellerQuery : IRequest<GetListResponse<GetListSellerListItem
             IPaginate<Seller> sellers = await _sellerRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
-                include: i => i.Include(s => s.Location).Include(s => s.Licence),
+                include: i => i.Include(s => s.Address),
                 cancellationToken: cancellationToken
             );
 

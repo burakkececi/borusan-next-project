@@ -100,6 +100,7 @@ public class GetDynamicCarResponse : IResponse
     public int LicenceLicenceNo { get; set; }
     public string LicenceProvidedBy { get; set; }
     public string LocationCity { get; set; }
+    public string LocationDistrict { get; set; }
     public string LocationAddress { get; set; }
     public string LocationLatitute { get; set; }
     public string LocationLongitute { get; set; }

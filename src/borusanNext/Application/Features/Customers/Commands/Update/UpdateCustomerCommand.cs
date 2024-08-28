@@ -12,14 +12,16 @@ namespace Application.Features.Customers.Commands.Update;
 
 public class UpdateCustomerCommand : IRequest<UpdatedCustomerResponse>, ISecuredRequest
 {
-    public Guid Id { get; set; }
     public required Guid UserId { get; set; }
+    public required string? IdentityNumber { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Phone { get; set; }
-    public bool? IsPhoneVerified { get; set; }
-    public DateOnly? DateOfBirth { get; set; }
+    public required bool IsPhoneVerified { get; set; }
+    public required DateOnly DateOfBirth { get; set; }
     public required CustomerType CustomerType { get; set; }
+    public required Guid AddressId { get; set; }
+    public required string AddressLine { get; set; }
 
     public string[] Roles => [Admin, Write, CustomersOperationClaims.Update];
 

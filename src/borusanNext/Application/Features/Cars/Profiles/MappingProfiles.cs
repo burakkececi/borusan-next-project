@@ -7,7 +7,6 @@ using AutoMapper;
 using NArchitecture.Core.Application.Responses;
 using Domain.Entities;
 using NArchitecture.Core.Persistence.Paging;
-using Application.Features.CarModels.Queries.GetDynamic;
 using Application.Features.Cars.Queries.GetDynamic;
 
 namespace Application.Features.Cars.Profiles;
@@ -79,14 +78,13 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.SellerUserId, opt => opt.MapFrom(src => src.Seller.UserId))
             .ForMember(dest => dest.SellerName, opt => opt.MapFrom(src => src.Seller.Name))
             .ForMember(dest => dest.SellerPhoneNumber, opt => opt.MapFrom(src => src.Seller.PhoneNumber))
-            .ForMember(dest => dest.SellerLicenceId, opt => opt.MapFrom(src => src.Seller.Licence.Id))
-            .ForMember(dest => dest.SellerLocationId, opt => opt.MapFrom(src => src.Seller.Location.Id))
-            .ForMember(dest => dest.LicenceLicenceNo, opt => opt.MapFrom(src => src.Seller.Licence.LicenceNo))
-            .ForMember(dest => dest.LicenceProvidedBy, opt => opt.MapFrom(src => src.Seller.Licence.ProvidedBy))
-            .ForMember(dest => dest.LocationCity, opt => opt.MapFrom(src => src.Seller.Location.City))
-            .ForMember(dest => dest.LocationAddress, opt => opt.MapFrom(src => src.Seller.Location.Address))
-            .ForMember(dest => dest.LocationLatitute, opt => opt.MapFrom(src => src.Seller.Location.Latitute))
-            .ForMember(dest => dest.LocationLongitute, opt => opt.MapFrom(src => src.Seller.Location.Longitute)); ;
+            .ForMember(dest => dest.LicenceLicenceNo, opt => opt.MapFrom(src => src.Seller.LicenceNo))
+            .ForMember(dest => dest.LicenceProvidedBy, opt => opt.MapFrom(src => src.Seller.ProvidedBy))
+            .ForMember(dest => dest.LocationCity, opt => opt.MapFrom(src => src.Seller.Address.City))
+            .ForMember(dest => dest.LocationDistrict, opt => opt.MapFrom(src => src.Seller.Address.District))
+            .ForMember(dest => dest.LocationAddress, opt => opt.MapFrom(src => src.Seller.AddressLine))
+            .ForMember(dest => dest.LocationLatitute, opt => opt.MapFrom(src => src.Seller.Latitute))
+            .ForMember(dest => dest.LocationLongitute, opt => opt.MapFrom(src => src.Seller.Longitute)); ;
 
         CreateMap<Car, GetListCarListItemDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -142,15 +140,13 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.SellerUserId, opt => opt.MapFrom(src => src.Seller.UserId))
             .ForMember(dest => dest.SellerName, opt => opt.MapFrom(src => src.Seller.Name))
             .ForMember(dest => dest.SellerPhoneNumber, opt => opt.MapFrom(src => src.Seller.PhoneNumber))
-            .ForMember(dest => dest.SellerLicenceId, opt => opt.MapFrom(src => src.Seller.Licence.Id))
-            .ForMember(dest => dest.SellerLocationId, opt => opt.MapFrom(src => src.Seller.Location.Id))
-            .ForMember(dest => dest.LicenceLicenceNo, opt => opt.MapFrom(src => src.Seller.Licence.LicenceNo))
-            .ForMember(dest => dest.LicenceProvidedBy, opt => opt.MapFrom(src => src.Seller.Licence.ProvidedBy))
-            .ForMember(dest => dest.LocationCity, opt => opt.MapFrom(src => src.Seller.Location.City))
-            .ForMember(dest => dest.LocationAddress, opt => opt.MapFrom(src => src.Seller.Location.Address))
-            .ForMember(dest => dest.LocationLatitute, opt => opt.MapFrom(src => src.Seller.Location.Latitute))
-            .ForMember(dest => dest.LocationLongitute, opt => opt.MapFrom(src => src.Seller.Location.Longitute)); ;
-        CreateMap<IPaginate<Car>, GetListResponse<GetListCarListItemDto>>();
+            .ForMember(dest => dest.LicenceLicenceNo, opt => opt.MapFrom(src => src.Seller.LicenceNo))
+            .ForMember(dest => dest.LicenceProvidedBy, opt => opt.MapFrom(src => src.Seller.ProvidedBy))
+            .ForMember(dest => dest.LocationCity, opt => opt.MapFrom(src => src.Seller.Address.City))
+            .ForMember(dest => dest.LocationDistrict, opt => opt.MapFrom(src => src.Seller.Address.District))
+            .ForMember(dest => dest.LocationAddress, opt => opt.MapFrom(src => src.Seller.AddressLine))
+            .ForMember(dest => dest.LocationLatitute, opt => opt.MapFrom(src => src.Seller.Latitute))
+            .ForMember(dest => dest.LocationLongitute, opt => opt.MapFrom(src => src.Seller.Longitute)); 
 
         CreateMap<Car, GetDynamicCarResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -206,14 +202,13 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.SellerUserId, opt => opt.MapFrom(src => src.Seller.UserId))
             .ForMember(dest => dest.SellerName, opt => opt.MapFrom(src => src.Seller.Name))
             .ForMember(dest => dest.SellerPhoneNumber, opt => opt.MapFrom(src => src.Seller.PhoneNumber))
-            .ForMember(dest => dest.SellerLicenceId, opt => opt.MapFrom(src => src.Seller.Licence.Id))
-            .ForMember(dest => dest.SellerLocationId, opt => opt.MapFrom(src => src.Seller.Location.Id))
-            .ForMember(dest => dest.LicenceLicenceNo, opt => opt.MapFrom(src => src.Seller.Licence.LicenceNo))
-            .ForMember(dest => dest.LicenceProvidedBy, opt => opt.MapFrom(src => src.Seller.Licence.ProvidedBy))
-            .ForMember(dest => dest.LocationCity, opt => opt.MapFrom(src => src.Seller.Location.City))
-            .ForMember(dest => dest.LocationAddress, opt => opt.MapFrom(src => src.Seller.Location.Address))
-            .ForMember(dest => dest.LocationLatitute, opt => opt.MapFrom(src => src.Seller.Location.Latitute))
-            .ForMember(dest => dest.LocationLongitute, opt => opt.MapFrom(src => src.Seller.Location.Longitute));
+            .ForMember(dest => dest.LicenceLicenceNo, opt => opt.MapFrom(src => src.Seller.LicenceNo))
+            .ForMember(dest => dest.LicenceProvidedBy, opt => opt.MapFrom(src => src.Seller.ProvidedBy))
+            .ForMember(dest => dest.LocationCity, opt => opt.MapFrom(src => src.Seller.Address.City))
+            .ForMember(dest => dest.LocationDistrict, opt => opt.MapFrom(src => src.Seller.Address.District))
+            .ForMember(dest => dest.LocationAddress, opt => opt.MapFrom(src => src.Seller.AddressLine))
+            .ForMember(dest => dest.LocationLatitute, opt => opt.MapFrom(src => src.Seller.Latitute))
+            .ForMember(dest => dest.LocationLongitute, opt => opt.MapFrom(src => src.Seller.Longitute));
 
         CreateMap<IPaginate<Car>, GetListResponse<GetDynamicCarResponse>>();
     }

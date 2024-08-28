@@ -101,15 +101,5 @@ public class AdvertDetailsConfiguration : IEntityTypeConfiguration<AdvertDetails
         builder.Property(p => p.Seller_Name).HasColumnName("Seller_Name");
         builder.Property(p => p.Seller_PhoneNumber).HasColumnName("Seller_PhoneNumber");
 
-        builder.Property(p => p.LicenceId).HasColumnName("LicenceId");
-        builder.Property(p => p.Licence_LicenceNo).HasColumnName("Licence_LicenceNo");
-        builder.Property(p => p.Licence_ProvidedBy).HasColumnName("Licence_ProvidedBy");
-
-        builder.Property(p => p.LocationId).HasColumnName("LocationId");
-        builder.Property(p => p.Location_City).HasColumnName("Location_City");
-        builder.Property(p => p.Location_Address).HasColumnName("Location_Address");
-        builder.Property(p => p.Location_Latitute).HasColumnName("Location_Latitute");
-        builder.Property(p => p.Location_Longitute).HasColumnName("Location_Longitute");
-
     }
 }

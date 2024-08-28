@@ -23,8 +23,6 @@ using Application.Features.Engines.Constants;
 using Application.Features.ExpertizeResults.Constants;
 using Application.Features.FuelTypes.Constants;
 using Application.Features.Generations.Constants;
-using Application.Features.Licences.Constants;
-using Application.Features.Locations.Constants;
 using Application.Features.ModalExtensions.Constants;
 using Application.Features.Tags.Constants;
 using Application.Features.Transmissions.Constants;
@@ -35,6 +33,8 @@ using Application.Features.GenerationImages.Constants;
 using Application.Features.CustomerFavorites.Constants;
 using Application.Features.AdvertDetails.Constants;
 using Application.Features.CarModelDetails.Constants;
+using Application.Features.Pricing.Constants;
+using Application.Features.Addresses.Constants;
 
 namespace Persistence.EntityConfigurations;
 
@@ -338,34 +338,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         #endregion
         
         
-        #region Licences CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = LicencesOperationClaims.Admin },
-                new() { Id = ++lastId, Name = LicencesOperationClaims.Read },
-                new() { Id = ++lastId, Name = LicencesOperationClaims.Write },
-                new() { Id = ++lastId, Name = LicencesOperationClaims.Create },
-                new() { Id = ++lastId, Name = LicencesOperationClaims.Update },
-                new() { Id = ++lastId, Name = LicencesOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
-        #region Locations CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Read },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Write },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Create },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Update },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Delete },
-            ]
-        );
-        #endregion
-        
-        
         #region Tags CRUD
         featureOperationClaims.AddRange(
             [
@@ -421,19 +393,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         );
         #endregion
         
-        
-        #region Locations CRUD
-        featureOperationClaims.AddRange(
-            [
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Admin },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Read },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Write },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Create },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Update },
-                new() { Id = ++lastId, Name = LocationsOperationClaims.Delete },
-            ]
-        );
-        #endregion
         
         
         #region ExpertizeResults CRUD
@@ -564,6 +523,30 @@ featureOperationClaims.AddRange(
             ]
         );
         #endregion
+
+        #region Pricing Readonly
+        featureOperationClaims.AddRange(
+            [
+                new() { Id = ++lastId, Name = PricingOperationClaims.Admin },
+                new() { Id = ++lastId, Name = PricingOperationClaims.Read }
+            ]
+        );
+        #endregion
+
+
+
+#region Addresses CRUD
+featureOperationClaims.AddRange(
+    [
+        new() { Id = ++lastId, Name = AddressesOperationClaims.Admin },
+        new() { Id = ++lastId, Name = AddressesOperationClaims.Read },
+        new() { Id = ++lastId, Name = AddressesOperationClaims.Write },
+        new() { Id = ++lastId, Name = AddressesOperationClaims.Create },
+        new() { Id = ++lastId, Name = AddressesOperationClaims.Update },
+        new() { Id = ++lastId, Name = AddressesOperationClaims.Delete },
+    ]
+);
+#endregion
 
         return featureOperationClaims;
     }

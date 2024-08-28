@@ -1,5 +1,4 @@
-﻿using Application.Features.Licences.Queries.GetDynamic;
-using Application.Features.ModalExtensions.Rules;
+﻿using Application.Features.ModalExtensions.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;

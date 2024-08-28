@@ -14,8 +14,12 @@ public class CreateSellerCommand : IRequest<CreatedSellerResponse>, ISecuredRequ
     public required Guid UserId { get; set; }
     public required string Name { get; set; }
     public required string PhoneNumber { get; set; }
-    public required Guid LicenceId { get; set; }
-    public required Guid LocationId { get; set; }
+    public required Guid AddressId { get; set; }
+    public required string AddressLine { get; set; }
+    public required string Latitute { get; set; }
+    public required string Longitute { get; set; }
+    public required int LicenceNo { get; set; }
+    public required string ProvidedBy { get; set; }
 
     public string[] Roles => [Admin, Write, SellersOperationClaims.Create];
 
@@ -37,8 +41,6 @@ public class CreateSellerCommand : IRequest<CreatedSellerResponse>, ISecuredRequ
         {
             Seller seller = _mapper.Map<Seller>(request);
             await _sellerBusinessRules.UserIdShouldExistWhenBindingToSeller(seller.UserId, cancellationToken);
-            await _sellerBusinessRules.LocationIdShouldExistWhenBindingToSeller(seller.LocationId, cancellationToken);
-            await _sellerBusinessRules.LicenceIdShouldExistWhenBindingToSeller(seller.LicenceId, cancellationToken);
 
             await _sellerRepository.AddAsync(seller);
 

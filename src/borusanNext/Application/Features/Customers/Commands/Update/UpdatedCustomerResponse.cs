@@ -5,11 +5,14 @@ namespace Application.Features.Customers.Commands.Update;
 
 public class UpdatedCustomerResponse : IResponse
 {
-    public Guid Id { get; set; }
     public Guid UserId { get; set; }
+    public string IdentityNumber { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Phone { get; set; }
-    public DateOnly? DateOfBirth { get; set; }
+    public bool IsPhoneVerified { get; set; }
+    public DateOnly DateOfBirth { get; set; }
     public CustomerType CustomerType { get; set; }
+    public Guid AddressId { get; set; }
+    public string AddressLine { get; set; }
 }

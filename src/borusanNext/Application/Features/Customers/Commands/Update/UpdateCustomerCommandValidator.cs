@@ -16,6 +16,10 @@ public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCo
             .NotEqual(Guid.Empty).WithMessage("UserId cannot be empty or invalid")
             .WithName("Customer Update User Id");
 
+        RuleFor(c => c.IdentityNumber)
+            .NotEmpty().WithMessage("IdentityNumber cannot be empty")
+            .Length(11);
+
         RuleFor(c => c.FirstName)
             .NotEmpty().WithMessage("FirstName cannot be empty")
             .MinimumLength(3).WithMessage("FirstName length must be at least 3")

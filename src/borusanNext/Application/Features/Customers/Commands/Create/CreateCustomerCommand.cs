@@ -13,12 +13,16 @@ namespace Application.Features.Customers.Commands.Create;
 public class CreateCustomerCommand : IRequest<CreatedCustomerResponse>, ISecuredRequest
 {
     public required Guid UserId { get; set; }
+    public string? IdentityNumber { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
-    public required string Phone { get; set; }
+    public string? Phone { get; set; }
     public bool? IsPhoneVerified { get; set; }
     public DateOnly? DateOfBirth { get; set; }
     public required CustomerType CustomerType { get; set; }
+    public Guid? AddressId { get; set; }
+    public string? AddressLine { get; set; }
+
 
     public string[] Roles => [Admin, Write, CustomersOperationClaims.Create];
 

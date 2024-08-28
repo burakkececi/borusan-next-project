@@ -269,6 +269,10 @@ namespace Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Location_City");
 
+                    b.Property<string>("Location_District")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Location_Latitute")
                         .IsRequired()
                         .HasColumnType("text")
@@ -569,6 +573,40 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OutboxEvents", "event");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Address", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("City");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("District")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("District");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Advert", b =>
@@ -1148,7 +1186,7 @@ namespace Persistence.Migrations
                         {
                             Id = new Guid("96ec5f7f-8b0f-41b9-9694-e9968fd49f7a"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Logo = "https://res.cloudinary.com/dl0cotczj/image/upload/v1722106757/dalglsprdgaabq0m7jmg.png",
+                            Logo = "https://res.cloudinary.com/dl0cotczj/image/upload/v1724597194/szhvy5qofpb482r5yazn.png",
                             Name = "MINI"
                         });
                 });
@@ -1524,6 +1562,13 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("Id");
 
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AddressLine")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
@@ -1543,6 +1588,10 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("FirstName");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsPhoneVerified")
                         .HasColumnType("boolean");
@@ -1567,6 +1616,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("UserId")
                         .IsUnique();
 
@@ -1576,10 +1627,13 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("27ca8f20-333f-4fc2-a535-c156a2aec150"),
+                            AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                            AddressLine = "",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerType = 2,
                             DateOfBirth = new DateOnly(1, 1, 1),
                             FirstName = "Burak",
+                            IdentityNumber = "44444444444",
                             IsPhoneVerified = false,
                             LastName = "Keçeci",
                             Phone = "5555555555",
@@ -1588,10 +1642,13 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("ab623e31-88ab-48cb-8942-2c541343d651"),
+                            AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                            AddressLine = "",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerType = 2,
                             DateOfBirth = new DateOnly(1, 1, 1),
                             FirstName = "Meryem",
+                            IdentityNumber = "33333333333",
                             IsPhoneVerified = false,
                             LastName = "Talay",
                             Phone = "5555555555",
@@ -1600,10 +1657,13 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("d2f17680-26d1-4ac3-90c6-4ffec9e5c0ad"),
+                            AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                            AddressLine = "",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerType = 3,
                             DateOfBirth = new DateOnly(1, 1, 1),
                             FirstName = "Ali",
+                            IdentityNumber = "22222222222",
                             IsPhoneVerified = false,
                             LastName = "Laçin",
                             Phone = "5555555555",
@@ -1612,10 +1672,13 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("b1e3b9cd-1c82-4f68-a70e-8349c28af525"),
+                            AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                            AddressLine = "",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerType = 1,
                             DateOfBirth = new DateOnly(1, 1, 1),
                             FirstName = "Sefa",
+                            IdentityNumber = "11111111111",
                             IsPhoneVerified = false,
                             LastName = "Pehlivan",
                             Phone = "5555555555",
@@ -2095,135 +2158,6 @@ namespace Persistence.Migrations
                     b.HasIndex("GenerationId");
 
                     b.ToTable("GenerationImages", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Licence", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("CreatedDate");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("DeletedDate");
-
-                    b.Property<int>("LicenceNo")
-                        .HasColumnType("integer")
-                        .HasColumnName("LicenceNo");
-
-                    b.Property<string>("ProvidedBy")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ProvidedBy");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("UpdatedDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Licences", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7f30d80f-3a7b-429c-81a5-0c9507839691"),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LicenceNo = 3401870,
-                            ProvidedBy = "Borusan Otomotiv"
-                        },
-                        new
-                        {
-                            Id = new Guid("e99ccd48-51a3-46c0-b539-a28cec7d214c"),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LicenceNo = 6401872,
-                            ProvidedBy = "Borusan Otomotiv"
-                        },
-                        new
-                        {
-                            Id = new Guid("d1993933-0185-4333-888c-36f226993e1c"),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LicenceNo = 3501870,
-                            ProvidedBy = "Borusan Otomotiv"
-                        });
-                });
-
-            modelBuilder.Entity("Domain.Entities.Location", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Address");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("City");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("CreatedDate");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("DeletedDate");
-
-                    b.Property<string>("Latitute")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Latitute");
-
-                    b.Property<string>("Longitute")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Longitute");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("UpdatedDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Locations", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("59a7ddc2-3920-4652-9543-797fbd1d3d38"),
-                            Address = "Firüzköy Yolu No: 21 Avcılar",
-                            City = "Istanbul",
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Latitute = "40.992769",
-                            Longitute = "28.716821"
-                        },
-                        new
-                        {
-                            Id = new Guid("2f565ad5-7ae1-42ad-82f2-96944052aa27"),
-                            Address = "Akpınar, Bilim Cd. No:2, 34485 Sancaktepe",
-                            City = "Istanbul",
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Latitute = "40.9753623",
-                            Longitute = "29.2244372"
-                        },
-                        new
-                        {
-                            Id = new Guid("4744af1a-89ba-4d1b-890c-9d3e3c755cda"),
-                            Address = "Firüzköy Yolu No: 21 Avcılar",
-                            City = "Istanbul",
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Latitute = "40.992769",
-                            Longitute = "28.716821"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ModalExtension", b =>
@@ -3082,565 +3016,505 @@ namespace Persistence.Migrations
                         {
                             Id = 114,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Admin"
+                            Name = "Tags.Admin"
                         },
                         new
                         {
                             Id = 115,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Read"
+                            Name = "Tags.Read"
                         },
                         new
                         {
                             Id = 116,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Write"
+                            Name = "Tags.Write"
                         },
                         new
                         {
                             Id = 117,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Create"
+                            Name = "Tags.Create"
                         },
                         new
                         {
                             Id = 118,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Update"
+                            Name = "Tags.Update"
                         },
                         new
                         {
                             Id = 119,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Licences.Delete"
+                            Name = "Tags.Delete"
                         },
                         new
                         {
                             Id = 120,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Admin"
+                            Name = "Transmissions.Admin"
                         },
                         new
                         {
                             Id = 121,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Read"
+                            Name = "Transmissions.Read"
                         },
                         new
                         {
                             Id = 122,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Write"
+                            Name = "Transmissions.Write"
                         },
                         new
                         {
                             Id = 123,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Create"
+                            Name = "Transmissions.Create"
                         },
                         new
                         {
                             Id = 124,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Update"
+                            Name = "Transmissions.Update"
                         },
                         new
                         {
                             Id = 125,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Delete"
+                            Name = "Transmissions.Delete"
                         },
                         new
                         {
                             Id = 126,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Admin"
+                            Name = "Customers.Admin"
                         },
                         new
                         {
                             Id = 127,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Read"
+                            Name = "Customers.Read"
                         },
                         new
                         {
                             Id = 128,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Write"
+                            Name = "Customers.Write"
                         },
                         new
                         {
                             Id = 129,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Create"
+                            Name = "Customers.Create"
                         },
                         new
                         {
                             Id = 130,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Update"
+                            Name = "Customers.Update"
                         },
                         new
                         {
                             Id = 131,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Tags.Delete"
+                            Name = "Customers.Delete"
                         },
                         new
                         {
                             Id = 132,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Admin"
+                            Name = "Sellers.Admin"
                         },
                         new
                         {
                             Id = 133,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Read"
+                            Name = "Sellers.Read"
                         },
                         new
                         {
                             Id = 134,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Write"
+                            Name = "Sellers.Write"
                         },
                         new
                         {
                             Id = 135,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Create"
+                            Name = "Sellers.Create"
                         },
                         new
                         {
                             Id = 136,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Update"
+                            Name = "Sellers.Update"
                         },
                         new
                         {
                             Id = 137,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Transmissions.Delete"
+                            Name = "Sellers.Delete"
                         },
                         new
                         {
                             Id = 138,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Admin"
+                            Name = "ExpertizeResults.Admin"
                         },
                         new
                         {
                             Id = 139,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Read"
+                            Name = "ExpertizeResults.Read"
                         },
                         new
                         {
                             Id = 140,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Write"
+                            Name = "ExpertizeResults.Write"
                         },
                         new
                         {
                             Id = 141,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Create"
+                            Name = "ExpertizeResults.Create"
                         },
                         new
                         {
                             Id = 142,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Update"
+                            Name = "ExpertizeResults.Update"
                         },
                         new
                         {
                             Id = 143,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Customers.Delete"
+                            Name = "ExpertizeResults.Delete"
                         },
                         new
                         {
                             Id = 144,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Admin"
+                            Name = "Adverts.Admin"
                         },
                         new
                         {
                             Id = 145,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Read"
+                            Name = "Adverts.Read"
                         },
                         new
                         {
                             Id = 146,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Write"
+                            Name = "Adverts.Write"
                         },
                         new
                         {
                             Id = 147,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Create"
+                            Name = "Adverts.Create"
                         },
                         new
                         {
                             Id = 148,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Update"
+                            Name = "Adverts.Update"
                         },
                         new
                         {
                             Id = 149,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sellers.Delete"
+                            Name = "Adverts.Delete"
                         },
                         new
                         {
                             Id = 150,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Admin"
+                            Name = "CarModels.Admin"
                         },
                         new
                         {
                             Id = 151,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Read"
+                            Name = "CarModels.Read"
                         },
                         new
                         {
                             Id = 152,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Write"
+                            Name = "CarModels.Write"
                         },
                         new
                         {
                             Id = 153,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Create"
+                            Name = "CarModels.Create"
                         },
                         new
                         {
                             Id = 154,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Update"
+                            Name = "CarModels.Update"
                         },
                         new
                         {
                             Id = 155,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Locations.Delete"
+                            Name = "CarModels.Delete"
                         },
                         new
                         {
                             Id = 156,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Admin"
+                            Name = "AdvertImages.Admin"
                         },
                         new
                         {
                             Id = 157,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Read"
+                            Name = "AdvertImages.Read"
                         },
                         new
                         {
                             Id = 158,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Write"
+                            Name = "AdvertImages.Write"
                         },
                         new
                         {
                             Id = 159,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Create"
+                            Name = "AdvertImages.Create"
                         },
                         new
                         {
                             Id = 160,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Update"
+                            Name = "AdvertImages.Update"
                         },
                         new
                         {
                             Id = 161,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ExpertizeResults.Delete"
+                            Name = "AdvertImages.Delete"
                         },
                         new
                         {
                             Id = 162,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Admin"
+                            Name = "ModalExtensions.Admin"
                         },
                         new
                         {
                             Id = 163,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Read"
+                            Name = "ModalExtensions.Read"
                         },
                         new
                         {
                             Id = 164,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Write"
+                            Name = "ModalExtensions.Write"
                         },
                         new
                         {
                             Id = 165,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Create"
+                            Name = "ModalExtensions.Create"
                         },
                         new
                         {
                             Id = 166,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Update"
+                            Name = "ModalExtensions.Update"
                         },
                         new
                         {
                             Id = 167,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Adverts.Delete"
+                            Name = "ModalExtensions.Delete"
                         },
                         new
                         {
                             Id = 168,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Admin"
+                            Name = "GenerationImages.Admin"
                         },
                         new
                         {
                             Id = 169,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Read"
+                            Name = "GenerationImages.Read"
                         },
                         new
                         {
                             Id = 170,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Write"
+                            Name = "GenerationImages.Write"
                         },
                         new
                         {
                             Id = 171,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Create"
+                            Name = "GenerationImages.Create"
                         },
                         new
                         {
                             Id = 172,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Update"
+                            Name = "GenerationImages.Update"
                         },
                         new
                         {
                             Id = 173,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModels.Delete"
+                            Name = "GenerationImages.Delete"
                         },
                         new
                         {
                             Id = 174,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Admin"
+                            Name = "Cars.Admin"
                         },
                         new
                         {
                             Id = 175,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Read"
+                            Name = "Cars.Read"
                         },
                         new
                         {
                             Id = 176,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Write"
+                            Name = "Cars.Write"
                         },
                         new
                         {
                             Id = 177,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Create"
+                            Name = "Cars.Create"
                         },
                         new
                         {
                             Id = 178,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Update"
+                            Name = "Cars.Update"
                         },
                         new
                         {
                             Id = 179,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertImages.Delete"
+                            Name = "Cars.Delete"
                         },
                         new
                         {
                             Id = 180,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Admin"
+                            Name = "CustomerFavorites.Admin"
                         },
                         new
                         {
                             Id = 181,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Read"
+                            Name = "CustomerFavorites.Read"
                         },
                         new
                         {
                             Id = 182,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Write"
+                            Name = "CustomerFavorites.Write"
                         },
                         new
                         {
                             Id = 183,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Create"
+                            Name = "CustomerFavorites.Create"
                         },
                         new
                         {
                             Id = 184,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Update"
+                            Name = "CustomerFavorites.Update"
                         },
                         new
                         {
                             Id = 185,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "ModalExtensions.Delete"
+                            Name = "CustomerFavorites.Delete"
                         },
                         new
                         {
                             Id = 186,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Admin"
+                            Name = "AdvertDetails.Admin"
                         },
                         new
                         {
                             Id = 187,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Read"
+                            Name = "AdvertDetails.Read"
                         },
                         new
                         {
                             Id = 188,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Write"
+                            Name = "CarModelDetails.Admin"
                         },
                         new
                         {
                             Id = 189,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Create"
+                            Name = "CarModelDetails.Read"
                         },
                         new
                         {
                             Id = 190,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Update"
+                            Name = "Pricing.Admin"
                         },
                         new
                         {
                             Id = 191,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "GenerationImages.Delete"
+                            Name = "Pricing.Read"
                         },
                         new
                         {
                             Id = 192,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Admin"
+                            Name = "Addresses.Admin"
                         },
                         new
                         {
                             Id = 193,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Read"
+                            Name = "Addresses.Read"
                         },
                         new
                         {
                             Id = 194,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Write"
+                            Name = "Addresses.Write"
                         },
                         new
                         {
                             Id = 195,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Create"
+                            Name = "Addresses.Create"
                         },
                         new
                         {
                             Id = 196,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Update"
+                            Name = "Addresses.Update"
                         },
                         new
                         {
                             Id = 197,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Cars.Delete"
-                        },
-                        new
-                        {
-                            Id = 198,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerFavorites.Admin"
-                        },
-                        new
-                        {
-                            Id = 199,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerFavorites.Read"
-                        },
-                        new
-                        {
-                            Id = 200,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerFavorites.Write"
-                        },
-                        new
-                        {
-                            Id = 201,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerFavorites.Create"
-                        },
-                        new
-                        {
-                            Id = 202,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerFavorites.Update"
-                        },
-                        new
-                        {
-                            Id = 203,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CustomerFavorites.Delete"
-                        },
-                        new
-                        {
-                            Id = 204,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertDetails.Admin"
-                        },
-                        new
-                        {
-                            Id = 205,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "AdvertDetails.Read"
-                        },
-                        new
-                        {
-                            Id = 206,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModelDetails.Admin"
-                        },
-                        new
-                        {
-                            Id = 207,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "CarModelDetails.Read"
+                            Name = "Addresses.Delete"
                         });
                 });
 
@@ -3711,6 +3585,14 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("Id");
 
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("AddressId");
+
+                    b.Property<string>("AddressLine")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("CreatedDate");
@@ -3719,13 +3601,16 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid>("LicenceId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("LicenceId");
+                    b.Property<string>("Latitute")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<Guid>("LocationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("LocationId");
+                    b.Property<int>("LicenceNo")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Longitute")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -3737,6 +3622,10 @@ namespace Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("PhoneNumber");
 
+                    b.Property<string>("ProvidedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("UpdatedDate");
@@ -3747,11 +3636,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LicenceId")
-                        .IsUnique();
-
-                    b.HasIndex("LocationId")
-                        .IsUnique();
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -3762,32 +3647,30 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("056dd418-5114-4ea1-baf3-07d4b8fc26f6"),
+                            AddressId = new Guid("047c6a96-da39-4b67-b68d-1b1956ca2e7d"),
+                            AddressLine = "Firüzköy Yolu No: 21 Avcılar",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LicenceId = new Guid("7f30d80f-3a7b-429c-81a5-0c9507839691"),
-                            LocationId = new Guid("59a7ddc2-3920-4652-9543-797fbd1d3d38"),
+                            Latitute = "40.992769",
+                            LicenceNo = 0,
+                            Longitute = "28.716821",
                             Name = "Borusan Avcılar",
                             PhoneNumber = "5354567890",
+                            ProvidedBy = "Burak",
                             UserId = new Guid("b73f6541-460e-4d9d-97eb-1402f63df038")
                         },
                         new
                         {
                             Id = new Guid("785d6af9-4404-4d7a-ad3e-82319812b037"),
+                            AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                            AddressLine = "Akpınar, Bilim Cd. No:2, 34485 Sancaktepe",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LicenceId = new Guid("e99ccd48-51a3-46c0-b539-a28cec7d214c"),
-                            LocationId = new Guid("2f565ad5-7ae1-42ad-82f2-96944052aa27"),
+                            Latitute = "40.9753623",
+                            LicenceNo = 0,
+                            Longitute = "29.2244372",
                             Name = "Borusan Samandıra",
                             PhoneNumber = "5426543210",
+                            ProvidedBy = "Burak",
                             UserId = new Guid("69bd8e0f-59d4-4532-ae32-03cec3e39158")
-                        },
-                        new
-                        {
-                            Id = new Guid("667742ae-ae24-4d8c-9029-57ab5ba305ba"),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LicenceId = new Guid("d1993933-0185-4333-888c-36f226993e1c"),
-                            LocationId = new Guid("4744af1a-89ba-4d1b-890c-9d3e3c755cda"),
-                            Name = "Kececi Oto",
-                            PhoneNumber = "5556667777",
-                            UserId = new Guid("398b5d31-f2e2-473f-8f40-78f7e79af217")
                         });
                 });
 
@@ -3919,12 +3802,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b345972e-61c4-451c-82e6-e26a48393ddf"),
+                            Id = new Guid("36c92202-8530-43ff-8ea1-f04ab132c569"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         },
                         new
@@ -3933,8 +3816,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "avcilar@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         },
                         new
@@ -3943,8 +3826,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "samandira@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         },
                         new
@@ -3953,8 +3836,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "kececi@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         },
                         new
@@ -3963,8 +3846,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "burak@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         },
                         new
@@ -3973,8 +3856,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "meryem@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         },
                         new
@@ -3983,8 +3866,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ali@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         },
                         new
@@ -3993,8 +3876,8 @@ namespace Persistence.Migrations
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "sefa@borusan.com",
-                            PasswordHash = new byte[] { 75, 78, 130, 39, 198, 88, 171, 27, 174, 62, 73, 135, 29, 148, 235, 233, 193, 189, 98, 20, 19, 112, 178, 235, 230, 157, 212, 70, 199, 83, 130, 151, 95, 64, 171, 243, 240, 192, 44, 88, 124, 18, 105, 59, 129, 121, 229, 74, 223, 103, 191, 77, 49, 35, 172, 154, 210, 47, 247, 113, 156, 209, 31, 141 },
-                            PasswordSalt = new byte[] { 66, 83, 110, 165, 231, 175, 119, 62, 184, 86, 7, 37, 254, 68, 6, 173, 122, 1, 27, 151, 184, 167, 114, 83, 129, 238, 81, 111, 106, 104, 58, 53, 199, 59, 246, 63, 89, 10, 40, 211, 10, 145, 31, 121, 99, 154, 97, 204, 229, 24, 57, 94, 177, 40, 82, 153, 202, 39, 237, 179, 234, 215, 101, 99, 193, 154, 100, 218, 3, 122, 62, 249, 198, 22, 134, 107, 239, 23, 209, 102, 183, 89, 236, 227, 248, 114, 5, 9, 136, 102, 42, 79, 22, 43, 154, 92, 129, 154, 172, 92, 113, 67, 154, 72, 122, 23, 118, 129, 61, 113, 248, 28, 150, 76, 167, 203, 109, 194, 4, 51, 142, 73, 98, 226, 151, 167, 148, 72 },
+                            PasswordHash = new byte[] { 160, 165, 76, 88, 136, 171, 91, 201, 145, 174, 68, 151, 240, 113, 193, 47, 67, 243, 39, 197, 198, 9, 4, 195, 236, 150, 247, 6, 236, 220, 144, 39, 65, 117, 230, 177, 70, 217, 219, 49, 137, 202, 173, 224, 160, 249, 108, 108, 134, 179, 72, 84, 98, 132, 199, 224, 214, 134, 244, 43, 158, 194, 53, 92 },
+                            PasswordSalt = new byte[] { 42, 122, 49, 55, 2, 69, 88, 235, 117, 93, 49, 211, 252, 167, 224, 130, 1, 58, 57, 66, 96, 180, 19, 10, 204, 36, 61, 175, 55, 8, 140, 178, 190, 37, 101, 250, 229, 158, 23, 2, 147, 77, 117, 162, 31, 10, 242, 58, 227, 72, 255, 17, 202, 130, 74, 35, 7, 200, 167, 32, 217, 223, 242, 128, 63, 238, 210, 121, 8, 177, 155, 230, 7, 187, 199, 68, 160, 130, 211, 95, 51, 27, 95, 53, 75, 183, 203, 140, 187, 206, 132, 134, 130, 169, 59, 78, 194, 253, 202, 196, 251, 124, 136, 132, 38, 183, 236, 188, 150, 200, 90, 192, 165, 27, 92, 68, 144, 198, 119, 3, 196, 186, 75, 152, 221, 56, 229, 50 },
                             Provider = 0
                         });
                 });
@@ -4037,10 +3920,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2353c39c-7ebf-40e7-a9a8-1b15f616b52c"),
+                            Id = new Guid("62c8a9db-7fff-4662-80e8-62630595fa91"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("b345972e-61c4-451c-82e6-e26a48393ddf")
+                            UserId = new Guid("36c92202-8530-43ff-8ea1-f04ab132c569")
                         });
                 });
 
@@ -4152,11 +4035,19 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>
                 {
+                    b.HasOne("Domain.Entities.Address", "Address")
+                        .WithMany("Customers")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.User", "User")
                         .WithOne("Customer")
                         .HasForeignKey("Domain.Entities.Customer", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("User");
                 });
@@ -4307,15 +4198,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Seller", b =>
                 {
-                    b.HasOne("Domain.Entities.Licence", "Licence")
-                        .WithOne("Seller")
-                        .HasForeignKey("Domain.Entities.Seller", "LicenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Location", "Location")
-                        .WithOne("Seller")
-                        .HasForeignKey("Domain.Entities.Seller", "LocationId")
+                    b.HasOne("Domain.Entities.Address", "Address")
+                        .WithMany("Sellers")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -4325,9 +4210,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Licence");
-
-                    b.Navigation("Location");
+                    b.Navigation("Address");
 
                     b.Navigation("User");
                 });
@@ -4349,6 +4232,13 @@ namespace Persistence.Migrations
                     b.Navigation("OperationClaim");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Address", b =>
+                {
+                    b.Navigation("Customers");
+
+                    b.Navigation("Sellers");
                 });
 
             modelBuilder.Entity("Domain.Entities.Advert", b =>
@@ -4435,18 +4325,6 @@ namespace Persistence.Migrations
                     b.Navigation("GenerationImages");
 
                     b.Navigation("ModalExtensions");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Licence", b =>
-                {
-                    b.Navigation("Seller")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Location", b =>
-                {
-                    b.Navigation("Seller")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.ModalExtension", b =>

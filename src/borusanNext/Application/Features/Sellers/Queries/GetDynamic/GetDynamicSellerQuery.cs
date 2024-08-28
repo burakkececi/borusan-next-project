@@ -47,7 +47,7 @@ public class GetDynamicSellerQuery : IRequest<GetListResponse<GetDynamicSellerRe
         {
             IPaginate<Seller> seller = await _sellerRepository.GetListByDynamicAsync(
              dynamic: request.DynamicQuery,
-             include: i => i.Include(s => s.Location).Include(s => s.Licence),
+             include: i => i.Include(s => s.Address),
              index: request.PageRequest.PageIndex,
              size: request.PageRequest.PageSize,
              cancellationToken: cancellationToken);

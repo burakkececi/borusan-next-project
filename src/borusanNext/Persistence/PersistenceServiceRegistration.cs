@@ -40,8 +40,6 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IExpertizeResultRepository, ExpertizeResultRepository>();
         services.AddScoped<IFuelTypeRepository, FuelTypeRepository>();
         services.AddScoped<IGenerationRepository, GenerationRepository>();
-        services.AddScoped<ILicenceRepository, LicenceRepository>();
-        services.AddScoped<ILocationRepository, LocationRepository>();
         services.AddScoped<IModalExtensionRepository, ModalExtensionRepository>();
         services.AddScoped<ITagRepository, TagRepository>();
         services.AddScoped<ITransmissionRepository, TransmissionRepository>();
@@ -56,6 +54,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IInboxEventRepository, InboxEventRepository>();
         services.AddScoped<ICarModelDetailsReadRepository, CarModelDetailsReadRepository>();
 
+        services.AddScoped<IAddressRepository, AddressRepository>();
         return services;
     }
 }

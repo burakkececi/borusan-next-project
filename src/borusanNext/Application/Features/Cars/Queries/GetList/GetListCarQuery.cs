@@ -38,8 +38,7 @@ public class GetListCarQuery : IRequest<GetListResponse<GetListCarListItemDto>>,
                  .Include(i => i.ModalExtension).Include(modelExtension => modelExtension.ModalExtension.CarModel)
                     .Include(i => i.ModalExtension).ThenInclude(modal => modal.Generation)
                     .Include(i => i.ModalExtension).ThenInclude(modal => modal.CarModel).ThenInclude(modal => modal.Brand)
-                    .Include(i => i.Seller).ThenInclude(modal => modal.Location)
-                    .Include(i => i.Seller).ThenInclude(modal => modal.Licence)
+                    .Include(i => i.Seller).ThenInclude(modal => modal.Address)
                     .Include(i => i.ExpertizeResult).ThenInclude(modal => modal.ChassisPart)
                     .Include(i => i.ExpertizeResult).ThenInclude(modal => modal.BodyShellPart)
                     .Include(i => i.Color),

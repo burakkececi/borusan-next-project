@@ -40,7 +40,7 @@ public class GetByIdSellerQuery : IRequest<GetByIdSellerResponse>, ISecuredReque
 
         public async Task<GetByIdSellerResponse> Handle(GetByIdSellerQuery request, CancellationToken cancellationToken)
         {
-            Seller? seller = await _sellerRepository.GetAsync(predicate: s => s.Id == request.Id, include: i => i.Include(s => s.Location).Include(s => s.Licence), cancellationToken: cancellationToken);
+            Seller? seller = await _sellerRepository.GetAsync(predicate: s => s.Id == request.Id, include: i => i.Include(s => s.Address), cancellationToken: cancellationToken);
             await _sellerBusinessRules.SellerShouldExistWhenSelected(seller);
 
             GetByIdSellerResponse response = _mapper.Map<GetByIdSellerResponse>(seller);

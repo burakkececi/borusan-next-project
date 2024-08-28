@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,6 +23,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
 
+        builder.HasOne(p => p.Address).WithMany(p => p.Customers).HasForeignKey(p => p.AddressId);
         builder.HasOne(p => p.User).WithOne(p => p.Customer).HasForeignKey<Customer>(p => p.UserId);
 
         builder.HasData(
@@ -32,7 +34,12 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
                 FirstName = "Burak",
                 LastName = "Keçeci",
                 CustomerType = Domain.Enums.CustomerType.Buyer,
+                IdentityNumber = "44444444444",
                 Phone = "5555555555",
+                IsPhoneVerified = false,
+                DateOfBirth = new DateOnly(),
+                AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                AddressLine = "",
             },
             new Customer()
             {
@@ -42,6 +49,11 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
                 LastName = "Talay",
                 CustomerType = Domain.Enums.CustomerType.Buyer,
                 Phone = "5555555555",
+                IdentityNumber = "33333333333",
+                IsPhoneVerified = false,
+                DateOfBirth = new DateOnly(),
+                AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                AddressLine = "",
             },
             new Customer()
             {
@@ -51,6 +63,11 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
                 LastName = "Laçin",
                 CustomerType = Domain.Enums.CustomerType.BuyerAndSeller,
                 Phone = "5555555555",
+                IdentityNumber = "22222222222",
+                IsPhoneVerified = false,
+                DateOfBirth = new DateOnly(),
+                AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                AddressLine = "",
             },
             new Customer()
             {
@@ -60,6 +77,11 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
                 LastName = "Pehlivan",
                 CustomerType = Domain.Enums.CustomerType.Seller,
                 Phone = "5555555555",
+                IdentityNumber = "11111111111",
+                IsPhoneVerified = false,
+                DateOfBirth = new DateOnly(),
+                AddressId = new Guid("a48e5400-d10b-450c-817a-6a5188e13de9"),
+                AddressLine = "",
             }
             );
     }

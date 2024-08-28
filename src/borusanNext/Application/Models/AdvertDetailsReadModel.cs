@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Domain.Enums;
+﻿using Domain.Enums;
 
 namespace Application.Models;
 public class AdvertDetailsReadModel
@@ -90,14 +89,12 @@ public class AdvertDetailsReadModel
     public Guid SellerId { get; set; }
     public string Seller_Name { get; set; }
     public string Seller_PhoneNumber { get; set; }
-
-    public Guid LicenceId { get; set; }
-    public int Licence_LicenceNo { get; set; }
-    public string Licence_ProvidedBy { get; set; }
-
-    public Guid LocationId { get; set; }
-    public string Location_City { get; set; }
-    public string Location_Address { get; set; }
-    public string Location_Latitute { get; set; }
-    public string Location_Longitute { get; set; }
+    public int Seller_LicenceNo { get; set; }
+    public Guid Seller_AddressId { get; set; }
+    public string Seller_AddressLine { get; set; }
+    public string Seller_ProvidedBy { get; set; }
+    public string Seller_City { get; set; }
+    public string Seller_District { get; set; }
+    public string Seller_Latitude { get; set; }
+    public string Seller_Longitude { get; set; }
 }

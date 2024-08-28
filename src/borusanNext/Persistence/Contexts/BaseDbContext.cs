@@ -33,8 +33,6 @@ public class BaseDbContext : DbContext
     public DbSet<ExpertizeResult> ExpertizeResults { get; set; }
     public DbSet<FuelType> FuelTypes { get; set; }
     public DbSet<Generation> Generations { get; set; }
-    public DbSet<Licence> Licences { get; set; }
-    public DbSet<Location> Locations { get; set; }
     public DbSet<ModalExtension> ModalExtensions { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<Transmission> Transmissions { get; set; }
@@ -47,6 +45,7 @@ public class BaseDbContext : DbContext
     public DbSet<OutboxEvent> OutboxEvents { get; set; }
     public DbSet<InboxEvent> InboxEvent { get; set; }
     public DbSet<CarModelDetailsReadModel> CarModelDetails { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

@@ -4,10 +4,13 @@ namespace Application.Features.Sellers.Commands.Update;
 
 public class UpdatedSellerResponse : IResponse
 {
-    public Guid Id { get; set; }
-    public Guid UserId { get; set; }
-    public string Name { get; set; }
-    public string PhoneNumber { get; set; }
-    public Guid LicenceId { get; set; }
-    public Guid LocationId { get; set; }
+    public required Guid UserId { get; set; }
+    public required string Name { get; set; }
+    public required string PhoneNumber { get; set; }
+    public required Guid AddressId { get; set; }
+    public required string AddressLine { get; set; }
+    public required string Latitute { get; set; }
+    public required string Longitute { get; set; }
+    public required int LicenceNo { get; set; }
+    public required string ProvidedBy { get; set; }
 }
