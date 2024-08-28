@@ -16,7 +16,6 @@ using NArchitecture.Core.CrossCuttingConcerns.Logging.Serilog.File;
 using NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
-using NArchitecture.Core.Security.DependencyInjection;
 using NArchitecture.Core.Security.JWT;
 using Application.Services.Brands;
 using Application.Services.Adverts;
@@ -35,8 +34,6 @@ using Application.Services.Engines;
 using Application.Services.ExpertizeResults;
 using Application.Services.FuelTypes;
 using Application.Services.Generations;
-using Application.Services.Licences;
-using Application.Services.Locations;
 using Application.Services.ModalExtensions;
 using Application.Services.Tags;
 using Application.Services.Transmissions;
@@ -48,6 +45,7 @@ using Application.Services.CustomerFavorites;
 using NArchitecture.Core.Security.EmailAuthenticator;
 using Application.Security;
 using Application.Services.JWT;
+using Application.Services.Addresses;
 
 namespace Application;
 
@@ -105,8 +103,6 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IExpertizeResultService, ExpertizeResultManager>();
         services.AddScoped<IFuelTypeService, FuelTypeManager>();
         services.AddScoped<IGenerationService, GenerationManager>();
-        services.AddScoped<ILicenceService, LicenceManager>();
-        services.AddScoped<ILocationService, LocationManager>();
         services.AddScoped<IModalExtensionService, ModalExtensionManager>();
         services.AddScoped<ITagService, TagManager>();
         services.AddScoped<ITransmissionService, TransmissionManager>();
@@ -116,6 +112,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IGenerationImageService, GenerationImageManager>();
         services.AddScoped<ICarService, CarManager>();
         services.AddScoped<ICustomerFavoriteService, CustomerFavoriteManager>();
+        services.AddScoped<IAddressService, AddressManager>();
         return services;
     }
 
