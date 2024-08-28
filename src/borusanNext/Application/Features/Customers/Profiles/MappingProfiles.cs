@@ -26,17 +26,25 @@ public class MappingProfiles : Profile
         CreateMap<Customer, DeletedCustomerResponse>();
 
         CreateMap<Customer, GetByIdCustomerResponse>()
-            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
+            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+            .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Address.District));
 
         CreateMap<Customer, GetByUserIdCustomerResponse>()
-            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
+            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+            .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Address.District));
 
         CreateMap<Customer, GetListCustomerListItemDto>()
-            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
+            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+            .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Address.District));
         CreateMap<IPaginate<Customer>, GetListResponse<GetListCustomerListItemDto>>();
 
         CreateMap<Customer, GetDynamicCustomerResponse>()
-            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
+            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+            .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Address.District));
         CreateMap<IPaginate<Customer>, GetListResponse<GetDynamicCustomerResponse>>();
     }
 }

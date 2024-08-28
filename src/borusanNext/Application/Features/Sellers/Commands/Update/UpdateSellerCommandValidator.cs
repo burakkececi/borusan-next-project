@@ -24,15 +24,5 @@ public class UpdateSellerCommandValidator : AbstractValidator<UpdateSellerComman
             .NotEmpty().WithMessage("Phone cannot be empty")
             .Matches(@"^(0\d{3} \d{3} \d{2} \d{2})$").WithMessage("Phone number is not valid")
             .WithName("Phone Number");
-
-        RuleFor(c => c.LicenceId)
-            .NotEmpty().WithMessage("LicenceId cannot be empty")
-            .NotEqual(Guid.Empty).WithMessage("LicenceId cannot be an empty GUID")
-            .WithName("Licence ID");
-
-        RuleFor(c => c.LocationId)
-            .NotEmpty().WithMessage("LocationId cannot be empty")
-            .NotEqual(Guid.Empty).WithMessage("LocationId cannot be an empty GUID")
-            .WithName("Location ID");
     }
 }

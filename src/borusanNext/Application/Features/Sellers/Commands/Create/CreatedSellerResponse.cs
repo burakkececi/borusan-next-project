@@ -4,6 +4,7 @@ namespace Application.Features.Sellers.Commands.Create;
 
 public class CreatedSellerResponse : IResponse
 {
+    public required Guid Id { get; set; }
     public required Guid UserId { get; set; }
     public required string Name { get; set; }
     public required string PhoneNumber { get; set; }

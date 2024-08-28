@@ -24,11 +24,17 @@ public class MappingProfiles : Profile
         CreateMap<DeleteSellerCommand, Seller>();
         CreateMap<Seller, DeletedSellerResponse>();
 
-        CreateMap<Seller, GetByIdSellerResponse>();
+        CreateMap<Seller, GetByIdSellerResponse>()
+            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+            .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Address.District));
 
-        CreateMap<Seller, GetListSellerListItemDto>();
+        CreateMap<Seller, GetListSellerListItemDto>()
+                        .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+            .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Address.District));
         CreateMap<IPaginate<Seller>, GetListResponse<GetListSellerListItemDto>>();
-        CreateMap<Seller, GetDynamicSellerResponse>();
+        CreateMap<Seller, GetDynamicSellerResponse>()
+                        .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+            .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Address.District));
         CreateMap<IPaginate<Seller>, GetListResponse<GetDynamicSellerResponse>>();
     }
 }

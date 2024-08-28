@@ -5,6 +5,7 @@ namespace Application.Features.Customers.Commands.Create;
 
 public class CreatedCustomerResponse : IResponse
 {
+    public required Guid Id { get; set; }
     public Guid UserId { get; set; }
     public string IdentityNumber { get; set; }
     public string FirstName { get; set; }

@@ -33,12 +33,13 @@ public class GetDynamicCustomerQuery : IRequest<GetListResponse<GetDynamicCustom
             _customerBusinessRules = customerBusinessRules;
         }
 
-        public async Task<GetListResponse<GetDynamicCustomerResponse>> Handle(GetDynamicCustomerQuery request, CancellationToken cancellationToken)
+        public async Task<GetListResponse<GetDynamicCustomerResponse>> Handle(GetDynamicCustomerQuery request,  CancellationToken cancellationToken)
         {
             IPaginate<Customer> customer = await _customerRepository.GetListByDynamicAsync(
              dynamic: request.DynamicQuery,
              index: request.PageRequest.PageIndex,
              size: request.PageRequest.PageSize,
+             include: c => c.Include(k => k.Address).Include(k => k.User),
              cancellationToken: cancellationToken);
 
 

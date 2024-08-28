@@ -8,6 +8,7 @@ using NArchitecture.Core.Application.Responses;
 using NArchitecture.Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Customers.Constants.CustomersOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Customers.Queries.GetList;
 
@@ -33,6 +34,7 @@ public class GetListCustomerQuery : IRequest<GetListResponse<GetListCustomerList
             IPaginate<Customer> customers = await _customerRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
+                include: c => c.Include(k => k.Address).Include(k => k.User),
                 cancellationToken: cancellationToken
             );
 

@@ -31,7 +31,7 @@ public class GetByIdCustomerQuery : IRequest<GetByIdCustomerResponse>, ISecuredR
 
         public async Task<GetByIdCustomerResponse> Handle(GetByIdCustomerQuery request, CancellationToken cancellationToken)
         {
-            Customer? customer = await _customerRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
+            Customer? customer = await _customerRepository.GetAsync(predicate: c => c.Id == request.Id, include: c => c.Include(k => k.Address).Include(k => k.User), cancellationToken: cancellationToken);
             await _customerBusinessRules.CustomerShouldExistWhenSelected(customer);
 
             GetByIdCustomerResponse response = _mapper.Map<GetByIdCustomerResponse>(customer);

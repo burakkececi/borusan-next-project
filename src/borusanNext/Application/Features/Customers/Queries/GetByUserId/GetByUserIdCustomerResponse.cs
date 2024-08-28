@@ -13,10 +13,13 @@ public class GetByUserIdCustomerResponse
     public string IdentityNumber { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public string Email { get; set; }
+
     public string Phone { get; set; }
     public bool IsPhoneVerified { get; set; }
     public DateOnly DateOfBirth { get; set; }
     public CustomerType CustomerType { get; set; }
-    public Guid AddressId { get; set; }
+    public string City { get; set; }
+    public string District { get; set; }
     public string AddressLine { get; set; }
 }
