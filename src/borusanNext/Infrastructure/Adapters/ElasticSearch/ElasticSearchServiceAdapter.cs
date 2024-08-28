@@ -129,11 +129,61 @@ public class ElasticSearchServiceAdapter : IElasticSearch
         }
 
         var dynamicQuery = new List<QueryContainer>();
+
         if (queryParameters.Queries?.Any() == true)
         {
             foreach (var item in queryParameters.Queries)
             {
                 dynamicQuery.Add(Query<T>.Match(m => m.Field(new Field(item.Field)).Query(item.Value)));
+            }
+        }
+
+        if (queryParameters.Filters?.Any() == true)
+        {
+            foreach (var filter in queryParameters.Filters)
+            {
+                switch (filter.Type)
+                {
+                    case FilterType.Term:
+                        dynamicQuery.Add(new TermQuery
+                        {
+                            Field = $"{filter.Field}.enum",
+                            Value = filter.Value
+                        });
+                        break;
+
+                    case FilterType.DateRange:
+                        dynamicQuery.Add(Query<T>.DateRange(dr => dr
+                            .Field(filter.Field)
+                            .GreaterThanOrEquals(DateTime.Now.AddDays(-Convert.ToInt64(filter.From!.ToString()!)))));
+                        break;
+
+                    case FilterType.Range:
+                        if (filter.From != null && filter.To != null)
+                        {
+                            dynamicQuery.Add(Query<T>.Range(r => r
+                                .Field(filter.Field)
+                                .GreaterThanOrEquals(Convert.ToDouble(filter.From.ToString()))
+                                .LessThanOrEquals(Convert.ToDouble(filter.To.ToString()))));
+                        }
+                        else if (filter.From != null)
+                        {
+                            dynamicQuery.Add(Query<T>.Range(r => r
+                                .Field(filter.Field)
+                                .GreaterThanOrEquals(Convert.ToDouble(filter.From.ToString()))));
+                        }
+                        else if (filter.To != null)
+                        {
+                            dynamicQuery.Add(Query<T>.Range(r => r
+                                .Field(filter.Field)
+                                .LessThanOrEquals(Convert.ToDouble(filter.To.ToString()))));
+                        }
+                        break;
+
+                    default:
+                        dynamicQuery.Add(Query<T>.Term(filter.Field, filter.Value));
+                        break;
+                }
             }
         }
 
@@ -144,58 +194,10 @@ public class ElasticSearchServiceAdapter : IElasticSearch
             .Sort(sort => sort
                 .Field(field => field.Field(queryParameters.Order.Field)
                     .Order(queryParameters.Order.Type == "asc" ? SortOrder.Ascending : SortOrder.Descending)))
-            .MatchAll()
-            .Query(q => q.Bool(b => b.Must(dynamicQuery.ToArray())))
-            .PostFilter(f =>
-            {
-                if (queryParameters.Filters?.Any() == true)
-                {
-                    foreach (var filter in queryParameters.Filters)
-                    {
-                        switch (filter.Type)
-                        {
-                            case FilterType.Term:
-                                f.Term(filter.Field, filter.Value);
-                                break;
-
-                            case FilterType.DateRange:
-                                f.DateRange(dr => dr
-                                        .Field(filter.Field)
-                                        .GreaterThanOrEquals(DateTime.Now.AddDays(-Convert.ToInt64(filter.From!.ToString()!))));
-                                break;
-
-                            case FilterType.Range:
-                                if (filter.From != null && filter.To != null)
-                                {
-                                    f.Range(r => r
-                                        .Field(filter.Field)
-                                        .GreaterThanOrEquals(Convert.ToDouble(filter.From.ToString()))
-                                        .LessThanOrEquals(Convert.ToDouble(filter.To.ToString())));
-                                }
-                                else if (filter.From != null)
-                                {
-                                    f.Range(r => r
-                                        .Field(filter.Field)
-                                        .GreaterThanOrEquals(Convert.ToDouble(filter.From.ToString())));
-                                }
-                                else if (filter.To != null)
-                                {
-                                    f.Range(r => r.LessThanOrEquals(Convert.ToDouble(filter.To.ToString())));
-                                }
-                                break;
-
-                            default:
-                                f.Term(filter.Field, filter.Value);
-                                break;
-                        }
-                    }
-                }
-                return f;
-            }));
+            .Query(q => q.Bool(b => b.Must(dynamicQuery.ToArray()))));
 
         if (searchResponse == null || !searchResponse.IsValid)
         {
-            // Log detailed error information
             var errorMessage = searchResponse?.ServerError?.ToString() ?? "Unknown error";
             var statusCode = searchResponse?.ApiCall?.HttpStatusCode;
             var debugInformation = searchResponse?.DebugInformation;
