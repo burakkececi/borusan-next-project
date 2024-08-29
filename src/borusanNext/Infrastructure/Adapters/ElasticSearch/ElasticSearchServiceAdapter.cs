@@ -1,4 +1,5 @@
 ﻿using Application.Services.ElasticSearch;
+using Common.Persistance.Elastic.Models;
 using Common.Persistance.Elastic.Queries;
 using Elasticsearch.Net;
 using NArchitecture.Core.ElasticSearch.Constants;
@@ -6,6 +7,7 @@ using NArchitecture.Core.ElasticSearch.Models;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Infrastructure.Adapters.Elastic;
 
@@ -119,7 +121,7 @@ public class ElasticSearchServiceAdapter : IElasticSearch
     }
 
     public async Task<List<ElasticSearchGetModel<T>>> GetSearchBySimpleQueryString<T>(Common.Persistance.Elastic.Models.SearchByQueryParameters queryParameters)
-     where T : class
+        where T : class
     {
         ElasticClient elasticClient = getElasticClient(queryParameters.IndexName);
 
@@ -130,26 +132,20 @@ public class ElasticSearchServiceAdapter : IElasticSearch
 
         var dynamicQuery = new List<QueryContainer>();
 
-        if (queryParameters.Queries?.Any() == true)
-        {
-            foreach (var item in queryParameters.Queries)
-            {
-                dynamicQuery.Add(Query<T>.Match(m => m.Field(new Field(item.Field)).Query(item.Value)));
-            }
-        }
-
         if (queryParameters.Filters?.Any() == true)
         {
+            var termFiltersByField = new Dictionary<string, List<object>>();
+
             foreach (var filter in queryParameters.Filters)
             {
                 switch (filter.Type)
                 {
                     case FilterType.Term:
-                        dynamicQuery.Add(new TermQuery
+                        if (!termFiltersByField.ContainsKey(filter.Field))
                         {
-                            Field = $"{filter.Field}.enum",
-                            Value = filter.Value
-                        });
+                            termFiltersByField[filter.Field] = new List<object>();
+                        }
+                        termFiltersByField[filter.Field].Add(filter.Value);
                         break;
 
                     case FilterType.DateRange:
@@ -181,10 +177,28 @@ public class ElasticSearchServiceAdapter : IElasticSearch
                         break;
 
                     default:
-                        dynamicQuery.Add(Query<T>.Term(filter.Field, filter.Value));
+                        // Handle unknown filter types if necessary
                         break;
                 }
             }
+
+            foreach (var kvp in termFiltersByField)
+            {
+                var field = kvp.Key;
+                var values = kvp.Value.Distinct().ToList(); // Remove duplicates
+                if (values.Count > 0)
+                {
+                    dynamicQuery.Add(Query<T>.MultiMatch(t => t
+                        .Fields(field)
+                        .Query(String.Join(" ", values))));
+                }
+            }
+        }
+
+        Debug.WriteLine("Dynamic Queries:");
+        foreach (var query in dynamicQuery)
+        {
+            Debug.WriteLine(query.ToString());
         }
 
         var searchResponse = await elasticClient.SearchAsync<T>(s => s
@@ -198,10 +212,9 @@ public class ElasticSearchServiceAdapter : IElasticSearch
 
         if (searchResponse == null || !searchResponse.IsValid)
         {
-            var errorMessage = searchResponse?.ServerError?.ToString() ?? "Unknown error";
-            var statusCode = searchResponse?.ApiCall?.HttpStatusCode;
-            var debugInformation = searchResponse?.DebugInformation;
-
+            var errorMessage = searchResponse.OriginalException?.Message ?? "Unknown error";
+            var statusCode = searchResponse.ApiCall?.HttpStatusCode;
+            var debugInformation = searchResponse.DebugInformation;
             throw new InvalidOperationException($"Search query failed. Status Code: {statusCode}. Error: {errorMessage}. Debug Info: {debugInformation}");
         }
 
@@ -211,6 +224,8 @@ public class ElasticSearchServiceAdapter : IElasticSearch
             Item = hit.Source
         }).ToList();
     }
+
+
 
 
     public async Task<IElasticSearchResult> InsertAsync(ElasticSearchInsertUpdateModel model)

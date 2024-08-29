@@ -39,7 +39,6 @@ public class GetDynamicCarModelDetailsElasticQuery : IRequest<GetListResponse<Ca
                 From = request.ElasticQuery.From,
                 Size = request.ElasticQuery.Size,
                 Order = request.ElasticQuery.Order,
-                Queries = request.ElasticQuery.Queries,
                 Filters = request.ElasticQuery.Filters
             });
 

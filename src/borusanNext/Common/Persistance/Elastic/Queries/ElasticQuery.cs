@@ -4,7 +4,6 @@ public class ElasticQuery
     public int From { get; set; }
     public int Size { get; set; }
     public Order Order { get; set; }
-    public IEnumerable<Query>? Queries { get; set; }
     public IEnumerable<DynamicFilter>? Filters { get; set; }
 }
 public class DynamicFilter
@@ -20,12 +19,6 @@ public class Order
 {
     public string Field { get; set; }
     public string Type { get; set; } // asc, desc
-}
-
-public class Query
-{
-    public string Field { get; set; }
-    public string Value { get; set; }
 }
 
 public enum FilterType
