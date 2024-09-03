@@ -11,14 +11,14 @@ using Common.Models;
 
 namespace Application.Features.CustomerFavorites.Commands.Create;
 
-public class CreateCustomerFavoriteCommand : IRequest<Unit>, ISecuredRequest
+public class CreateCustomerFavoriteCommand : IRequest<Guid>, ISecuredRequest
 {
     public required Guid CustomerId { get; set; }
     public required Guid AdvertId { get; set; }
 
     public string[] Roles => [Admin, Write, CustomerFavoritesOperationClaims.Create];
 
-    public class CreateCustomerFavoriteCommandHandler : IRequestHandler<CreateCustomerFavoriteCommand, Unit>
+    public class CreateCustomerFavoriteCommandHandler : IRequestHandler<CreateCustomerFavoriteCommand, Guid>
     {
         private readonly IMapper _mapper;
         private readonly ICustomerFavoriteRepository _customerFavoriteRepository;
@@ -34,16 +34,17 @@ public class CreateCustomerFavoriteCommand : IRequest<Unit>, ISecuredRequest
             _outboxEventRepository = outboxEventRepository;
         }
 
-        public async Task<Unit> Handle(CreateCustomerFavoriteCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateCustomerFavoriteCommand request, CancellationToken cancellationToken)
         {
             CustomerFavorite customerFavorite = _mapper.Map<CustomerFavorite>(request);
             await _customerFavoriteBusinessRules.CustomerIdShouldExistWhenSelected(request.CustomerId, cancellationToken);
             await _customerFavoriteBusinessRules.AdvertIdShouldExistWhenSelected(request.AdvertId, cancellationToken);
 
+            var favId = Guid.NewGuid();
             var @event = new CreateCustomerFavoriteEvent()
             {
                 Id = Guid.NewGuid(),
-                CustomerFavoriteId = Guid.NewGuid(), 
+                CustomerFavoriteId = favId,
                 CustomerId = customerFavorite.CustomerId,
                 AdvertId = customerFavorite.AdvertId
             };
@@ -52,7 +53,7 @@ public class CreateCustomerFavoriteCommand : IRequest<Unit>, ISecuredRequest
             await _outboxEventRepository.AddAsync(outboxEvent);
             await _outboxEventRepository.SaveChangesAsync();
 
-            return Unit.Value;
+            return favId;
         }
     }
 }

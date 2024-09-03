@@ -7,6 +7,7 @@ using NArchitecture.Core.Application.Requests;
 using NArchitecture.Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Application.Features.CustomerFavorites.Queries.GetByCustomerId;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace WebAPI.Controllers;
 
@@ -15,11 +16,10 @@ namespace WebAPI.Controllers;
 public class CustomerFavoritesController : BaseController
 {
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] CreateCustomerFavoriteCommand command)
+    public async Task<ActionResult<Guid>> Add([FromBody] CreateCustomerFavoriteCommand command)
     {
-        await Mediator.Send(command);
-
-        return StatusCode(StatusCodes.Status201Created);
+        var response = await Mediator.Send(command);
+        return Created(nameof(Add), response);
     }
 
     [HttpPut]
